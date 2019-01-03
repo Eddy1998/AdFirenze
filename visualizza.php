@@ -203,14 +203,14 @@ header('location: index.php');
                             </div>
                             <div class="col-md-6 multi-horizontal" >
                                 <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Indirizzo</b></label>
+                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Indirizzo</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="indirizzo">Via amilcare ponhcielli 46/14</b></label>
 
                                 </div>
                             </div>
                             <div class="col-md-4 multi-horizontal" >
                                 <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Città</b></label>
+                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Città</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="citta">Firenze</b></label>
 
 
@@ -218,7 +218,7 @@ header('location: index.php');
                             </div>
                             <div class="col-md-2 multi-horizontal" >
                                 <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>CAP</b></label>
+                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>CAP</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="cap">50144</b></label>
 
                                 </div>
@@ -226,14 +226,14 @@ header('location: index.php');
 
                             <div class="col-md-4 multi-horizontal" >
                                 <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Data di nascita</b></label>
+                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Data di nascita</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="nascita">10-10-2010</b></label>
 
                                 </div>
                             </div>
                             <div class="col-md-4 multi-horizontal" >
                                 <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Genere</b></label>
+                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Genere</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="sesso">Maschile</b></label>
 
 
@@ -246,7 +246,7 @@ header('location: index.php');
                             </div>
                             <div class="col-md-4 multi-horizontal" >
                                 <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Numero di Telefono</b></label>
+                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Numero di Telefono</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="telefono">3737576471</b></label>
                                     <input type="number" class="form-control" name="telefono"  id="telefono">
                                 </div>
@@ -254,7 +254,7 @@ header('location: index.php');
 
                             <div class="col-md-8 multi-horizontal" >
                                 <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Nazionalità</b></label>
+                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Nazionalità</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="nazionalita">Peru</b></label>
                                     <select  class="form-control" name="nazionalita"  id="nazionalita">
                                     <option></option>
@@ -274,7 +274,7 @@ header('location: index.php');
                             </div>
                             <div class="col-md-8 multi-horizontal" >
                                 <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Stato civile</b></label>
+                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Stato civile</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="statocivile">Fidanzato</b></label>
                                     <select  id="statocivile" class="form-control" name="statocivile">
                                     <option value="" disabled selected>Scegli un'opzione..</option>
@@ -287,28 +287,28 @@ header('location: index.php');
                             </div>
                             <div class="col-md-4 multi-horizontal" >
                                 <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Data di matrimonio</b></label>
+                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Data di matrimonio</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="matrimonio">10-10-2012</b></label>
                                     <input type="date" class="form-control" name="matrimonio"  id="matrimonio" maxlength="10">
                                 </div>
                             </div>
                             <div class="col-md-6 multi-horizontal" >
                                 <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Nome coniuge</b></label>
+                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Nome coniuge</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="nome-coniuge">Qualcuno coniuge</b></label>
                                     <input type="text" class="form-control" name="nome-coniuge"  id="nome-coniuge">
                                 </div>
                             </div>
                             <div class="col-md-6 multi-horizontal" >
                                 <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Cognome coniuge</b></label>
+                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Cognome coniuge</b></label><br>
                                       <label class="form-control-label mbr-fonts-style display-7"  ><b id="cognome-coniuge">Qualcuno coniuge</b></label>
                                     <input type="text" class="form-control" name="cognome-coniuge"  id="cognome-coniuge">
                                 </div>
                             </div>
                             <div class="col-md-4 multi-horizontal" >
                                 <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Numero di figli</b></label>
+                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Numero di figli</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="numero-figli">0</b></label>
                                     <select  id="numero" class="form-control" name="numero-figli"  >
                                     <option value="0" selected>0</option>
@@ -325,14 +325,14 @@ header('location: index.php');
 
                             <div id="nfiglio1" class="col-md-6 multi-horizontal" >
                                 <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Nome figlio 1</b></label>
+                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Nome figlio 1</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="nome-figlio-1">nome filgio 1</b></label>
                                     <input type="text" class="form-control" name="nome-figlio-1" id="nome-figlio-1">
                                 </div>
                             </div>
                             <div id="cfiglio1" class="col-md-6 multi-horizontal" >
                                 <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Cognome figlio 1</b></label>
+                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Cognome figlio 1</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="cognome-figlio-1">nome filgio 1</b></label>
                                     <input type="text" class="form-control" name="cognome-figlio-1" id="cognome-figlio-1">
                                 </div>
@@ -340,102 +340,102 @@ header('location: index.php');
 
                             <div id="nfiglio2" class="col-md-6 multi-horizontal" >
                                 <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Nome figlio 2</b></label>
+                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Nome figlio 2</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="nome-figlio-1">nome filgio 2</b></label>
                                     <input type="text" class="form-control" name="nome-figlio-2"  id="nome-figlio-2">
                                 </div>
                             </div>
                             <div id="cfiglio2" class="col-md-6 multi-horizontal" >
                                 <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Cognome figlio 2</b></label>
+                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Cognome figlio 2</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="cognome-figlio-2">nome filgio 1</b></label>
                                     <input type="text" class="form-control" name="cognome-figlio-2"  id="cognome-figlio-2">
                                 </div>
                             </div>
                             <div id="nfiglio3" class="col-md-6 multi-horizontal" >
                                 <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Nome figlio 3</b></label>
+                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Nome figlio 3</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="nome-figlio-3">nome filgio 1</b></label>
                                     <input type="text" class="form-control" name="nome-figlio-3" id="nome-figlio-3">
                                 </div>
                             </div>
                             <div  id="cfiglio3" class="col-md-6 multi-horizontal" >
                                 <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Cognome figlio 3</b></label>
+                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Cognome figlio 3</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="cognome-figlio-3">nome filgio 1</b></label>
                                     <input type="text" class="form-control" name="cognome-figlio-3"  id="cognome-figlio-3">
                                 </div>
                             </div>
                             <div id="nfiglio4" class="col-md-6 multi-horizontal" >
                                 <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Nome figlio 4</b></label>
+                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Nome figlio 4</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="nome-figlio-4">nome filgio 1</b></label>
                                     <input type="text" class="form-control" name="nome-figlio-4"  id="nome-figlio-4">
                                 </div>
                             </div>
-                            <div id="cfiglio4" class="col-md-6 multi-horizontal" data-for="cognome-figlio-4">
+                            <div id="cfiglio4" class="col-md-6 multi-horizontal" >
                                 <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7" for="cognome-figlio-4" style="color:gray"><b>Cognome figlio 4</b></label>
+                                    <label class="form-control-label mbr-fonts-style display-7" style="color:gray"><b>Cognome figlio 4</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="cognome-figlio-4">nome filgio 1</b></label>
                                     <input type="text" class="form-control" name="cognome-figlio-4"  id="cognome-figlio-4">
                                 </div>
                             </div>
-                            <div id="nfiglio5" class="col-md-6 multi-horizontal" data-for="nome-figlio-5">
+                            <div id="nfiglio5" class="col-md-6 multi-horizontal">
                                 <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7" for="nome-figlio-5" style="color:gray"><b>Nome figlio 5</b></label>
+                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Nome figlio 5</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="nome-figlio-5">nome filgio 1</b></label>
                                     <input type="text" class="form-control" name="nome-figlio-5"  id="nome-figlio-5">
                                 </div>
                             </div>
-                            <div id="cfiglio5" class="col-md-6 multi-horizontal" data-for="cognome-figlio-5">
+                            <div id="cfiglio5" class="col-md-6 multi-horizontal">
                                 <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7" for="cognome-figlio-5" style="color:gray"><b>Cognome figlio 5</b></label>
+                                    <label class="form-control-label mbr-fonts-style display-7" style="color:gray"><b>Cognome figlio 5</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="cognome-figlio-5">nome filgio 1</b></label>
                                     <input type="text" class="form-control" name="cognome-figlio-5"  id="cognome-figlio-5">
                                 </div>
                             </div>
                             <div class="col-md-8 multi-horizontal" >
                             </div>
-                            <div class="col-md-6 multi-horizontal" data-for="nome-padre">
+                            <div class="col-md-6 multi-horizontal" >
                                 <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7" for="nome-padre" style="color:gray"><b>Nome e cognome padre</b></label>
+                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Nome e cognome padre</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="nome-padre">nome filgio 1</b></label>
                                     <input type="text" class="form-control" name="nome-padre"  id="nome-padre">
                                 </div>
                             </div>
-                            <div class="col-md-6 multi-horizontal" data-for="nome-madre">
+                            <div class="col-md-6 multi-horizontal" >
                                 <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7" for="nome-madre" style="color:gray"><b>Nome e cognome madre</b></label>
+                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Nome e cognome madre</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="nome-madre">nome filgio 1</b></label>
                                     <input type="text" class="form-control" name="nome-madre"  id="nome-madre">
                                 </div>
                             </div>
-                            <div class="col-md-4 multi-horizontal" data-for="data-battesimo">
+                            <div class="col-md-4 multi-horizontal" >
                                 <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7" for="data-battesimo" style="color:gray"><b>Data di battesimo</b></label>
+                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Data di battesimo</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="data-battesimo">10-10-2010</b></label>
                                     <input type="date" class="form-control" name="data-battesimo" id="data-battesimo" maxlength="10">
                                 </div>
                             </div>
-                            <div class="col-md-4 multi-horizontal" data-for="luogo-battesimo">
+                            <div class="col-md-4 multi-horizontal" >
                                 <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7" for="luogo-battesimo" style="color:gray"><b>Luogo di battesimo</b></label>
+                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Luogo di battesimo</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="luogo-battesimo">nome filgio 1</b></label>
                                     <input type="text" class="form-control" name="luogo-battesimo" id="luogo-battesimo">
                                 </div>
                             </div>
-                            <div class="col-md-4 multi-horizontal" data-for="luogo-battesimo">
+                            <div class="col-md-4 multi-horizontal" >
                             </div>
-                            <div class="col-md-4 multi-horizontal" data-for="data-arrivo">
+                            <div class="col-md-4 multi-horizontal">
                                 <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7" for="data-arrivo" style="color:gray"><b>Data di arrivo in chiesa</b></label>
+                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Data di arrivo in chiesa</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="data-arrivo">nome filgio 1</b></label>
                                     <input type="date" class="form-control" name="data-arrivo" id="data-arrivo" maxlength="10">
                                 </div>
                             </div>
-                            <div class="col-md-8 multi-horizontal" data-for="battezzato-spirito">
+                            <div class="col-md-8 multi-horizontal" >
                                 <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7" for="battezzato-spirito" style="color:gray"><b>Battezzato con Spirito Santo</b></label>
+                                    <label class="form-control-label mbr-fonts-style display-7" style="color:gray"><b>Battezzato con Spirito Santo</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="battezzato-spirito">nome filgio 1</b></label>
                                     <select  class="form-control" name="battezzato-spirito" id="battezzato-spirito">
                                     <option value="" disabled selected>Scegli un'opzione..</option>
@@ -445,16 +445,16 @@ header('location: index.php');
                                 </div>
                             </div>
 
-                            <div class="col-md-4 multi-horizontal" data-for="tessera">
+                            <div class="col-md-4 multi-horizontal" >
                                 <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7" for="numero-tessera" style="color:gray"><b>Numero di tessera</b></label>
+                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Numero di tessera</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="numero-tessera">nome filgio 1</b></label>
                                     <input type="text" class="form-control" name="tessera"  maxlength="6"  id="numero-tessera">
                                 </div>
                             </div>
-                            <div class="col-md-4 multi-horizontal" data-for="carico">
+                            <div class="col-md-4 multi-horizontal">
                                 <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7" for="carico" style="color:gray"><b>Carico in chiesa</b></label>
+                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Carico in chiesa</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="carico">nome filgio 1</b></label>
                                     <select  class="form-control" name="carico"  required="" id="carico">
                                     <option value="" disabled selected>Scegli un'opzione..</option>
@@ -470,9 +470,9 @@ header('location: index.php');
                             </div>
 
                         </div>
-                        <div class="form-group" data-for="osservazioni">
+                        <div class="form-group" >
 
-                            <label class="form-control-label mbr-fonts-style display-7" for="osservazioni" style="color:gray"><b>Osservazioni</b></label>
+                            <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Osservazioni</b></label><br>
                               <output class="form-control-label mbr-fonts-style display-7" style="display: inline;" ><b id="osservazioni">V
                               </b></output>
 
@@ -485,6 +485,7 @@ header('location: index.php');
                         <input type="text" class="form-control" name="citta"  id="citta">
                         <input type="text" class="form-control" name="cap" id="cap">
                         <input type="date" class="form-control" name="nascita56"  id="nascita3" maxlength="10" style="display:hidden;">
+                      
                         <!--/////INSERT INTO user_date VALUES ('', '$name', STR_TO_DATE('$date', '%m/%d/%Y'))
                         -->
                         <textarea type="text" class="form-control" name="osservazioni" maxlength="500" rows="6"  id="osservazioni" style="display:none;"></textarea>
