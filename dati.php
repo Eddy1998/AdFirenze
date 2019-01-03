@@ -205,7 +205,7 @@ try{
 										}
 
 									 	// se esiste si cerca nella tabella di consacrato
-									 	$sql2 =$dbh->prepare("SELECT * FROM consacrato WHERE md5(id_persona)=:id");
+									 	$sql2 =$dbh->prepare("SELECT *,DATE_FORMAT(consacrato_diacono, '%d/%m/%Y' ) AS data_diacono,DATE_FORMAT(consacrato_presbitero, '%d/%m/%Y' ) AS data_presbitero, DATE_FORMAT(consacrato_evangelista, '%d/%m/%Y' ) AS data_evangelista,DATE_FORMAT(consacrato_pastore, '%d/%m/%Y' ) AS data_pastore FROM consacrato WHERE md5(id_persona)=:id");
 										$sql2->bindValue(":id", $id);
 										$sql2->execute();
 
