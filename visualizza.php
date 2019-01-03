@@ -513,6 +513,9 @@ header('location: index.php');
                         
                       
                         <!--/////INSERT INTO user_date VALUES ('', '$name', STR_TO_DATE('$date', '%m/%d/%Y'))
+
+                        link per caricamento 
+https://stackoverflow.com/questions/5763096/i-want-to-display-a-waiting-animation-while-my-php-page-is-fetching-data-from-th
                         -->
                         <textarea type="text" class="form-control" name="osservazioni" maxlength="500" rows="6"  id="osservazioni" style="display:none;"></textarea>
 
