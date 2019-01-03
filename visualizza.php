@@ -536,49 +536,49 @@ header('location: index.php');
                               </b></output>
 
                         </div>
-                        <input  type="hidden" class="form-control"  name="attivo" value="S">
-                        <input  type="hidden" class="form-control" name="tipo" id="tipo" value="">
-                        <input type="hidden" class="form-control" name="nome" data-form-field="Name" required="" id="nome2" >
+                        <input  type="hidden" class="form-control"  name="attivo" id="attivo2" value="S">
+                        <input  type="hidden" class="form-control" name="tipo" id="tipo2" value="">
+                        <input type="hidden" class="form-control" name="nome"  id="nome2" >
                         <input type="hidden" class="form-control" name="cognome" id="cognome2">
-                        <input type="hidden" class="form-control" name="indirizzo"  id="indirizzo" />
-                        <input type="hidden" class="form-control" name="citta"  id="citta">
-                        <input type="hidden" class="form-control" name="cap" id="cap">
-                        <input type="hidden" class="form-control" name="nascita56"  id="nascita3" maxlength="10" style="display:hidden;">
-                        <input type="hidden" class="form-control" name="sesso"  id="sesso">
-                        <input type="hidden" class="form-control" name="telefono"  id="telefono">
-                       <input type="hidden" class="form-control" name="nazionalita"  id="nazionalita">
-                       <input type="hidden" class="form-control" name="statocivile"  id="statocivile">
-                       <input type="hidden" class="form-control" name="matrimonio"  id="matrimonio" maxlength="10">  
-                       <input type="hidden" class="form-control" name="nome-coniuge"  id="nome-coniuge">  
-                       <input type="hidden" class="form-control" name="cognome-coniuge"  id="cognome-coniuge">
-                      <input type="hidden" class="form-control" name="numero-figli"  id="numero-figli">
-                       <input type="hidden" class="form-control" name="nome-figlio-1" id="nome-figlio-1">  
-                      <input type="hidden" class="form-control" name="cognome-figlio-1" id="cognome-figlio-1">  
-                      <input type="hidden" class="form-control" name="nome-figlio-2"  id="nome-figlio-2">  
-                      <input type="hidden" class="form-control" name="cognome-figlio-2"  id="cognome-figlio-2">  
-                      <input type="hidden" class="form-control" name="nome-figlio-3" id="nome-figlio-3">  
-                      <input type="hidden" class="form-control" name="cognome-figlio-3"  id="cognome-figlio-3">  
-                      <input type="hidden" class="form-control" name="nome-figlio-4"  id="nome-figlio-4">  
-                      <input type="hidden" class="form-control" name="cognome-figlio-4"  id="cognome-figlio-4">  
-                      <input type="hidden" class="form-control" name="nome-figlio-5"  id="nome-figlio-5">  
-                      <input type="hidden" class="form-control" name="cognome-figlio-5"  id="cognome-figlio-5">  
-                      <input type="hidden" class="form-control" name="nome-padre"  id="nome-padre">  
-                      <input type="hidden" class="form-control" name="nome-madre"  id="nome-madre">  
-                      <input type="hidden" class="form-control" name="data-battesimo" id="data-battesimo" maxlength="10">  
-                      <input type="hidden" class="form-control" name="luogo-battesimo" id="luogo-battesimo">  
-                      <input type="hidden" class="form-control" name="data-arrivo" id="data-arrivo" maxlength="10">
-                       <input type="hidden" class="form-control" name="battezzato-spirito" id="battezzato-spirito" maxlength="10">
-                      <input type="hidden" class="form-control" name="tessera"  maxlength="6"  id="numero-tessera">
-                       <input type="hidden" class="form-control" name="carico"  maxlength="6"  id="numero-tessera"> 
-                      <input type="hidden" class="form-control" name="data-diacono" id="data-diacono">
-                      <input type="hidden" class="form-control" name="luogo-diacono" id="luogo-diacono">
-                      <input type="hidden" class="form-control" name="data-presbitero"  id="data-presbitero">
-                      <input type="hidden" class="form-control" name="luogo-presbitero"  id="luogo-presbitero">
-                      <input type="hidden" class="form-control" name="data-evangelista" id="data-evangelista">  
-                      <input type="hidden" class="form-control" name="luogo-evangelista"  id="luogo-evangelista">  
-                      <input type="hidden" class="form-control" name="data-pastore"  id="data-pastore">  
-                      <input type="hidden" class="form-control" name="luogo-pastore"  id="luogo-pastore">
-                      <textarea type="text" class="form-control" name="osservazioni" maxlength="500" rows="6"  id="osservazioni" style="display:none;"></textarea>
+                        <input type="hidden" class="form-control" name="indirizzo"  id="indirizzo2" />
+                        <input type="hidden" class="form-control" name="citta"  id="citta2">
+                        <input type="hidden" class="form-control" name="cap" id="cap2">
+                        <input type="hidden" class="form-control" name="nascita"  id="nascita2">
+                        <input type="hidden" class="form-control" name="sesso"  id="sesso2">
+                        <input type="hidden" class="form-control" name="telefono"  id="telefono2">
+                       <input type="hidden" class="form-control" name="nazionalita"  id="nazionalita2">
+                       <input type="hidden" class="form-control" name="statocivile"  id="statocivile2">
+                       <input type="hidden" class="form-control" name="matrimonio"  id="matrimonio2" >  
+                       <input type="hidden" class="form-control" name="nome-coniuge"  id="nome-coniuge2">  
+                       <input type="hidden" class="form-control" name="cognome-coniuge"  id="cognome-coniuge2">
+                      <input type="hidden" class="form-control" name="numero-figli"  id="numero-figli2">
+                       <input type="hidden" class="form-control" name="nome-figlio-1" id="nome-figlio-12">  
+                      <input type="hidden" class="form-control" name="cognome-figlio-1" id="cognome-figlio-12">  
+                      <input type="hidden" class="form-control" name="nome-figlio-2"  id="nome-figlio-22">  
+                      <input type="hidden" class="form-control" name="cognome-figlio-2"  id="cognome-figlio-22">  
+                      <input type="hidden" class="form-control" name="nome-figlio-3" id="nome-figlio-32">  
+                      <input type="hidden" class="form-control" name="cognome-figlio-3"  id="cognome-figlio-32">  
+                      <input type="hidden" class="form-control" name="nome-figlio-4"  id="nome-figlio-42">  
+                      <input type="hidden" class="form-control" name="cognome-figlio-4"  id="cognome-figlio-42">  
+                      <input type="hidden" class="form-control" name="nome-figlio-5"  id="nome-figlio-52">  
+                      <input type="hidden" class="form-control" name="cognome-figlio-5"  id="cognome-figlio-52">  
+                      <input type="hidden" class="form-control" name="nome-padre"  id="nome-padre2">  
+                      <input type="hidden" class="form-control" name="nome-madre"  id="nome-madre2">  
+                      <input type="hidden" class="form-control" name="data-battesimo" id="data-battesimo2" >  
+                      <input type="hidden" class="form-control" name="luogo-battesimo" id="luogo-battesimo2">  
+                      <input type="hidden" class="form-control" name="data-arrivo" id="data-arrivo2" >
+                       <input type="hidden" class="form-control" name="battezzato-spirito" id="battezzato-spirito2" >
+                      <input type="hidden" class="form-control" name="tessera" id="numero-tessera2">
+                       <input type="hidden" class="form-control" name="carico" id="carico2"> 
+                      <input type="hidden" class="form-control" name="data-diacono" id="data-diacono2">
+                      <input type="hidden" class="form-control" name="luogo-diacono" id="luogo-diacono2">
+                      <input type="hidden" class="form-control" name="data-presbitero"  id="data-presbitero2">
+                      <input type="hidden" class="form-control" name="luogo-presbitero"  id="luogo-presbitero2">
+                      <input type="hidden" class="form-control" name="data-evangelista" id="data-evangelista2">  
+                      <input type="hidden" class="form-control" name="luogo-evangelista"  id="luogo-evangelista2">  
+                      <input type="hidden" class="form-control" name="data-pastore"  id="data-pastore2">  
+                      <input type="hidden" class="form-control" name="luogo-pastore"  id="luogo-pastore2">
+                      <textarea type="text" class="form-control" name="osservazioni"  id="osservazioni2" style="display:none;"></textarea>
                         <!--/////INSERT INTO user_date VALUES ('', '$name', STR_TO_DATE('$date', '%m/%d/%Y'))
 
                         link per caricamento 
