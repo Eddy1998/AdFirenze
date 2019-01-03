@@ -10,7 +10,7 @@ if(!isset($_GET['ssid']))
   //errore, utente non specificato
 }
 
-    
+
 ?>
 <!DOCTYPE html>
 <html >
@@ -197,13 +197,13 @@ if(!isset($_GET['ssid']))
         <div class="row justify-content-center">
             <div class="media-container-column col-lg-8" data-form-type="formoid">
 
-                    <form name="modulo" class="mbr-form" action="esito.php" method="post">
-                         <?php
+                    <form name="modulo" class="mbr-form" action="modifica.php" method="post">
+
                             <?php if(isset($_GET['ssid']))
-                              {       
+                              {
                             ?>
-                              <input type="hidden" id="ssid" value="<?php echo $_GET['ssid'];?>"></input>
-                              <?php 
+                              <input type="hidden" id="ssid" value=" <?php echo $_GET['ssid']; ?> "></input>
+                              <?php
                             }
                             ?>
                           <div class="row row-sm-offset">
@@ -216,7 +216,7 @@ if(!isset($_GET['ssid']))
                             <div class="col-md-6 multi-horizontal" >
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" style="color:gray"><b>Cognome</b></label><br>
-                                      <label class="form-control-label mbr-fonts-style display-7" for="cognome"><b id="cognome"> </b></label>
+                                      <label class="form-control-label mbr-fonts-style display-7" ><b id="cognome"> </b></label>
 
                                 </div>
                             </div>
@@ -262,7 +262,7 @@ if(!isset($_GET['ssid']))
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Numero di Telefono</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="telefono"> </b></label>
-                                    
+
                                 </div>
                             </div>
 
@@ -270,7 +270,7 @@ if(!isset($_GET['ssid']))
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Nazionalità</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="nazionalita"> </b></label>
-                              
+
                                   </div>
                             </div>
                             <div class="col-md-4 multi-horizontal" >
@@ -279,35 +279,35 @@ if(!isset($_GET['ssid']))
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Stato civile</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="statocivile"> </b></label>
-                                    
+
                                   </div>
                             </div>
                             <div class="col-md-4 multi-horizontal" >
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Data di matrimonio</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="matrimonio"> </b></label>
-                                    
+
                                 </div>
                             </div>
                             <div class="col-md-6 multi-horizontal" >
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Nome coniuge</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="nome-coniuge"> </b></label>
-                                  
+
                                 </div>
                             </div>
                             <div class="col-md-6 multi-horizontal" >
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Cognome coniuge</b></label><br>
                                       <label class="form-control-label mbr-fonts-style display-7"  ><b id="cognome-coniuge"> </b></label>
-                                 
+
                                 </div>
                             </div>
                             <div class="col-md-4 multi-horizontal" >
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Numero di figli</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="numero-figli"> </b></label>
-                              
+
                                 </div>
                             </div>
                             <div class="col-md-8 multi-horizontal" >
@@ -317,14 +317,14 @@ if(!isset($_GET['ssid']))
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Nome figlio 1</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="nome-figlio-1"> </b></label>
-                                    
+
                                 </div>
                             </div>
                             <div id="cfiglio1" class="col-md-6 multi-horizontal" >
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Cognome figlio 1</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="cognome-figlio-1"> </b></label>
-                                  
+
                                 </div>
                             </div>
 
@@ -332,56 +332,56 @@ if(!isset($_GET['ssid']))
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Nome figlio 2</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="nome-figlio-2"> </b></label>
-                                  
+
                                 </div>
                             </div>
                             <div id="cfiglio2" class="col-md-6 multi-horizontal" >
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Cognome figlio 2</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="cognome-figlio-2"> </b></label>
-                                 
+
                                 </div>
                             </div>
                             <div id="nfiglio3" class="col-md-6 multi-horizontal" >
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Nome figlio 3</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="nome-figlio-3"> </b></label>
-                                  
+
                                 </div>
                             </div>
                             <div  id="cfiglio3" class="col-md-6 multi-horizontal" >
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Cognome figlio 3</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="cognome-figlio-3"> </b></label>
-                                   
+
                                 </div>
                             </div>
                             <div id="nfiglio4" class="col-md-6 multi-horizontal" >
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Nome figlio 4</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="nome-figlio-4"> </b></label>
-                                  
+
                                 </div>
                             </div>
                             <div id="cfiglio4" class="col-md-6 multi-horizontal" >
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" style="color:gray"><b>Cognome figlio 4</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="cognome-figlio-4"> </b></label>
-                                  
+
                                 </div>
                             </div>
                             <div id="nfiglio5" class="col-md-6 multi-horizontal">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Nome figlio 5</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="nome-figlio-5"> </b></label>
-                                  
+
                                 </div>
                             </div>
                             <div id="cfiglio5" class="col-md-6 multi-horizontal">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" style="color:gray"><b>Cognome figlio 5</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="cognome-figlio-5"> </b></label>
-                                  
+
                                 </div>
                             </div>
                             <div class="col-md-8 multi-horizontal" >
@@ -390,14 +390,14 @@ if(!isset($_GET['ssid']))
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Nome e cognome padre</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="nome-padre"> </b></label>
-                                  
+
                                 </div>
                             </div>
                             <div class="col-md-6 multi-horizontal" >
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Nome e cognome madre</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="nome-madre"> </b></label>
-                                  
+
                                 </div>
                             </div>
                             <div class="col-md-4 multi-horizontal" >
@@ -410,7 +410,7 @@ if(!isset($_GET['ssid']))
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Luogo di battesimo</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="luogo-battesimo"> </b></label>
-                                  
+
                                 </div>
                             </div>
                             <div class="col-md-4 multi-horizontal" >
@@ -419,7 +419,7 @@ if(!isset($_GET['ssid']))
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Data di arrivo in chiesa</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="data-arrivo"> </b></label>
-                                  
+
                                 </div>
                             </div>
                             <div class="col-md-8 multi-horizontal" >
@@ -438,81 +438,81 @@ if(!isset($_GET['ssid']))
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Numero di tessera</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="numero-tessera"> </b></label>
-                                    
+
                                 </div>
                             </div>
                             <div class="col-md-4 multi-horizontal">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Carico in chiesa</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="carico"> </b></label>
-                                   
+
                                 </div>
                             </div>
-                            
+
                             <div id="datadiacono" class="col-md-6 multi-horizontal" >
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" ><b>Data consacrazione a Diacono</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="data-diacono"> </b></label>
-                                    
+
                                 </div>
                             </div>
                             <div id="luogodiacono" class="col-md-6 multi-horizontal" >
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" ><b>Luogo di consacrazione - Diacono</b></label><br>
-                                    <label class="form-control-label mbr-fonts-style display-7"  ><b id="luogo-diacono"> </b></label>  
-                                  
+                                    <label class="form-control-label mbr-fonts-style display-7"  ><b id="luogo-diacono"> </b></label>
+
                                 </div>
                             </div>
 
                             <div id="datapresbitero" class="col-md-6 multi-horizontal" >
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" ><b>Data consacrazione a Presbitero</b></label><br>
-                                    <label class="form-control-label mbr-fonts-style display-7"  ><b id="data-presbitero"> </b></label>  
-                                  
+                                    <label class="form-control-label mbr-fonts-style display-7"  ><b id="data-presbitero"> </b></label>
+
                                 </div>
                             </div>
                             <div id="luogopresbitero" class="col-md-6 multi-horizontal" >
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" ><b>Luogo di consacrazione - Presbitero</b></label><br>
-                                    <label class="form-control-label mbr-fonts-style display-7"  ><b id="luogo-presbitero"> </b></label>  
-                                  
+                                    <label class="form-control-label mbr-fonts-style display-7"  ><b id="luogo-presbitero"> </b></label>
+
                                 </div>
                             </div>
                             <div id="dataevangelista" class="col-md-6 multi-horizontal">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" ><b>Data consacrazione a Evangelista</b></label><br>
-                                    <label class="form-control-label mbr-fonts-style display-7"  ><b id="data-evangelista"> </b></label>  
-                                  
+                                    <label class="form-control-label mbr-fonts-style display-7"  ><b id="data-evangelista"> </b></label>
+
                                 </div>
                             </div>
                             <div  id="luogoevangelista" class="col-md-6 multi-horizontal" >
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" ><b>Luogo di consacrazione - Evangelista</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="luogo-evangelista"> </b></label>
-                                  
+
                                 </div>
                             </div>
                             <div id="datapastore" class="col-md-6 multi-horizontal" >
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" ><b>Data consacrazione a Pastore</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="data-pastore"> </b></label>
-                                  
+
                                 </div>
                             </div>
                             <div id="luogopastore" class="col-md-6 multi-horizontal">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7"><b>Luogo di consacrazione - Pastore</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="luogo-pastore"> </b></label>
-                                  
+
                                 </div>
 </div>
-                          
+
 
                         </div>
                         <div class="form-group" >
 
                             <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Osservazioni</b></label><br>
-                              <output class="form-control-label mbr-fonts-style display-7" style="display: inline;" ><b id="osservazioni"> 
+                              <output class="form-control-label mbr-fonts-style display-7" style="display: inline;" ><b id="osservazioni">
                               </b></output>
 
                         </div>
@@ -528,43 +528,43 @@ if(!isset($_GET['ssid']))
                         <input type="hidden" class="form-control" name="telefono"  id="telefono2">
                        <input type="hidden" class="form-control" name="nazionalita"  id="nazionalita2">
                        <input type="hidden" class="form-control" name="statocivile"  id="statocivile2">
-                       <input type="hidden" class="form-control" name="matrimonio"  id="matrimonio2" >  
-                       <input type="hidden" class="form-control" name="nome-coniuge"  id="nome-coniuge2">  
+                       <input type="hidden" class="form-control" name="matrimonio"  id="matrimonio2" >
+                       <input type="hidden" class="form-control" name="nome-coniuge"  id="nome-coniuge2">
                        <input type="hidden" class="form-control" name="cognome-coniuge"  id="cognome-coniuge2">
                       <input type="hidden" class="form-control" name="numero-figli"  id="numero-figli2">
-                       <input type="hidden" class="form-control" name="nome-figlio-1" id="nome-figlio-12">  
-                      <input type="hidden" class="form-control" name="cognome-figlio-1" id="cognome-figlio-12">  
-                      <input type="hidden" class="form-control" name="nome-figlio-2"  id="nome-figlio-22">  
-                      <input type="hidden" class="form-control" name="cognome-figlio-2"  id="cognome-figlio-22">  
-                      <input type="hidden" class="form-control" name="nome-figlio-3" id="nome-figlio-32">  
-                      <input type="hidden" class="form-control" name="cognome-figlio-3"  id="cognome-figlio-32">  
-                      <input type="hidden" class="form-control" name="nome-figlio-4"  id="nome-figlio-42">  
-                      <input type="hidden" class="form-control" name="cognome-figlio-4"  id="cognome-figlio-42">  
-                      <input type="hidden" class="form-control" name="nome-figlio-5"  id="nome-figlio-52">  
-                      <input type="hidden" class="form-control" name="cognome-figlio-5"  id="cognome-figlio-52">  
-                      <input type="hidden" class="form-control" name="nome-padre"  id="nome-padre2">  
-                      <input type="hidden" class="form-control" name="nome-madre"  id="nome-madre2">  
-                      <input type="hidden" class="form-control" name="data-battesimo" id="data-battesimo2" >  
-                      <input type="hidden" class="form-control" name="luogo-battesimo" id="luogo-battesimo2">  
+                       <input type="hidden" class="form-control" name="nome-figlio-1" id="nome-figlio-12">
+                      <input type="hidden" class="form-control" name="cognome-figlio-1" id="cognome-figlio-12">
+                      <input type="hidden" class="form-control" name="nome-figlio-2"  id="nome-figlio-22">
+                      <input type="hidden" class="form-control" name="cognome-figlio-2"  id="cognome-figlio-22">
+                      <input type="hidden" class="form-control" name="nome-figlio-3" id="nome-figlio-32">
+                      <input type="hidden" class="form-control" name="cognome-figlio-3"  id="cognome-figlio-32">
+                      <input type="hidden" class="form-control" name="nome-figlio-4"  id="nome-figlio-42">
+                      <input type="hidden" class="form-control" name="cognome-figlio-4"  id="cognome-figlio-42">
+                      <input type="hidden" class="form-control" name="nome-figlio-5"  id="nome-figlio-52">
+                      <input type="hidden" class="form-control" name="cognome-figlio-5"  id="cognome-figlio-52">
+                      <input type="hidden" class="form-control" name="nome-padre"  id="nome-padre2">
+                      <input type="hidden" class="form-control" name="nome-madre"  id="nome-madre2">
+                      <input type="hidden" class="form-control" name="data-battesimo" id="data-battesimo2" >
+                      <input type="hidden" class="form-control" name="luogo-battesimo" id="luogo-battesimo2">
                       <input type="hidden" class="form-control" name="data-arrivo" id="data-arrivo2" >
                        <input type="hidden" class="form-control" name="battezzato-spirito" id="battezzato-spirito2" >
                       <input type="hidden" class="form-control" name="tessera" id="numero-tessera2">
-                       <input type="hidden" class="form-control" name="carico" id="carico2"> 
+                       <input type="hidden" class="form-control" name="carico" id="carico2">
                       <input type="hidden" class="form-control" name="data-diacono" id="data-diacono2">
                       <input type="hidden" class="form-control" name="luogo-diacono" id="luogo-diacono2">
                       <input type="hidden" class="form-control" name="data-presbitero"  id="data-presbitero2">
                       <input type="hidden" class="form-control" name="luogo-presbitero"  id="luogo-presbitero2">
-                      <input type="hidden" class="form-control" name="data-evangelista" id="data-evangelista2">  
-                      <input type="hidden" class="form-control" name="luogo-evangelista"  id="luogo-evangelista2">  
-                      <input type="hidden" class="form-control" name="data-pastore"  id="data-pastore2">  
+                      <input type="hidden" class="form-control" name="data-evangelista" id="data-evangelista2">
+                      <input type="hidden" class="form-control" name="luogo-evangelista"  id="luogo-evangelista2">
+                      <input type="hidden" class="form-control" name="data-pastore"  id="data-pastore2">
                       <input type="hidden" class="form-control" name="luogo-pastore"  id="luogo-pastore2">
                       <textarea type="text" class="form-control" name="osservazioni"  id="osservazioni2" style="display:none;"></textarea>
                         <!--/////INSERT INTO user_date VALUES ('', '$name', STR_TO_DATE('$date', '%m/%d/%Y'))
 
-                        link per caricamento 
+                        link per caricamento
 https://stackoverflow.com/questions/5763096/i-want-to-display-a-waiting-animation-while-my-php-page-is-fetching-data-from-th
                         -->
-                        
+
 
                         <span class="input-group-btn"><button href="" type="submit" class="btn btn-form btn-black display-4">MODIFICA</button></span>
                     </form>

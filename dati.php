@@ -149,9 +149,12 @@ try{
 
     if (isset($_POST['ONE'])) {
 
-            $id=$_POST["id"];
-             $jsondata=array();
-             $sqlu =$dbh->prepare("SELECT p.*,DATE_FORMAT(p.data_nascita,  '%d/%m/%Y' ) AS data_di_nascita,DATE_FORMAT(p.data_matrimonio,  '%d/%m/%Y' ) AS data_di_matrimonio, DATE_FORMAT(p.data_battesimo,  '%d/%m/%Y' ) AS data_di_battesimo, DATE_FORMAT(p.data_arrivo_in_chiesa,  '%d/%m/%Y' ) AS data_arrivo  FROM persone p WHERE md5(id)=:id ORDER BY p.cognome ASC;");
+
+            $id=$_POST["ssid"];
+						//	$id="17e62166fc8586dfa4d1bc0e1742c08b";
+
+					   $jsondata=array();
+             $sql =$dbh->prepare("SELECT p.*,DATE_FORMAT(p.data_nascita,  '%d/%m/%Y' ) AS data_di_nascita,DATE_FORMAT(p.data_matrimonio,  '%d/%m/%Y' ) AS data_di_matrimonio, DATE_FORMAT(p.data_battesimo,  '%d/%m/%Y' ) AS data_di_battesimo, DATE_FORMAT(p.data_arrivo_in_chiesa,  '%d/%m/%Y' ) AS data_arrivo  FROM persone p WHERE md5(id)=:id ORDER BY p.cognome ASC;");
               $sql->bindValue(":id", $id);
              $sql->execute();
 
@@ -161,15 +164,91 @@ try{
                   while($row=$sql->fetch())
                   {
 										//da rivedere nel caso ci siano errori
-                        $jsondata=$row;
+                        $jsondata["profilo"][]=$row;
+
+												$genere = $row['sesso'];
+												$numero = $row['numero_figli'];
                    }
+
+									 //se esiste si cerca nella tabella se esistono figli collegati
+									 //controllando prima se è padre o madre e se ha figli
+									 	if($numero>0)
+										{
+
+											if($genere=="Maschile")
+											{
+												$quer="SELECT * FROM figli_persone WHERE md5(id_padre)=:id";
+
+											}
+											else
+											{
+												$quer="SELECT * FROM figli_persone WHERE md5(id_madre)=:id";
+											}
+											$sql1 =$dbh->prepare($quer);
+											$sql1->bindValue(":id", $id);
+
+												$sql1->execute();
+											if ($sql1->rowCount()>0)
+											{
+												while($row=$sql1->fetch())
+			                  {
+													//da rivedere nel caso ci siano errori
+			                        $jsondata["figli"][]=$row;
+
+
+			                   }
+										 	}
+											else {
+														$jsondata["figli"][]="not_found";
+
+													}
+										}
+
+									 	// se esiste si cerca nella tabella di consacrato
+									 	$sql2 =$dbh->prepare("SELECT * FROM consacrato WHERE md5(id_persona)=:id");
+										$sql2->bindValue(":id", $id);
+										$sql2->execute();
+
+										if ($sql2->rowCount()>0)
+										{
+											while($row=$sql2->fetch())
+		                  {
+												//da rivedere nel caso ci siano errori
+		                        $jsondata["consacrato"][]=$row;
+
+		                   }
+									 	}
+										else {
+													$jsondata["consacrato"][]="not_found";
+										}
+										//se esiste si cerca un'immagine di profilo
+										$sql3 =$dbh->prepare("SELECT * FROM immagini WHERE md5(id_persona)=:id");
+										$sql3->bindValue(":id", $id);
+										$sql3->execute();
+										if ($sql3->rowCount()>0)
+										{
+											$row=$sql3->fetch();
+											$immagine=base64_encode($row['img']);
+											$jsondata["immagine"]["foto"]=$immagine;
+											$jsondata["immagine"]["type"]=$row['type'];
+											$jsondata["immagine"]["id"]=$row['id'];
+											$jsondata["immagine"]["id_persona"]=$row['id_persona'];
+
+
+									 	}
+										else {
+													$jsondata["immagine"][]="not_found";
+										}
+
+
                    echo json_encode($jsondata);
                 }
             else
-                     {
-                           echo json_encode("not_found");
-                     }
-                      exit();
+                {
+
+								           echo json_encode("not_found");
+                }
+               exit();
         }
 
 
@@ -194,4 +273,5 @@ try{
   catch (PDOException $e) {
     echo 'Connection failed: ' . $e->getMessage();
   }
+	catch ( Exception $e ) { echo 'ERRORE GENERICO: ' . $e->getMessage();}
 ?>
