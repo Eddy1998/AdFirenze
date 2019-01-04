@@ -516,8 +516,8 @@ if(!isset($_GET['ssid']))
                               </b></output>
 
                         </div>
-                        <input  type="hidden" class="form-control"  name="attivo" id="attivo2" value="S">
-                        <input  type="hidden" class="form-control" name="tipo" id="tipo2" value="">
+                        <input  type="hidden" class="form-control"  name="attivo" id="attivo2">
+                        <input  type="hidden" class="form-control" name="tipo" id="tipo2" >
                         <input type="hidden" class="form-control" name="nome"  id="nome2" >
                         <input type="hidden" class="form-control" name="cognome" id="cognome2">
                         <input type="hidden" class="form-control" name="indirizzo"  id="indirizzo2" />
