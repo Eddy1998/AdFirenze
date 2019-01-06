@@ -28,6 +28,10 @@ document.body.appendChild(image);*/
        $("#statocivile2 ,#statocivile ").append(json.profilo[0].stato_civile);
        $("#matrimonio2 ,#matrimonio ").append(json.profilo[0].data_di_matrimonio);
        $("#nome-coniuge2 ,#nome-coniuge ").append(json.profilo[0].nome_coniuge);
+       if(json.profilo[0].cognome_coniuge==null)
+       {
+         alert('vuotoooo');
+       }
        $("#cognome-coniuge2 ,#cognome-coniuge ").append(json.profilo[0].cognome_coniuge);
        $("#numero-figli2 ,#numero-figli ").append(json.profilo[0].numero_figli);
 
