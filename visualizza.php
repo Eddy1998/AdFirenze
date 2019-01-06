@@ -5,7 +5,7 @@ include 'conn.inc.php';
 {
 header('location: index.php');
 }*/
-if(!isset($_GET['ssid']))
+if(!isset($_GET['id']))
 {
   //errore, utente non specificato
 }
@@ -34,7 +34,7 @@ if(!isset($_GET['ssid']))
   <link rel="stylesheet" href="assets/theme/css/style.css">
   <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script type="text/javascript" src="js/view-profile.js"></script>
+  <script type="text/javascript" src="js/dataprofile.js"></script>
   <script type="text/javascript">
   $(document).ready(function(){
       $("#nascita3").append("2012-01-10");
@@ -199,10 +199,10 @@ if(!isset($_GET['ssid']))
 
                     <form name="modulo" class="mbr-form" action="modifica.php" method="post">
 
-                            <?php if(isset($_GET['ssid']))
+                            <?php if(isset($_GET['id']))
                               {
                             ?>
-                              <input type="hidden" id="ssid" value=" <?php echo $_GET['ssid']; ?> "></input>
+                              <input type="hidden" id="id" name="id" value="<?php echo $_GET['id']; ?>"></input>
                               <?php
                             }
                             ?>
