@@ -173,8 +173,7 @@ try{
 
 									 //se esiste si cerca nella tabella se esistono figli collegati
 									 //controllando prima se è padre o madre e se ha figli
-									 	if($numero>0)
-										{
+
 
 											if($genere=="Maschile")
 											{
@@ -188,22 +187,21 @@ try{
 											$sql1 =$dbh->prepare($quer);
 											$sql1->bindValue(":id", $id);
 
-												$sql1->execute();
+											$sql1->execute();
 											if ($sql1->rowCount()>0)
 											{
+
 												while($row=$sql1->fetch())
 			                  {
 													//da rivedere nel caso ci siano errori
 			                        $jsondata["figli"][]=$row;
-
-
 			                   }
+												 $jsondata["mex"]["figli"]="trovato";
 										 	}
 											else {
-														$jsondata["figli"][]="not_found";
-
+														$jsondata["figli"]["mex"]="not_found";
 													}
-										}
+
 
 									 	// se esiste si cerca nella tabella di consacrato
 									 	$sql2 =$dbh->prepare("SELECT *,DATE_FORMAT(consacrato_diacono, '%d/%m/%Y' ) AS data_diacono,DATE_FORMAT(consacrato_presbitero, '%d/%m/%Y' ) AS data_presbitero, DATE_FORMAT(consacrato_evangelista, '%d/%m/%Y' ) AS data_evangelista,DATE_FORMAT(consacrato_pastore, '%d/%m/%Y' ) AS data_pastore FROM consacrato WHERE md5(id_persona)=:id");
@@ -223,23 +221,7 @@ try{
 													$jsondata["consacrato"][]="not_found";
 										}
 										//se esiste si cerca un'immagine di profilo
-										$sql3 =$dbh->prepare("SELECT * FROM immagini WHERE md5(id_persona)=:id");
-										$sql3->bindValue(":id", $id);
-										$sql3->execute();
-										if ($sql3->rowCount()>0)
-										{
-											$row=$sql3->fetch();
-											$immagine=base64_encode($row['img']);
-											$jsondata["immagine"]["foto"]=$immagine;
-											$jsondata["immagine"]["type"]=$row['type'];
-											$jsondata["immagine"]["id"]=$row['id'];
-											$jsondata["immagine"]["id_persona"]=$row['id_persona'];
 
-
-									 	}
-										else {
-													$jsondata["immagine"][]="not_found";
-										}
 
 
                    echo json_encode($jsondata);

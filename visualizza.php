@@ -1,6 +1,7 @@
   <?php
 session_start();
 include 'conn.inc.php';
+$dbh = new PDO($conn, $user, $pass);
 /*if(!isset($_SESSION['user']))
 {
 header('location: index.php');
@@ -131,8 +132,8 @@ if(!isset($_GET['id']))
 
             </div>
             <div class="media-container-column title col-12 col-lg-7 col-md-6">
-                <h2 class="align-right mbr-bold mbr-white pb-3 mbr-fonts-style display-2">Dati di 'user'</h2>
-                <h3 class="mbr-section-subtitle align-right mbr-light mbr-white mbr-fonts-style display-5">Stai vedendo i dati di 'user', puoi modificarli ma non eliminarli</h3>
+                <h2 class="align-right mbr-bold mbr-white pb-3 mbr-fonts-style display-2">Dati di <b id="nomege"></b></h2>
+                <h3 class="mbr-section-subtitle align-right mbr-light mbr-white mbr-fonts-style display-5">Stai vedendo i dati di <b id="utente"></b>, puoi modificarli ma non eliminarli</h3>
             </div>
         </div>
     </div>
@@ -207,6 +208,44 @@ if(!isset($_GET['id']))
                             }
                             ?>
                           <div class="row row-sm-offset">
+                            <div class="col-md-3 multi-horizontal" >
+                            </div>
+
+                            <div class="col-md-3 multi-horizontal" >
+                              <div class="form-group">
+                                <label class="form-control-label mbr-fonts-style display-7" style="color:gray"><b>Foto</b></label><br>
+
+                              <div id="foto">
+                                <?php if(isset($_GET['id']))
+                                  {
+                                    $id=$_GET['id'];
+                                    $sql3 =$dbh->prepare("SELECT * FROM immagini WHERE md5(id_persona)=:id");
+                										$sql3->bindValue(":id", $id);
+                                    $sql3->execute();
+                                    if ($sql3->rowCount()>0)
+                                    {
+                                      $ris = $sql3->fetch(); ?>
+                                      <img src="data: <?php echo $ris['type']; ?>;base64,<?php echo base64_encode($ris['img']); ?>"  height="150px" alt="foto" />
+                                      <?php
+                                    }
+                                    else { ?>
+                                            <label class="form-control-label mbr-fonts-style display-7"  ><b> Nessuna foto inserita</b></label>
+                                  <?php  }
+                                ?>
+                                  <input type="hidden" id="id" name="id" value="<?php echo $_GET['id']; ?>"></input>
+                                  <?php
+                                }
+                                ?>
+                              </div>
+                              </div>
+                            </div>
+
+
+                              <div class="col-md-3 multi-horizontal" data-for="" id="bottoni-file">
+
+                              </div>
+
+
                             <div class="col-md-6 multi-horizontal" >
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Nome</b></label><br>
@@ -426,11 +465,7 @@ if(!isset($_GET['id']))
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" style="color:gray"><b>Battezzato con Spirito Santo</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="battezzato-spirito"> </b></label>
-                                   <!-- <select  class="form-control" name="battezzato-spirito" id="battezzato-spirito">
-                                    <option value="" disabled selected>Scegli un'opzione..</option>
-                                    <option value="S">Si</option>
-                                    <option value="N">No</option>
-                                    </select>-->
+
                                 </div>
                             </div>
 
@@ -451,14 +486,14 @@ if(!isset($_GET['id']))
 
                             <div id="datadiacono" class="col-md-6 multi-horizontal" >
                                 <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7" ><b>Data consacrazione a Diacono</b></label><br>
+                                    <label class="form-control-label mbr-fonts-style display-7" style="color:gray"><b>Data consacrazione a Diacono</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="data-diacono"> </b></label>
 
                                 </div>
                             </div>
                             <div id="luogodiacono" class="col-md-6 multi-horizontal" >
                                 <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7" ><b>Luogo di consacrazione - Diacono</b></label><br>
+                                    <label class="form-control-label mbr-fonts-style display-7" style="color:gray" ><b>Luogo di consacrazione - Diacono</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="luogo-diacono"> </b></label>
 
                                 </div>
@@ -466,46 +501,46 @@ if(!isset($_GET['id']))
 
                             <div id="datapresbitero" class="col-md-6 multi-horizontal" >
                                 <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7" ><b>Data consacrazione a Presbitero</b></label><br>
+                                    <label class="form-control-label mbr-fonts-style display-7" style="color:gray" ><b>Data consacrazione a Presbitero</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="data-presbitero"> </b></label>
 
                                 </div>
                             </div>
                             <div id="luogopresbitero" class="col-md-6 multi-horizontal" >
                                 <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7" ><b>Luogo di consacrazione - Presbitero</b></label><br>
+                                    <label class="form-control-label mbr-fonts-style display-7" style="color:gray" ><b>Luogo di consacrazione - Presbitero</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="luogo-presbitero"> </b></label>
 
                                 </div>
                             </div>
                             <div id="dataevangelista" class="col-md-6 multi-horizontal">
                                 <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7" ><b>Data consacrazione a Evangelista</b></label><br>
+                                    <label class="form-control-label mbr-fonts-style display-7" style="color:gray"><b>Data consacrazione a Evangelista</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="data-evangelista"> </b></label>
 
                                 </div>
                             </div>
                             <div  id="luogoevangelista" class="col-md-6 multi-horizontal" >
                                 <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7" ><b>Luogo di consacrazione - Evangelista</b></label><br>
+                                    <label class="form-control-label mbr-fonts-style display-7" style="color:gray"><b>Luogo di consacrazione - Evangelista</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="luogo-evangelista"> </b></label>
 
                                 </div>
                             </div>
                             <div id="datapastore" class="col-md-6 multi-horizontal" >
                                 <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7" ><b>Data consacrazione a Pastore</b></label><br>
+                                    <label class="form-control-label mbr-fonts-style display-7" style="color:gray"><b>Data consacrazione a Pastore</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="data-pastore"> </b></label>
 
                                 </div>
                             </div>
                             <div id="luogopastore" class="col-md-6 multi-horizontal">
                                 <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7"><b>Luogo di consacrazione - Pastore</b></label><br>
+                                    <label class="form-control-label mbr-fonts-style display-7" style="color:gray"><b>Luogo di consacrazione - Pastore</b></label><br>
                                     <label class="form-control-label mbr-fonts-style display-7"  ><b id="luogo-pastore"> </b></label>
 
                                 </div>
-</div>
+                              </div>
 
 
                         </div>
@@ -527,7 +562,7 @@ if(!isset($_GET['id']))
                         <input type="hidden" class="form-control" name="sesso"  id="sesso2">
                         <input type="hidden" class="form-control" name="telefono"  id="telefono2">
                        <input type="hidden" class="form-control" name="nazionalita"  id="nazionalita2">
-                       <input type="hidden" class="form-control" name="statocivile"  id="statocivile2">
+                       <input type="hidden" name="statocivile"  id="statocivile2">
                        <input type="hidden" class="form-control" name="matrimonio"  id="matrimonio2" >
                        <input type="hidden" class="form-control" name="nome-coniuge"  id="nome-coniuge2">
                        <input type="hidden" class="form-control" name="cognome-coniuge"  id="cognome-coniuge2">
