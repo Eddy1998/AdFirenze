@@ -117,7 +117,7 @@ document.body.appendChild(image);*/
 	if(json.profilo[0].stato_civile==null)
 	{
 	  $("#statocivile ").append("--non indicato--");
-    	$("#statocivile2").val ("NaN");
+    	$("#statocivile2").val ("NV");
 	}
 	else
 	{
@@ -173,15 +173,15 @@ document.body.appendChild(image);*/
 
        if(json.mex.figli=="trovato")
        {
-	       
+
 	       var k,conta;
        for(var i=0;i<json.figli.length;i++)
        {
           k = i+1;
-	  conta++; 
+	  conta++;
 	  $("#nfiglio"+k).show();
           $("#cfiglio"+k).show();
-	       
+
 	  if(json.figli[i].nome_figlio==null)
           {
            $("#nome-figlio-"+k).append("--non indicato--");
@@ -191,8 +191,8 @@ document.body.appendChild(image);*/
           {
 	       $("#nome-figlio-"+k).append(json.figli[i].nome_figlio);
 	       $("#nome-figlio-"+k+"2").val(json.figli[i].nome_figlio);
-           } 
-	   
+           }
+
 	    if(json.figli[i].cognome_figlio==null)
           {
            $("#cognome-figlio-"+k).append("--non indicato--");
@@ -202,18 +202,18 @@ document.body.appendChild(image);*/
           {
 	       $("#cognome-figlio-"+k).append(json.figli[i].cognome_figlio);
 	       $("#cognome-figlio-"+k+"2").val(json.figli[i].cognome_figlio);
-           } 
+           }
        }
 	//uscita da for, si controlla quanti sono stati valorizzati
 	  var h=0;
 	       for(var m=conta;m<5;m++)
-	  {	
+	  {
 		 h=m+1;
 		  //si riempono con nv(non valorizzati) quelli che non hanno dati inseriti dalla secretaria
 	  	$("#nome-figlio-"+h+"2").val("NV");
 		  $("#cognome-figlio-"+h+"2").val("NV");
 	  }
-	     
+
      }
 	      else
 	      {
@@ -223,7 +223,7 @@ document.body.appendChild(image);*/
 			$("#nome-figlio-"+m+"2").val("NV");
 			  $("#cognome-figlio-"+m+"2").val("NV");
 		  }
-	     
+
 	      }
 
 	if(json.profilo[0].nome_padre==null)
@@ -510,7 +510,7 @@ function prepara_congregato()
         }
         function prepara_nuovo_membro()
         {
-    
+
           $('#membro').show();
           $("#statocivile").parent().show();
           $("#matrimonio").parent().show();
