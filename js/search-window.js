@@ -1,3 +1,21 @@
+//funzione che apre nuova finestra
+function lanciaFin()
+    {
+      hrfN = document.f.Zdatil.value; 
+      hrfTrans = hrfN.substring(0,13);
+      hrfUlTra = hrfN.substring(13,20);
+             ww=500; 
+            pos=screen.width-ww-10; 
+            Param='scrollbars,resizable,height=400,width='+ww+',left='+pos+',top=0';
+           win1='esechtm?HTFITAB+00' + hrfTrans + '________________________________';
+           WinFitab=window.open(win1,'finTabelle',Param);
+     WinFitab.location.href;
+     WinFitab.focus();
+   }
+
+
+
+
 <HTML>
 <HEAD>
 <TITLE>Codici Tipo Retribuzioni</TITLE>
@@ -23,7 +41,7 @@ function settaVal()
 <CENTER><B>CODICI TIPO RETRIBUZIONE</B></CENTER>
 <BR>
 <CENTER><TABLE BORDER=1 CELLPADDING=0 CELLSPACING=0 BGCOLOR="#BAD0DB" >
-
+<!--viene valorizzato il campo, da ritornare-->
 <TR>
 <TD ALIGN=CENTER><INPUT type=button name="a" value=" 1 " onClick="campo='1';  settaVal();"></TD>
 <TD>Per dichiarare i dati relativi alla parte di retribuzione che supera il massimale annuo di cui all'art. 2, comma 18 della Legge n. 335/1995 (circ. INPS n. 55/1999)</TD>
