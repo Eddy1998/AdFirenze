@@ -5,6 +5,118 @@ include 'conn.inc.php';
 {
 header('location: index.php');
 }*/
+$ssid=$_POST['ssid'];
+$tipo=$_POST["tipo"];
+$attivo=$_POST["attivo"];
+
+$tessera=$_POST["tessera"];
+
+$nome=$_POST["nome"];
+$cognome=$_POST["cognome"];
+
+$carico=$_POST["carico"];
+
+
+$indirizzo=$_POST["indirizzo"];
+
+
+  $citta=$_POST["citta"];
+
+
+  $cap=$_POST["cap"];
+
+
+  $telefono=$_POST["telefono"];
+
+
+  $nazionalita=$_POST["nazionalita"];
+
+  $sesso=$_POST["sesso"];
+
+
+  $rawdate = htmlentities($_POST["nascita"]);
+  $nascita = date('Y-m-d', strtotime($rawdate));
+
+
+  $stato_civile=$_POST["statocivile"];
+
+
+  $data_matrimonio=$_POST["matrimonio"];
+
+
+  $nome_coniuge=$_POST["nome-coniuge"];
+
+  $cognome_coniuge=$_POST["cognome-coniuge"];
+
+
+  $numero_figli=$_POST["numero-figli"];
+
+
+  $nome_padre=$_POST["nome-padre"];
+
+
+  $nome_madre=$_POST["nome-madre"];
+
+
+  $rawdate1 = htmlentities($_POST["data-battesimo"]);
+  $data_battesimo = date('Y-m-d', strtotime($rawdate1));
+
+
+  $luogo_battesimo=$_POST["luogo-battesimo"];
+
+  $rawdate2 = htmlentities($_POST["data-arrivo"]);
+  $data_arrivo = date('Y-m-d', strtotime($rawdate2));
+
+
+  $battezzato_spirito=$_POST["battezzato-spirito"];
+
+
+  $congregazione=$_POST["congregazione"];
+
+
+  $osservazioni=$_POST["osservazioni"];
+
+
+  $rawdate9 = htmlentities($_POST["data-diacono"]);
+  $data_diacono = date('Y-m-d', strtotime($rawdate9));
+
+
+  $rawdate8 = htmlentities($_POST["data-presbitero"]);
+    $data_presbitero = date('Y-m-d', strtotime($rawdate8));
+
+  $rawdate7 = htmlentities($_POST["data-evangelista"]);
+  $data_evangelista = date('Y-m-d', strtotime($rawdate7));
+
+  $rawdate6 = htmlentities($_POST["data-pastore"]);
+  $data_pastore = date('Y-m-d', strtotime($rawdate6));
+
+  $luogo_diacono=$_POST["luogo-diacono"];
+
+  $luogo_presbitero=$_POST["luogo-presbitero"];
+
+  $luogo_evangelista=$_POST["luogo-evangelista"];
+
+  $luogo_pastore=$_POST["luogo-pastore"];
+
+  $nome_figlio_1=$_POST["nome-figlio-1"];
+
+  $cognome_figlio_1=$_POST["cognome-figlio-1"];
+
+  $nome_figlio_2=$_POST["nome-figlio-2"];
+
+  $cognome_figlio_2=$_POST["cognome-figlio-2"];
+
+  $nome_figlio_3=$_POST["nome-figlio-3"];
+
+  $cognome_figlio_3=$_POST["cognome-figlio-3"];
+
+  $nome_figlio_4=$_POST["nome-figlio-4"];
+
+  $cognome_figlio_4=$_POST["cognome-figlio-4"];
+
+  $nome_figlio_5=$_POST["nome-figlio-5"];
+
+  $cognome_figlio_5=$_POST["cognome-figlio-5"];
 
 ?>
 <!DOCTYPE html>
@@ -17,7 +129,7 @@ header('location: index.php');
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
   <link rel="shortcut icon" href="assets/images/img-1583-122x122.png" type="image/x-icon">
   <meta name="description" content="Site Generator Description">
-  <title>Nuovo</title>
+  <title>Modifica</title>
   <link rel="stylesheet" href="assets/web/assets/mobirise-icons2/mobirise2.css">
   <link rel="stylesheet" href="assets/web/assets/mobirise-icons/mobirise-icons.css">
   <link rel="stylesheet" href="assets/tether/tether.min.css">
@@ -31,709 +143,46 @@ header('location: index.php');
   <script src="assets/bootstrap/js/script.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+  <script type="text/javascript" src="js/action-new.js"></script>
   <style>
-
   input[type="file"] {
                       display: none;
                     }
 
   .thumb {
             height: 170px;
-            border: 1px solid #000;
+
             margin: 10px 5px 0 0;
           }
   </style>
   <script type="text/javascript">
-        $(document).ready(function(){
+  $(document).ready(function(){
 
 
-          // we define and invoke a function
-          nascondere();
-          nascondecons();
-          hidebutton();
-          //nascondi_figli();
-          $('#statocivile').on('change', function () {
-              dissattiva();
-          });
-         $('#opzione').on('change', function () {
-              cambia();
-          });
-          $('#numero').on('change', function () {
-              myFunction();
-          });
-          $('#carico').on('change', function () {
-             consacrazione();
-         });
-          $('#button-elimina').on('click', function () {
-               $('#list').children().remove();
-               hidebutton();
-                 $('#img-ad').show();
-                   $('#erroredimensione').text('');
-           });
-
-          <?php $res = @$_GET['new'];
-          if($res=='M')
-          { ?>
-            //preparo membro
-            document.getElementById("opzione").selectedIndex = 1;
-            cambia();
-          <?php }
-          else if($res=='C') { ?>
-            //preparo congregato
-            document.getElementById("opzione").selectedIndex = 2;
-            cambia();
-          <?php }
-          else if($res=='B')
-          { ?>
-            //prepato bambino/a
-            document.getElementById("opzione").selectedIndex = 3;
-            cambia();
-          <?php
-          } ?>
-
-        });
-        function opciones()
-        {
-          var valore = $("#nome-coniuge").val();
-          if(!valore==' ' ||!valore==null)
-          {
-              console.log(valore);
-              $.ajax({
-              url: 'dati.php',
-              type: 'POST',
-              data: {
-                'NAMES' : 1,
-                'valore': valore,
-              },
-              success: function(response){
-                  var data = JSON.parse(response);
-                  //console.log(data);
-                  var indice = data.names.length;
-                  $('#nomecon option').remove();
-                  for(var i=0;i<indice;i++)
-                  {
-
-                    var valori = data.names[i].nome + '  '+ data.names[i].cognome;
-
-                    $("#nomecon").append($("<option>").attr('value', valori).text(valori));
-                  }
-              }
-              });
-            }
-        }
-        function opciones1()
-        {
-          var valore = $('#nome-figlio-1').val();
-          if(!valore==' ' ||!valore==null)
-          {
-              console.log(valore);
-              $.ajax({
-              url: 'dati.php',
-              type: 'POST',
-              data: {
-                'NAMES' : 1,
-                'valore': valore,
-              },
-              success: function(response){
-                  var data = JSON.parse(response);
-                  //console.log(data);
-                  var indice = data.names.length;
-                  $('#nomefi1 option').remove();
-                  for(var i=0;i<indice;i++)
-                  {
-
-                    var valori = data.names[i].nome + '  '+ data.names[i].cognome;
-
-                    $("#nomefi1").append($("<option>").attr('value', valori).text(valori));
-                  }
-              }
-              });
-            }
-        }
-
-        function rellena()
-        {
-          var val = document.getElementById("nome-coniuge").value;
-          var opts = document.getElementById('nomecon').childNodes;
-          for (var i = 0; i < opts.length; i++) {
-            if (opts[i].value === val) {
-              // An item was selected from the list!
-              // yourCallbackHere()
-              var salto = opts[i].value.split("  ");
-              $("#nome-coniuge").val(salto[0]);
-              $("#cognome-coniuge").val(salto[1]);
-              $(':focus').blur()
-              break;
-            }
-          }
-        }
-
-        function rellena1()
-        {
-          var val = document.getElementById("nome-figlio-1").value;
-          var opts = document.getElementById('nomefi1').childNodes;
-          for (var i = 0; i < opts.length; i++) {
-            if (opts[i].value === val) {
-              // An item was selected from the list!
-              // yourCallbackHere()
-              var salto = opts[i].value.split("  ");
-              $("#nome-figlio-1").val(salto[0]);
-              $("#cognome-figlio-1").val(salto[1]);
-              $(':focus').blur()
-              break;
-            }
-          }
-        }
-        function opciones2()
-        {
-          var valore = $('#nome-figlio-2').val();
-          if(!valore==' ' ||!valore==null)
-          {
-              console.log(valore);
-              $.ajax({
-              url: 'dati.php',
-              type: 'POST',
-              data: {
-                'NAMES' : 1,
-                'valore': valore,
-              },
-              success: function(response){
-                  var data = JSON.parse(response);
-                  //console.log(data);
-                  var indice = data.names.length;
-                  $('#nomefi2 option').remove();
-                  for(var i=0;i<indice;i++)
-                  {
-
-                    var valori = data.names[i].nome + '  '+ data.names[i].cognome;
-
-                    $("#nomefi2").append($("<option>").attr('value', valori).text(valori));
-                  }
-              }
-              });
-            }
-        }
-        function rellena2()
-        {
-          var val = document.getElementById("nome-figlio-2").value;
-          var opts = document.getElementById('nomefi2').childNodes;
-          for (var i = 0; i < opts.length; i++) {
-            if (opts[i].value === val) {
-              // An item was selected from the list!
-              // yourCallbackHere()
-              var salto = opts[i].value.split("  ");
-              $("#nome-figlio-2").val(salto[0]);
-              $("#cognome-figlio-2").val(salto[1]);
-              $(':focus').blur()
-              break;
-            }
-          }
-        }
-
-        function opciones3()
-        {
-          var valore = $('#nome-figlio-3').val();
-          if(!valore==' ' ||!valore==null)
-          {
-              console.log(valore);
-              $.ajax({
-              url: 'dati.php',
-              type: 'POST',
-              data: {
-                'NAMES' : 1,
-                'valore': valore,
-              },
-              success: function(response){
-                  var data = JSON.parse(response);
-                  //console.log(data);
-                  var indice = data.names.length;
-                  $('#nomefi3 option').remove();
-                  for(var i=0;i<indice;i++)
-                  {
-
-                    var valori = data.names[i].nome + '  '+ data.names[i].cognome;
-
-                    $("#nomefi3").append($("<option>").attr('value', valori).text(valori));
-                  }
-              }
-              });
-            }
-        }
-        function rellena3()
-        {
-          var val = document.getElementById("nome-figlio-3").value;
-          var opts = document.getElementById('nomefi3').childNodes;
-          for (var i = 0; i < opts.length; i++) {
-            if (opts[i].value === val) {
-              // An item was selected from the list!
-              // yourCallbackHere()
-              var salto = opts[i].value.split("  ");
-              $("#nome-figlio-3").val(salto[0]);
-              $("#cognome-figlio-3").val(salto[1]);
-              $(':focus').blur()
-              break;
-            }
-          }
-        }
-
-        function opciones4()
-        {
-          var valore = $('#nome-figlio-4').val();
-          if(!valore==' ' ||!valore==null)
-          {
-              console.log(valore);
-              $.ajax({
-              url: 'dati.php',
-              type: 'POST',
-              data: {
-                'NAMES' : 1,
-                'valore': valore,
-              },
-              success: function(response){
-                  var data = JSON.parse(response);
-                  //console.log(data);
-                  var indice = data.names.length;
-                  $('#nomefi4 option').remove();
-                  for(var i=0;i<indice;i++)
-                  {
-
-                    var valori = data.names[i].nome + '  '+ data.names[i].cognome;
-
-                    $("#nomefi4").append($("<option>").attr('value', valori).text(valori));
-                  }
-              }
-              });
-            }
-        }
-        function rellena4()
-        {
-          var val = document.getElementById("nome-figlio-4").value;
-          var opts = document.getElementById('nomefi4').childNodes;
-          for (var i = 0; i < opts.length; i++) {
-            if (opts[i].value === val) {
-              // An item was selected from the list!
-              // yourCallbackHere()
-              var salto = opts[i].value.split("  ");
-              $("#nome-figlio-4").val(salto[0]);
-              $("#cognome-figlio-4").val(salto[1]);
-              $(':focus').blur()
-              break;
-            }
-          }
-        }
-
-        function opciones5()
-        {
-          var valore = $('#nome-figlio-5').val();
-          if(!valore==' ' ||!valore==null)
-          {
-              console.log(valore);
-              $.ajax({
-              url: 'dati.php',
-              type: 'POST',
-              data: {
-                'NAMES' : 1,
-                'valore': valore,
-              },
-              success: function(response){
-                  var data = JSON.parse(response);
-                  //console.log(data);
-                  var indice = data.names.length;
-                  $('#nomefi5 option').remove();
-                  for(var i=0;i<indice;i++)
-                  {
-
-                    var valori = data.names[i].nome + '  '+ data.names[i].cognome;
-
-                    $("#nomefi5").append($("<option>").attr('value', valori).text(valori));
-                  }
-              }
-              });
-            }
-        }
-        function rellena5()
-        {
-          var val = document.getElementById("nome-figlio-5").value;
-          var opts = document.getElementById('nomefi5').childNodes;
-          for (var i = 0; i < opts.length; i++) {
-            if (opts[i].value === val) {
-              // An item was selected from the list!
-              // yourCallbackHere()
-              var salto = opts[i].value.split("  ");
-              $("#nome-figlio-5").val(salto[0]);
-              $("#cognome-figlio-5").val(salto[1]);
-              $(':focus').blur()
-              break;
-            }
-          }
-        }
-
-
-        function opcionespadre()
-        {
-          var valore = $('#nome-padre').val();
-          if(!valore==' ' ||!valore==null)
-          {
-              console.log(valore);
-              $.ajax({
-              url: 'dati.php',
-              type: 'POST',
-              data: {
-                'NAMES' : 1,
-                'valore': valore,
-              },
-              success: function(response){
-                  var data = JSON.parse(response);
-                  //console.log(data);
-                  var indice = data.names.length;
-                  $('#nomepadre option').remove();
-                  for(var i=0;i<indice;i++)
-                  {
-
-                    var valori = data.names[i].nome + '  '+ data.names[i].cognome;
-
-                    $("#nomepadre").append($("<option>").attr('value', valori).text(valori));
-                  }
-              }
-              });
-            }
-        }
-        function rellenapadre()
-        {
-          var val = document.getElementById("nome-padre").value;
-          var opts = document.getElementById('nomepadre').childNodes;
-          for (var i = 0; i < opts.length; i++) {
-            if (opts[i].value === val) {
-              // An item was selected from the list!
-              // yourCallbackHere()
-              var salto = opts[i].value.split("  ");
-              $("#nome-padre").val(salto[0]+' '+salto[1]);
-              //$("#cognome-figlio-5").val(salto[1]);
-              $(':focus').blur()
-              break;
-            }
-          }
-        }
-
-        function opcionesmadre()
-        {
-          var valore = $('#nome-madre').val();
-          if(!valore==' ' ||!valore==null)
-          {
-              console.log(valore);
-              $.ajax({
-              url: 'dati.php',
-              type: 'POST',
-              data: {
-                'NAMES' : 1,
-                'valore': valore,
-              },
-              success: function(response){
-                  var data = JSON.parse(response);
-                  //console.log(data);
-                  var indice = data.names.length;
-                  $('#nomemadre option').remove();
-                  for(var i=0;i<indice;i++)
-                  {
-
-                    var valori = data.names[i].nome + '  '+ data.names[i].cognome;
-
-                    $("#nomemadre").append($("<option>").attr('value', valori).text(valori));
-                  }
-              }
-              });
-            }
-        }
-        function rellenamadre()
-        {
-          var val = document.getElementById("nome-madre").value;
-          var opts = document.getElementById('nomemadre').childNodes;
-          for (var i = 0; i < opts.length; i++) {
-            if (opts[i].value === val) {
-              // An item was selected from the list!
-              // yourCallbackHere()
-              var salto = opts[i].value.split("  ");
-              $("#nome-madre").val(salto[0]+' '+salto[1]);
-              //$("#cognome-figlio-5").val(salto[1]);
-              $(':focus').blur()
-              break;
-            }
-          }
-        }
-
-
-
-        function nascondi_figli()
-        {
-          for(var k =1;k<6;k++)
-          {
-            $("#nfiglio"+k).hide();
-            $("#cfiglio"+k).hide();
-          }
-
-        }
-        function nascondere()
-        {
-          $('#membro').hide();
-        }
-        function azzeravalori()
-        {
-         document.getElementById("nome").value=null;
-         document.getElementById("cognome").value=null;
-         document.getElementById("indirizzo").value=null;
-         document.getElementById("citta").value=null;
-         document.getElementById("cap").value="";
-         document.getElementById("nascita").value=null;
-         document.getElementById("sesso").selectedIndex = 0;
-         document.getElementById("telefono").value=null;
-         document.getElementById("nazionalita").selectedIndex = 0;
-         document.getElementById("statocivile").selectedIndex = 0;
-         document.getElementById("matrimonio").value=null;
-         document.getElementById("nome-coniuge").value=null;
-         document.getElementById("cognome-coniuge").value=null;
-         document.getElementById("numero").selectedIndex = 0;
-         document.getElementById("nome-figlio-1").value=null;
-         document.getElementById("cognome-figlio-1").value=null;
-         document.getElementById("nome-figlio-2").value=null;
-         document.getElementById("cognome-figlio-2").value=null;
-         document.getElementById("nome-figlio-3").value=null;
-         document.getElementById("cognome-figlio-3").value=null;
-         document.getElementById("nome-figlio-4").value=null;
-         document.getElementById("cognome-figlio-4").value=null;
-         document.getElementById("nome-figlio-5").value=null;
-         document.getElementById("cognome-figlio-5").value=null;
-         document.getElementById("nome-padre").value=null;
-         document.getElementById("nome-madre").value=null;
-         document.getElementById("data-battesimo").value=null;
-         document.getElementById("luogo-battesimo").value=null;
-         document.getElementById("data-arrivo").value=null;
-         document.getElementById("battezzato-spirito").selectedIndex = 0;
-         document.getElementById("settore").selectedIndex = 0;
-         document.getElementById("numero-tessera").value=null;
-         document.getElementById("carico").selectedIndex = 0;
-         document.getElementById("osservazioni").value=null;
-         nascondi_figli();
-        }
-        function prepara_congregato()
-        {
-          $('#membro').show();
-          prepara_nuovo_membro();
-          document.getElementById("carico").required = false;
-          document.getElementById("tipo").value="congregato";
-          $('#numero-tessera').parent().hide();
-          $('#carico').parent().hide();
-          $('#data-battesimo').parent().hide();
-          $('#luogo-battesimo').parent().hide();
-        }
-        function prepara_bambino()
-        {
-          document.getElementById("carico").required = false;
-          document.getElementById("tipo").value="bambino";
-          $('#membro').show();
-          $("#statocivile").parent().hide();
-          $("#matrimonio").parent().hide();
-          $("#nome-coniuge").parent().hide();
-          $("#cognome-coniuge").parent().hide();
-          $('#numero').parent().hide();
-          $('#nome-figlio-1').parent().hide();
-          $('#cognome-figlio-1').parent().hide();
-          $('#nome-figlio-2').parent().hide();
-          $('#cognome-figlio-2').parent().hide();
-          $('#nome-figlio-3').parent().hide();
-          $('#cognome-figlio-3').parent().hide();
-          $('#nome-figlio-4').parent().hide();
-          $('#cognome-figlio-4').parent().hide();
-          $('#nome-figlio-5').parent().hide();
-          $('#cognome-figlio-5').parent().hide();
-          $("#data-battesimo").parent().hide();
-          $('#luogo-battesimo').parent().hide();
-          $('#data-arrivo').parent().hide();
-          $('#battezzato-spirito').parent().hide();
-          //$('#settore').parent().hide();
-          $("#numero-tessera").parent().hide();
-          $("#carico").parent().hide();
-          $("#osservazioni").parent().hide();
-        }
-        function prepara_nuovo_membro()
-        {
-          document.getElementById("tipo").value="membro";
-          document.getElementById("carico").required = true;
-          $('#membro').show();
-          $("#statocivile").parent().show();
-          $("#matrimonio").parent().show();
-          $("#nome-coniuge").parent().show();
-          $("#cognome-coniuge").parent().show();
-          $('#numero').parent().show();
-          $('#nome-figlio-1').parent().show();
-          $('#cognome-figlio-1').parent().show();
-          $('#nome-figlio-2').parent().show();
-          $('#cognome-figlio-2').parent().show();
-          $('#nome-figlio-3').parent().show();
-          $('#cognome-figlio-3').parent().show();
-          $('#nome-figlio-4').parent().show();
-          $('#cognome-figlio-4').parent().show();
-          $('#nome-figlio-5').parent().show();
-          $('#cognome-figlio-5').parent().show();
-          $("#data-battesimo").parent().show();
-          $('#luogo-battesimo').parent().show();
-          $('#data-arrivo').parent().show();
-          $('#battezzato-spirito').parent().show();
-          $('#settore').parent().show();
-          $("#numero-tessera").parent().show();
-          $("#carico").parent().show();
-          $("#osservazioni").parent().show();
-        }
-        function cambia()
-        {
-          azzeravalori();
-          var op = document.getElementById("opzione");
-          var valore = op.options[op.selectedIndex].value;
-          if(valore==="M")
-          {
-            document.getElementById('modulo').innerHTML="MODULO MEMBRO";
-            $('#membro').show();
-            prepara_nuovo_membro();
-          }
-          else if(valore==="C")
-          {
-            document.getElementById('modulo').innerHTML="MODULO CONGREGATO";
-            prepara_congregato();
-          }
-          else if(valore==="B")
-          {
-            document.getElementById('modulo').innerHTML="MODULO BAMBINO/A";
-            prepara_bambino();
-          }
-
-        }
-        function dissattiva()
-        {
-
-          var ele = document.getElementById("statocivile");
-          var stato = ele.options[ele.selectedIndex].value;
-          if(stato==='Cebile/nubile')
-          {
-            $("#matrimonio").prop('disabled', true);
-            $("#nome-coniuge").prop('disabled', true);
-            $("#cognome-coniuge").prop('disabled', true);
-          }
-          else {
-            $("#matrimonio").prop('disabled', false);
-            $("#nome-coniuge").prop('disabled', false);
-            $("#cognome-coniuge").prop('disabled', false);
-
-          }
-        }
-
-       function myFunction() {
-         //nsacondo tutti
-         var i=0,j=0;
-         for(i=1;i<6;i++)
-         {
-          $("#nfiglio"+i).hide();
-          $("#cfiglio"+i).hide();
-         }
-         var qta=0;
-         var e = document.getElementById("numero");
-         var numero = e.options[e.selectedIndex].value;
-         var number=0;
-         switch(numero)
-         {
-           case '0':
-              number=0;
-           break;
-           case '1':
-              number=1;
-           break;
-           case '2':
-              number=2;
-           break;
-           case '3':
-              number=3;
-           break;
-           case '4':
-              number=4;
-           break;
-           case '5':
-              number=5;
-           break;
-         }
-         for (var j=1;j<number+1;j++)
-          {
-            $("#nfiglio"+j).show();
-            $("#cfiglio"+j).show();
-          }
-
-       }
-       function consacrazione() {
-
-        nascondecons();
-        var e = document.getElementById("carico");
-        var numero = e.options[e.selectedIndex].value;
-        switch(numero)
-        {
-          case 'Pastore':
-               $("#datadiacono").show();
-               $("#luogodiacono").show();
-               $("#datapresbitero").show();
-               $("#luogopresbitero").show();
-               $("#dataevangelista").show();
-               $("#luogoevangelista").show();
-               $("#datapastore").show();
-               $("#luogopastore").show();
-          break;
-          case 'Evangelista':
-              $("#datadiacono").show();
-               $("#luogodiacono").show();
-               $("#datapresbitero").show();
-               $("#luogopresbitero").show();
-               $("#dataevangelista").show();
-               $("#luogoevangelista").show();
-          break;
-          case 'Presbitero':
-              $("#datadiacono").show();
-               $("#luogodiacono").show();
-               $("#datapresbitero").show();
-               $("#luogopresbitero").show();
-          break;
-          case 'Diacono':
-             $("#datadiacono").show();
-               $("#luogodiacono").show();
-          break;
-
-          case  'Diaconessa':
-             $("#datadiacono").show();
-               $("#luogodiacono").show();
-          break;
-
-        }
-
-      }
-
-      function nascondecons()
-        {
-             $("#datadiacono").hide();
-             $("#luogodiacono").hide();
-             $("#datapresbitero").hide();
-             $("#luogopresbitero").hide();
-             $("#dataevangelista").hide();
-             $("#luogoevangelista").hide();
-             $("#datapastore").hide();
-             $("#luogopastore").hide();
-        }
-
-
-       function hidebutton()
-       {
-
-         $('#button-elimina').hide();
-         $('#button-modifica').hide();
-       }
-       function mostrabottoni()
-       {
-         $('#button-elimina').show();
-         $('#button-modifica').show();
-       }
+    // we define and invoke a function
+  //  nascondere();
+  //  nascondecons();
+  //  hidebutton();
+    //nascondi_figli();
+    $('#statocivile').on('change', function () {
+        dissattiva();
+    });
+   $('#opzione').on('change', function () {
+        cambia();
+    });
+    $('#numero').on('change', function () {
+        myFunction();
+    });
+    $('#carico').on('change', function () {
+       consacrazione();
+   });
+    $('#button-elimina').on('click', function () {
+         $('#list').children().remove();
+         hidebutton();
+           $('#img-ad').show();
+             $('#erroredimensione').text('');
+     });
+});
  </script>
 
 
@@ -784,12 +233,12 @@ header('location: index.php');
 
             </div>
             <div class="media-container-column title col-12 col-lg-7 col-md-6">
-                <h2 class="align-right mbr-bold mbr-white pb-3 mbr-fonts-style display-2">Aggiungi al registro</h2>
-                <h3 class="mbr-section-subtitle align-right mbr-light mbr-white mbr-fonts-style display-5">
-                    Inserisci i dati del nuovo membro, congregato o bambino/a</h3>
+                <h2 class="align-left mbr-bold mbr-white pb-3 mbr-fonts-style display-2">Modifica i dati</h2>
+
             </div>
         </div>
     </div>
+
 </section>
 
 <section class="mbr-section form3 cid-ra8rRktZ5P" id="form3-1d">
@@ -798,54 +247,37 @@ header('location: index.php');
 
 
 
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="title col-12 col-lg-8">
-                <h2 class="align-center pb-2 mbr-fonts-style display-2">TIPO</h2>
-                <h3 class="mbr-section-subtitle align-center pb-5 mbr-light mbr-fonts-style display-5">
-                    Membro, congregato o bambino</h3>
-            </div>
-        </div>
 
-        <div class="row py-2 justify-content-center">
-            <div class="col-12 col-lg-8  col-md-8 " data-form-type="formoid">
-                <div class="row row-sm-offset">
-                  <div class="col-md-3 multi-horizontal"></div>
-                    <div class="col-md-6 multi-horizontal">
-        						<select class="form-control" placeholder="scegli" id="opzione">
-                    <option selected disabled>Scegli un'opzione</option>
-        						<option value="M">Membro</option>
-        						<option value="C">Congregato</option>
-        						<option value="B">Bambino/a</option>
-        						</select>
-                  </div>
-                  <div class="col-md-3 multi-horizontal"></div>
-                </div>
-
-            </div>
-        </div>
-    </div>
 </section>
 
 <section class="mbr-section form1 cid-ra8qCZsALE" id="membro" >
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="title col-12 col-lg-8">
-                <h2 class="mbr-section-title align-center pb-3 mbr-fonts-style display-2" id="modulo"></h2>
-                <h3 class="mbr-section-subtitle align-center mbr-light pb-3 mbr-fonts-style display-5">
-                    Inserisci i dati richiesti.
-                </h3>
-            </div>
-        </div>
-    </div>
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="media-container-column col-lg-8" data-form-type="formoid">
                     <form name="modulo" class="mbr-form" action="esito.php" method="post" enctype="multipart/form-data">
-                      <input  type="hidden" class="form-control"  name="attivo" value="S">
-                      <input  type="hidden" class="form-control" name="tipo" id="tipo" value="">
+
+
+                      <input  type="hidden" class="form-control"  name="attivo" value="<?php echo $attivo; ?>">
+                      <!--<input  type="hidden" class="form-control" name="tipo" id="tipo" value="">-->
                       <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
                         <div class="row row-sm-offset">
+
+                          <div class="col-md-4 multi-horizontal" data-for="">
+                          </div>
+                          <div class="col-md-4 multi-horizontal" data-for="">
+                            <div class="form-group">
+                            <label class="form-control-label mbr-fonts-style display-7" for="nome"><b>Tipo</b></label>
+                            <select class="form-control" placeholder="scegli" id="opzione">
+                            <option selected disabled>Scegli un'opzione</option>
+                						<option value="membro">Membro</option>
+                						<option value="congregato">Congregato</option>
+                						<option value="bambino">Bambino/a</option>
+                						</select>
+                          </div>
+                          </div>
+                          <div class="col-md-4 multi-horizontal" data-for="">
+                          </div>
 
                             <div class="col-md-3 multi-horizontal" data-for="">
                             </div>
@@ -891,38 +323,38 @@ header('location: index.php');
                             <div class="col-md-6 multi-horizontal" data-for="nome">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="nome"><b>Nome</b></label>
-                                    <input type="text" class="form-control" name="nome" data-form-field="Name" required="" id="nome" >
+                                    <input type="text" class="form-control" name="nome" data-form-field="Name" required="" id="nome" value="<?php echo $nome; ?>">
                                 </div>
                             </div>
                             <div class="col-md-6 multi-horizontal" data-for="cognome">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="cognome"><b>Cognome</b></label>
-                                    <input type="text" class="form-control" name="cognome" id="cognome">
+                                    <input type="text" class="form-control" name="cognome" id="cognome" value="<?php echo $cognome; ?>">
                                 </div>
                             </div>
                             <div class="col-md-6 multi-horizontal" data-for="indirizzo">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="indirizzo"><b>Indirizzo</b></label>
-                                    <input type="text" class="form-control" name="indirizzo"  id="indirizzo" />
+                                    <input type="text" class="form-control" name="indirizzo"  id="indirizzo" value="<?php echo $indirizzo; ?>"/>
                                 </div>
                             </div>
                             <div class="col-md-4 multi-horizontal" data-for="Citta">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="citta"><b>Città</b></label>
-                                    <input type="text" class="form-control" name="citta"  id="citta">
+                                    <input type="text" class="form-control" name="citta"  id="citta" value="<?php echo $citta; ?>">
                                 </div>
                             </div>
                             <div class="col-md-2 multi-horizontal" data-for="cap">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="cap"><b>CAP</b></label>
-                                    <input type="text" class="form-control" name="cap" id="cap">
+                                    <input type="text" class="form-control" name="cap" id="cap" value="<?php echo $cap; ?>">
                                 </div>
                             </div>
 
                             <div class="col-md-4 multi-horizontal" data-for="nascita">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="nascita"><b>Data di nascita</b></label>
-                                    <input type="date" class="form-control" name="nascita"  id="nascita" maxlength="10">
+                                    <input type="date" class="form-control" name="nascita"  id="nascita" maxlength="10" value="<?php echo $nascita; ?>">
                                 </div>
                             </div>
                             <div class="col-md-4 multi-horizontal" data-for="sesso">
@@ -938,7 +370,7 @@ header('location: index.php');
                             <div class="col-md-4 multi-horizontal" data-for="telefono">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="telefono"><b>Numero di Telefono</b></label>
-                                    <input type="number" class="form-control" name="telefono"  id="telefono">
+                                    <input type="number" class="form-control" name="telefono"  id="telefono" value="<?php echo $telefono; ?>">
                                 </div>
                             </div>
 
@@ -977,13 +409,13 @@ header('location: index.php');
                             <div class="col-md-4 multi-horizontal" data-for="matrimonio">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="matrimonio"><b>Data di matrimonio</b></label>
-                                    <input type="date" class="form-control" name="matrimonio"  id="matrimonio" maxlength="10">
+                                    <input type="date" class="form-control" name="matrimonio"  id="matrimonio" maxlength="10" value="<?php echo $data_matrimonio; ?>">
                                 </div>
                             </div>
                             <div class="col-md-6 multi-horizontal" data-for="nome-coniuge">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="nome-coniuge"><b>Nome coniuge</b></label>
-                                    <input type="text" class="form-control" name="nome-coniuge"  id="nome-coniuge" list="nomecon" onkeyup="opciones()" oninput="rellena()">
+                                    <input type="text" class="form-control" name="nome-coniuge"  id="nome-coniuge" list="nomecon" onkeyup="opciones()" oninput="rellena()" value="<?php echo $nome_coniuge; ?>">
                                     <datalist id="nomecon">
                                     </datalist>
                                 </div>
@@ -991,7 +423,7 @@ header('location: index.php');
                             <div class="col-md-6 multi-horizontal" data-for="cognome-coniuge">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="cognome-coniuge"><b>Cognome coniuge</b></label>
-                                    <input type="text" class="form-control" name="cognome-coniuge"  id="cognome-coniuge">
+                                    <input type="text" class="form-control" name="cognome-coniuge"  id="cognome-coniuge" value="<?php echo $cognome_coniuge; ?>">
                                 </div>
                             </div>
                             <div class="col-md-4 multi-horizontal" data-for="numero-figli">
@@ -1013,7 +445,7 @@ header('location: index.php');
                             <div id="nfiglio1" class="col-md-6 multi-horizontal" data-for="nome-figlio-1">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="nome-figlio-1"><b>Nome figlio 1</b></label>
-                                    <input type="text" class="form-control" name="nome-figlio-1" id="nome-figlio-1"  list="nomefi1" onkeyup="opciones1()" oninput="rellena1()">
+                                    <input type="text" class="form-control" name="nome-figlio-1" id="nome-figlio-1"  list="nomefi1" onkeyup="opciones1()" oninput="rellena1()" value="<?php echo $nome_figlio_1; ?>">
                                     <datalist id="nomefi1">
                                     </datalist>
                                 </div>
@@ -1021,14 +453,14 @@ header('location: index.php');
                             <div id="cfiglio1" class="col-md-6 multi-horizontal" data-for="cognome-figlio-1">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="cognome-figlio-1"><b>Cognome figlio 1</b></label>
-                                    <input type="text" class="form-control" name="cognome-figlio-1" id="cognome-figlio-1">
+                                    <input type="text" class="form-control" name="cognome-figlio-1" id="cognome-figlio-1" value="<?php echo $cognome_figlio_1; ?>">
                                 </div>
                             </div>
 
                             <div id="nfiglio2" class="col-md-6 multi-horizontal" data-for="nome-figlio-2">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="nome-figlio-2"><b>Nome figlio 2</b></label>
-                                    <input type="text" class="form-control" name="nome-figlio-2"  id="nome-figlio-2" list="nomefi2" onkeyup="opciones2()" oninput="rellena2()">
+                                    <input type="text" class="form-control" name="nome-figlio-2"  id="nome-figlio-2" list="nomefi2" onkeyup="opciones2()" oninput="rellena2()" value="<?php echo $nome_figlio_2; ?>">
                                     <datalist id="nomefi2">
                                     </datalist>
                                 </div>
@@ -1036,13 +468,13 @@ header('location: index.php');
                             <div id="cfiglio2" class="col-md-6 multi-horizontal" data-for="cognome-figlio-2">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="cognome-figlio-2"><b>Cognome figlio 2</b></label>
-                                    <input type="text" class="form-control" name="cognome-figlio-2"  id="cognome-figlio-2">
+                                    <input type="text" class="form-control" name="cognome-figlio-2"  id="cognome-figlio-2" value="<?php echo $cognome_figlio_2; ?>">
                                 </div>
                             </div>
                             <div id="nfiglio3" class="col-md-6 multi-horizontal" data-for="nome-figlio-3">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="nome-figlio-3"><b>Nome figlio 3</b></label>
-                                    <input type="text" class="form-control" name="nome-figlio-3" id="nome-figlio-3" list="nomefi3" onkeyup="opciones3()" oninput="rellena3()">
+                                    <input type="text" class="form-control" name="nome-figlio-3" id="nome-figlio-3" list="nomefi3" onkeyup="opciones3()" oninput="rellena3()" value="<?php echo $nome_figlio_3; ?>">
                                     <datalist id="nomefi3">
                                     </datalist>
                                 </div>
@@ -1050,13 +482,13 @@ header('location: index.php');
                             <div  id="cfiglio3" class="col-md-6 multi-horizontal" data-for="cognome-figlio-3">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="cognome-figlio-3"><b>Cognome figlio 3</b></label>
-                                    <input type="text" class="form-control" name="cognome-figlio-3"  id="cognome-figlio-3">
+                                    <input type="text" class="form-control" name="cognome-figlio-3"  id="cognome-figlio-3" value="<?php echo $cognome_figlio_3; ?>">
                                 </div>
                             </div>
                             <div id="nfiglio4" class="col-md-6 multi-horizontal" data-for="nome-figlio-4">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="nome-figlio-4"><b>Nome figlio 4</b></label>
-                                    <input type="text" class="form-control" name="nome-figlio-4"  id="nome-figlio-4" list="nomefi4" onkeyup="opciones4()" oninput="rellena4()">
+                                    <input type="text" class="form-control" name="nome-figlio-4"  id="nome-figlio-4" list="nomefi4" onkeyup="opciones4()" oninput="rellena4()" value="<?php echo $nome_figlio_4; ?>">
                                     <datalist id="nomefi4">
                                     </datalist>
                                 </div>
@@ -1064,13 +496,13 @@ header('location: index.php');
                             <div id="cfiglio4" class="col-md-6 multi-horizontal" data-for="cognome-figlio-4">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="cognome-figlio-4"><b>Cognome figlio 4</b></label>
-                                    <input type="text" class="form-control" name="cognome-figlio-4"  id="cognome-figlio-4">
+                                    <input type="text" class="form-control" name="cognome-figlio-4"  id="cognome-figlio-4" value="<?php echo $cognome_figlio_4; ?>">
                                 </div>
                             </div>
                             <div id="nfiglio5" class="col-md-6 multi-horizontal" data-for="nome-figlio-5">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="nome-figlio-5"><b>Nome figlio 5</b></label>
-                                    <input type="text" class="form-control" name="nome-figlio-5"  id="nome-figlio-5" list="nomefi5" onkeyup="opciones5()" oninput="rellena5()">
+                                    <input type="text" class="form-control" name="nome-figlio-5"  id="nome-figlio-5" list="nomefi5" onkeyup="opciones5()" oninput="rellena5()" value="<?php echo $nome_figlio_5; ?>">
                                     <datalist id="nomefi5">
                                     </datalist>
                                 </div>
@@ -1078,7 +510,7 @@ header('location: index.php');
                             <div id="cfiglio5" class="col-md-6 multi-horizontal" data-for="cognome-figlio-5">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="cognome-figlio-5"><b>Cognome figlio 5</b></label>
-                                    <input type="text" class="form-control" name="cognome-figlio-5"  id="cognome-figlio-5">
+                                    <input type="text" class="form-control" name="cognome-figlio-5"  id="cognome-figlio-5" value="<?php echo $cognome_figlio_5; ?>">
                                 </div>
                             </div>
                             <div class="col-md-8 multi-horizontal" >
@@ -1086,7 +518,7 @@ header('location: index.php');
                             <div class="col-md-6 multi-horizontal" data-for="nome-padre">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="nome-padre"><b>Nome e cognome padre</b></label>
-                                    <input type="text" class="form-control" name="nome-padre"  id="nome-padre" list="nomepadre" onkeyup="opcionespadre()" oninput="rellenapadre()">
+                                    <input type="text" class="form-control" name="nome-padre"  id="nome-padre" list="nomepadre" onkeyup="opcionespadre()" oninput="rellenapadre()" value="<?php echo $nome_padre; ?>">
                                     <datalist id="nomepadre">
                                     </datalist>
                                 </div>
@@ -1094,7 +526,7 @@ header('location: index.php');
                             <div class="col-md-6 multi-horizontal" data-for="nome-madre">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="nome-madre"><b>Nome e cognome madre</b></label>
-                                    <input type="text" class="form-control" name="nome-madre"  id="nome-madre" list="nomemadre" onkeyup="opcionesmadre()" oninput="rellenamadre()">
+                                    <input type="text" class="form-control" name="nome-madre"  id="nome-madre" list="nomemadre" onkeyup="opcionesmadre()" oninput="rellenamadre()" value="<?php echo $nome_madre; ?>">
                                     <datalist id="nomemadre">
                                     </datalist>
                                 </div>
@@ -1102,13 +534,13 @@ header('location: index.php');
                             <div class="col-md-4 multi-horizontal" data-for="data-battesimo">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="data-battesimo"><b>Data di battesimo</b></label>
-                                    <input type="date" class="form-control" name="data-battesimo" id="data-battesimo" maxlength="10">
+                                    <input type="date" class="form-control" name="data-battesimo" id="data-battesimo" maxlength="10" value="<?php echo $data_battesimo; ?>">
                                 </div>
                             </div>
                             <div class="col-md-4 multi-horizontal" data-for="luogo-battesimo">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="luogo-battesimo"><b>Luogo di battesimo</b></label>
-                                    <input type="text" class="form-control" name="luogo-battesimo" id="luogo-battesimo">
+                                    <input type="text" class="form-control" name="luogo-battesimo" id="luogo-battesimo" value="<?php echo $luogo_battesimo; ?>">
                                 </div>
                             </div>
                             <div class="col-md-4 multi-horizontal" >
@@ -1127,7 +559,7 @@ header('location: index.php');
                             <div class="col-md-4 multi-horizontal" data-for="data-arrivo">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="data-arrivo"><b>Data di arrivo in chiesa</b></label>
-                                    <input type="date" class="form-control" name="data-arrivo" id="data-arrivo" maxlength="10">
+                                    <input type="date" class="form-control" name="data-arrivo" id="data-arrivo" maxlength="10" value="<?php echo $data_arrivo; ?>">
                                 </div>
                             </div>
 
@@ -1147,7 +579,7 @@ header('location: index.php');
                             <div class="col-md-4 multi-horizontal" data-for="tessera">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="numero-tessera"><b>Numero di tessera</b></label>
-                                    <input type="text" class="form-control" name="tessera"  maxlength="6"  id="numero-tessera">
+                                    <input type="text" class="form-control" name="tessera"  maxlength="6"  id="numero-tessera" value="<?php echo $tessera; ?>">
                                 </div>
                             </div>
                             <div class="col-md-4 multi-horizontal" data-for="carico">
@@ -1170,50 +602,50 @@ header('location: index.php');
                             <div id="datadiacono" class="col-md-6 multi-horizontal" data-for="data-diacono">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="data-diacono"><b>Data consacrazione a Diacono</b></label>
-                                    <input type="date" class="form-control" name="data-diacono" id="data-diacono">
+                                    <input type="date" class="form-control" name="data-diacono" id="data-diacono" value="<?php echo $data_diacono; ?>">
                                 </div>
                             </div>
                             <div id="luogodiacono" class="col-md-6 multi-horizontal" data-for="luogo-diacono">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="luogo-diacono"><b>Luogo di consacrazione - Diacono</b></label>
-                                    <input type="text" class="form-control" name="luogo-diacono" id="luogo-diacono">
+                                    <input type="text" class="form-control" name="luogo-diacono" id="luogo-diacono" value="<?php echo $luogo_diacono; ?>">
                                 </div>
                             </div>
 
                             <div id="datapresbitero" class="col-md-6 multi-horizontal" data-for="data-presbitero">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="data-presbitero"><b>Data consacrazione a Presbitero</b></label>
-                                    <input type="date" class="form-control" name="data-presbitero"  id="data-presbitero">
+                                    <input type="date" class="form-control" name="data-presbitero"  id="data-presbitero" value="<?php echo $data_presbitero; ?>">
                                 </div>
                             </div>
                             <div id="luogopresbitero" class="col-md-6 multi-horizontal" data-for="luogo-presbitero">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="luogo-presbitero"><b>Luogo di consacrazione - Presbitero</b></label>
-                                    <input type="text" class="form-control" name="luogo-presbitero"  id="luogo-presbitero">
+                                    <input type="text" class="form-control" name="luogo-presbitero"  id="luogo-presbitero" value="<?php echo $luogo_presbitero; ?>">
                                 </div>
                             </div>
                             <div id="dataevangelista" class="col-md-6 multi-horizontal" data-for="data-evangelista">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="data-evangelista"><b>Data consacrazione a Evangelista</b></label>
-                                    <input type="date" class="form-control" name="data-evangelista" id="data-evangelista">
+                                    <input type="date" class="form-control" name="data-evangelista" id="data-evangelista" value="<?php echo $data_evangelista; ?>">
                                 </div>
                             </div>
                             <div  id="luogoevangelista" class="col-md-6 multi-horizontal" data-for="luogo-evangelista">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="luogo-evangelista"><b>Luogo di consacrazione - Evangelista</b></label>
-                                    <input type="text" class="form-control" name="luogo-evangelista"  id="luogo-evangelista">
+                                    <input type="text" class="form-control" name="luogo-evangelista"  id="luogo-evangelista" value="<?php echo $luogo_evangelista; ?>">
                                 </div>
                             </div>
                             <div id="datapastore" class="col-md-6 multi-horizontal" data-for="data-pastore">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="data-pastore"><b>Data consacrazione a Pastore</b></label>
-                                    <input type="date" class="form-control" name="data-pastore"  id="data-pastore">
+                                    <input type="date" class="form-control" name="data-pastore"  id="data-pastore" value="<?php echo $data_pastore; ?>">
                                 </div>
                             </div>
                             <div id="luogopastore" class="col-md-6 multi-horizontal" data-for="luogo-pastore">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="luogo-pastore"><b>Luogo di consacrazione - Pastore</b></label>
-                                    <input type="text" class="form-control" name="luogo-pastore"  id="luogo-pastore">
+                                    <input type="text" class="form-control" name="luogo-pastore"  id="luogo-pastore" value="<?php echo $luogo_pastore; ?>">
                                 </div>
                             </div>
 
@@ -1221,12 +653,25 @@ header('location: index.php');
                         </div>
                         <div class="form-group" data-for="osservazioni">
                             <label class="form-control-label mbr-fonts-style display-7" for="osservazioni"><b>Osservazioni</b></label>
-                            <textarea type="text" class="form-control" name="osservazioni" maxlength="500" rows="6"  id="osservazioni"></textarea>
+                            <textarea type="text" class="form-control" name="osservazioni" maxlength="500" rows="6"  id="osservazioni" value=""><?php echo $osservazioni; ?></textarea>
+                        </div>
+                        <div class="row row-sm-offset">
+
+                          <div class="col-md-2 multi-horizontal" data-for="">
+                          </div>
+                          <div class="col-md-4 multi-horizontal" data-for="">
+                            <span class="input-group-btn"><button  type="submit" class="btn  btn-form display-4" name="newmembro" style="background-color: #232323;color:white">ANNULLA</button></span>
+
+                          </div>
+                          <div class="col-md-4 multi-horizontal" data-for="">
+                            <span class="input-group-btn"><button  type="submit" class="btn btn-form display-4" name="newmembro" style="background-color: #0066ff;color:white">SALVA</button></span>
+
+                          </div>
+                          <div class="col-md-2 multi-horizontal" data-for="">
+                          </div>
                         </div>
 
-
-                        <span class="input-group-btn"><button  type="submit" class="btn btn-primary btn-form display-4" name="newmembro">REGISTRA</button></span>
-                    </form>
+                        </form>
             </div>
         </div>
     </div>

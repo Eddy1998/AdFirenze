@@ -174,16 +174,15 @@ try{
 									 //se esiste si cerca nella tabella se esistono figli collegati
 									 //controllando prima se è padre o madre e se ha figli
 
-
-											if($genere=="Maschile")
-											{
-												$quer="SELECT * FROM figli_persone WHERE md5(id_padre)=:id";
-
-											}
-											else
+									 	$quer="";
+											if($genere=="Femminile")
 											{
 												$quer="SELECT * FROM figli_persone WHERE md5(id_madre)=:id";
 											}
+											else {
+													$quer="SELECT * FROM figli_persone WHERE md5(id_padre)=:id";
+												}
+
 											$sql1 =$dbh->prepare($quer);
 											$sql1->bindValue(":id", $id);
 
@@ -195,12 +194,14 @@ try{
 			                  {
 													//da rivedere nel caso ci siano errori
 			                        $jsondata["figli"][]=$row;
+															$jsondata["mex"]="trovato";
 			                   }
-												 $jsondata["mex"]["figli"]="trovato";
+
 										 	}
 											else {
-														$jsondata["figli"]["mex"]="not_found";
+														$jsondata["mex"]="not_found";
 													}
+
 
 
 									 	// se esiste si cerca nella tabella di consacrato

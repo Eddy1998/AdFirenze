@@ -189,8 +189,7 @@ if(!isset($_GET['id']))
         <div class="row justify-content-center">
             <div class="title col-12 col-lg-8">
                 <h2 class="mbr-section-title align-center pb-3 mbr-fonts-style display-2">MODULO</h2>
-                <h3 class="mbr-section-subtitle align-center mbr-light pb-3 mbr-fonts-style display-5">
-                    Modifica i dati di 'user'</h3>
+
             </div>
         </div>
     </div>
@@ -198,16 +197,28 @@ if(!isset($_GET['id']))
         <div class="row justify-content-center">
             <div class="media-container-column col-lg-8" data-form-type="formoid">
 
-                    <form name="modulo" class="mbr-form" action="modifica.php" method="post">
+                    <form name="modulo" class="mbr-form" action="modifica" method="post">
 
                             <?php if(isset($_GET['id']))
                               {
                             ?>
-                              <input type="hidden" id="id" name="id" value="<?php echo $_GET['id']; ?>"></input>
+                              <input type="hidden" id="id" name="ssid" value="<?php echo $_GET['id']; ?>"></input>
                               <?php
                             }
                             ?>
                           <div class="row row-sm-offset">
+
+                            <div class="col-md-4 multi-horizontal" data-for="">
+                            </div>
+                            <div class="col-md-4 multi-horizontal" data-for="">
+                              <div class="form-group">
+                              <label class="form-control-label mbr-fonts-style display-7" style="color:gray"><b>Tipo</b></label><br>
+                              <label class="form-control-label mbr-fonts-style display-7"  ><b id="tipo"> </b></label>
+
+                            </div>
+                            </div>
+                            <div class="col-md-4 multi-horizontal" data-for="">
+                            </div>
                             <div class="col-md-3 multi-horizontal" >
                             </div>
 
@@ -454,6 +465,13 @@ if(!isset($_GET['id']))
                             </div>
                             <div class="col-md-4 multi-horizontal" >
                             </div>
+                            <div class="col-md-3 multi-horizontal" >
+                                <div class="form-group">
+                                    <label class="form-control-label mbr-fonts-style display-7" style="color:gray"><b>Batt.  Spirito Santo</b></label><br>
+                                    <label class="form-control-label mbr-fonts-style display-7"  ><b id="battezzato-spirito"> </b></label>
+
+                                </div>
+                            </div>
                             <div class="col-md-4 multi-horizontal">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Data di arrivo in chiesa</b></label><br>
@@ -461,13 +479,13 @@ if(!isset($_GET['id']))
 
                                 </div>
                             </div>
-                            <div class="col-md-8 multi-horizontal" >
+                            <div class="col-md-5 multi-horizontal">
                                 <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7" style="color:gray"><b>Battezzato con Spirito Santo</b></label><br>
-                                    <label class="form-control-label mbr-fonts-style display-7"  ><b id="battezzato-spirito"> </b></label>
-
+                                    <label class="form-control-label mbr-fonts-style display-7" style="color:gray"><b>Congregazione</b></label><br>
+                                    <label class="form-control-label mbr-fonts-style display-7"  ><b id="congregazione"> </b></label>
                                 </div>
                             </div>
+
 
                             <div class="col-md-4 multi-horizontal" >
                                 <div class="form-group">
@@ -582,6 +600,7 @@ if(!isset($_GET['id']))
                       <input type="hidden" class="form-control" name="data-battesimo" id="data-battesimo2" >
                       <input type="hidden" class="form-control" name="luogo-battesimo" id="luogo-battesimo2">
                       <input type="hidden" class="form-control" name="data-arrivo" id="data-arrivo2" >
+                      <input type="hidden" class="form-control" name="congregazione" id="congregazione2" >
                        <input type="hidden" class="form-control" name="battezzato-spirito" id="battezzato-spirito2" >
                       <input type="hidden" class="form-control" name="tessera" id="numero-tessera2">
                        <input type="hidden" class="form-control" name="carico" id="carico2">

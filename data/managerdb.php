@@ -80,7 +80,7 @@ session_start();
       $dbh = new PDO($conn,$user,$pass);
       $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       if(isset($_POST['AGGIORNA']))
-      { 
+      {
         $ssid=$_POST['ssid'];
         $tipo=$_POST["tipo"];
         $attivo=$_POST["attivo"];
@@ -222,11 +222,11 @@ session_start();
           $osservazioni=$_POST["osservazioni"];
         }
       $query=$dbh->prepare("UPDATE persone SET tipo_persona=:tipo_persona, attivo=:attivo, numero_tessera=:numero_tessera, congregazione=:congregazione, nome=:nome, cognome=:cognome, carico_in_chiesa=:carico_in_chiesa, indirizzo=:indirizzo, citta=:citta, cap=:cap, telefono=:telefono, nazionalita=:nazionalita, sesso=:sesso, data_nascita=:data_nascita, stato_civile=:stato_civile, data_matrimonio=:data_matrimonio, nome_coniuge=:nome_coniuge, cognome_coniuge=:cognome_coniuge, numero_figli=:numero_figli, nome_padre=:nome_padre, nome_madre=:nome_madre, data_battesimo=:data_battesimo, luogo_battesimo=:luogo_battesimo, data_arrivo_in_chiesa=:data_arrivo_in_chiesa, battezzato_con_spirito_santo=:battezzato_con_spirito_santo, osservazioni=:osservazioni
-      WHERE md5(id)=:id"); 
+      WHERE md5(id)=:id");
     /*  $query=$dbh->prepare("INSERT INTO persone(tipo_persona, attivo, numero_tessera,congregazione, nome, cognome, carico_in_chiesa, indirizzo, citta, cap, telefono, nazionalita, sesso, data_nascita, stato_civile, data_matrimonio, nome_coniuge, cognome_coniuge, numero_figli, nome_padre,  nome_madre,  data_battesimo, luogo_battesimo, data_arrivo_in_chiesa, battezzato_con_spirito_santo, osservazioni)
       VALUES(:tipo_persona,:attivo,:numero_tessera,:congregazione, :nome, :cognome, :carico, :indirizzo, :citta, :cap, :telefono, :nazionalita, :sesso, :data_nascita, :stato_civile, :data_matrimonio, :nome_coniuge, :cognome_coniuge, :numero_figli, :nome_padre, :nome_madre,:data_battesimo,:luogo_battesimo,:data_arrivo_in_chiesa,:battezzato_con_spirito_santo,:osservazioni);");
       */
-      $query->bindValue(":id",$ssid);  
+      $query->bindValue(":id",$ssid);
       $query->bindValue(":tipo_persona",$tipo);
       $query->bindValue(":attivo",$attivo);
       $query->bindValue(":numero_tessera",$tessera);
