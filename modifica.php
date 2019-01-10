@@ -159,8 +159,8 @@ $indirizzo=$_POST["indirizzo"];
   $(document).ready(function(){
      var statocivile = "<?php echo  $stato_civile; ?>";
      var tipo = "<?php echo  $tipo; ?>";
-     var sesso ="<?php echo $sesso; ?>;
-     var nazionalita ="<?php echo $nazionalita ?>;
+     var sesso ="<?php echo $sesso; ?>";
+     var nazionalita ="<?php echo $nazionalita ?>";
      var numero_figli = "<?php echo  $numero_figli; ?>";
      var battezzato_spirito = "<?php echo  $battezzato_spirito; ?>";
      var congregazione  = "<?php echo  $congregazione; ?>";
