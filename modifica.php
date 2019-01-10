@@ -680,17 +680,18 @@ $indirizzo=$_POST["indirizzo"];
                         </div>
                         <div class="row row-sm-offset">
 
-                          <div class="col-md-2 multi-horizontal" data-for="">
+                          <div class="col-md-2 multi-horizontal" >
                           </div>
-                          <div class="col-md-4 multi-horizontal" data-for="">
-                            <span class="input-group-btn"><button  type="submit" class="btn  btn-form display-4" name="newmembro" style="background-color: #232323;color:white">ANNULLA</button></span>
+                          <div class="col-md-4 multi-horizontal" >
+                            <!-- da rivedere se non funziona, cambiato a type "button"-->
+                            <span class="input-group-btn"><button  type="button" onClick="window.location.href='visualizza'" class="btn  btn-form display-4"  style="background-color: #232323;color:white">ANNULLA</button></span>
 
                           </div>
-                          <div class="col-md-4 multi-horizontal" data-for="">
-                            <span class="input-group-btn"><button  type="submit" class="btn btn-form display-4" name="newmembro" style="background-color: #0066ff;color:white">SALVA</button></span>
+                          <div class="col-md-4 multi-horizontal" >
+                            <span class="input-group-btn"><button  type="submit" class="btn btn-form display-4" name="salvamodifica" style="background-color: #0066ff;color:white">SALVA</button></span>
 
                           </div>
-                          <div class="col-md-2 multi-horizontal" data-for="">
+                          <div class="col-md-2 multi-horizontal" >
                           </div>
                         </div>
 
@@ -722,8 +723,8 @@ $indirizzo=$_POST["indirizzo"];
                       $('#img-ad').hide();
                       input = document.getElementById('files');
                       file = input.files[0];
-
-                      if(file.size>60000)
+                    ///cambiato dimensione massima accettabile
+                      if(file.size>1000000)
                       {
                         $('#erroredimensione').text("Immagine con dimensione superiore a 60KB, l'immagine non verra' inserita");
 
