@@ -278,12 +278,14 @@ $indirizzo=$_POST["indirizzo"];
     <div class="container">
         <div class="row justify-content-center">
             <div class="media-container-column col-lg-8" data-form-type="formoid">
-                    <form name="modulo" class="mbr-form" action="esito.php" method="post" enctype="multipart/form-data">
+                    <form name="modulo" class="mbr-form" action="data/managerdb.php" method="POST" enctype="multipart/form-data">
 
 
                       <input  type="hidden" class="form-control"  name="attivo" value="<?php echo $attivo; ?>">
+                      <input  type="hidden" class="form-control"  name="ssid" value="<?php echo $ssid; ?>">
+                      
                       <!--<input  type="hidden" class="form-control" name="tipo" id="tipo" value="">-->
-                      <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
+                      <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
                         <div class="row row-sm-offset">
 
                           <div class="col-md-4 multi-horizontal" data-for="">
