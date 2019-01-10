@@ -79,7 +79,7 @@ session_start();
     }
       $dbh = new PDO($conn,$user,$pass);
       $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      if(isset($_POST['AGGIORNA']))
+      if(isset($_POST['salvamodifica']))
       {
         $ssid=$_POST['ssid'];
         $tipo=$_POST["tipo"];
@@ -258,13 +258,13 @@ session_start();
         stampako($tipo);
       }
       else {
-        $query=$dbh->prepare("SELECT id FROM persone WHERE nome=:nome AND cognome=:cognome AND carico_in_chiesa=:carico LIMIT 1;");
+        /*$query=$dbh->prepare("SELECT id FROM persone WHERE nome=:nome AND cognome=:cognome AND carico_in_chiesa=:carico LIMIT 1;");
         $query->bindValue(":nome",$nome);
         $query->bindValue(":cognome",$cognome);
         $query->bindValue(":carico",$carico);
         $query->execute();
         $idrisultante=$query->fetch();
-        $id_genitore = $idrisultante['id'];
+        $id_genitore = $idrisultante['id'];*/
         //si inserisce i dati di consacrazione e l'immagine di profilo, nel caso esistano
         if ($_FILES['files']['size'] > 0 )
         {
@@ -296,10 +296,10 @@ session_start();
               throw new RuntimeException( "Formato immagine non valido.\nO il file non è un'immagine." );
             }
               $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-              $sql=$dbh->prepare("INSERT INTO immagini (id_persona,img,type) VALUES (:id_persona,:img,:type)");
+              $sql=$dbh->prepare("UPDATE immagini SET img=:img,type=:type WHERE md5(id_persona)=:ssid;");
               $immagine = file_get_contents( $_FILES['files']['tmp_name'] );
               $type= $_FILES['files']['type'] ;
-              $sql->bindValue(":id_persona",$id_genitore);
+              $sql->bindValue(":id_persona",$ssid);
               $sql->bindValue(":img",$immagine);
               $sql->bindValue(":type",$type);
             if(!$sql->execute())
@@ -367,9 +367,9 @@ session_start();
               else {
                 $luogo_pastore=$_POST["luogo-pastore"];
               }
-              $query=$dbh->prepare("INSERT INTO consacrato (id_persona,consacrato_diacono,luogo_diacono,consacrato_presbitero,luogo_presbitero,consacrato_evangelista,luogo_evangelista,consacrato_pastore,luogo_pastore)
-              VALUES (:id_persona,:consacrato_diacono,:luogo_diacono,:consacrato_presbitero,:luogo_presbitero,:consacrato_evangelista,:luogo_evangelista,:consacrato_pastore,:luogo_pastore)");
-              $query->bindValue(":id_persona",$id_genitore);
+              $query=$dbh->prepare("UPDATE consacrato SET consacrato_diacono=:consacrato_diacono, luogo_diacono=:luogo_diacono, consacrato_presbitero=:consacrato_presbitero, luogo_presbitero=:luogo_presbitero, consacrato_evangelista=:consacrato_evangelista, luogo_evangelista=:luogo_evangelista, consacrato_pastore=:consacrato_pastore, luogo_pastore=:luogo_pastore WHERE md5(id_persona)=:id;");
+              
+              $query->bindValue(":id_persona",$ssid);
               $query->bindValue(":consacrato_diacono",$data_diacono);
               $query->bindValue(":luogo_diacono",$luogo_diacono);
               $query->bindValue(":consacrato_presbitero",$data_presbitero);
@@ -461,21 +461,23 @@ session_start();
               }
               else return "no";
           }
-          function aggiorna($id,$nomefiglio,$cognomefiglio,$sesso,$tipo)
+          function aggiorna($ssid,$nomefiglio,$cognomefiglio,$sesso,$tipo)
           {
               if($sesso=="Maschile")
               {
-                 $riga ="UPDATE figli_persone SET id_padre=:id WHERE LOWER(nome_figlio)=LOWER(:nome) AND LOWER(cognome_figlio)=LOWER(:cognome);";
+                 $riga ="UPDATE figli_persone SET nome_figlio=:nome,cognome_figlio=:cognome WHERE id_padre=:id;"; 
+                 //$riga ="UPDATE figli_persone SET id_padre=:id WHERE LOWER(nome_figlio)=LOWER(:nome) AND LOWER(cognome_figlio)=LOWER(:cognome);";
               }
              else
              {
-               $riga ="UPDATE figli_persone SET id_madre=:id WHERE LOWER(nome_figlio)=LOWER(:nome) AND LOWER(cognome_figlio)=LOWER(:cognome);";
+               $riga ="UPDATE figli_persone SET nome_figlio=:nome,cognome_figlio=:cognome WHERE id_madre=:id;"
+               //$riga ="UPDATE figli_persone SET id_madre=:id WHERE LOWER(nome_figlio)=LOWER(:nome) AND LOWER(cognome_figlio)=LOWER(:cognome);";
              }
              require('conn.inc.php');
              $dbh = new PDO($conn,$user,$pass);
              $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
              $sql1=$dbh->prepare($riga);
-             $sql1->bindValue(":id",$id);
+             $sql1->bindValue(":id",$ssid);
              $sql1->bindValue(":nome",$nomefiglio);
              $sql1->bindValue(":cognome",$cognomefiglio);
              if($sql1->execute())
@@ -484,7 +486,7 @@ session_start();
              }
              else return "KO";
           }
-          function inserisci($id,$nomefiglio,$cognomefiglio,$sesso,$tipo)
+          function inserisci($ssid,$nomefiglio,$cognomefiglio,$sesso,$tipo)
           {
               if($sesso=="Maschile")
               {
@@ -498,7 +500,7 @@ session_start();
              $dbh = new PDO($conn,$user,$pass);
              $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
              $sql1=$dbh->prepare($riga);
-             $sql1->bindValue(":id",$id);
+             $sql1->bindValue(":id",$ssid);
              $sql1->bindValue(":nome",$nomefiglio);
              $sql1->bindValue(":cognome",$cognomefiglio);
              if($sql1->execute())
@@ -511,7 +513,7 @@ session_start();
 //se esiste uupdate altrimenti insert into
             if(esiste($nome_figlio_1,$cognome_figlio_1)=="si")
             {
-               if(aggiorna($id_genitore,$nome_figlio_1,$cognome_figlio_1,$sesso,$tipo)=="OK")
+               if(aggiorna($ssid,$nome_figlio_1,$cognome_figlio_1,$sesso,$tipo)=="OK")
                {
                   stampaok($tipo);
                }
@@ -522,7 +524,7 @@ session_start();
             }
             else
             {
-                if(inserisci($id_genitore,$nome_figlio_1,$cognome_figlio_1,$sesso,$tipo)=="OK")
+                if(inserisci($ssid,$nome_figlio_1,$cognome_figlio_1,$sesso,$tipo)=="OK")
                 {
                     stampaok($tipo);
                 }
@@ -536,7 +538,7 @@ session_start();
   //se esiste uupdate altrimenti insert into
               if(esiste($nome_figlio_2,$cognome_figlio_2)=="si")
               {
-                 if(aggiorna($id_genitore,$nome_figlio_2,$cognome_figlio_2,$sesso,$tipo)=="OK")
+                 if(aggiorna($ssid,$nome_figlio_2,$cognome_figlio_2,$sesso,$tipo)=="OK")
                  {
                     stampaok($tipo);
                  }
@@ -547,7 +549,7 @@ session_start();
               }
               else
               {
-                  if(inserisci($id_genitore,$nome_figlio_2,$cognome_figlio_2,$sesso,$tipo)=="OK")
+                  if(inserisci($ssid,$nome_figlio_2,$cognome_figlio_2,$sesso,$tipo)=="OK")
                   {
                       stampaok($tipo);
                   }
@@ -561,7 +563,7 @@ session_start();
     //se esiste uupdate altrimenti insert into
                 if(esiste($nome_figlio_3,$cognome_figlio_3)=="si")
                 {
-                   if(aggiorna($id_genitore,$nome_figlio_3,$cognome_figlio_3,$sesso,$tipo)=="OK")
+                   if(aggiorna($ssid,$nome_figlio_3,$cognome_figlio_3,$sesso,$tipo)=="OK")
                    {
                       stampaok($tipo);
                    }
@@ -572,7 +574,7 @@ session_start();
                 }
                 else
                 {
-                    if(inserisci($id_genitore,$nome_figlio_3,$cognome_figlio_3,$sesso,$tipo)=="OK")
+                    if(inserisci($ssid,$nome_figlio_3,$cognome_figlio_3,$sesso,$tipo)=="OK")
                     {
                         stampaok($tipo);
                     }
@@ -586,7 +588,7 @@ session_start();
       //se esiste uupdate altrimenti insert into
                   if(esiste($nome_figlio_4,$cognome_figlio_4)=="si")
                   {
-                     if(aggiorna($id_genitore,$nome_figlio_4,$cognome_figlio_4,$sesso,$tipo)=="OK")
+                     if(aggiorna($ssid,$nome_figlio_4,$cognome_figlio_4,$sesso,$tipo)=="OK")
                      {
                         stampaok($tipo);
                      }
@@ -597,7 +599,7 @@ session_start();
                   }
                   else
                   {
-                      if(inserisci($id_genitore,$nome_figlio_4,$cognome_figlio_4,$sesso,$tipo)=="OK")
+                      if(inserisci($ssid,$nome_figlio_4,$cognome_figlio_4,$sesso,$tipo)=="OK")
                       {
                           stampaok($tipo);
                       }
@@ -611,7 +613,7 @@ session_start();
         //se esiste uupdate altrimenti insert into
                     if(esiste($nome_figlio_5,$cognome_figlio_5)=="si")
                     {
-                       if(aggiorna($id_genitore,$nome_figlio_5,$cognome_figlio_5,$sesso,$tipo)=="OK")
+                       if(aggiorna($ssid,$nome_figlio_5,$cognome_figlio_5,$sesso,$tipo)=="OK")
                        {
                           stampaok($tipo);
                        }
@@ -622,7 +624,7 @@ session_start();
                     }
                     else
                     {
-                        if(inserisci($id_genitore,$nome_figlio_5,$cognome_figlio_5,$sesso,$tipo)=="OK")
+                        if(inserisci($ssid,$nome_figlio_5,$cognome_figlio_5,$sesso,$tipo)=="OK")
                         {
                             stampaok($tipo);
                         }
@@ -644,12 +646,18 @@ session_start();
     echo "Qualcosa e'' andato storto, contattare assistenza segnalando questo messaggio: " . $e->getMessage();
   }
   catch ( Exception $e ) { echo 'ERRORE GENERICO: ' . $e->getMessage();
-  echo $id_genitore;
-  $query=$dbh->prepare("DELETE FROM persone WHERE id=:id;");
+  echo 'id persona : '$id_genitore;
+  ?> <script type="text/javascript">
+    var ssid=" <?php echo $ssid; ?> ";
+    window.location="../visualizza?id="+ssid+"&success=9";
+      
+  </script>
+<?php
+  /*$query=$dbh->prepare("DELETE FROM persone WHERE id=:id;");
   $query->bindValue(":id",$id_genitore);
   if($query->execute())
   {
    echo 'ultimo inserimento eliminato';
-  }
+  }*/
 }
 ?>
