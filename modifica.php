@@ -157,8 +157,23 @@ $indirizzo=$_POST["indirizzo"];
   </style>
   <script type="text/javascript">
   $(document).ready(function(){
-
-
+     var statocivile = "<?php echo  $stato_civile; ?>";
+     var tipo = "<?php echo  $tipo; ?>";
+     var sesso ="<?php echo $sesso; ?>;
+     var nazionalita ="<?php echo $nazionalita ?>;
+     var numero_figli = "<?php echo  $numero_figli; ?>";
+     var battezzato_spirito = "<?php echo  $battezzato_spirito; ?>";
+     var congregazione  = "<?php echo  $congregazione; ?>";
+     var carico = "<?php echo  $carico; ?>"; 
+     
+    seleziona("opzione",tipo);
+    seleziona("sesso",sesso);
+    seleziona("statocivile",statocivile );
+    seleziona("nazionalita", nazionalita);
+    seleziona("numero", numero_figli);
+    seleziona("battezzato-spirito", battezzato_spirito);
+    seleziona("settore",congregazione );
+    seleziona("carico",carico );
     // we define and invoke a function
   //  nascondere();
   //  nascondecons();
@@ -183,6 +198,14 @@ $indirizzo=$_POST["indirizzo"];
              $('#erroredimensione').text('');
      });
 });
+    function seleziona(id,value)
+    {
+      $("#"+id+" option").each(function(){
+        if($(this).val()==value){
+          $(this).attr("selected","selected");
+           }
+      });
+    }
  </script>
 
 
