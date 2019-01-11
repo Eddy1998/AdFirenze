@@ -30,9 +30,44 @@ header('location: index.php');
   <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script type="text/javascript">
-        $(document).ready(function(){
-          var Div, contenuto;
-
+            $(document).ready(function(){
+          var Div, contenuto,data;
+          <?php
+           if (!isset($_GET['ca']) || !isset($_GET['cn'])) { ?>
+          $.ajax({
+          url: 'data/dati.php',
+          type: 'POST',
+          data: {
+            'M' : 1,
+          },
+          success: function(response){
+            data = JSON.parse(response);
+           var attivi = data.contatore.attivi;
+           var non_attivi = data.contatore.non_attivi;
+          window.location="membri?ma="+attivi+"&mn="+non_attivi;
+          }
+          });
+          <?php }
+           else { ?>
+             $.ajax({
+             url: 'data/dati.php',
+             type: 'POST',
+             data: {
+               'M' : 1,
+             },
+             success: function(response){
+               data = JSON.parse(response);
+              var attivi = data.contatore.attivi;
+              var non_attivi = data.contatore.non_attivi;
+               var controlloA = <?php echo $_GET['ma']; ?> ;
+               var controlloN = <?php echo $_GET['mn']; ?> ;
+               if(controlloA!=attivi||controlloN!=non_attivi)
+               {
+                 window.location="membri?ma="+attivi+"&mn="+non_attivi;
+               }
+             }
+             });
+             <?php } ?>
           <?php $res = @$_GET['success'];
           if($res==1)
           {
@@ -43,14 +78,19 @@ header('location: index.php');
             $('#messaggio').delay(5000).fadeOut();
           <?php }
           else if($res==9) { ?>
-
             Div = document.getElementById("messaggio");
-            contenuto = document.createTextNode("ERRORE");
+            contenuto = document.createTextNode("ERRORE DURANTE INSERIMENTO");
             document.getElementById('messaggio').style.color = 'red';
             Div.append(contenuto);
             $('#messaggio').delay(5000).fadeOut();
           <?php } ?>
         });
+       
+        function visualizza(id)
+        {
+          window.location="visualizza?id="+id;
+        }
+    
 </script>
 
 </head>
@@ -159,7 +199,7 @@ header('location: index.php');
 
                         <div class="card-text">
                             <h3 class="count pt-3 pb-3 mbr-fonts-style display-2">
-                                  100
+                                   <?php echo @$_GET['ma']; ?>
                             </h3>
                             <h4 class="mbr-content-title mbr-bold mbr-fonts-style display-7">&nbsp;Membri attivi</h4>
 
@@ -175,7 +215,7 @@ header('location: index.php');
                         </div>
                         <div class="card-text">
                             <h3 class="count pt-3 pb-3 mbr-fonts-style display-2">
-                                  200
+                                   <?php echo @$_GET['mn']; ?>
                             </h3>
                             <h4 class="mbr-content-title mbr-bold mbr-fonts-style display-7">Membri non attivi</h4>
 
@@ -217,54 +257,66 @@ header('location: index.php');
             <thead>
               <tr class="table-heads ">
 
-
-
-
               <th class="head-item mbr-fonts-style display-7">
-                      NOME</th><th class="head-item mbr-fonts-style display-7">
-                      ETÀ</th><th class="head-item mbr-fonts-style display-7">
-                      DATA</th><th class="head-item mbr-fonts-style display-7">
-                      STIPENDIO</th></tr>
+                      Nome</th>
+                <th class="head-item mbr-fonts-style display-7">
+                      Cognome</th>
+                <th class="head-item mbr-fonts-style display-7">
+                      età</th>
+                <th class="head-item mbr-fonts-style display-7">
+                      Carico</th>
+                 <th class="head-item mbr-fonts-style display-7">
+                      Attivo</th>
+                <th class="head-item mbr-fonts-style display-7">
+                      Congregazione</th>
+              </tr>
             </thead>
 
             <tbody>
-
-
-
-
+              <?php
+                $dbh = new PDO($conn,$user,$pass);
+                $sqld =$dbh->prepare("SELECT p.*, md5(id) AS ssid, DATE_FORMAT(p.data_nascita,  '%d/%m/%Y' ) AS data_di_nascita,DATE_FORMAT(p.data_matrimonio,  '%d/%m/%Y' ) AS data_di_matrimonio, DATE_FORMAT(p.data_arrivo_in_chiesa, '%d/%m/%Y' ) AS data_arrivo  FROM persone p WHERE tipo_persona='congregato' ORDER BY p.cognome ASC;");
+                $sqld->execute();
+                while ($row=$sqld->fetch()) {
+                  $birthDate = $row['data_di_nascita'];
+                  //explode the date to get month, day and year
+                  $birthDate = explode("/", $birthDate);
+                  //get age from date or birthdate
+                  $age = (date("md", date("U", mktime(0, 0, 0, $birthDate[0], $birthDate[1], $birthDate[2]))) > date("md")
+                   ? ((date("Y") - $birthDate[2]) - 1)
+                   : (date("Y") - $birthDate[2]));
+                    echo '<tr onclick="visualizza(\'' . $row['ssid'] .'\');">';
+                    echo "<td class='body-item mbr-fonts-style display-7'>" . $row['nome'] . "</td>";
+                    echo "<td class='body-item mbr-fonts-style display-7'>" . $row['cognome'] . "</td>";
+                    echo "<td class='body-item mbr-fonts-style display-7'>" . $age . "</td>";
+                    echo "<td class='body-item mbr-fonts-style display-7'>" . $row['carico_in_chiesa'] . "</td>";
+                    echo "<td class='body-item mbr-fonts-style display-7'>" . $row['attivo']  . "</td>";
+                    echo "<td class='body-item mbr-fonts-style display-7'>" . $row['congregazione'] . "</td>";
+                    echo "</tr>";
+                }
+              ?>
+              
+                
+          <!--
             <tr>
-
-
-
-
               <td class="body-item mbr-fonts-style display-7">Jeanna Schmal</td><td class="body-item mbr-fonts-style display-7">44</td><td class="body-item mbr-fonts-style display-7">2016-10-17</td><td class="body-item mbr-fonts-style display-7">$317.000</td></tr><tr>
-
-
-
-
               <td class="body-item mbr-fonts-style display-7">Caren Rials</td><td class="body-item mbr-fonts-style display-7">35</td><td class="body-item mbr-fonts-style display-7">2013-04-12</td><td class="body-item mbr-fonts-style display-7">$445.500</td></tr><tr>
-
-
-
-
               <td class="body-item mbr-fonts-style display-7">Leon Rogol</td><td class="body-item mbr-fonts-style display-7">66</td><td class="body-item mbr-fonts-style display-7">2016-05-22</td><td class="body-item mbr-fonts-style display-7">$152.558</td></tr><tr>
-
-
-
-
-              <td class="body-item mbr-fonts-style display-7">Shala Barrera</td><td class="body-item mbr-fonts-style display-7">70</td><td class="body-item mbr-fonts-style display-7">2016-05-15</td><td class="body-item mbr-fonts-style display-7">$459.146</td></tr></tbody>
+              <td class="body-item mbr-fonts-style display-7">Shala Barrera</td><td class="body-item mbr-fonts-style display-7">70</td><td class="body-item mbr-fonts-style display-7">2016-05-15</td><td class="body-item mbr-fonts-style display-7">$459.146</td></tr>
+          -->
+</tbody>
           </table>
         </div>
         <div class="container table-info-container">
           <div class="row info">
             <div class="col-md-6">
               <div class="dataTables_info mbr-fonts-style display-7">
-                <span class="infoBefore">Mostrati</span>
+                <span class="infoBefore">Totale:</span>
                 <span class="inactive infoRows"></span>
-                <span class="infoAfter">inserimenti</span>
-                <span class="infoFilteredBefore">(filtrato da</span>
+                <span class="infoAfter">congregati</span>
+                <span class="infoFilteredBefore"></span>
                 <span class="inactive infoRows"></span>
-                <span class="infoFilteredAfter"> voci totali)</span>
+                <span class="infoFilteredAfter"> </span>
               </div>
             </div>
             <div class="col-md-6"></div>
