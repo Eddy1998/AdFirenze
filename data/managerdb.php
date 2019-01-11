@@ -2,86 +2,91 @@
 session_start();
 
   include ('conn.inc.php');
+    $dbh = new PDO($conn,$user,$pass);
+      $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try
   {
-    function redirect($tipo, $success)
+    
+    function stampaok($ssid)
     {
-      ?>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-      <script type="text/javascript">
-          $(document).ready(function(){
-            $.ajax({
-            url: 'dati.php',
-            type: 'POST',
-            data: {
-              'CONTA' : 1,
-            },
-            success: function(response){
-              data = JSON.parse(response);
-              console.log(data);
-             var totale = data.total;
-             var attivi_m = data.attivo_m;
-             var non_attivi_m = data.non_attivo_m;
-             var attivi_c=data.attivo_c;
-             var non_attivi_c=data.non_attivo_c;
-             var bambino = data.bambino;
-             <?php
-             if($success=="OK" && $tipo=="membro")
-             {
-               ?>
-                   window.location="membri?ma="+attivi_m+"&mn="+non_attivi_m+"&success=1";
-               <?php
-             }
-              else if ($success=="OK" && $tipo=="congregato")
-              {
-                ?>
-                   window.location="congregati?ca="+attivi_c+"&cn="+non_attivi_c+"&success=1";
-                <?php
-              }
-              else if ($success=="OK" && $tipo=="bambino")
-              {
-                ?>
-                  window.location="bambini?bb="+bambino+"&success=1";
-                <?php
-              }
-              else if ($success=="KO" && $tipo=="membro")
-              {
-                ?>
-                   window.location="membri?ma="+attivi_m+"&mn="+non_attivi_m+"&err=9";
-                <?php
-              }
-              else if ($success=="KO" && $tipo=="congregato")
-              {
-                ?>
-                   window.location="congregati?ca="+attivi_c+"&cn="+non_attivi_c+"&err=9";
-                <?php
-              }
-              else if ($success=="KO" && $tipo=="bambino")
-              {
-                ?>
-                    window.location="bambini?bb="+bambino+"&err=9";
-                <?php
-              }
-              ?>
-            }
-            });
-          });
-      </script>
-      <?php
+      header("Location: ../visualizza?id=$ssid&success=1");
+      //redirect($ssid,"OK");
     }
-    function stampaok($tipo)
+    function stampako($ssid)
     {
-      redirect($tipo,"OK");
+      header("Location: ../visualizza?id=$ssid&success=9");
+      //redirect($ssid,"KO");
     }
-    function stampako($tipo)
+
+    function esiste($nome,$cognome)
     {
-      redirect($tipo,"KO");
-    }
+      require('conn.inc.php');
       $dbh = new PDO($conn,$user,$pass);
       $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      $sql=$dbh->prepare("SELECT * FROM figli_persone WHERE LOWER(nome_figlio)=LOWER(:nome) AND LOWER(cognome_figlio)=LOWER(:cognome);");
+      $sql->bindValue(":nome",$nome);
+      $sql->bindValue(":cognome",$cognome);
+      $sql->execute();
+        if ($sql->rowCount()>0) {
+          return "si";
+        }
+        else {return "no";}
+    }
+
+    function aggiorna($ssid,$nomefiglio,$cognomefiglio,$sesso)
+    {
+        if($sesso=="Maschile")
+        {
+           $riga ="UPDATE figli_persone SET nome_figlio=:nome,cognome_figlio=:cognome WHERE md5(id_padre)=:id;";
+           //$riga ="UPDATE figli_persone SET id_padre=:id WHERE LOWER(nome_figlio)=LOWER(:nome) AND LOWER(cognome_figlio)=LOWER(:cognome);";
+        }
+       else
+       {
+         $riga ="UPDATE figli_persone SET nome_figlio=:nome,cognome_figlio=:cognome WHERE md5(id_madre)=:id;";
+         //$riga ="UPDATE figli_persone SET id_madre=:id WHERE LOWER(nome_figlio)=LOWER(:nome) AND LOWER(cognome_figlio)=LOWER(:cognome);";
+       }
+       require('conn.inc.php');
+       $dbh = new PDO($conn,$user,$pass);
+       $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+       $sql1=$dbh->prepare($riga);
+       $sql1->bindValue(":id",$ssid);
+       $sql1->bindValue(":nome",$nomefiglio);
+       $sql1->bindValue(":cognome",$cognomefiglio);
+       if($sql1->execute())
+       {
+         return "OK";
+       }
+       else {return "KO";}
+    }
+
+    function inserisci($id,$nomefiglio,$cognomefiglio,$sesso)
+    {
+        if($sesso=="Maschile")
+        {
+           $riga = "INSERT INTO figli_persone(id_padre,nome_figlio,cognome_figlio) VALUES (:id,:nome,:cognome);";
+        }
+       else
+       {
+          $riga = "INSERT INTO figli_persone(id_madre,nome_figlio,cognome_figlio) VALUES (:id,:nome,:cognome);";
+       }
+       require('conn.inc.php');
+       $dbh = new PDO($conn,$user,$pass);
+       $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+       $sql1=$dbh->prepare($riga);
+       $sql1->bindValue(":id",$id);
+       $sql1->bindValue(":nome",$nomefiglio);
+       $sql1->bindValue(":cognome",$cognomefiglio);
+       if($sql1->execute())
+       {
+         return "OK";
+       }
+       else return "KO";
+    }
+
       if(isset($_POST['salvamodifica']))
       {
         $ssid=$_POST['ssid'];
+        $id=$_POST['id'];
         $tipo=$_POST["tipo"];
         $attivo=$_POST["attivo"];
         if (empty($_POST["tessera"])){
@@ -221,8 +226,20 @@ session_start();
         else {
           $osservazioni=$_POST["osservazioni"];
         }
-      $query=$dbh->prepare("UPDATE persone SET tipo_persona=:tipo_persona, attivo=:attivo, numero_tessera=:numero_tessera, congregazione=:congregazione, nome=:nome, cognome=:cognome, carico_in_chiesa=:carico_in_chiesa, indirizzo=:indirizzo, citta=:citta, cap=:cap, telefono=:telefono, nazionalita=:nazionalita, sesso=:sesso, data_nascita=:data_nascita, stato_civile=:stato_civile, data_matrimonio=:data_matrimonio, nome_coniuge=:nome_coniuge, cognome_coniuge=:cognome_coniuge, numero_figli=:numero_figli, nome_padre=:nome_padre, nome_madre=:nome_madre, data_battesimo=:data_battesimo, luogo_battesimo=:luogo_battesimo, data_arrivo_in_chiesa=:data_arrivo_in_chiesa, battezzato_con_spirito_santo=:battezzato_con_spirito_santo, osservazioni=:osservazioni
-      WHERE md5(id)=:id");
+      $query=$dbh->prepare("UPDATE persone SET tipo_persona=:tipo_persona,
+         attivo=:attivo, numero_tessera=:numero_tessera,
+          congregazione=:congregazione, nome=:nome,
+           cognome=:cognome, carico_in_chiesa=:carico,
+            indirizzo=:indirizzo, citta=:citta, cap=:cap,
+             telefono=:telefono, nazionalita=:nazionalita,
+              sesso=:sesso, data_nascita=:data_nascita,
+               stato_civile=:stato_civile, data_matrimonio=:data_matrimonio,
+                nome_coniuge=:nome_coniuge, cognome_coniuge=:cognome_coniuge,
+                 numero_figli=:numero_figli, nome_padre=:nome_padre, nome_madre=:nome_madre,
+                  data_battesimo=:data_battesimo, luogo_battesimo=:luogo_battesimo,
+                  data_arrivo_in_chiesa=:data_arrivo_in_chiesa,
+                   battezzato_con_spirito_santo=:battezzato_con_spirito_santo,
+                    osservazioni=:osservazioni WHERE md5(id)=:id");
     /*  $query=$dbh->prepare("INSERT INTO persone(tipo_persona, attivo, numero_tessera,congregazione, nome, cognome, carico_in_chiesa, indirizzo, citta, cap, telefono, nazionalita, sesso, data_nascita, stato_civile, data_matrimonio, nome_coniuge, cognome_coniuge, numero_figli, nome_padre,  nome_madre,  data_battesimo, luogo_battesimo, data_arrivo_in_chiesa, battezzato_con_spirito_santo, osservazioni)
       VALUES(:tipo_persona,:attivo,:numero_tessera,:congregazione, :nome, :cognome, :carico, :indirizzo, :citta, :cap, :telefono, :nazionalita, :sesso, :data_nascita, :stato_civile, :data_matrimonio, :nome_coniuge, :cognome_coniuge, :numero_figli, :nome_padre, :nome_madre,:data_battesimo,:luogo_battesimo,:data_arrivo_in_chiesa,:battezzato_con_spirito_santo,:osservazioni);");
       */
@@ -255,7 +272,7 @@ session_start();
       $query->bindValue(":osservazioni",$osservazioni);
       if(!$query->execute())
       {
-        stampako($tipo);
+        stampako($ssid);
       }
       else {
         /*$query=$dbh->prepare("SELECT id FROM persone WHERE nome=:nome AND cognome=:cognome AND carico_in_chiesa=:carico LIMIT 1;");
@@ -299,7 +316,7 @@ session_start();
               $sql=$dbh->prepare("UPDATE immagini SET img=:img,type=:type WHERE md5(id_persona)=:ssid;");
               $immagine = file_get_contents( $_FILES['files']['tmp_name'] );
               $type= $_FILES['files']['type'] ;
-              $sql->bindValue(":id_persona",$ssid);
+              $sql->bindValue(":ssid",$ssid);
               $sql->bindValue(":img",$immagine);
               $sql->bindValue(":type",$type);
             if(!$sql->execute())
@@ -367,9 +384,13 @@ session_start();
               else {
                 $luogo_pastore=$_POST["luogo-pastore"];
               }
-              $query=$dbh->prepare("UPDATE consacrato SET consacrato_diacono=:consacrato_diacono, luogo_diacono=:luogo_diacono, consacrato_presbitero=:consacrato_presbitero, luogo_presbitero=:luogo_presbitero, consacrato_evangelista=:consacrato_evangelista, luogo_evangelista=:luogo_evangelista, consacrato_pastore=:consacrato_pastore, luogo_pastore=:luogo_pastore WHERE md5(id_persona)=:id;");
-              
-              $query->bindValue(":id_persona",$ssid);
+              $query=$dbh->prepare("UPDATE consacrato SET consacrato_diacono=:consacrato_diacono,
+                luogo_diacono=:luogo_diacono, consacrato_presbitero=:consacrato_presbitero,
+                 luogo_presbitero=:luogo_presbitero, consacrato_evangelista=:consacrato_evangelista,
+                  luogo_evangelista=:luogo_evangelista, consacrato_pastore=:consacrato_pastore,
+                  luogo_pastore=:luogo_pastore WHERE md5(id_persona)=:id;");
+
+              $query->bindValue(":id",$ssid);
               $query->bindValue(":consacrato_diacono",$data_diacono);
               $query->bindValue(":luogo_diacono",$luogo_diacono);
               $query->bindValue(":consacrato_presbitero",$data_presbitero);
@@ -380,7 +401,7 @@ session_start();
               $query->bindValue(":luogo_pastore",$luogo_pastore);
               if(!$query->execute())
               {
-                  echo 'ERROR - Inserimento dati di consacrazione';
+                  stampako($ssid);
               }
           }
       }
@@ -447,212 +468,159 @@ session_start();
           else {
             $cognome_figlio_5=$_POST["cognome-figlio-5"];
           }
-          function esiste($nome,$cognome)
-          {
-            require('conn.inc.php');
-            $dbh = new PDO($conn,$user,$pass);
-            $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql=$dbh->prepare("SELECT * FROM figli_persone WHERE LOWER(nome_figlio)=LOWER(:nome) AND LOWER(cognome_figlio)=LOWER(:cognome);");
-            $sql->bindValue(":nome",$nome);
-            $sql->bindValue(":cognome",$cognome);
-            $sql->execute();
-            	if ($sql->rowCount()>0) {
-                return "si";
-              }
-              else return "no";
-          }
-          function aggiorna($ssid,$nomefiglio,$cognomefiglio,$sesso,$tipo)
-          {
-              if($sesso=="Maschile")
-              {
-                 $riga ="UPDATE figli_persone SET nome_figlio=:nome,cognome_figlio=:cognome WHERE id_padre=:id;"; 
-                 //$riga ="UPDATE figli_persone SET id_padre=:id WHERE LOWER(nome_figlio)=LOWER(:nome) AND LOWER(cognome_figlio)=LOWER(:cognome);";
-              }
-             else
-             {
-               $riga ="UPDATE figli_persone SET nome_figlio=:nome,cognome_figlio=:cognome WHERE id_madre=:id;"
-               //$riga ="UPDATE figli_persone SET id_madre=:id WHERE LOWER(nome_figlio)=LOWER(:nome) AND LOWER(cognome_figlio)=LOWER(:cognome);";
-             }
-             require('conn.inc.php');
-             $dbh = new PDO($conn,$user,$pass);
-             $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-             $sql1=$dbh->prepare($riga);
-             $sql1->bindValue(":id",$ssid);
-             $sql1->bindValue(":nome",$nomefiglio);
-             $sql1->bindValue(":cognome",$cognomefiglio);
-             if($sql1->execute())
-             {
-               return "OK";
-             }
-             else return "KO";
-          }
-          function inserisci($ssid,$nomefiglio,$cognomefiglio,$sesso,$tipo)
-          {
-              if($sesso=="Maschile")
-              {
-                 $riga = "INSERT INTO figli_persone(id_padre,nome_figlio,cognome_figlio) VALUES (:id,:nome,:cognome);";
-              }
-             else
-             {
-                $riga = "INSERT INTO figli_persone(id_madre,nome_figlio,cognome_figlio) VALUES (:id,:nome,:cognome);";
-             }
-             require('conn.inc.php');
-             $dbh = new PDO($conn,$user,$pass);
-             $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-             $sql1=$dbh->prepare($riga);
-             $sql1->bindValue(":id",$ssid);
-             $sql1->bindValue(":nome",$nomefiglio);
-             $sql1->bindValue(":cognome",$cognomefiglio);
-             if($sql1->execute())
-             {
-               return "OK";
-             }
-             else return "KO";
-          }
+
+
+
           if(!$nome_figlio_1==NULL){
 //se esiste uupdate altrimenti insert into
             if(esiste($nome_figlio_1,$cognome_figlio_1)=="si")
             {
-               if(aggiorna($ssid,$nome_figlio_1,$cognome_figlio_1,$sesso,$tipo)=="OK")
+              aggiorna($ssid,$nome_figlio_1,$cognome_figlio_1,$sesso);
+               /*if(aggiorna($ssid,$nome_figlio_1,$cognome_figlio_1,$sesso)=="OK")
                {
-                  stampaok($tipo);
+                  stampaok($ssid);
                }
                else
                {
-                 stampako($tipo);
-               }
+                 stampako($ssid);
+               }*/
             }
             else
             {
-                if(inserisci($ssid,$nome_figlio_1,$cognome_figlio_1,$sesso,$tipo)=="OK")
+              inserisci($id,$nome_figlio_1,$cognome_figlio_1,$sesso);
+                /*if(inserisci($id,$nome_figlio_1,$cognome_figlio_1,$sesso)=="OK")
                 {
-                    stampaok($tipo);
+                    stampaok($ssid);
                 }
                 else
                 {
-                  stampako($tipo);
-                }
+                  stampako($ssid);
+                }*/
             }
           }
             if(!$nome_figlio_2==NULL){
   //se esiste uupdate altrimenti insert into
               if(esiste($nome_figlio_2,$cognome_figlio_2)=="si")
               {
-                 if(aggiorna($ssid,$nome_figlio_2,$cognome_figlio_2,$sesso,$tipo)=="OK")
+                aggiorna($ssid,$nome_figlio_2,$cognome_figlio_2,$sesso);
+                /* if(aggiorna($ssid,$nome_figlio_2,$cognome_figlio_2,$sesso)=="OK")
                  {
-                    stampaok($tipo);
+                    stampaok($ssid);
                  }
                  else
                  {
-                   stampako($tipo);
-                 }
+                   stampako($ssid);
+                 }*/
               }
               else
               {
-                  if(inserisci($ssid,$nome_figlio_2,$cognome_figlio_2,$sesso,$tipo)=="OK")
+                inserisci($id,$nome_figlio_2,$cognome_figlio_2,$sesso);
+                  /*if(inserisci($id,$nome_figlio_2,$cognome_figlio_2,$sesso)=="OK")
                   {
-                      stampaok($tipo);
+                      stampaok($ssid);
                   }
                   else
                   {
-                    stampako($tipo);
-                  }
+                    stampako($ssid);
+                  }*/
               }
             }
               if(!$nome_figlio_3==NULL){
     //se esiste uupdate altrimenti insert into
                 if(esiste($nome_figlio_3,$cognome_figlio_3)=="si")
                 {
-                   if(aggiorna($ssid,$nome_figlio_3,$cognome_figlio_3,$sesso,$tipo)=="OK")
+                  aggiorna($ssid,$nome_figlio_3,$cognome_figlio_3,$sesso);
+                   /*if(aggiorna($ssid,$nome_figlio_3,$cognome_figlio_3,$sesso)=="OK")
                    {
-                      stampaok($tipo);
+                      stampaok($ssid);
                    }
                    else
                    {
-                     stampako($tipo);
-                   }
+                     stampako($ssid);
+                   }*/
                 }
                 else
                 {
-                    if(inserisci($ssid,$nome_figlio_3,$cognome_figlio_3,$sesso,$tipo)=="OK")
+                  inserisci($id,$nome_figlio_3,$cognome_figlio_3,$sesso);
+                  /*  if(inserisci($id,$nome_figlio_3,$cognome_figlio_3,$sesso)=="OK")
                     {
-                        stampaok($tipo);
+                        stampaok($ssid);
                     }
                     else
                     {
-                      stampako($tipo);
-                    }
+                      stampako($ssid);
+                    }*/
                 }
               }
                 if(!$nome_figlio_4==NULL){
       //se esiste uupdate altrimenti insert into
                   if(esiste($nome_figlio_4,$cognome_figlio_4)=="si")
                   {
-                     if(aggiorna($ssid,$nome_figlio_4,$cognome_figlio_4,$sesso,$tipo)=="OK")
+                    aggiorna($ssid,$nome_figlio_4,$cognome_figlio_4,$sesso);
+                    /* if(aggiorna($ssid,$nome_figlio_4,$cognome_figlio_4,$sesso)=="OK")
                      {
-                        stampaok($tipo);
+                        stampaok($ssid);
                      }
                      else
                      {
-                       stampako($tipo);
-                     }
+                       stampako($ssid);
+                     }*/
                   }
                   else
                   {
-                      if(inserisci($ssid,$nome_figlio_4,$cognome_figlio_4,$sesso,$tipo)=="OK")
+                    inserisci($id,$nome_figlio_4,$cognome_figlio_4,$sesso);
+                      /*if(inserisci($id,$nome_figlio_4,$cognome_figlio_4,$sesso)=="OK")
                       {
-                          stampaok($tipo);
+                          stampaok($ssid);
                       }
                       else
                       {
-                        stampako($tipo);
-                      }
+                        stampako($ssid);
+                      }*/
                   }
                 }
                   if(!$nome_figlio_5==NULL){
         //se esiste uupdate altrimenti insert into
                     if(esiste($nome_figlio_5,$cognome_figlio_5)=="si")
                     {
-                       if(aggiorna($ssid,$nome_figlio_5,$cognome_figlio_5,$sesso,$tipo)=="OK")
+                      aggiorna($ssid,$nome_figlio_5,$cognome_figlio_5,$sesso);
+                       /*if(aggiorna($ssid,$nome_figlio_5,$cognome_figlio_5,$sesso)=="OK")
                        {
-                          stampaok($tipo);
+                          stampaok($ssid);
                        }
                        else
                        {
-                         stampako($tipo);
-                       }
+                         stampako($ssid);
+                       }*/
                     }
                     else
                     {
-                        if(inserisci($ssid,$nome_figlio_5,$cognome_figlio_5,$sesso,$tipo)=="OK")
+                      inserisci($id,$nome_figlio_5,$cognome_figlio_5,$sesso);
+                      /*  if(inserisci($id,$nome_figlio_5,$cognome_figlio_5,$sesso)=="OK")
                         {
-                            stampaok($tipo);
+                            stampaok($ssid);
                         }
                         else
                         {
-                          stampako($tipo);
-                        }
+                          stampako($ssid);
+                        }*/
                     }
                   }
+                  stampaok($ssid);
             }
             else
               {
-                  stampaok($tipo);
+                  stampaok($ssid);
               }
-            }
+
+      }
   }
 }
   catch (PDOException $e) {
     echo "Qualcosa e'' andato storto, contattare assistenza segnalando questo messaggio: " . $e->getMessage();
   }
-  catch ( Exception $e ) { echo 'ERRORE GENERICO: ' . $e->getMessage();
-  echo 'id persona : '$id_genitore;
-  ?> <script type="text/javascript">
-    var ssid=" <?php echo $ssid; ?> ";
-    window.location="../visualizza?id="+ssid+"&success=9";
-      
-  </script>
-<?php
+  catch ( Exception $ex ) { echo 'ERRORE GENERICO: contattare assistenza segnalando questo messaggio: ' . $ex->getMessage();
+
   /*$query=$dbh->prepare("DELETE FROM persone WHERE id=:id;");
   $query->bindValue(":id",$id_genitore);
   if($query->execute())

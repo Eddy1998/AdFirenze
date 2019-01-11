@@ -571,6 +571,7 @@ if(!isset($_GET['id']))
                         </div>
                         <input  type="hidden" class="form-control"  name="attivo" id="attivo2">
                         <input  type="hidden" class="form-control" name="tipo" id="tipo2" >
+                        <input  type="hidden" class="form-control" name="id" id="id2" >
                         <input type="hidden" class="form-control" name="nome"  id="nome2" >
                         <input type="hidden" class="form-control" name="cognome" id="cognome2">
                         <input type="hidden" class="form-control" name="indirizzo"  id="indirizzo2" />

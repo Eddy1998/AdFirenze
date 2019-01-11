@@ -6,6 +6,11 @@ $dbh = new PDO($conn, $user, $pass);
 {
 header('location: index.php');
 }*/
+if(!isset($_GET['id']))
+{
+//errore, utente non specificato
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -18,7 +23,7 @@ header('location: index.php');
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 <link rel="shortcut icon" href="assets/images/img-1583-122x122.png" type="image/x-icon">
 <meta name="description" content="Site Generator Description">
-<title>Gestione Utenti</title>
+<title>Visualizza</title>
 <link rel="stylesheet" href="assets/web/assets/mobirise-icons2/mobirise2.css">
 <link rel="stylesheet" href="assets/web/assets/mobirise-icons/mobirise-icons.css">
 <link rel="stylesheet" href="assets/tether/tether.min.css">
@@ -38,76 +43,69 @@ header('location: index.php');
          nuovariga();
      });
 
+
+	 /*$('.btn-success').on('click', function () {
+         txt = $(this).parent().parent().parents('tr').find("td:eq(1)").text();
+		console.log(txt);
+     });*/
+
+	 $(".table tbody").on('click', 'btn',function(){
+	 alert('ss');
+		/*var valore= $(this).closest('tr');
+		var col1 = valore.find('td:eq(0)').text();
+		var col2 = valore.find('td:eq(1)').text();
+		var col3 = valore.find('td:eq(2)').text();
+		var col4 = valore.find('td:eq(3)').text();
+		var col5 = valore.find('td:eq(4)').text();
+		var res= col1+' '+col2+' '+col3+' '+col4+' '+col5;
+		alert(res);
+		alert('ss');*/
+	 });
+
+
+
  });
 	function nuovariga()
 	{
-		var riga='<tr><td><input type="text" class="form-control focus"></td><td><input class="form-control" type="text"></td><td><input class="form-control" type="text"></td><td><input  class="form-control" type="email"></td><td><input class="form-control" type="password"></td><td><button type="submit" class="btn btn-form display-4" name="salvamodifica" style="background-color: #329015;color:white" onclick="aggiungi(this)">salva</button> <button type="submit" class="btn btn-form display-4" name="salvamodifica" style="background-color: #e61e1e;color:white" onclick="elimina(this)">annulla</button> </td></tr>';
+		var riga='<tr><td><input type="text" class="form-control"></td><td><input class="form-control" type="text"></td><td><input class="form-control" type="text"></td><td><input  class="form-control" type="email"></td><td><input class="form-control" type="password"></td><td><input  type="button" class="btn btn-success" id="add" onclick="aggiungi(this)" value="+">  </td><td><input type="button" class="btn btn-danger" id="add" value="X" onclick="elimina(this)"></td></tr>';
 		$("#riga").append(riga);
-    $('.focus').focus();
 	}
 
 	function elimina(value)
 	{
 		var r = confirm("Confermi di eliminare utente?");
 		  if (r == true) {
-        var valore= $(value).closest('tr');
-    		var id = valore.find('td:eq(5)').find("input").val();
-        $.post("data/dati.php",{'eliminautente': 1, 'id' : id }, function(response) {
-          var json = JSON.parse(response);
-          console.log(json);
-          if(json.return=="OK")
-          {
-            $(value).parent().parent().remove();
-            $("#mex").remove();
-              $("#messaggio").append('  <div id="mex" class="alert alert-dark" role="alert">Utente Rimosso correttamente </div>');
-            window.scrollTo(0, 0);
-          }
-          else
-          {
-            $("#mex").remove();
-            $("#messaggio").append('  <div id="mex" class="alert alert-danger" role="alert">Errore durante Rimozione </div>');
-            window.scrollTo(0, 0);
-
-          }
-        });
-
-      }
+			//richiesta delete con dati (id)
+			//se eliminato return code == ok, si rimuove
+			$(value).parent().parent().remove();
+		  } else {
+			txt = "You pressed Cancel!";
+		  }
 
 	}
 	function aggiungi(value)
 	{
 
-
+		/*$(this).closest('tr').find("input").each(function() {
+        alert(this.value)
+    });*/
 		var valore= $(value).closest('tr');
-		var nome = valore.find('td:eq(0)').find("input").val();
-		var cognome = valore.find('td:eq(1)').find("input").val();
-		var username = valore.find('td:eq(2)').find("input").val();
-		var email = valore.find('td:eq(3)').find("input").val();
-		var password = valore.find('td:eq(4)').find("input").val();
+		var col1 = valore.find('td:eq(0)').find("input").val();
+		var col2 = valore.find('td:eq(1)').find("input").val();
+		var col3 = valore.find('td:eq(2)').find("input").val();
+		var col4 = valore.find('td:eq(3)').find("input").val();
+		var col5 = valore.find('td:eq(4)').find("input").val();
+		var res= col1+' '+col2+' '+col3+' '+col4+' '+col5;
 		//invia request post con dati e se retunr ok si posizionano come fissi
-    $.post("data/dati.php",{'salvautente': 1, 'nome' : nome, 'cognome':cognome, 'username':username, 'email':email,'password':password }, function(response) {
-      var json = JSON.parse(response);
-      console.log(json);
-      if(json.return=="OK")
-      {
-        var id=json.id;
-        $(value).parent().parent().remove();
-    		var riga='<tr><td>'+nome+'</td><td>'+cognome+'</td><td>'+username+'</td><td>'+email+'</td><td></td><td>  <input type="hidden" value="'+id+'">    <button type="submit" class="btn btn-form display-4" name="salvamodifica" style="background-color: #e61e1e;color:white" onclick="elimina(this)">elimina</button></td></tr>';
-    		$("#riga").append(riga);
-        $("#mex").remove();
-          $("#messaggio").append('  <div id="mex" class="alert alert-info" role="alert">Utente inserito correttamente </div>');
+		$(value).parent().parent().remove();
+		var riga='<tr><td>'+col1+'</td><td>'+col2+'</td><td>'+col3+'</td><td>'+col4+'</td><td></td><td><input  type="button" class="btn btn-success" id="add" onclick="aggiungi(this)" value="+">  </td><td><input type="button" class="btn btn-danger" id="add" value="X" onclick="elimina(this)"></td></tr>';
+		$("#riga").append(riga);
 
-        window.scrollTo(0, 0);
-      }
-      else
-      {
-        $("#mex").remove();
-        $("#messaggio").append('  <div id="mex" class="alert alert-danger" role="alert">Errore durante inserimento </div>');
-        window.scrollTo(0, 0);
-
-      }
-    });
-
+		//alert(res);
+		/*$(value).parent().parent().$("td").each(function()
+			{
+			  alert($(this).html());
+			});*/
 	}
 </script>
 
@@ -144,16 +142,21 @@ header('location: index.php');
 </section>
 
 
+
+
+
+
+
+
+
+
+
 <section class="tabs3 cid-ra8uzLCEiU" id="tabs3-1n" style="margin-top: 80px;">
 
 
   <div class="container-fluid">
       <div class="row tabcont">
         <div class="col-md-4">
-          <label class="form-control-label" ><b>Attenzione</b></label><br>
-          <div class="alert alert-warning" role="alert">
-          </b>L'elenco non puo' rimanere vuoto</b>
-            </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
@@ -161,46 +164,41 @@ header('location: index.php');
             <input type="button" class="btn btn-primary" id="add" value="Nuovo">
           </div>
 
+
         </div>
-        <div class="col-md-4" id="messaggio">
-            <label class="form-control-label" ><b>Messaggi:</b></label><br>
-
-
+        <div class="col-md-4">
         </div>
 
       </div>
       <div class="row tabcont">
-
-        <div class="col-md-12">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-10">
         <table class="table table-striped  table-bordered table-hover"   >
-        <caption>Elenco utenti - secretaria</caption>
+        <caption>Lista di utenti - secretaria</caption>
         <thead class="thead-dark">
           <th scope="col" style="width: 188px;height: 50px;">Nome</th>
           <th scope="col" style="width: 188px;height: 50px;">Cognome</th>
-          <th scope="col" style="width: 150px;height: 50px;">Username</th>
+          <th scope="col" style="width: 188px;height: 50px;">Username</th>
           <th scope="col" style="width: 188px;height: 50px;">Email</th>
           <th scope="col" style="width: 188px;height: 50px;">Password</th>
-          <th scope="col" style="width: 210px;height: 50px;">Operazioni</th>
+          <th colspan="2" style="width: 188px;height: 50px;">Operazioni</th>
         </thead>
         <tbody id="riga" >
-          <?php
-
-          $sqlu =$dbh->prepare("SELECT id_user,nome_user,cognome_user,username_user,email_user FROM users ");
-          $sqlu->execute();
-          if ($sqlu->rowCount()>0)
-          {
-              while($row=$sqlu->fetch())
-              {
-
-                echo '<tr><td>'.$row['nome_user'].'</td><td>'.$row['cognome_user'].'</td><td>'.$row['username_user'].'</td><td>'.$row['email_user'].'</td><td></td><td><input type="hidden" value="'.$row['id_user'].'">  <button type="submit" class="btn btn-form display-4" name="salvamodifica" style="background-color: #e61e1e;color:white" onclick="elimina(this)">elimina</button></td></tr>';
-              }
-
-          }
-          ?>
+          <tr >
+            <td>nasdadsasdasdas</td>
+            <td>nasdadasdsadasd</td>
+            <td>naaaa</td>
+            <td>nasafw</td>
+            <td></td>
+            <td></td>
+            <td><input type="button" class="btn btn-danger" id="add" value="X" onclick="elimina(this)"></td>
+          </tr>
         </tbody>
         </table>
       </div>
-
+      <div class="col-md-1">
+      </div>
 
       </div>
   </div>

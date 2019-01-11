@@ -6,6 +6,7 @@ include 'conn.inc.php';
 header('location: index.php');
 }*/
 $ssid=$_POST['ssid'];
+$id=$_POST['id'];
 $tipo=$_POST["tipo"];
 $attivo=$_POST["attivo"];
 
@@ -164,8 +165,8 @@ $indirizzo=$_POST["indirizzo"];
      var numero_figli = "<?php echo  $numero_figli; ?>";
      var battezzato_spirito = "<?php echo  $battezzato_spirito; ?>";
      var congregazione  = "<?php echo  $congregazione; ?>";
-     var carico = "<?php echo  $carico; ?>"; 
-     
+     var carico = "<?php echo  $carico; ?>";
+
     seleziona("opzione",tipo);
     seleziona("sesso",sesso);
     seleziona("statocivile",statocivile );
@@ -283,7 +284,8 @@ $indirizzo=$_POST["indirizzo"];
 
                       <input  type="hidden" class="form-control"  name="attivo" value="<?php echo $attivo; ?>">
                       <input  type="hidden" class="form-control"  name="ssid" value="<?php echo $ssid; ?>">
-                      
+                      <input  type="hidden" class="form-control"  name="id" value="<?php echo $id; ?>">
+
                       <!--<input  type="hidden" class="form-control" name="tipo" id="tipo" value="">-->
                       <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
                         <div class="row row-sm-offset">
@@ -292,8 +294,8 @@ $indirizzo=$_POST["indirizzo"];
                           </div>
                           <div class="col-md-4 multi-horizontal" data-for="">
                             <div class="form-group">
-                            <label class="form-control-label mbr-fonts-style display-7" for="nome"><b>Tipo</b></label>
-                            <select class="form-control" placeholder="scegli" id="opzione">
+                            <label class="form-control-label mbr-fonts-style display-7" ><b>Tipo</b></label>
+                            <select class="form-control" placeholder="scegli" id="opzione" name="tipo">
                             <option selected disabled>Scegli un'opzione</option>
                 						<option value="membro">Membro</option>
                 						<option value="congregato">Congregato</option>

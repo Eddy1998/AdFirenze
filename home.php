@@ -94,9 +94,9 @@ if(isset($_SESSION['user_admin']))
 
     <div class="container align-left">
         <div class="media-container-column mbr-white col-md-12">
-            <h3 class="mbr-section-subtitle py-3 mbr-fonts-style display-5">AD Firenze</h3>
-            <h1 class="mbr-section-title py-3 mbr-fonts-style display-1">Benvenuto/a <?php echo $_SESSION['username']; ?></h1>
-            <p class="mbr-text py-3 mbr-fonts-style display-5">Gestisci tutti i dati della secretaria, in seguito, segli una sezione</p>
+            <h3 class="mbr-section-subtitle py-3 mbr-fonts-style display-5">Benvenuto/a <?php echo $_SESSION['username']; ?></h3>
+
+            <p class="mbr-text py-3 mbr-fonts-style display-5">Gestisci tutti i dati della secretaria e tesoreria, in seguito, scegli una sezione</p>
 
         </div>
     </div>

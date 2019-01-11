@@ -271,10 +271,12 @@ header('location: index.php');
           <table class="table isSearch" cellspacing="0">
             <thead>
               <tr class="table-heads ">
-              <th class="head-item mbr-fonts-style display-7">NOME</th>
-              <th class="head-item mbr-fonts-style display-7">ETÀ</th>
-              <th class="head-item mbr-fonts-style display-7">DATA</th>
-              <th class="head-item mbr-fonts-style display-7">STIPENDIO</th></tr>
+              <th class="head-item mbr-fonts-style display-7">Nome</th>
+              <th class="head-item mbr-fonts-style display-7">Cognome</th>
+              <th class="head-item mbr-fonts-style display-7">Età</th>
+              <th class="head-item mbr-fonts-style display-7">Attivo</th>
+              <th class="head-item mbr-fonts-style display-7">Carico</th>
+              <th class="head-item mbr-fonts-style display-7">Congregazione</th></tr>
             </thead>
             <tbody id="body">
               <?php
@@ -282,11 +284,21 @@ header('location: index.php');
                 $sqld =$dbh->prepare("SELECT p.*, md5(id) AS ssid, DATE_FORMAT(p.data_nascita,  '%d/%m/%Y' ) AS data_di_nascita,DATE_FORMAT(p.data_matrimonio,  '%d/%m/%Y' ) AS data_di_matrimonio, DATE_FORMAT(p.data_arrivo_in_chiesa, '%d/%m/%Y' ) AS data_arrivo  FROM persone p WHERE tipo_persona='congregato' ORDER BY p.cognome ASC;");
                 $sqld->execute();
                 while ($row=$sqld->fetch()) {
+                  $birthDate = $row['data_di_nascita'];
+                  //explode the date to get month, day and year
+                  $birthDate = explode("/", $birthDate);
+                  //get age from date or birthdate
+                  $age = (date("md", date("U", mktime(0, 0, 0, $birthDate[0], $birthDate[1], $birthDate[2]))) > date("md")
+                   ? ((date("Y") - $birthDate[2]) - 1)
+                   : (date("Y") - $birthDate[2]));
+
                     echo '<tr onclick="visualizza(\'' . $row['ssid'] .'\');">';
                     echo "<td class='body-item mbr-fonts-style display-7'>" . $row['nome'] . "</td>";
                     echo "<td class='body-item mbr-fonts-style display-7'>" . $row['cognome'] . "</td>";
-                    echo "<td class='body-item mbr-fonts-style display-7'>" . $row['data_di_nascita'] . "</td>";
+                    echo "<td class='body-item mbr-fonts-style display-7'>" . $age . "</td>";
                     echo "<td class='body-item mbr-fonts-style display-7'>" . $row['attivo'] . "</td>";
+                    echo "<td class='body-item mbr-fonts-style display-7'>" . $row['carico_in_chiesa'] . "</td>";
+                    echo "<td class='body-item mbr-fonts-style display-7'>" . $row['congregazione'] . "</td>";
                     echo "</tr>";
                 }
 

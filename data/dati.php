@@ -7,6 +7,59 @@ try{
      $dbh = new PDO($conn, $user, $pass);
 		 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+		 if (isset($_POST['salvautente']))
+		{
+						$nome = $_POST['nome'];
+						$cognome=$_POST['cognome'];
+						$username=$_POST['username'];
+						$email=$_POST['email'];
+						$password=$_POST['password'];
+						 $jsondataT=array();
+						  $sqlu =$dbh->prepare("INSERT INTO users (nome_user,cognome_user,username_user,email_user,password_user) VALUES(:nome,:cognome,:username,:email,md5(:password))");
+							$sqlu->bindValue(":nome", $nome);
+							$sqlu->bindValue(":cognome", $cognome);
+							$sqlu->bindValue(":username", $username);
+							$sqlu->bindValue(":email", $email);
+							$sqlu->bindValue(":password", $password);
+								if($sqlu->execute())
+								{
+
+									$sqlu =$dbh->prepare("SELECT id_user FROM users ORDER BY id_user DESC limit 1");
+									$sqlu->execute();
+									if ($sqlu->rowCount()>0)
+									{
+										$row=$sqlu->fetch();
+										$jsondataT["id"]=$row['id_user'];
+										$jsondataT["return"]="OK";	
+									}
+
+								}
+								else {
+									$jsondataT["return"]="KO";
+								}
+							echo json_encode($jsondataT);
+							 exit();
+			 }
+			 if (isset($_POST['eliminautente']))
+			{
+							$id = $_POST['id'];
+
+							 $jsondataT=array();
+							  $sqlu =$dbh->prepare("DELETE FROM users WHERE id_user=:id");
+								$sqlu->bindValue(":id", $id);
+									if($sqlu->execute())
+									{
+										$jsondataT["return"]="OK";
+
+									}
+									else {
+										$jsondataT["return"]="KO";
+									}
+								echo json_encode($jsondataT);
+								 exit();
+				 }
+
+
           if (isset($_POST['ALL']))
          {
 

@@ -17,6 +17,7 @@ document.body.appendChild(image);*/
     /*   $("#attivo2 ,#attivo ").append();
        $("#tipo2 ,#tipo ").append();*/
    $("#attivo2").val(json.profilo[0].attivo);
+    $("#id2").val(json.profilo[0].id);
    $("#tipo").append(json.profilo[0].tipo_persona);
    $("#tipo2").val(json.profilo[0].tipo_persona);
 	if(json.profilo[0].tipo=="bambino")
@@ -447,7 +448,7 @@ document.body.appendChild(image);*/
 		if(json.consacrato[0].luogo_pastore==null)
 		{
 			$("#luogo-pastore").append("--non indicato--");
-		
+
 		}
 		else
 		{
