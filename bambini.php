@@ -205,10 +205,14 @@ header('location: index.php');
             <thead>
               <tr class="table-heads ">
               <th class="head-item mbr-fonts-style display-7">
-                      NOME</th><th class="head-item mbr-fonts-style display-7">
-                      ETÀ</th><th class="head-item mbr-fonts-style display-7">
-                      DATA</th><th class="head-item mbr-fonts-style display-7">
-                      STIPENDIO</th></tr>
+                      Nome</th>
+             <th class="head-item mbr-fonts-style display-7">
+                      Cognome</th>
+             <th class="head-item mbr-fonts-style display-7">
+                      Età</th>
+             <th class="head-item mbr-fonts-style display-7">
+                      Data di Nascita</th>
+              </tr>
             </thead>
             <tbody>
               <?php
@@ -216,11 +220,20 @@ header('location: index.php');
                 $sqld =$dbh->prepare("SELECT *, md5(id) AS ssid, DATE_FORMAT(p.data_nascita,  '%d/%m/%Y' ) AS data_di_nascita FROM persone p WHERE p.tipo_persona='bambino' ORDER BY p.cognome ASC;");
                 $sqld->execute();
                 while ($row=$sqld->fetch()) {
+                  
+                   $birthDate = $row['data_di_nascita'];
+                  //explode the date to get month, day and year
+                  $birthDate = explode("/", $birthDate);
+                  //get age from date or birthdate
+                  $age = (date("md", date("U", mktime(0, 0, 0, $birthDate[0], $birthDate[1], $birthDate[2]))) > date("md")
+                   ? ((date("Y") - $birthDate[2]) - 1)
+                   : (date("Y") - $birthDate[2]));
+                  
                     echo '<tr onclick="visualizza(\'' . $row['ssid'] .'\');">';
                     echo "<td class='body-item mbr-fonts-style display-7'>" . $row['nome'] .    "</td>";
                     echo "<td class='body-item mbr-fonts-style display-7'>" . $row['cognome'] . "</td>";
+                    echo "<td class='body-item mbr-fonts-style display-7'>" . $age. "</td>";
                     echo "<td class='body-item mbr-fonts-style display-7'>" . $row['data_di_nascita'] . "</td>";
-                    echo "<td class='body-item mbr-fonts-style display-7'>" . $row['tipo_persona'] . "</td>";
                     echo "</tr>";
                 }
 
