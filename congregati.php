@@ -274,8 +274,8 @@ header('location: index.php');
               <th class="head-item mbr-fonts-style display-7">Nome</th>
               <th class="head-item mbr-fonts-style display-7">Cognome</th>
               <th class="head-item mbr-fonts-style display-7">Età</th>
+              <th class="head-item mbr-fonts-style display-7">Data di Nascita</th>
               <th class="head-item mbr-fonts-style display-7">Attivo</th>
-              <th class="head-item mbr-fonts-style display-7">Carico</th>
               <th class="head-item mbr-fonts-style display-7">Congregazione</th></tr>
             </thead>
             <tbody id="body">
@@ -296,8 +296,8 @@ header('location: index.php');
                     echo "<td class='body-item mbr-fonts-style display-7'>" . $row['nome'] . "</td>";
                     echo "<td class='body-item mbr-fonts-style display-7'>" . $row['cognome'] . "</td>";
                     echo "<td class='body-item mbr-fonts-style display-7'>" . $age . "</td>";
-                    echo "<td class='body-item mbr-fonts-style display-7'>" . $row['attivo'] . "</td>";
-                    echo "<td class='body-item mbr-fonts-style display-7'>" . $row['carico_in_chiesa'] . "</td>";
+                    echo "<td class='body-item mbr-fonts-style display-7'>" . $row['data_di_nascita'] . "</td>";
+                    echo "<td class='body-item mbr-fonts-style display-7'>" . $row['attivo']  . "</td>";
                     echo "<td class='body-item mbr-fonts-style display-7'>" . $row['congregazione'] . "</td>";
                     echo "</tr>";
                 }
