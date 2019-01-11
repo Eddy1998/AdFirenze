@@ -1,3 +1,15 @@
+<?php
+session_start();
+include 'conn.inc.php';
+
+/*if(!isset($_SESSION['user']))
+{
+header('location: index.php');
+}*/
+$dbh = new PDO($conn,$user,$pass);
+?>
+
+
 <!DOCTYPE html>
 <html >
 <head>
@@ -7,7 +19,7 @@
   <meta name="generator" content="Mobirise v4.8.7, mobirise.com">
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
   <link rel="shortcut icon" href="assets/images/img-1583-122x122.png" type="image/x-icon">
-  <meta name="description" content="Site Generator Description">
+  <meta name="description" content="">
   <title>Ricerca</title>
   <link rel="stylesheet" href="assets/web/assets/mobirise-icons2/mobirise2.css">
   <link rel="stylesheet" href="assets/web/assets/mobirise-icons/mobirise-icons.css">
@@ -20,7 +32,19 @@
   <link rel="stylesheet" href="assets/animatecss/animate.min.css">
   <link rel="stylesheet" href="assets/theme/css/style.css">
   <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript">
+            $(document).ready(function(){
+          
+         
+        });
+       
+        function visualizza(id)
+        {
+          window.location="visualizza?id="+id;
+        }
+    
+</script>
 
 
 </head>
@@ -69,7 +93,7 @@
     </nav>
 </section>
 
-<section class="engine"><a href="https://mobirise.info/v">free html templates</a></section><section class="mbr-section info2 cid-ra87YiQtNm" id="info2-10">
+<section class="engine"><a ></a></section><section class="mbr-section info2 cid-ra87YiQtNm" id="info2-10">
 
 
 
@@ -97,7 +121,7 @@
 
 
     <div class="container">
-        <h2 class="mbr-section-title pb-3 align-center mbr-fonts-style display-2">Totale persone</h2>
+        <h2 class="mbr-section-title pb-3 align-center mbr-fonts-style display-2">Totale persone registrate</h2>
 
 
         <div class="container pt-4 mt-2">
@@ -110,21 +134,18 @@
 
                         <div class="card-text">
                             <h3 class="count pt-3 pb-3 mbr-fonts-style display-2">
-                                  100
+                                   <?php
+                                    
+                                    $sqld =$dbh->prepare("SELECT count(*) as totale  FROM persone;");
+                                    $sqld->execute();
+                                    $row=$sqld->fetch()
+                                    echo $row['totale'];   
+              
+                                  ?>
                             </h3>
-
-
                         </div>
                     </div>
                 </div>
-
-
-
-
-
-
-
-
             </div>
         </div>
    </div>
@@ -154,56 +175,91 @@
           <table class="table isSearch" cellspacing="0">
             <thead>
               <tr class="table-heads ">
-
-
-
-
               <th class="head-item mbr-fonts-style display-7">
-                      NOME</th>
+                Nome completo</th>
               <th class="head-item mbr-fonts-style display-7">
-                      ETA'</th>
-              <th class="head-item mbr-fonts-style display-7">ANNO</th>
+                Età</th>
               <th class="head-item mbr-fonts-style display-7">
-                      TIPO</th>
+                      Data di Nascita</th>
+                <th class="head-item mbr-fonts-style display-7">
+                      Sezione</th>
+                <th class="head-item mbr-fonts-style display-7">
+                      Carico</th>
               <th class="head-item mbr-fonts-style display-7">
-                      STATO</th></tr>
+                      Attivo</th>
+                <th class="head-item mbr-fonts-style display-7">
+                      Congregazione</th>
+              </tr>
             </thead>
-
             <tbody>
+                  <?php
+                
+                $sezione;
+                $sqld =$dbh->prepare("SELECT p.*, md5(id) AS ssid, DATE_FORMAT(p.data_nascita,  '%d/%m/%Y' ) AS data_di_nascita,DATE_FORMAT(p.data_matrimonio,  '%d/%m/%Y' ) AS data_di_matrimonio, DATE_FORMAT(p.data_arrivo_in_chiesa, '%d/%m/%Y' ) AS data_arrivo  FROM persone p ORDER BY p.cognome ASC;");
+                $sqld->execute();
+                while ($row=$sqld->fetch()) {
+                  $birthDate = $row['data_di_nascita'];
+                  //explode the date to get month, day and year
+                  $birthDate = explode("/", $birthDate);
+                  //get age from date or birthdate
+                  $age = (date("md", date("U", mktime(0, 0, 0, $birthDate[0], $birthDate[1], $birthDate[2]))) > date("md")
+                   ? ((date("Y") - $birthDate[2]) - 1)
+                   : (date("Y") - $birthDate[2]));
+                  
+                    echo '<tr onclick="visualizza(\'' . $row['ssid'] .'\');">';
+                    echo "<td class='body-item mbr-fonts-style display-7'>" . $row['nome'] .' '.$row['cognome'] "</td>";
+                    echo "<td class='body-item mbr-fonts-style display-7'>" . $age . "</td>";
+                    echo "<td class='body-item mbr-fonts-style display-7'>" . $row['data_di_nascita'] . "</td>";
+                    if($row['tipo_persona']=="bambino")
+                    {
+                      $sezione="Bambini";
+                    }
+                    else if ($row['tipo_persona']=="membro")
+                    {
+                      $sezione="Membri";
+                    }
+                    else
+                    {
+                      $sezione="Congregati";
+                    }
+                    echo "<td class='body-item mbr-fonts-style display-7'>" . $sezione. "</td>"; 
+                  
+                    if(!$row['tipo_persona']=="membro")
+                    {
+                      echo "<td class='body-item mbr-fonts-style display-7'></td>";
+                    }
+                    else
+                    {
+                      echo "<td class='body-item mbr-fonts-style display-7'>" . $row['carico_in_chiesa'] . "</td>";
+                    }
+                    if($row['tipo_persona'=="bambino"]
+                       {
+                         echo "<td class='body-item mbr-fonts-style display-7'>""</td>";
+                       }
+                    else
+                       {
+                        echo "<td class='body-item mbr-fonts-style display-7'>" . $row['attivo']  . "</td>";
+                       }
+                    
+                    echo "<td class='body-item mbr-fonts-style display-7'>" . $row['congregazione'] . "</td>";
+                    echo "</tr>";
+                }
+              ?>
 
 
+  
+   
+        </tbody>
 
-
-            <tr>
-
-
-
-
-              <td class="body-item mbr-fonts-style display-7">Kely Cristina</td><td class="body-item mbr-fonts-style display-7">Jeanna Schmal</td><td class="body-item mbr-fonts-style display-7">Jeanna Schmal</td><td class="body-item mbr-fonts-style display-7">Jeanna Schmal</td><td class="body-item mbr-fonts-style display-7">Jeanna Schmal</td></tr><tr>
-
-
-
-
-              <td class="body-item mbr-fonts-style display-7">Eddy David</td><td class="body-item mbr-fonts-style display-7">Caren Rials</td><td class="body-item mbr-fonts-style display-7">Caren Rials</td><td class="body-item mbr-fonts-style display-7">Caren Rials</td><td class="body-item mbr-fonts-style display-7">Caren Rials</td></tr><tr>
-
-
-
-
-              <td class="body-item mbr-fonts-style display-7">Luis</td><td class="body-item mbr-fonts-style display-7">Leon Rogol</td><td class="body-item mbr-fonts-style display-7">Leon Rogol</td><td class="body-item mbr-fonts-style display-7">Leon Rogol</td><td class="body-item mbr-fonts-style display-7">Leon Rogol</td></tr><tr>
-
-
-
-
-              <td class="body-item mbr-fonts-style display-7">Alexandre</td><td class="body-item mbr-fonts-style display-7">Shala Barrera</td><td class="body-item mbr-fonts-style display-7">Shala Barrera</td><td class="body-item mbr-fonts-style display-7">Shala Barrera</td><td class="body-item mbr-fonts-style display-7">Shala Barrera</td></tr></tbody>
-          </table>
+        </table>
         </div>
         <div class="container table-info-container">
           <div class="row info">
             <div class="col-md-6">
               <div class="dataTables_info mbr-fonts-style display-7">
-                <span class="infoBefore"></span>
+                <span class="infoBefore">Persone registrate</span>
                 <span class="inactive infoRows"></span>
-                <span class="infoAfter">inserimenti</span>
+                <span class="infoAfter"></span>
                 <span class="infoFilteredBefore"></span>
                 <span class="inactive infoRows"></span>
                 <span class="infoFilteredAfter"></span>
