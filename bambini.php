@@ -30,27 +30,62 @@ header('location: index.php');
   <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script type="text/javascript">
-        $(document).ready(function(){
-          var Div, contenuto;
-
+         $(document).ready(function(){
+          var Div, contenuto,data;
+          <?php
+           if (!isset($_GET['ba'])) { ?>
+          $.ajax({
+          url: 'data/dati.php',
+          type: 'POST',
+          data: {
+            'B' : 1,
+          },
+          success: function(response){
+            data = JSON.parse(response);
+           var totale = data.contatore.totale;
+           //var non_attivi = data.contatore.non_attivi;
+          window.location="bambini?ba="+totale;
+          }
+          });
+          <?php }
+           else { ?>
+             $.ajax({
+             url: 'data/dati.php',
+             type: 'POST',
+             data: {
+               'B' : 1,
+             },
+             success: function(response){
+               data = JSON.parse(response);
+              var totale = data.contatore.totale;
+              //var non_attivi = data.contatore.non_attivi;
+               var controlloT = <?php echo $_GET['ba']; ?> ;
+               //var controlloN = <?php //echo $_GET['mn']; ?> ;
+               if(controlloT!=totale)
+               {
+                 window.location="bambini?ba="+totale;
+               }
+             }
+             });
+             <?php } ?>
           <?php $res = @$_GET['success'];
           if($res==1)
           {
             ?>
             Div = document.getElementById("messaggio");
-            contenuto = document.createTextNode("BAMBINO/A AGGIUNTO/A CON SUCCESSO");
+            contenuto = document.createTextNode("BAMBINO AGGIUNTO CON SUCCESSO");
             Div.append(contenuto);
             $('#messaggio').delay(5000).fadeOut();
           <?php }
           else if($res==9) { ?>
-
             Div = document.getElementById("messaggio");
-            contenuto = document.createTextNode("ERRORE");
+            contenuto = document.createTextNode("ERRORE DURANTE INSERIMENTO");
             document.getElementById('messaggio').style.color = 'red';
             Div.append(contenuto);
             $('#messaggio').delay(5000).fadeOut();
           <?php } ?>
         });
+       
         function visualizza(id)
         {
           window.location="visualizza?id="+id;
@@ -212,6 +247,8 @@ header('location: index.php');
                       Età</th>
              <th class="head-item mbr-fonts-style display-7">
                       Data di Nascita</th>
+                <th class="head-item mbr-fonts-style display-7">
+                      Congregazione</th>
               </tr>
             </thead>
             <tbody>
@@ -234,34 +271,12 @@ header('location: index.php');
                     echo "<td class='body-item mbr-fonts-style display-7'>" . $row['cognome'] . "</td>";
                     echo "<td class='body-item mbr-fonts-style display-7'>" . $age. "</td>";
                     echo "<td class='body-item mbr-fonts-style display-7'>" . $row['data_di_nascita'] . "</td>";
+                  echo "<td class='body-item mbr-fonts-style display-7'>" . $row['congregazione'] . "</td>";
                     echo "</tr>";
                 }
 
               ?>
 
-
-    <!--        <tr onclick="window.location.href = 'home?id=214123123';">
-
-
-
-
-              <td class="body-item mbr-fonts-style display-7">primo rigo prova</td><td class="body-item mbr-fonts-style display-7">44</td><td class="body-item mbr-fonts-style display-7">2016-10-17</td><td class="body-item mbr-fonts-style display-7">$317.000</td></tr><tr>
-
-
-
-
-              <td class="body-item mbr-fonts-style display-7">Caren Rials</td><td class="body-item mbr-fonts-style display-7">35</td><td class="body-item mbr-fonts-style display-7">2013-04-12</td><td class="body-item mbr-fonts-style display-7">$445.500</td></tr><tr>
-
-
-
-
-              <td class="body-item mbr-fonts-style display-7">Leon Rogol</td><td class="body-item mbr-fonts-style display-7">66</td><td class="body-item mbr-fonts-style display-7">2016-05-22</td><td class="body-item mbr-fonts-style display-7">$152.558</td></tr><tr>
-
-
-
-
-              <td class="body-item mbr-fonts-style display-7">Shala Barrera</td><td class="body-item mbr-fonts-style display-7">70</td><td class="body-item mbr-fonts-style display-7">2016-05-15</td><td class="body-item mbr-fonts-style display-7">$459.146</td></tr>
--->
             </tbody>
           </table>
         </div>
@@ -269,9 +284,9 @@ header('location: index.php');
           <div class="row info">
             <div class="col-md-6">
               <div class="dataTables_info mbr-fonts-style display-7">
-                <span class="infoBefore"></span>
+                <span class="infoBefore">Totale:</span>
                 <span class="inactive infoRows"></span>
-                <span class="infoAfter">inserimenti</span>
+                <span class="infoAfter">bambini</span>
                 <span class="infoFilteredBefore"></span>
                 <span class="inactive infoRows"></span>
                 <span class="infoFilteredAfter"></span>
