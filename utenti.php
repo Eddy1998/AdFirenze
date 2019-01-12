@@ -1,8 +1,9 @@
 <?php
 session_start();
 include 'conn.inc.php';
+include 'data/funzioni.php';
 $dbh = new PDO($conn, $user, $pass);
-/*if(!isset($_SESSION['user']))
+/*if(!isset($_SESSION['id']))
 {
 header('location: index.php');
 }*/
@@ -29,8 +30,13 @@ header('location: index.php');
 <link rel="stylesheet" href="assets/animatecss/animate.min.css">
 <link rel="stylesheet" href="assets/theme/css/style.css">
 <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
 
 <script>
  $(document).ready(function(){
@@ -41,17 +47,18 @@ header('location: index.php');
  });
 	function nuovariga()
 	{
-		var riga='<tr><td><input type="text" class="form-control focus"></td><td><input class="form-control" type="text"></td><td><input class="form-control" type="text"></td><td><input  class="form-control" type="email"></td><td><input class="form-control" type="password"></td><td><button type="submit" class="btn btn-form display-4" name="salvamodifica" style="background-color: #329015;color:white" onclick="aggiungi(this)">salva</button> <button type="submit" class="btn btn-form display-4" name="salvamodifica" style="background-color: #e61e1e;color:white" onclick="elimina(this)">annulla</button> </td></tr>';
+		var riga='<tr><td><input type="text" class="form-control focus" ></td><td><input class="form-control" type="text" ></td><td><input class="form-control" type="text"  ></td><td><input  class="form-control" type="email"></td><td><input class="form-control" type="password"  ></td><td><button type="submit" class="btn btn-form display-4" name="salvamodifica" style="background-color: #329015;color:white" onclick="aggiungi(this)">salva</button> <button type="submit" class="btn btn-form display-4" name="salvamodifica" style="background-color: #e61e1e;color:white" onclick="annulla(this)">annulla</button> </td></tr>';
 		$("#riga").append(riga);
     $('.focus').focus();
 	}
 
 	function elimina(value)
 	{
-		var r = confirm("Confermi di eliminare utente?");
-		  if (r == true) {
+      $("#notifica").click();
+      $('#conferma').on('click', function () {
+
         var valore= $(value).closest('tr');
-    		var id = valore.find('td:eq(5)').find("input").val();
+       var id = valore.find('td:eq(5)').find("input").val();
         $.post("data/dati.php",{'eliminautente': 1, 'id' : id }, function(response) {
           var json = JSON.parse(response);
           console.log(json);
@@ -60,20 +67,37 @@ header('location: index.php');
             $(value).parent().parent().remove();
             $("#mex").remove();
               $("#messaggio").append('  <div id="mex" class="alert alert-dark" role="alert">Utente Rimosso correttamente </div>');
+              var idprova = <?php echo $_SESSION['id']; ?> ;
+              
+              if(idprova==id)
+              {
+                window.location="logout";
+              }
             window.scrollTo(0, 0);
+
           }
           else
           {
             $("#mex").remove();
             $("#messaggio").append('  <div id="mex" class="alert alert-danger" role="alert">Errore durante Rimozione </div>');
+
             window.scrollTo(0, 0);
 
           }
         });
+    });
 
-      }
 
 	}
+
+  function annulla(value)
+	{
+
+            $(value).parent().parent().remove();
+
+	}
+
+
 	function aggiungi(value)
 	{
 
@@ -144,7 +168,7 @@ header('location: index.php');
 </section>
 
 
-<section class="tabs3 cid-ra8uzLCEiU" id="tabs3-1n" style="margin-top: 80px;">
+<section class="tabs3 cid-ra8uzLCEiU" id="tabs3-1n" style="margin-top: 85px;">
 
 
   <div class="container-fluid">
@@ -152,7 +176,7 @@ header('location: index.php');
         <div class="col-md-4">
           <label class="form-control-label" ><b>Attenzione</b></label><br>
           <div class="alert alert-warning" role="alert">
-          </b>L'elenco non puo' rimanere vuoto</b>
+          <b>L'elenco non puo' rimanere vuoto</b>
             </div>
         </div>
         <div class="col-md-4">
@@ -173,7 +197,7 @@ header('location: index.php');
 
         <div class="col-md-12">
         <table class="table table-striped  table-bordered table-hover"   >
-        <caption>Elenco utenti - secretaria</caption>
+        <caption>Elenco utenti - secretaria e tesoreria</caption>
         <thead class="thead-dark">
           <th scope="col" style="width: 188px;height: 50px;">Nome</th>
           <th scope="col" style="width: 188px;height: 50px;">Cognome</th>
@@ -204,6 +228,42 @@ header('location: index.php');
 
       </div>
   </div>
+
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg" id="notifica" style="display:none">
+  </button>
+
+  <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog ">
+     <div class="modal-content">
+        <div class="modal-content">
+        <div class="modal-header">
+
+  		<div class="input-group">
+  		  <div class="input-group-prepend">
+  			<h4  >Conferma Eliminazione</h4>
+  		  </div>
+  		</div>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body "><div class="input-group">
+      	  <div class="table-responsive-xl">
+
+              <h5>Confermi di eliminale l'utente selezionato?<br>L'utente non potrà essere recuperato.</h5>
+      	</div>
+      	</div>
+        </div>
+        <div class="modal-footer">
+
+          <button id="conferma" type="button" class="btn btn-primary" data-dismiss="modal">Conferma</button>
+          <button  id="chiudi" type="button" class="btn btn-secondary" data-dismiss="modal" >Annulla</button>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
 
 </section>
 

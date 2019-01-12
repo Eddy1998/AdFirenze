@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(isset($_SESSION['user'])&&isset($_SESSION['username']))
+if(isset($_SESSION['id'])&&isset($_SESSION['username']))
 { session_destroy();}
-header("location: index.php");
+header("location: index");
 ?>

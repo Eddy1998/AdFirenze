@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'data/funzioni.php';
 include 'conn.inc.php';
 /*if(!isset($_SESSION['user']))
 {
@@ -33,8 +34,8 @@ header('location: index.php');
          $(document).ready(function(){
           var Div, contenuto,data;
           <?php
-           if (!isset($_GET['ba'])) { ?>
-          $.ajax({
+          // if (!isset($_GET['ba'])) { ?>
+        /*  $.ajax({
           url: 'data/dati.php',
           type: 'POST',
           data: {
@@ -47,9 +48,9 @@ header('location: index.php');
           window.location="bambini?ba="+totale;
           }
           });
-          <?php }
-           else { ?>
-             $.ajax({
+          */<?php //}
+          // else { ?>
+            /* $.ajax({
              url: 'data/dati.php',
              type: 'POST',
              data: {
@@ -59,15 +60,15 @@ header('location: index.php');
                data = JSON.parse(response);
               var totale = data.contatore.totale;
               //var non_attivi = data.contatore.non_attivi;
-               var controlloT = <?php echo $_GET['ba']; ?> ;
+               var controlloT = */ <?php //echo $_GET['ba']; ?> //;
                //var controlloN = <?php //echo $_GET['mn']; ?> ;
-               if(controlloT!=totale)
+              /* if(controlloT!=totale)
                {
                  window.location="bambini?ba="+totale;
                }
              }
-             });
-             <?php } ?>
+           });*/
+             <?php //} ?>
           <?php $res = @$_GET['success'];
           if($res==1)
           {
@@ -85,7 +86,7 @@ header('location: index.php');
             $('#messaggio').delay(5000).fadeOut();
           <?php } ?>
         });
-       
+
         function visualizza(id)
         {
           window.location="visualizza?id="+id;
@@ -195,7 +196,7 @@ header('location: index.php');
 
                         <div class="card-text">
                             <h3 class="count pt-3 pb-3 mbr-fonts-style display-2">
-                                  <?php echo $_GET['b']; ?>
+                                  <?php echo visualizza("BB"); ?>
                             </h3>
                             <h4 class="mbr-content-title mbr-bold mbr-fonts-style display-7">Bambini in chiesa</h4>
 
@@ -257,19 +258,15 @@ header('location: index.php');
                 $sqld =$dbh->prepare("SELECT *, md5(id) AS ssid, DATE_FORMAT(p.data_nascita,  '%d/%m/%Y' ) AS data_di_nascita FROM persone p WHERE p.tipo_persona='bambino' ORDER BY p.cognome ASC;");
                 $sqld->execute();
                 while ($row=$sqld->fetch()) {
+
+
+                   $eta = calcola($row['data_di_nascita']);
                   
-                   $birthDate = $row['data_di_nascita'];
-                  //explode the date to get month, day and year
-                  $birthDate = explode("/", $birthDate);
-                  //get age from date or birthdate
-                  $age = (date("md", date("U", mktime(0, 0, 0, $birthDate[0], $birthDate[1], $birthDate[2]))) > date("md")
-                   ? ((date("Y") - $birthDate[2]) - 1)
-                   : (date("Y") - $birthDate[2]));
-                  
+
                     echo '<tr onclick="visualizza(\'' . $row['ssid'] .'\');">';
                     echo "<td class='body-item mbr-fonts-style display-7'>" . $row['nome'] .    "</td>";
                     echo "<td class='body-item mbr-fonts-style display-7'>" . $row['cognome'] . "</td>";
-                    echo "<td class='body-item mbr-fonts-style display-7'>" . $age. "</td>";
+                    echo "<td class='body-item mbr-fonts-style display-7'>" . $eta. "</td>";
                     echo "<td class='body-item mbr-fonts-style display-7'>" . $row['data_di_nascita'] . "</td>";
                   echo "<td class='body-item mbr-fonts-style display-7'>" . $row['congregazione'] . "</td>";
                     echo "</tr>";

@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'data/funzioni.php';
 include 'conn.inc.php';
 
 /*if(!isset($_SESSION['user']))
@@ -35,15 +36,15 @@ $dbh = new PDO($conn,$user,$pass);
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script type="text/javascript">
             $(document).ready(function(){
-          
-         
+
+
         });
-       
+
         function visualizza(id)
         {
           window.location="visualizza?id="+id;
         }
-    
+
 </script>
 
 
@@ -80,15 +81,19 @@ $dbh = new PDO($conn,$user,$pass);
                   <a class="nav-link link text-white dropdown-toggle display-4" href="" data-toggle="dropdown-submenu" aria-expanded="true">
                     <span class="mobi-mbri mobi-mbri-plus mbr-iconfont mbr-iconfont-btn">
                     </span>Nuovo</a>
-                    <div class="dropdown-menu"><a class="text-white dropdown-item display-4" href="nuovo.php?new=M">Membro</a>
-                      <a class="text-white dropdown-item display-4" href="nuovo.php?new=C" aria-expanded="false">Congregato</a>
-                      <a class="text-white dropdown-item display-4" href="nuovo.php?new=B" aria-expanded="false">Bambino<br>
+                    <div class="dropdown-menu"><a class="text-white dropdown-item display-4" href="nuovo?new=M">Membro</a>
+                      <a class="text-white dropdown-item display-4" href="nuovo?new=C" aria-expanded="false">Congregato</a>
+                      <a class="text-white dropdown-item display-4" href="nuovo?new=B" aria-expanded="false">Bambino<br>
                       </a>
                     </div>
                   </li>
 
             </ul>
-            <div class="navbar-buttons mbr-section-btn"><a class="btn btn-sm btn-white display-4" href="index.php"><span class="mbri-login mbr-iconfont mbr-iconfont-btn"></span>Accedi</a>  <a class="btn btn-sm btn-white display-4" href="index.php"><span class="mbri-logout mbr-iconfont mbr-iconfont-btn"></span>Esci</a></div>
+            <div class="navbar-buttons mbr-section-btn">
+
+              <a class="btn btn-sm btn-white display-4" href="logout">
+                <span class="mbri-logout mbr-iconfont mbr-iconfont-btn"></span>Esci</a>
+              </div>
         </div>
     </nav>
 </section>
@@ -135,12 +140,9 @@ $dbh = new PDO($conn,$user,$pass);
                         <div class="card-text">
                             <h3 class="count pt-3 pb-3 mbr-fonts-style display-2">
                                    <?php
-                                    
-                                    $sqld =$dbh->prepare("SELECT count(*) as totale  FROM persone;");
-                                    $sqld->execute();
-                                    $row=$sqld->fetch()
-                                    echo $row['totale'];   
-              
+
+                                    echo visualizza("TT");
+
                                   ?>
                             </h3>
                         </div>
@@ -193,22 +195,17 @@ $dbh = new PDO($conn,$user,$pass);
             </thead>
             <tbody>
                   <?php
-                
+
                 $sezione;
                 $sqld =$dbh->prepare("SELECT p.*, md5(id) AS ssid, DATE_FORMAT(p.data_nascita,  '%d/%m/%Y' ) AS data_di_nascita,DATE_FORMAT(p.data_matrimonio,  '%d/%m/%Y' ) AS data_di_matrimonio, DATE_FORMAT(p.data_arrivo_in_chiesa, '%d/%m/%Y' ) AS data_arrivo  FROM persone p ORDER BY p.cognome ASC;");
                 $sqld->execute();
                 while ($row=$sqld->fetch()) {
-                  $birthDate = $row['data_di_nascita'];
-                  //explode the date to get month, day and year
-                  $birthDate = explode("/", $birthDate);
-                  //get age from date or birthdate
-                  $age = (date("md", date("U", mktime(0, 0, 0, $birthDate[0], $birthDate[1], $birthDate[2]))) > date("md")
-                   ? ((date("Y") - $birthDate[2]) - 1)
-                   : (date("Y") - $birthDate[2]));
-                  
+
+                 $eta = calcola($row['data_di_nascita']);
+
                     echo '<tr onclick="visualizza(\'' . $row['ssid'] .'\');">';
-                    echo "<td class='body-item mbr-fonts-style display-7'>" . $row['nome'] .' '.$row['cognome'] "</td>";
-                    echo "<td class='body-item mbr-fonts-style display-7'>" . $age . "</td>";
+                    echo "<td class='body-item mbr-fonts-style display-7'>" . $row['nome'] ." ".$row['cognome']. "</td>";
+                    echo "<td class='body-item mbr-fonts-style display-7'>" . $eta . "</td>";
                     echo "<td class='body-item mbr-fonts-style display-7'>" . $row['data_di_nascita'] . "</td>";
                     if($row['tipo_persona']=="bambino")
                     {
@@ -222,8 +219,8 @@ $dbh = new PDO($conn,$user,$pass);
                     {
                       $sezione="Congregati";
                     }
-                    echo "<td class='body-item mbr-fonts-style display-7'>" . $sezione. "</td>"; 
-                  
+                    echo "<td class='body-item mbr-fonts-style display-7'>" . $sezione. "</td>";
+
                     if(!$row['tipo_persona']=="membro")
                     {
                       echo "<td class='body-item mbr-fonts-style display-7'></td>";
@@ -232,23 +229,23 @@ $dbh = new PDO($conn,$user,$pass);
                     {
                       echo "<td class='body-item mbr-fonts-style display-7'>" . $row['carico_in_chiesa'] . "</td>";
                     }
-                    if($row['tipo_persona'=="bambino"]
+                    if($row['tipo_persona']=="bambino")
                        {
-                         echo "<td class='body-item mbr-fonts-style display-7'>""</td>";
+                         echo "<td class='body-item mbr-fonts-style display-7'></td>";
                        }
                     else
                        {
                         echo "<td class='body-item mbr-fonts-style display-7'>" . $row['attivo']  . "</td>";
                        }
-                    
+
                     echo "<td class='body-item mbr-fonts-style display-7'>" . $row['congregazione'] . "</td>";
                     echo "</tr>";
                 }
               ?>
 
 
-  
-   
+
+
         </tbody>
 
         </table>

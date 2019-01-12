@@ -34,15 +34,26 @@ $indirizzo=$_POST["indirizzo"];
 
   $sesso=$_POST["sesso"];
 
+  if (empty($_POST["nascita"])){
+    $nascita=NULL;
+  }
+  else {
+    $rawdate = htmlentities($_POST["nascita"]);
+    $nascita = date('Y-m-d', strtotime($rawdate));
+  }
 
-  $rawdate = htmlentities($_POST["nascita"]);
-  $nascita = date('Y-m-d', strtotime($rawdate));
-
+  if (empty($_POST["matrimonio"])){
+    $data_matrimonio=NULL;
+  }
+  else {
+    $rawdate44 = htmlentities($_POST["matrimonio"]);
+    $data_matrimonio = date('Y-m-d', strtotime($rawdate44));
+  }
 
   $stato_civile=$_POST["statocivile"];
 
 
-  $data_matrimonio=$_POST["matrimonio"];
+  
 
 
   $nome_coniuge=$_POST["nome-coniuge"];
@@ -58,15 +69,29 @@ $indirizzo=$_POST["indirizzo"];
 
   $nome_madre=$_POST["nome-madre"];
 
+  if (empty($_POST["data-battesimo"])){
+    $data_battesimo=NULL;
+  }
+  else {
+    $rawdate1 = htmlentities($_POST["data-battesimo"]);
+    $data_battesimo = date('Y-m-d', strtotime($rawdate1));
+  }
 
-  $rawdate1 = htmlentities($_POST["data-battesimo"]);
-  $data_battesimo = date('Y-m-d', strtotime($rawdate1));
+
 
 
   $luogo_battesimo=$_POST["luogo-battesimo"];
 
-  $rawdate2 = htmlentities($_POST["data-arrivo"]);
-  $data_arrivo = date('Y-m-d', strtotime($rawdate2));
+
+  if (empty($_POST["data-arrivo"])){
+    $data_arrivo=NULL;
+  }
+  else {
+    $rawdate2 = htmlentities($_POST["data-arrivo"]);
+    $data_arrivo = date('Y-m-d', strtotime($rawdate2));
+  }
+
+
 
 
   $battezzato_spirito=$_POST["battezzato-spirito"];
@@ -77,19 +102,41 @@ $indirizzo=$_POST["indirizzo"];
 
   $osservazioni=$_POST["osservazioni"];
 
+  if (empty($_POST["data-diacono"])){
+    $data_diacono=NULL;
+  }
+  else {
+    $rawdate9 = htmlentities($_POST["data-diacono"]);
+    $data_diacono = date('Y-m-d', strtotime($rawdate9));
+  }
 
-  $rawdate9 = htmlentities($_POST["data-diacono"]);
-  $data_diacono = date('Y-m-d', strtotime($rawdate9));
+  if (empty($_POST["data-presbitero"])){
+    $data_presbitero=NULL;
+  }
+  else {
+    $rawdate8 = htmlentities($_POST["data-presbitero"]);
+      $data_presbitero = date('Y-m-d', strtotime($rawdate8));
+  }
+
+  if (empty($_POST["data-evangelista"])){
+    $data_evangelista=NULL;
+  }
+  else {
+    $rawdate7 = htmlentities($_POST["data-evangelista"]);
+    $data_evangelista = date('Y-m-d', strtotime($rawdate7));
+  }
+
+  if (empty($_POST["data-pastore"])){
+    $data_pastore=NULL;
+  }
+  else {
+    $rawdate6 = htmlentities($_POST["data-pastore"]);
+    $data_pastore = date('Y-m-d', strtotime($rawdate6));
+  }
 
 
-  $rawdate8 = htmlentities($_POST["data-presbitero"]);
-    $data_presbitero = date('Y-m-d', strtotime($rawdate8));
 
-  $rawdate7 = htmlentities($_POST["data-evangelista"]);
-  $data_evangelista = date('Y-m-d', strtotime($rawdate7));
 
-  $rawdate6 = htmlentities($_POST["data-pastore"]);
-  $data_pastore = date('Y-m-d', strtotime($rawdate6));
 
   $luogo_diacono=$_POST["luogo-diacono"];
 

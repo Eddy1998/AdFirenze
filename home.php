@@ -1,7 +1,7 @@
 <?php
 session_start();
 include 'conn.inc.php';
-if(isset($_SESSION['user_admin']))
+if(isset($_SESSION['username']))
 {
    //header('location: index.php');
 }

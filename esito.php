@@ -10,70 +10,33 @@ session_start();
 
   try
   {
+    function rettipo($tipo)
+    {
+      if($tipo=="bambino")
+      {
+        return "bambini";
+      }
+      else if($tipo=="congregato")
+      {
+        return "congregati";
+      }
+      else
+      {
+        return "membri";
+      }
+    }
     function redirect($tipo, $success)
     {
-      ?>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-      <script type="text/javascript">
-          $(document).ready(function(){
-            $.ajax({
-            url: 'dati.php',
-            type: 'POST',
-            data: {
-              'CONTA' : 1,
-            },
-            success: function(response){
-              data = JSON.parse(response);
-              console.log(data);
-             var totale = data.total;
-             var attivi_m = data.attivo_m;
-             var non_attivi_m = data.non_attivo_m;
-             var attivi_c=data.attivo_c;
-             var non_attivi_c=data.non_attivo_c;
-             var bambino = data.bambino;
-             <?php
-             if($success=="OK" && $tipo=="membro")
-             {
-               ?>
-                   window.location="membri?ma="+attivi_m+"&mn="+non_attivi_m+"&success=1";
-               <?php
-             }
-              else if ($success=="OK" && $tipo=="congregato")
-              {
-                ?>
-                   window.location="congregati?ca="+attivi_c+"&cn="+non_attivi_c+"&success=1";
-                <?php
-              }
-              else if ($success=="OK" && $tipo=="bambino")
-              {
-                ?>
-                  window.location="bambini?bb="+bambino+"&success=1";
-                <?php
-              }
-              else if ($success=="KO" && $tipo=="membro")
-              {
-                ?>
-                   window.location="membri?ma="+attivi_m+"&mn="+non_attivi_m+"&err=9";
-                <?php
-              }
-              else if ($success=="KO" && $tipo=="congregato")
-              {
-                ?>
-                   window.location="congregati?ca="+attivi_c+"&cn="+non_attivi_c+"&err=9";
-                <?php
-              }
-              else if ($success=="KO" && $tipo=="bambino")
-              {
-                ?>
-                    window.location="bambini?bb="+bambino+"&err=9";
-                <?php
-              }
-              ?>
-            }
-            });
-          });
-      </script>
-      <?php
+        $rt = rettipo($tipo);
+        if($success=="OK")
+        {
+          header("Location: $rt?success=1");
+        }
+        else
+        {
+          header("Location: $rt?success=9");
+        }
+
     }
     function stampaok($tipo)
     {
@@ -281,13 +244,17 @@ session_start();
         stampako($tipo);
       }
       else {
-        $query=$dbh->prepare("SELECT id FROM persone WHERE nome=:nome AND cognome=:cognome AND carico_in_chiesa=:carico LIMIT 1;");
+        $sqlu =$dbh->prepare("SELECT id FROM persone ORDER BY id DESC limit 1");
+        $sqlu->execute();
+          $row=$sqlu->fetch();
+          $id_genitore =$row['id'];
+      /*  $query=$dbh->prepare("SELECT id FROM persone WHERE nome=:nome AND cognome=:cognome AND carico_in_chiesa=:carico LIMIT 1;");
         $query->bindValue(":nome",$nome);
         $query->bindValue(":cognome",$cognome);
         $query->bindValue(":carico",$carico);
         $query->execute();
         $idrisultante=$query->fetch();
-        $id_genitore = $idrisultante['id'];
+      = $idrisultante['id'];*/
         //si inserisce i dati di consacrazione e l'immagine di profilo, nel caso esistano
         if ($_FILES['files']['size'] > 0 )
         {
@@ -304,7 +271,7 @@ session_start();
                   break;
               case UPLOAD_ERR_INI_SIZE:
               case UPLOAD_ERR_FORM_SIZE:
-                  throw new RuntimeException( 'Eccede la dimensione massima del file, ritorna e inserisci di nuovo i dati, con un immagine di dimensioni inferiore a 60KB.' );
+                  throw new RuntimeException( 'Eccede la dimensione massima del file, ritorna e inserisci di nuovo i dati, con un immagine di dimensioni inferiore a 1MB.' );
                   break;
               default:
                   throw new RuntimeException( 'Errore sconosciuto.' );
@@ -337,9 +304,9 @@ session_start();
             unset( $_FILES, $handle, $immagine );
 
         }
-        else {
+      /*  else {
 
-        }
+      }*/
           //controllo carico in chiesa
         if($carico === 'Pastore' || $carico === 'Evangelista' || $carico==='Presbitero' || $carico ==='Diacono' || $carico==='Diaconessa')
         {
@@ -429,8 +396,6 @@ session_start();
         if($numero_figli > 0)
         {
 
-
-
           if (empty($_REQUEST["nome-figlio-1"])){
             $nome_figlio_1=NULL;
           }
@@ -505,55 +470,84 @@ session_start();
             require('conn.inc.php');
             $dbh = new PDO($conn,$user,$pass);
             $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql=$dbh->prepare("SELECT * FROM figli_persone WHERE LOWER(nome_figlio)=LOWER(:nome) AND LOWER(cognome_figlio)=LOWER(:cognome);");
+            $sql=$dbh->prepare("SELECT * FROM figli_persone WHERE LOWER(nome_figlio_1)=LOWER(:nome) AND LOWER(cognome_figlio_1)=LOWER(:cognome)||LOWER(nome_figlio_2)=LOWER(:nome) AND LOWER(cognome_figlio_2)=LOWER(:cognome)||LOWER(nome_figlio_3)=LOWER(:nome) AND LOWER(cognome_figlio_3)=LOWER(:cognome)||LOWER(nome_figlio_4)=LOWER(:nome) AND LOWER(cognome_figlio_4)=LOWER(:cognome)||LOWER(nome_figlio_5)=LOWER(:nome) AND LOWER(cognome_figlio_5)=LOWER(:cognome);");
             $sql->bindValue(":nome",$nome);
             $sql->bindValue(":cognome",$cognome);
             $sql->execute();
-            	if ($sql->rowCount()>0) {
-                return "si";
+            if ($sql->rowCount()>0) {
+                $row = $sql->fetch();
+                return $row['id'];
               }
               else return "no";
+
           }
-          function aggiorna($id,$nomefiglio,$cognomefiglio,$sesso,$tipo)
+          function aggiorna($id,$n1,$c1,$n2,$c2,$n3,$c3,$n4,$c4,$n5,$c5,$sesso,$idriga)
           {
+              require('conn.inc.php');
               if($sesso=="Maschile")
               {
-                 $riga ="UPDATE figli_persone SET id_padre=:id WHERE LOWER(nome_figlio)=LOWER(:nome) AND LOWER(cognome_figlio)=LOWER(:cognome);";
+                $prima="id_padre";
+                // $riga ="UPDATE figli_persone SET id_padre=:id WHERE LOWER(nome_figlio)=LOWER(:nome) AND LOWER(cognome_figlio)=LOWER(:cognome);";
               }
              else
              {
-               $riga ="UPDATE figli_persone SET id_madre=:id WHERE LOWER(nome_figlio)=LOWER(:nome) AND LOWER(cognome_figlio)=LOWER(:cognome);";
+               $prima="id_madre";
              }
-             require('conn.inc.php');
+             $riga ="UPDATE figli_persone SET ".$prima."=:id, nome_figlio_1=:n1, cognome_figlio_1=:c1, nome_figlio_2=:n2,cognome_figlio_2=:c2, nome_figlio_3=:n3,cognome_figlio_3=:c3, nome_figlio_4=:n4,cognome_figlio_4=:c4, nome_figlio_5=:n5,cognome_figlio_5=:c5  WHERE id=:idriga;";
+
+
              $dbh = new PDO($conn,$user,$pass);
              $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
              $sql1=$dbh->prepare($riga);
              $sql1->bindValue(":id",$id);
-             $sql1->bindValue(":nome",$nomefiglio);
-             $sql1->bindValue(":cognome",$cognomefiglio);
+             $sql1->bindValue(":idriga",$idriga);
+             $sql1->bindValue(":n1",$n1);
+             $sql1->bindValue(":c1",$c1);
+             $sql1->bindValue(":n2",$n2);
+             $sql1->bindValue(":c2",$c2);
+             $sql1->bindValue(":n3",$n3);
+             $sql1->bindValue(":c3",$c3);
+             $sql1->bindValue(":n4",$n4);
+             $sql1->bindValue(":c4",$c4);
+             $sql1->bindValue(":n5",$n5);
+             $sql1->bindValue(":c5",$c5);
              if($sql1->execute())
              {
                return "OK";
              }
              else return "KO";
           }
-          function inserisci($id,$nomefiglio,$cognomefiglio,$sesso,$tipo)
+          function inserisci($id,$n1,$c1,$n2,$c2,$n3,$c3,$n4,$c4,$n5,$c5,$sesso)
           {
               if($sesso=="Maschile")
               {
-                 $riga = "INSERT INTO figli_persone(id_padre,nome_figlio,cognome_figlio) VALUES (:id,:nome,:cognome);";
+                $in = "id_padre";
+                // $riga = "INSERT INTO figli_persone(id_padre,nome_figlio,cognome_figlio) VALUES (:id,:nome,:cognome);";
               }
              else
              {
-                $riga = "INSERT INTO figli_persone(id_madre,nome_figlio,cognome_figlio) VALUES (:id,:nome,:cognome);";
+               $in = "id_padre";
+
              }
+             $prein="INSERT INTO figli_persone(";
+             $postin=",nome_figlio_1,cognome_figlio_1,nome_figlio_2,cognome_figlio_2,nome_figlio_3,cognome_figlio_3,nome_figlio_4,cognome_figlio_4,nome_figlio_5,cognome_figlio_5) VALUES (:id,:n1,:c1,:n2,:c2,:n3,:c3,:n4,:c4,:n5,:c5);"
+             //$riga = "INSERT INTO figli_persone(".$in.",nome_figlio_1,cognome_figlio_1,nome_figlio_2,cognome_figlio_2,nome_figlio_3,cognome_figlio_3,nome_figlio_4,cognome_figlio_4,nome_figlio_5,cognome_figlio_5) VALUES (:id,:n1,:c1,:n2,:c2,:n3,:c3,:n4,:c4,:n5,:c5);";
+             $riga=$prein.$in.$postin;
              require('conn.inc.php');
              $dbh = new PDO($conn,$user,$pass);
              $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
              $sql1=$dbh->prepare($riga);
              $sql1->bindValue(":id",$id);
-             $sql1->bindValue(":nome",$nomefiglio);
-             $sql1->bindValue(":cognome",$cognomefiglio);
+             $sql1->bindValue(":n1",$n1);
+             $sql1->bindValue(":c1",$c1);
+             $sql1->bindValue(":n2",$n2);
+             $sql1->bindValue(":c2",$c2);
+             $sql1->bindValue(":n3",$n3);
+             $sql1->bindValue(":c3",$c3);
+             $sql1->bindValue(":n4",$n4);
+             $sql1->bindValue(":c4",$c4);
+             $sql1->bindValue(":n5",$n5);
+             $sql1->bindValue(":c5",$c5);
              if($sql1->execute())
              {
                return "OK";

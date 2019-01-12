@@ -1,13 +1,13 @@
 
 
-      function opciones()
+      function opciones(id,dataid)
       {
-        var valore = $("#nome-coniuge").val();
+        var valore = $("#"+id).val();
         if(!valore==' ' ||!valore==null)
         {
-            console.log(valore);
+            //console.log(valore);
             $.ajax({
-            url: 'dati.php',
+            url: 'data/dati.php',
             type: 'POST',
             data: {
               'NAMES' : 1,
@@ -17,358 +17,46 @@
                 var data = JSON.parse(response);
                 //console.log(data);
                 var indice = data.names.length;
-                $('#nomecon option').remove();
+                $('#'+dataid+' option').remove();
                 for(var i=0;i<indice;i++)
                 {
 
                   var valori = data.names[i].nome + '  '+ data.names[i].cognome;
 
-                  $("#nomecon").append($("<option>").attr('value', valori).text(valori));
-                }
-            }
-            });
-          }
-      }
-      function opciones1()
-      {
-        var valore = $('#nome-figlio-1').val();
-        if(!valore==' ' ||!valore==null)
-        {
-            console.log(valore);
-            $.ajax({
-            url: 'dati.php',
-            type: 'POST',
-            data: {
-              'NAMES' : 1,
-              'valore': valore,
-            },
-            success: function(response){
-                var data = JSON.parse(response);
-                //console.log(data);
-                var indice = data.names.length;
-                $('#nomefi1 option').remove();
-                for(var i=0;i<indice;i++)
-                {
-
-                  var valori = data.names[i].nome + '  '+ data.names[i].cognome;
-
-                  $("#nomefi1").append($("<option>").attr('value', valori).text(valori));
+                  $('#'+dataid).append($("<option>").attr('value', valori).text(valori));
                 }
             }
             });
           }
       }
 
-      function rellena()
+
+      function rellena(idinput,idcognome,idlist)
       {
-        var val = document.getElementById("nome-coniuge").value;
-        var opts = document.getElementById('nomecon').childNodes;
+        var val = document.getElementById(idinput).value;
+        var opts = document.getElementById(idlist).childNodes;
         for (var i = 0; i < opts.length; i++) {
           if (opts[i].value === val) {
             // An item was selected from the list!
             // yourCallbackHere()
-            var salto = opts[i].value.split("  ");
-            $("#nome-coniuge").val(salto[0]);
-            $("#cognome-coniuge").val(salto[1]);
-            $(':focus').blur()
-            break;
-          }
-        }
-      }
-
-      function rellena1()
-      {
-        var val = document.getElementById("nome-figlio-1").value;
-        var opts = document.getElementById('nomefi1').childNodes;
-        for (var i = 0; i < opts.length; i++) {
-          if (opts[i].value === val) {
-            // An item was selected from the list!
-            // yourCallbackHere()
-            var salto = opts[i].value.split("  ");
-            $("#nome-figlio-1").val(salto[0]);
-            $("#cognome-figlio-1").val(salto[1]);
-            $(':focus').blur()
-            break;
-          }
-        }
-      }
-      function opciones2()
-      {
-        var valore = $('#nome-figlio-2').val();
-        if(!valore==' ' ||!valore==null)
-        {
-            console.log(valore);
-            $.ajax({
-            url: 'dati.php',
-            type: 'POST',
-            data: {
-              'NAMES' : 1,
-              'valore': valore,
-            },
-            success: function(response){
-                var data = JSON.parse(response);
-                //console.log(data);
-                var indice = data.names.length;
-                $('#nomefi2 option').remove();
-                for(var i=0;i<indice;i++)
-                {
-
-                  var valori = data.names[i].nome + '  '+ data.names[i].cognome;
-
-                  $("#nomefi2").append($("<option>").attr('value', valori).text(valori));
-                }
+            if(idinput=="nome-padre"||idinput=="nome-madre")
+            {
+              var salto = opts[i].value.split("  ");
+              $("#"+idinput).val(salto[0]+' '+salto[1]);
+              //$("#cognome-figlio-5").val(salto[1]);
+              $(':focus').blur()
             }
-            });
-          }
-      }
-      function rellena2()
-      {
-        var val = document.getElementById("nome-figlio-2").value;
-        var opts = document.getElementById('nomefi2').childNodes;
-        for (var i = 0; i < opts.length; i++) {
-          if (opts[i].value === val) {
-            // An item was selected from the list!
-            // yourCallbackHere()
-            var salto = opts[i].value.split("  ");
-            $("#nome-figlio-2").val(salto[0]);
-            $("#cognome-figlio-2").val(salto[1]);
-            $(':focus').blur()
-            break;
-          }
-        }
-      }
-
-      function opciones3()
-      {
-        var valore = $('#nome-figlio-3').val();
-        if(!valore==' ' ||!valore==null)
-        {
-            console.log(valore);
-            $.ajax({
-            url: 'dati.php',
-            type: 'POST',
-            data: {
-              'NAMES' : 1,
-              'valore': valore,
-            },
-            success: function(response){
-                var data = JSON.parse(response);
-                //console.log(data);
-                var indice = data.names.length;
-                $('#nomefi3 option').remove();
-                for(var i=0;i<indice;i++)
-                {
-
-                  var valori = data.names[i].nome + '  '+ data.names[i].cognome;
-
-                  $("#nomefi3").append($("<option>").attr('value', valori).text(valori));
-                }
+            else {
+              var salto = opts[i].value.split("  ");
+              $("#"+idinput).val(salto[0]);
+              $("#"+idcognome).val(salto[1]);
+              $(':focus').blur()
             }
-            });
-          }
-      }
-      function rellena3()
-      {
-        var val = document.getElementById("nome-figlio-3").value;
-        var opts = document.getElementById('nomefi3').childNodes;
-        for (var i = 0; i < opts.length; i++) {
-          if (opts[i].value === val) {
-            // An item was selected from the list!
-            // yourCallbackHere()
-            var salto = opts[i].value.split("  ");
-            $("#nome-figlio-3").val(salto[0]);
-            $("#cognome-figlio-3").val(salto[1]);
-            $(':focus').blur()
+
             break;
           }
         }
       }
-
-      function opciones4()
-      {
-        var valore = $('#nome-figlio-4').val();
-        if(!valore==' ' ||!valore==null)
-        {
-            console.log(valore);
-            $.ajax({
-            url: 'dati.php',
-            type: 'POST',
-            data: {
-              'NAMES' : 1,
-              'valore': valore,
-            },
-            success: function(response){
-                var data = JSON.parse(response);
-                //console.log(data);
-                var indice = data.names.length;
-                $('#nomefi4 option').remove();
-                for(var i=0;i<indice;i++)
-                {
-
-                  var valori = data.names[i].nome + '  '+ data.names[i].cognome;
-
-                  $("#nomefi4").append($("<option>").attr('value', valori).text(valori));
-                }
-            }
-            });
-          }
-      }
-      function rellena4()
-      {
-        var val = document.getElementById("nome-figlio-4").value;
-        var opts = document.getElementById('nomefi4').childNodes;
-        for (var i = 0; i < opts.length; i++) {
-          if (opts[i].value === val) {
-            // An item was selected from the list!
-            // yourCallbackHere()
-            var salto = opts[i].value.split("  ");
-            $("#nome-figlio-4").val(salto[0]);
-            $("#cognome-figlio-4").val(salto[1]);
-            $(':focus').blur()
-            break;
-          }
-        }
-      }
-
-      function opciones5()
-      {
-        var valore = $('#nome-figlio-5').val();
-        if(!valore==' ' ||!valore==null)
-        {
-            console.log(valore);
-            $.ajax({
-            url: 'dati.php',
-            type: 'POST',
-            data: {
-              'NAMES' : 1,
-              'valore': valore,
-            },
-            success: function(response){
-                var data = JSON.parse(response);
-                //console.log(data);
-                var indice = data.names.length;
-                $('#nomefi5 option').remove();
-                for(var i=0;i<indice;i++)
-                {
-
-                  var valori = data.names[i].nome + '  '+ data.names[i].cognome;
-
-                  $("#nomefi5").append($("<option>").attr('value', valori).text(valori));
-                }
-            }
-            });
-          }
-      }
-      function rellena5()
-      {
-        var val = document.getElementById("nome-figlio-5").value;
-        var opts = document.getElementById('nomefi5').childNodes;
-        for (var i = 0; i < opts.length; i++) {
-          if (opts[i].value === val) {
-            // An item was selected from the list!
-            // yourCallbackHere()
-            var salto = opts[i].value.split("  ");
-            $("#nome-figlio-5").val(salto[0]);
-            $("#cognome-figlio-5").val(salto[1]);
-            $(':focus').blur()
-            break;
-          }
-        }
-      }
-
-
-      function opcionespadre()
-      {
-        var valore = $('#nome-padre').val();
-        if(!valore==' ' ||!valore==null)
-        {
-            console.log(valore);
-            $.ajax({
-            url: 'dati.php',
-            type: 'POST',
-            data: {
-              'NAMES' : 1,
-              'valore': valore,
-            },
-            success: function(response){
-                var data = JSON.parse(response);
-                //console.log(data);
-                var indice = data.names.length;
-                $('#nomepadre option').remove();
-                for(var i=0;i<indice;i++)
-                {
-
-                  var valori = data.names[i].nome + '  '+ data.names[i].cognome;
-
-                  $("#nomepadre").append($("<option>").attr('value', valori).text(valori));
-                }
-            }
-            });
-          }
-      }
-      function rellenapadre()
-      {
-        var val = document.getElementById("nome-padre").value;
-        var opts = document.getElementById('nomepadre').childNodes;
-        for (var i = 0; i < opts.length; i++) {
-          if (opts[i].value === val) {
-            // An item was selected from the list!
-            // yourCallbackHere()
-            var salto = opts[i].value.split("  ");
-            $("#nome-padre").val(salto[0]+' '+salto[1]);
-            //$("#cognome-figlio-5").val(salto[1]);
-            $(':focus').blur()
-            break;
-          }
-        }
-      }
-
-      function opcionesmadre()
-      {
-        var valore = $('#nome-madre').val();
-        if(!valore==' ' ||!valore==null)
-        {
-            console.log(valore);
-            $.ajax({
-            url: 'dati.php',
-            type: 'POST',
-            data: {
-              'NAMES' : 1,
-              'valore': valore,
-            },
-            success: function(response){
-                var data = JSON.parse(response);
-                //console.log(data);
-                var indice = data.names.length;
-                $('#nomemadre option').remove();
-                for(var i=0;i<indice;i++)
-                {
-
-                  var valori = data.names[i].nome + '  '+ data.names[i].cognome;
-
-                  $("#nomemadre").append($("<option>").attr('value', valori).text(valori));
-                }
-            }
-            });
-          }
-      }
-      function rellenamadre()
-      {
-        var val = document.getElementById("nome-madre").value;
-        var opts = document.getElementById('nomemadre').childNodes;
-        for (var i = 0; i < opts.length; i++) {
-          if (opts[i].value === val) {
-            // An item was selected from the list!
-            // yourCallbackHere()
-            var salto = opts[i].value.split("  ");
-            $("#nome-madre").val(salto[0]+' '+salto[1]);
-            //$("#cognome-figlio-5").val(salto[1]);
-            $(':focus').blur()
-            break;
-          }
-        }
-      }
-
 
 
       function nascondi_figli()
@@ -519,7 +207,7 @@
 
         var ele = document.getElementById("statocivile");
         var stato = ele.options[ele.selectedIndex].value;
-        if(stato==='Cebile/nubile')
+        if(stato=='Cebile/nubile'||stato=='Fidanzato/a')
         {
           $("#matrimonio").prop('disabled', true);
           $("#nome-coniuge").prop('disabled', true);
@@ -544,28 +232,8 @@
        var qta=0;
        var e = document.getElementById("numero");
        var numero = e.options[e.selectedIndex].value;
-       var number=0;
-       switch(numero)
-       {
-         case '0':
-            number=0;
-         break;
-         case '1':
-            number=1;
-         break;
-         case '2':
-            number=2;
-         break;
-         case '3':
-            number=3;
-         break;
-         case '4':
-            number=4;
-         break;
-         case '5':
-            number=5;
-         break;
-       }
+       var number=Number(numero);
+       
        for (var j=1;j<number+1;j++)
         {
           $("#nfiglio"+j).show();

@@ -1,11 +1,14 @@
 <?php
-date_default_timezone_set('Europe/Rome');
 session_start();
+
+date_default_timezone_set('Europe/Rome');
 	include ('conn.inc.php');
 
+
+
 try{
-     $dbh = new PDO($conn, $user, $pass);
-		 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	$dbh = new PDO($conn, $user, $pass);
+	$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 		 if (isset($_POST['salvautente']))
 		{
@@ -30,7 +33,7 @@ try{
 									{
 										$row=$sqlu->fetch();
 										$jsondataT["id"]=$row['id_user'];
-										$jsondataT["return"]="OK";	
+										$jsondataT["return"]="OK";
 									}
 
 								}
@@ -38,8 +41,9 @@ try{
 									$jsondataT["return"]="KO";
 								}
 							echo json_encode($jsondataT);
-							 exit();
+
 			 }
+
 			 if (isset($_POST['eliminautente']))
 			{
 							$id = $_POST['id'];
@@ -56,7 +60,7 @@ try{
 										$jsondataT["return"]="KO";
 									}
 								echo json_encode($jsondataT);
-								 exit();
+
 				 }
 
 
@@ -82,7 +86,7 @@ try{
 								        $row=$sqlu->fetch();
 
   											$jsondataT["contatore"]=$row;
-								       echo json_encode($jsondataT);
+
 
 
                   	}
@@ -90,8 +94,10 @@ try{
                    {
                         echo json_encode("not_found");
                    }
+									 echo json_encode($jsondataT);
                     exit();
             }
+
 						if (isset($_POST['NAMES']))
 	        	{
 
@@ -108,13 +114,14 @@ try{
 	                        {
 	                            $jsondataT["names"][]=$row;
 	                        }
-												  echo json_encode($jsondataT);
+
 	                  	}
 	                   else
 	                   {
 	                        echo json_encode("not_found");
 	                   }
-	                    exit();
+										  echo json_encode($jsondataT);
+
 	          }
          if (isset($_POST['M']))
          {
@@ -159,7 +166,7 @@ try{
 
                     }
 
-										$sqld =$dbh->prepare("SELECT count(*) as totale, (select count(*)  from persone p WHERE attivo='S' and tipo_persona='congregato') as attivi, (select count(*)  from persone p WHERE attivo='N' and tipo_persona='congregato') as non_attivi   FROM persone WHERE tipo_persona='congregato'");
+										$sqld =$dbh->prepare("SELECT count(*) as totale, (select count(*)  from persone p WHERE attivo='S' and tipo_persona='congregato') as attivi, (select count(*)  from persone p WHERE attivo='N' and tipo_persona='congregato') as non_attivi   FROM persone WHERE tipo_persona='congregato';");
 
 										$sqld->execute();
 										$row=$sqld->fetch();
@@ -200,7 +207,7 @@ try{
                            echo json_encode("not_found");
                      }
                       exit();
-        }
+  }
 
     if(isset($_POST['ONE'])) {
 

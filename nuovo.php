@@ -39,7 +39,7 @@ header('location: index.php');
 
   .thumb {
             height: 170px;
-          
+
             margin: 10px 5px 0 0;
           }
   </style>
@@ -202,7 +202,7 @@ header('location: index.php');
                     <form name="modulo" class="mbr-form" action="esito.php" method="post" enctype="multipart/form-data">
                       <input  type="hidden" class="form-control"  name="attivo" value="S">
                       <input  type="hidden" class="form-control" name="tipo" id="tipo" value="">
-                      <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
+                      <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
                         <div class="row row-sm-offset">
 
                             <div class="col-md-3 multi-horizontal" data-for="">
@@ -341,7 +341,7 @@ header('location: index.php');
                             <div class="col-md-6 multi-horizontal" data-for="nome-coniuge">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="nome-coniuge"><b>Nome coniuge</b></label>
-                                    <input type="text" class="form-control" name="nome-coniuge"  id="nome-coniuge" list="nomecon" onkeyup="opciones()" oninput="rellena()">
+                                    <input type="text" class="form-control" name="nome-coniuge"  id="nome-coniuge" list="nomecon" onkeyup="opciones('nome-coniuge','nomecon')" oninput="rellena('nome-coniuge','cognome-coniuge','nomecon')">
                                     <datalist id="nomecon">
                                     </datalist>
                                 </div>
@@ -371,7 +371,7 @@ header('location: index.php');
                             <div id="nfiglio1" class="col-md-6 multi-horizontal" data-for="nome-figlio-1">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="nome-figlio-1"><b>Nome figlio 1</b></label>
-                                    <input type="text" class="form-control" name="nome-figlio-1" id="nome-figlio-1"  list="nomefi1" onkeyup="opciones1()" oninput="rellena1()">
+                                    <input type="text" class="form-control" name="nome-figlio-1" id="nome-figlio-1"  list="nomefi1" onkeyup="opciones('nome-figlio-1','nomefi1')" oninput="rellena('nome-figlio-1','cognome-figlio-1','nomefi1')">
                                     <datalist id="nomefi1">
                                     </datalist>
                                 </div>
@@ -386,7 +386,7 @@ header('location: index.php');
                             <div id="nfiglio2" class="col-md-6 multi-horizontal" data-for="nome-figlio-2">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="nome-figlio-2"><b>Nome figlio 2</b></label>
-                                    <input type="text" class="form-control" name="nome-figlio-2"  id="nome-figlio-2" list="nomefi2" onkeyup="opciones2()" oninput="rellena2()">
+                                    <input type="text" class="form-control" name="nome-figlio-2"  id="nome-figlio-2" list="nomefi2" onkeyup="opciones('nome-figlio-2','nomefi2')" oninput="rellena('nome-figlio-2','cognome-figlio-2','nomefi2')">
                                     <datalist id="nomefi2">
                                     </datalist>
                                 </div>
@@ -400,7 +400,7 @@ header('location: index.php');
                             <div id="nfiglio3" class="col-md-6 multi-horizontal" data-for="nome-figlio-3">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="nome-figlio-3"><b>Nome figlio 3</b></label>
-                                    <input type="text" class="form-control" name="nome-figlio-3" id="nome-figlio-3" list="nomefi3" onkeyup="opciones3()" oninput="rellena3()">
+                                    <input type="text" class="form-control" name="nome-figlio-3" id="nome-figlio-3" list="nomefi3" onkeyup="opciones('nome-figlio-3','nomefi3')" oninput="rellena('nome-figlio-3','cognome-figlio-3','nomefi3')">
                                     <datalist id="nomefi3">
                                     </datalist>
                                 </div>
@@ -414,7 +414,7 @@ header('location: index.php');
                             <div id="nfiglio4" class="col-md-6 multi-horizontal" data-for="nome-figlio-4">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="nome-figlio-4"><b>Nome figlio 4</b></label>
-                                    <input type="text" class="form-control" name="nome-figlio-4"  id="nome-figlio-4" list="nomefi4" onkeyup="opciones4()" oninput="rellena4()">
+                                    <input type="text" class="form-control" name="nome-figlio-4"  id="nome-figlio-4" list="nomefi4" onkeyup="opciones('nome-figlio-4','nomefi4')" oninput="rellena('nome-figlio-4','cognome-figlio-4','nomefi4')">
                                     <datalist id="nomefi4">
                                     </datalist>
                                 </div>
@@ -428,7 +428,7 @@ header('location: index.php');
                             <div id="nfiglio5" class="col-md-6 multi-horizontal" data-for="nome-figlio-5">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="nome-figlio-5"><b>Nome figlio 5</b></label>
-                                    <input type="text" class="form-control" name="nome-figlio-5"  id="nome-figlio-5" list="nomefi5" onkeyup="opciones5()" oninput="rellena5()">
+                                    <input type="text" class="form-control" name="nome-figlio-5"  id="nome-figlio-5" list="nomefi5" onkeyup="opciones('nome-figlio-5','nomefi5')" oninput="rellena('nome-figlio-5','cognome-figlio-5','nomefi5')">
                                     <datalist id="nomefi5">
                                     </datalist>
                                 </div>
@@ -444,7 +444,7 @@ header('location: index.php');
                             <div class="col-md-6 multi-horizontal" data-for="nome-padre">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="nome-padre"><b>Nome e cognome padre</b></label>
-                                    <input type="text" class="form-control" name="nome-padre"  id="nome-padre" list="nomepadre" onkeyup="opcionespadre()" oninput="rellenapadre()">
+                                    <input type="text" class="form-control" name="nome-padre"  id="nome-padre" list="nomepadre" onkeyup="opciones('nome-padre','nomepadre')" oninput="rellena('nome-padre',' ','nomepadre')">
                                     <datalist id="nomepadre">
                                     </datalist>
                                 </div>
@@ -452,7 +452,7 @@ header('location: index.php');
                             <div class="col-md-6 multi-horizontal" data-for="nome-madre">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="nome-madre"><b>Nome e cognome madre</b></label>
-                                    <input type="text" class="form-control" name="nome-madre"  id="nome-madre" list="nomemadre" onkeyup="opcionesmadre()" oninput="rellenamadre()">
+                                    <input type="text" class="form-control" name="nome-madre"  id="nome-madre" list="nomemadre" onkeyup="opciones('nome-madre','nomemadre')" oninput="rellena('nome-madre',' ','nomemadre')">
                                     <datalist id="nomemadre">
                                     </datalist>
                                 </div>
@@ -613,9 +613,9 @@ header('location: index.php');
                       input = document.getElementById('files');
                       file = input.files[0];
 
-                      if(file.size>60000)
+                      if(file.size>1000000)
                       {
-                        $('#erroredimensione').text("Immagine con dimensione superiore a 60KB, l'immagine non verra' inserita");
+                        $('#erroredimensione').text("Immagine con dimensione superiore a 1MB, l'immagine non verra' inserita");
 
                       }
                       else {

@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'data/funzioni.php';
 include 'conn.inc.php';
 /*if(!isset($_SESSION['user']))
 {
@@ -32,8 +33,8 @@ header('location: index.php');
         $(document).ready(function(){
           var Div, contenuto,data;
           <?php
-           if (!isset($_GET['ca']) || !isset($_GET['cn'])) { ?>
-          $.ajax({
+           //if (!isset($_GET['ca']) || !isset($_GET['cn'])) { ?>
+        /*$.ajax({
           url: 'data/dati.php',
           type: 'POST',
           data: {
@@ -46,10 +47,10 @@ header('location: index.php');
           window.location="congregati?ca="+attivi+"&cn="+non_attivi;
 
           }
-          });
-          <?php }
-           else { ?>
-             $.ajax({
+        });*/
+          <?php /*}
+           else { */?>
+          /*   $.ajax({
              url: 'data/dati.php',
              type: 'POST',
              data: {
@@ -67,9 +68,9 @@ header('location: index.php');
                  window.location="congregati?ca="+attivi+"&cn="+non_attivi;
                }
              }
-             });
+           });*/
 
-             <?php } ?>
+             <?php //} ?>
 
           <?php $res = @$_GET['success'];
           if($res==1)
@@ -212,7 +213,7 @@ header('location: index.php');
 
                         <div class="card-text">
                             <h3 class="count pt-3 pb-3 mbr-fonts-style display-2">
-                                <?php echo @$_GET['ca']; ?>
+                                <?php echo visualizza("CA"); ?>
                             </h3>
                             <h4 class="mbr-content-title mbr-bold mbr-fonts-style display-7">Congregati attivi</h4>
 
@@ -227,7 +228,7 @@ header('location: index.php');
                         </div>
                         <div class="card-text">
                             <h3 class="count pt-3 pb-3 mbr-fonts-style display-2">
-                                <?php echo @$_GET['cn']; ?>
+                                  <?php echo visualizza("CN"); ?>
                             </h3>
                             <h4 class="mbr-content-title mbr-bold mbr-fonts-style display-7">Congregati non attivi</h4>
 
@@ -284,18 +285,17 @@ header('location: index.php');
                 $sqld =$dbh->prepare("SELECT p.*, md5(id) AS ssid, DATE_FORMAT(p.data_nascita,  '%d/%m/%Y' ) AS data_di_nascita,DATE_FORMAT(p.data_matrimonio,  '%d/%m/%Y' ) AS data_di_matrimonio, DATE_FORMAT(p.data_arrivo_in_chiesa, '%d/%m/%Y' ) AS data_arrivo  FROM persone p WHERE tipo_persona='congregato' ORDER BY p.cognome ASC;");
                 $sqld->execute();
                 while ($row=$sqld->fetch()) {
-                  $birthDate = $row['data_di_nascita'];
+                  $eta = calcola($row['data_di_nascita']);
                   //explode the date to get month, day and year
-                  $birthDate = explode("/", $birthDate);
+
+
                   //get age from date or birthdate
-                  $age = (date("md", date("U", mktime(0, 0, 0, $birthDate[0], $birthDate[1], $birthDate[2]))) > date("md")
-                   ? ((date("Y") - $birthDate[2]) - 1)
-                   : (date("Y") - $birthDate[2]));
+
 
                     echo '<tr onclick="visualizza(\'' . $row['ssid'] .'\');">';
                     echo "<td class='body-item mbr-fonts-style display-7'>" . $row['nome'] . "</td>";
                     echo "<td class='body-item mbr-fonts-style display-7'>" . $row['cognome'] . "</td>";
-                    echo "<td class='body-item mbr-fonts-style display-7'>" . $age . "</td>";
+                    echo "<td class='body-item mbr-fonts-style display-7'>" . $eta . "</td>";
                     echo "<td class='body-item mbr-fonts-style display-7'>" . $row['data_di_nascita'] . "</td>";
                     echo "<td class='body-item mbr-fonts-style display-7'>" . $row['attivo']  . "</td>";
                     echo "<td class='body-item mbr-fonts-style display-7'>" . $row['congregazione'] . "</td>";
