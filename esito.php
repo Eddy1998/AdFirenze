@@ -521,15 +521,17 @@ session_start();
           {
               if($sesso=="Maschile")
               {
-                $in = "id_padre";
+                $in = "INSERT INTO figli_persone(id_padre,nome_figlio_1,cognome_figlio_1,nome_figlio_2,cognome_figlio_2,nome_figlio_3,cognome_figlio_3,nome_figlio_4,cognome_figlio_4,nome_figlio_5,cognome_figlio_5)";
                 // $riga = "INSERT INTO figli_persone(id_padre,nome_figlio,cognome_figlio) VALUES (:id,:nome,:cognome);";
               }
              else
              {
-               $in = "id_padre";
+               $in = "INSERT INTO figli_persone(id_madre,nome_figlio_1,cognome_figlio_1,nome_figlio_2,cognome_figlio_2,nome_figlio_3,cognome_figlio_3,nome_figlio_4,cognome_figlio_4,nome_figlio_5,cognome_figlio_5)";
+
+               //$in = "id_padre";
 
              }
-             $prein="INSERT INTO figli_persone(";
+             $prein='INSERT INTO figli_persone(';
              $postin=",nome_figlio_1,cognome_figlio_1,nome_figlio_2,cognome_figlio_2,nome_figlio_3,cognome_figlio_3,nome_figlio_4,cognome_figlio_4,nome_figlio_5,cognome_figlio_5) VALUES (:id,:n1,:c1,:n2,:c2,:n3,:c3,:n4,:c4,:n5,:c5);"
              //$riga = "INSERT INTO figli_persone(".$in.",nome_figlio_1,cognome_figlio_1,nome_figlio_2,cognome_figlio_2,nome_figlio_3,cognome_figlio_3,nome_figlio_4,cognome_figlio_4,nome_figlio_5,cognome_figlio_5) VALUES (:id,:n1,:c1,:n2,:c2,:n3,:c3,:n4,:c4,:n5,:c5);";
              $riga=$prein.$in.$postin;

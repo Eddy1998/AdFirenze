@@ -560,7 +560,7 @@ var luogo="";
 
         echo "<td>" . $sezione. "</td>";
         echo "<td >" . $row['congregazione'] . "</td>";
-        echo "<td><input type='hidden' value='".$row['id']."'>  <input type='button' class='btn btn-dark' id='add' value='seleziona' onclick='setta(this)'></td>";
+        echo "<td><input type='hidden' value='".$row['id']."'>  <input type='button' class='btn btn-dark' id='add' value='seleziona' data-dismiss='modal' onclick='setta(this)'></td>";
 
         echo "</tr>";
     }

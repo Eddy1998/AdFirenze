@@ -4,6 +4,150 @@ session_start();
 try{
 
        //if(isset($_POST['loginuser'])){
+			 $query="SELECT * FROM persone WHERE ";
+			 //tipo membro
+			 if(isset($_GET['t_m']))
+			 {
+				 $query .= " tipo_persona='membro'";
+			 }
+			 //tipo CONGREGATO
+			 if(isset($_GET['t_c']))
+			 {
+				 if(isset($_GET['t_m']))
+				 {
+					 	 $query .= " OR tipo_persona='congregato'";
+				 }
+
+				 else {
+				 	$query .= " tipo_persona='congregato'";
+				 }
+
+			 }
+			 //tipo BAMBINO
+			 if(isset($_GET['t_b']))
+			 {
+				 if(isset($_GET['t_m'])||isset($_GET['t_c']))
+				 {
+					 $query .= " OR tipo_persona='bambino'";
+				 }
+				 else {
+
+					$query .= " tipo_persona='bambino'";
+				 }
+
+			 }
+			 //attivo attivo2
+			 if(isset($_GET['a_a']))
+			 {
+				 $query .= " AND attivo='S'";
+			 }
+			 //attivo non attivo2
+			 if(isset($_GET['a_n']))
+			 {
+				 if(isset($_GET['a_a']))
+				 {
+					 $query .= " OR attivo='N'";
+				 }
+				 else {
+					 	$query .= " AND attivo='N'";
+
+				 }
+
+			 }
+			 //carico pastore2
+			 if(isset($_GET['c_par']))
+			 {
+				 	$query .= " AND carico_in_chiesa='Pastore'";
+			 }
+			 //carico evangelista
+			 if(isset($_GET['c_e']))
+			 {
+				 if(isset($_GET['c_par']))
+				 {
+					 	$query .= " OR carico_in_chiesa='Evangelista'";
+				 }
+				 else {
+
+					$query .= " AND carico_in_chiesa='Evangelista'";
+				 }
+			 }
+			 //carico presbitero2
+			 if(isset($_GET['c_pre']))
+			 {
+				 if(isset($_GET['c_par'])||isset($_GET['c_e']))
+				 {
+						$query .= " OR carico_in_chiesa='Presbitero'";
+				 }
+				 else {
+
+					$query .= " AND carico_in_chiesa='Presbitero'";
+				 }
+			 }
+			 //carico diacono2
+			 if(isset($_GET['c_di']))
+			 {
+				 if(isset($_GET['c_par'])||isset($_GET['c_e'])||isset($_GET['c_pre']))
+				{
+					 $query .= " OR carico_in_chiesa='Diacono' OR carico_in_chiesa='Diaconessa'";
+				}
+				else {
+
+				 $query .= " AND carico_in_chiesa='Diacono' OR carico_in_chiesa='Diaconessa'";
+				}
+			 }
+			 //carico MEMBRO
+			 if(isset($_GET['c_m']))
+			 {
+					 if(isset($_GET['c_par'])||isset($_GET['c_e'])||isset($_GET['c_pre'])||isset($_GET['c_di']))
+					{
+						 $query .= " OR carico_in_chiesa='Membro'";
+					}
+					else {
+
+					 $query .= " AND carico_in_chiesa='Membro'";
+					}
+			 }
+			 //luogo Firenze
+			 if(isset($_GET['l_fi']))
+			 {
+				 	$query .=" AND congregazione='Firenze'";
+			 }
+			 //luogo Pisa
+			 if(isset($_GET['l_pi']))
+			 {
+						 if(isset($_GET['l_fi']))
+						 {
+								$query .= " OR congregazione='Pisa'";
+						 }
+						 else {
+
+							$query .= " AND congregazione='Pisa'";
+						 }
+			 }
+			 //luogo Prato
+			 if(isset($_GET['l_pra']))
+			 {
+					 if(isset($_GET['l_fi'])||isset($_GET['l_pi']))
+					 {
+							$query .= " OR congregazione='Prato'";
+					 }
+					 else {
+
+						$query .= " AND congregazione='Prato'";
+					 }
+			 }
+			 //luogo Cecina
+			 if(isset($_GET['l_ce']))
+			 {
+					 if(isset($_GET['l_fi'])||isset($_GET['l_pi'])||isset($_GET['l_pra']))
+					 {
+							$query .= " OR congregazione='Cecina'";
+					 }
+					 else {
+
+						$query .= " AND congregazione='Cecina'";
+					 }
+			 }
        $ssid='26';
        $imm='16';
        $dbh = new PDO($conn,$user,$pass);
@@ -151,6 +295,10 @@ $qrcode->displayFPDF($pdf, 160, 110, 20);
 //$pdf->Output();
 //se agrega el logo
 //$pdf->Image('assets/images/img-1583-122x122.png',20,25,-200);
+$pdf->Setfont('Arial','',5);
+$pdf->SetXY(10,10);
+$pdf->MultiCell(160,5,$query,0,'L');
+$pdf->Ln(3);
 
 $pdf->Setfont('Arial','',24);
 $pdf->SetXY(38,30);
@@ -611,108 +759,13 @@ $pdf->Setfont('Arial','',7);
 $pdf->SetTextColor(160,160,160);
 $pdf->SetXY(20,276);
 $pdf->Cell(15,0,"ADM Firenze - Via San gallo 113 b rosso 50129 Firenze",0,1);
+$pdf->SetTextColor(0,0,0);
+$pdf->SetDrawColor(0,0,0);
+
 /*
 $pdf->AddPage();
-$pdf->SetFont('Courier','',8);
-//======================================
-// Primer bloque - 3 rectángulos      =
-//======================================
-//Rectángulo Azul:
-//Elegir color RGB que llevará Rect al tener el parametro 'F'
-//Rect(x , y, ancho, alto, 'F') F rellena con el color elegido
-//Line(x1, y1, x2, y2) que sale de la esquina superior izquierda
-//cada rectángulo
-//Elegir la posición de la celda para colocar el texto
-//Usamos una celda para poner texto
-$pdf->SetFillColor(80, 150, 200);
-$pdf->Rect(10, 10, 95, 20, 'F');
-$pdf->Line(10, 10, 15, 15);
-$pdf->SetXY(15, 15);
-$pdf->Cell(15, 6, '10,10', 0 , 1); //Celda
-
-//Amarillo
-$pdf->SetFillColor(255, 215, 0);
-$pdf->Rect(110, 10, 45 , 20, 'F');
-$pdf->Line(110, 10, 115, 15);
-$pdf->SetXY(115, 15);
-$pdf->Cell(15, 6, '110, 10', 0 , 1);
-//Verde
-$pdf->SetFillColor(0, 128, 0);
-$pdf->Rect(160, 10, 40 , 20, 'F');
-$pdf->Line(160, 10, 165, 15);
-$pdf->SetXY(165, 15  );
-$pdf->Cell(15, 6, '160, 10', 0 , 1);
-//========================================
-
-//========================================
-//  Segundo bloque - 1 rectángulo       ==
-//========================================
-//Salmón
-$pdf->SetFillColor(255, 99, 71);
-$pdf->Rect(10, 35, 190, 140, 'F');
-$pdf->Line(10, 35, 15, 40);
-$pdf->SetXY(15, 40);
-$pdf->Cell(15, 6, '10, 35', 0 , 1);
-//========================================
-
-//========================================
-//  Tercer bloque - 2 rectángulos       ==
-//========================================
-//Rosa
-$pdf->SetFillColor(255, 20, 147);
-$pdf->Rect(10, 180, 90, 50, 'F');
-$pdf->Line(10, 180, 15, 185);
-$pdf->SetXY(15, 185);
-$pdf->Cell(15, 6, '10, 180', 0 , 1);
-//Café
-$pdf->SetFillColor(233, 150, 122);
-$pdf->Rect(110, 180, 90, 50, 'F');
-$pdf->Line(110, 180, 115, 185);
-$pdf->SetXY(115, 185);
-$pdf->Cell(15, 6, '110, 180', 0 , 1);
-//========================================
-
-//========================================
-//  Cuarto bloque - 6 rectángulos       ==
-//========================================
-//Verde
-$pdf->SetFillColor(124, 252, 0);
-$pdf->Rect(10, 235, 40, 25, 'F');
-$pdf->Line(10, 235, 15, 240);
-$pdf->SetXY(15, 240);
-$pdf->Cell(15, 6, '10, 235', 0 , 1);
-//Café
-$pdf->SetFillColor(160 ,82, 40);
-$pdf->Rect(60, 235, 40, 25, 'F');
-$pdf->Line(60, 235, 65, 240);
-$pdf->SetXY(65, 240);
-$pdf->Cell(15, 6, '60, 235', 0 , 1);
-//Marrón
-$pdf->SetFillColor(128, 0 ,0);
-$pdf->Rect(10, 265, 40, 25, 'F');
-$pdf->Line(10, 265, 15, 270);
-$pdf->SetXY(15, 270);
-$pdf->Cell(15, 6, '10, 265', 0 , 1);
-//Morado
-$pdf->SetFillColor(153, 50, 204);
-$pdf->Rect(60, 265, 40, 25, 'F');
-$pdf->Line(60, 265, 65, 270);
-$pdf->SetXY(65, 270);
-$pdf->Cell(15, 6, '60, 265', 0 , 1);
-//Azul
-$pdf->SetFillColor(0, 191, 255);
-$pdf->Rect(110, 235, 90, 25, 'F');
-$pdf->Line(110, 235, 115, 240);
-$pdf->SetXY(115, 240);
-$pdf->Cell(15, 6, '110, 235', 0 , 1);
-//Verde
-$pdf->SetFillColor(173, 255, 47);
-$pdf->Rect(110, 265, 90, 25, 'F');
-$pdf->Line(110, 265, 115, 270);
-$pdf->SetXY(115, 270);
-$pdf->Cell(15, 6, '110, 265', 0 , 1);
- */
-$pdf->Output($valore,true); //Salida al navegador
+*/
+$pdf->Output(); //Salida al navegador
  }
          else
          {

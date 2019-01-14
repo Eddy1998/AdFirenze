@@ -16,28 +16,24 @@
 
 <style>
 
-#parametri input[type="radio"]:checked + label {
-  background: #000 important!;
-  border-color: green;
-  color: white;
-}
+
 </style>
 <script>
 var luogo="";
-var TIPO="S";
+var final="pdf";
  $(document).ready(function(){
 			//controlladefault();
 	//$("#selpersona").hide();
 	//$("#parametri").hide();
 	$('#add').on('click', function () {
-         nuovariga(); 
+         nuovariga();
      });
-	 
+
 	 $('#opzione').on('change', function () {
         mostra();
     });
-	
-	
+
+
 	$("#cerca").on("keyup", function() {
 		var value = $(this).val().toLowerCase();
 		$("#riga tr").filter(function() {
@@ -46,75 +42,88 @@ var TIPO="S";
 	  });
 
 	$('#print').on('click', function () {
+    var linkfinale="?tipo=M";
+
+
 		//controlla che ci sia almeno un check per ogni sezione
-		controllomultiplo();
-        var tm = $("#cmembri").val();  
-		var tc= $("#ccongregati").val();  
-		var tb= $("#cbambini").val();  
-		var aa= $("#attivic").val();  
-		var an= $("#attivicn").val();  
-		var cp= $("#cpastore").val();  
-		var cpr= $("#cprebitero").val();  
-		var cev= $("#cevangelista").val();  
-		var cd= $("#cdiacono").val();  
-		var cm= $("#cmembro").val();  
-		var cofi= $("#cfi").val();  
-		var copra= $("#cpi").val();  
-		var copi= $("#cpra").val();  
-		var coce= $("#cce").val();  
+		if(controllomultiplo())
+    {
+      var ss = coda(linkfinale);
+        window.final=ss;
+        window.open('pdf'+window.final);
+    }
+
+
      });
- 
-	 
+
+
  });
-	
-	
-	function controllomultiplo()
-	{
-		var tipo=true,att=true,car=true,lu=true;
-		  if($("#cmembri").prop("checked")||$("#ccongregati").prop("checked")||$("#cbambini").prop("checked"))
-		  {
-				tipo=true;
-		  }
-		  else
-		  {
-				tipo=false;
-		  }
-		if($("#attivic").prop("checked")||$("#attivicn").prop("checked") )
-		{
-				att=true;
-		}	
-		else
-		{
-			att=false;
-		}
-		 if($("#cpastore").prop("checked")||$("#cprebitero").prop("checked")||$("#cevangelista").prop("checked")||$("#cdiacono").prop("checked")||$("#cmembro").prop("checked"))
-		 {
-			car=true;
-		 }
-		 else
-		 {
-		 car=false;
-		 }
-		if( $("#cfi").prop("checked")||$("#cpi").prop("checked")||$("#cpra").prop("checked")||$("#cce").prop("checked"))
-		{
-			lu=true;
-		}
-		else
-		{
-		lu=false;	
-		}
-		if(tipo==true&&att==true&&car==true&&lu==true)
-			{
-				alert('alemno');
-			}
-			else
-			{
-			alert('error');
-			}
-		
-	}
+
+function coda(riga)
+{
+
+  $("#parametri").find("input").each(function() {
+    if($(this).prop("checked"))
+    {
+
+      var valore=$(this).val();
+      riga=riga+"&"+valore+"=1";
+    }
+
+  });
+
+  alert(riga);
+  return riga;
+}
+ function controllomultiplo()
+ {
+   var tipo=true,att=true,car=true,lu=true;
+     if($("#cmembri").prop("checked")||$("#ccongregati").prop("checked")||$("#cbambini").prop("checked"))
+     {
+       tipo=true;
+     }
+     else
+     {
+       tipo=false;
+     }
+   if($("#attivic").prop("checked")||$("#attivicn").prop("checked") )
+   {
+       att=true;
+   }
+   else
+   {
+     att=false;
+   }
+    if($("#cpastore").prop("checked")||$("#cprebitero").prop("checked")||$("#cevangelista").prop("checked")||$("#cdiacono").prop("checked")||$("#cmembro").prop("checked"))
+    {
+     car=true;
+    }
+    else
+    {
+    car=false;
+    }
+   if( $("#cfi").prop("checked")||$("#cpi").prop("checked")||$("#cpra").prop("checked")||$("#cce").prop("checked"))
+   {
+     lu=true;
+   }
+   else
+   {
+   lu=false;
+   }
+   if(tipo==true&&att==true&&car==true&&lu==true)
+     {
+       return true;
+
+     }
+     else
+     {
+     return false;
+
+     }
+
+ }
 	function mostra(){
-	
+
 		var op = document.getElementById("opzione");
         var valore = op.options[op.selectedIndex].value;
         if(valore==="S")
@@ -129,28 +138,28 @@ var TIPO="S";
 				TIPO="M";
 		}
 	}
-	
+
 	function nuovariga()
-	{	
+	{
 		var riga='<tr><td><input type="text" class="form-control"></td><td><input class="form-control" type="text"></td><td><input class="form-control" type="text"></td><td><input  class="form-control" type="email"></td><td><input class="form-control" type="password"></td><td><input  type="button" class="btn btn-success" id="add" onclick="aggiungi(this)" value="+">  </td><td><input type="button" class="btn btn-danger" id="add" value="X" onclick="elimina(this)"></td></tr>';
 		$("#riga").append(riga);
 	}
-	
+
 	function elimina(value)
-	{	
+	{
 		var r = confirm("Confermi di eliminare utente?");
 		  if (r == true) {
 			//richiesta delete con dati (id)
-			//se eliminato return code == ok, si rimuove 
+			//se eliminato return code == ok, si rimuove
 			$(value).parent().parent().remove();
 		  } else {
 			txt = "You pressed Cancel!";
 		  }
-	 
+
 	}
 	function aggiungi(value)
 	{
-		
+
 		/*$(this).closest('tr').find("input").each(function() {
         alert(this.value)
     });*/
@@ -165,7 +174,7 @@ var TIPO="S";
 		$(value).parent().parent().remove();
 		var riga='<tr><td>'+col1+'</td><td>'+col2+'</td><td>'+col3+'</td><td>'+col4+'</td><td></td><td><input  type="button" class="btn btn-success" id="add" onclick="aggiungi(this)" value="+">  </td><td><input type="button" class="btn btn-danger" id="add" value="X" onclick="elimina(this)"></td></tr>';
 		$("#riga").append(riga);
-		
+
 		//alert(res);
 		/*$(value).parent().parent().$("td").each(function()
 			{
@@ -178,10 +187,10 @@ var TIPO="S";
 			$(this).parent().addClass("btn-dark");
 		});
 	 }
-	 
+
 	function setta(value)
 	{
-		
+
 		/*$(this).closest('tr').find("input").each(function() {
         alert(this.value)
     });*/
@@ -207,12 +216,12 @@ var TIPO="S";
 			  alert($(this).html());
 			});*/
 	}
-	
+
 	function citta(field){
-	
+
 		luogo=field;
 	}
-	
+
 
 
 	function attivaopzione(field)
@@ -223,7 +232,7 @@ var TIPO="S";
 				{
 					$(this).parent().click();
 				}
-			
+
 			});
 
 	}
@@ -231,7 +240,7 @@ var TIPO="S";
 	function controllo(field)
 	{
 		if($("#"+field).prop('checked'))
-		
+
 		{
 			$("#carico2").show();
 
@@ -241,8 +250,8 @@ var TIPO="S";
 			$("#carico2").hide();
 		}
 	}
-				
-	
+
+
 </script>
 
 </head>
@@ -252,7 +261,7 @@ var TIPO="S";
 	<div class="col-md-4">
 	</div>
 	<div class="col-md-4">
-		<h4>Gest. stampe varie</h4>	
+		<h4>Gest. stampe varie</h4>
 	</div>
 	<div class="col-md-4">
 	</div>
@@ -260,14 +269,14 @@ var TIPO="S";
 	</div>
 	<div class="col-md-8">
 	<div>
-		
+
 	</div>
 	<div>
 		<div class="input-group mb-3">
 		  <h4>Stampa singola :</h4>
-		</div>	
+		</div>
 	</div>
-	<div class="form-group">	
+	<div class="form-group">
 		<div class="input-group" id="selpersona">
 			<div class="input-group-prepend">
 				<button type="button" class="btn btn-success" data-toggle="modal" data-target=".bd-example-modal-lg" id="notifica">
@@ -278,7 +287,7 @@ var TIPO="S";
 			<input type="hidden" class="form-control" id="ssid">
 		</div>
 	</div>
-	
+
 	<div class="container">
 		<div class="row ">
 			<div class="col-md-3">
@@ -286,7 +295,7 @@ var TIPO="S";
 			<div class="col-md-6">
 				<div class="input-group">
 					<button type="button" id="printsingola" class="btn btn-info btn-lg btn-block">Visualizza stampa Singola</button>
-					
+
 				</div>
 				<br>
 					<br>
@@ -294,84 +303,84 @@ var TIPO="S";
 			</div>
 			<div class="col-md-3">
 			</div>
-			
+
 		</div>
 	</div>
-	
+
 	<hr>
-	
-			
+
+
 	<div id="parametri">
 		<div>
 			<div class="input-group mb-3">
 			  <h4>Stampa Multipla :</h4>
-			</div>	
+			</div>
 		</div>
 		<div class="form-group">
 			<label >Tipo persona</label><br>
-							
+
 			<div class="btn-group btn-group-toggle" data-toggle="buttons">
 				<label id="bmembri" class="btn btn-outline-primary active">
-				<input type="checkbox" name="options" id="cmembri"  value="membri" onchange="controllo(this.id)"  checked> Membri
+				<input type="checkbox" name="options" id="cmembri"  value="t_m" onchange="controllo(this.id)"  checked> Membri
 				</label>
 				<label id="bcongregati" class="btn btn-outline-primary ">
-				<input type="checkbox" name="options" id="ccongregati"  value="congregati" checked> Congregati
+				<input type="checkbox" name="options" id="ccongregati"  value="t_c"> Congregati
 				</label>
 				<label class="btn btn-outline-primary ">
-				<input type="checkbox" name="options" id="cbambini"  value="bambini" checked> Bambini
+				<input type="checkbox" name="options" id="cbambini"  value="t_b" > Bambini
 				</label>
 			</div>
 		</div>
 	    <div class="form-group">
 			<label for="inputAddress2">Attività</label><br>
-			<div class="btn-group btn-group-toggle" data-toggle="buttons"> 
+			<div class="btn-group btn-group-toggle" data-toggle="buttons">
 				<label class="btn btn-outline-primary active">
-					<input type="checkbox" name="options" id="attivic" value="attivi" autocomplete="off" >Attivi
+					<input type="checkbox" name="options" id="attivic" value="a_a" autocomplete="off" checked >Attivi
 				</label>
 				<label class="btn btn-outline-primary ">
-					<input type="checkbox" name="options" id="attivicn" value="nonattivi" autocomplete="off">Non attivi
+					<input type="checkbox" name="options" id="attivicn" value="a_n" autocomplete="off">Non attivi
 				</label>
 			</div>
 		</div>
 		<div class="form-row">
 			<div class="form-group col-md-12" id="carico2">
 				<label for="inputCity">Carico</label><br>
-				
+
 				<div class="btn-group btn-group-toggle" data-toggle="buttons" id="carico">
 					<label class="btn btn-outline-primary active">
-						<input type="checkbox" name="options" id="cpastore" autocomplete="off" value="pastore" > Pastore
+						<input type="checkbox" name="options" id="cpastore" autocomplete="off" value="c_par" checked> Pastore
 					</label>
 					<label class="btn btn-outline-primary">
-						<input type="checkbox" name="options" id="cevangelista" autocomplete="off" value="evangelista"> Evangelista
+						<input type="checkbox" name="options" id="cevangelista" autocomplete="off" value="c_e"> Evangelista
 					</label>
 					<label class="btn btn-outline-primary">
-						<input type="checkbox" name="options" id="cprebitero" autocomplete="off" value="presbitero"> Presbitero
+						<input type="checkbox" name="options" id="cprebitero" autocomplete="off" value="c_pre"> Presbitero
 					</label>
 					<label class="btn btn-outline-primary">
-						<input type="checkbox" name="options" id="cdiacono" autocomplete="off" value="diacono"> Diacono
+						<input type="checkbox" name="options" id="cdiacono" autocomplete="off" value="c_di"> Diacono
 					</label>
 					<label class="btn btn-outline-primary">
-						<input type="checkbox" name="options" id="cmembro" autocomplete="off" value="membro"> Membro
+						<input type="checkbox" name="options" id="cmembro" autocomplete="off" value="c_m"> Membro
 					</label>
-				</div>				
+				</div>
 			</div>
 			<div class="form-group col-md-12">
 				<label for="inputState">Congregazione</label><br>
-			
-				<div class="btn-group btn-group-toggle" data-toggle="buttons"> 
+
+				<div class="btn-group btn-group-toggle" data-toggle="buttons">
 					<label class="btn btn-outline-primary active">
-						<input type="checkbox" name="options" id="cfi" autocomplete="off" value="firenze"> Firenze
+						<input type="checkbox" name="options" id="cfi" autocomplete="off" value="l_fi" checked> Firenze
 					</label>
 					<label class="btn btn-outline-primary">
-						<input type="checkbox" name="options" id="cpi" autocomplete="off" value="pisa"> Pisa
+						<input type="checkbox" name="options" id="cpi" autocomplete="off" value="l_pi"> Pisa
 					</label>
 					<label class="btn btn-outline-primary">
-						<input type="checkbox" name="options" id="cpra" autocomplete="off" value="prato" > Prato
+						<input type="checkbox" name="options" id="cpra" autocomplete="off" value="l_pra" > Prato
 					</label>
 					<label class="btn btn-outline-primary">
-						<input type="checkbox" name="options" id="cce" autocomplete="off" value="cecina"> Cecina
-					</label>		
-				</div>		
+						<input type="checkbox" name="options" id="cce" autocomplete="off" value="l_ce"> Cecina
+					</label>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -405,21 +414,21 @@ var TIPO="S";
 	   <div class="modal-content">
 		  <div class="modal-content">
 		  <div class="modal-header">
-		  
+
 			<div class="input-group">
 			  <div class="input-group-prepend">
 				<label class="input-group-text" for="inputGroupSelect01">Cerca persona</label>
 			  </div>
-			 
+
 			  <input type="text" class="form-control" id="cerca">
-			</div>	
+			</div>
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			  <span aria-hidden="true">&times;</span>
 			</button>
 		  </div>
 		  <div class="modal-body "><div class="input-group">
 		  <div class="table-responsive-xl">
-		  
+
 			<table id="risultati" class="table table-striped  table-bordered table-hover" width="100%"  >
 		<caption>List of users</caption>
 		<thead class="thead-dark">
@@ -436,7 +445,7 @@ var TIPO="S";
 				<td>seconda riga 1 col</td>
 				<td>terza riga 1 col</td>
 				<td>nasafw</td>
-				
+
 				<td></td>
 				<td> <input type="hidden" value="11"><input type="button" class="btn btn-dark" id="add" value="seleziona" onclick="setta(this)"></td>
 			</tr>
@@ -444,7 +453,7 @@ var TIPO="S";
 				<td>prima riga 2colona</td>
 				<td>seconda riga 2 col</td>
 				<td>t12l</td>
-				<td>nasafw</td>			
+				<td>nasafw</td>
 				<td></td>
 				<td> <input type="hidden" value="22">  <input type="button" class="btn btn-dark" id="add" value="seleziona" onclick="setta(this)"></td>
 			</tr>
@@ -453,7 +462,7 @@ var TIPO="S";
 				<td>seconda riga 3 col</td>
 				<td>terza riga3 col</td>
 				<td>nasafw</td>
-				
+
 				<td></td>
 				<td><input type="hidden" value="33"><input type="button" class="btn btn-dark" id="add" value="seleziona" onclick="setta(this)"></td>
 			</tr>
@@ -462,7 +471,7 @@ var TIPO="S";
 				<td>seconda riga 4 col</td>
 				<td>terza riga 4 col</td>
 				<td>nasafw</td>
-				
+
 				<td></td>
 				<td><input type="hidden" value="44"><input type="button" class="btn btn-dark" id="add" value="seleziona" onclick="setta(this)"></td>
 			</tr>
