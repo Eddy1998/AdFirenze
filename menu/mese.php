@@ -1,11 +1,13 @@
 <?php
 session_start();
 header("Content-Type: application/pdf;charset=utf-8");
-	include ('conn.inc.php');
-	
-try{
+	include ('../conn.inc.php');
 
-       //if(isset($_POST['loginuser'])){
+try{
+ $prova = $_POST['giorno1'];
+ //$newlist = ereg_replace( "\n",'|', $_POST['giorno1']);
+
+	     //if(isset($_POST['loginuser'])){
        /*$ssid='26';
        $imm='17';
        $dbh = new PDO($conn,$user,$pass);
@@ -14,11 +16,11 @@ try{
        $stm->execute();
       if($stm->rowCount()>0)
       {
-         
-         $row= $stm->fetch(); 
-        
-       */ 
-//orizonatle         
+
+         $row= $stm->fetch();
+
+       */
+//orizonatle
 //posiciones linea orizontal : de 0 a 210
 //            linea vertical : de 0 a 297
 //   mitad de linea orizontal: 105
@@ -27,12 +29,12 @@ try{
 //colocre sfondo dati (220,220,220)
 $valore = 'gennaio.pdf';
 
-require('fpdf/fpdf.php');
+require('../fpdf/fpdf.php');
 
 class PDF extends FPDF
 {
-    
- 
+
+
 } // FIN Class PDF
 
 
@@ -40,20 +42,23 @@ class PDF extends FPDF
 $pdf = new FPDF();
 
 $pdf->AddPage('L','A4');
+$pdf->Image('../assets/images/img-1583-122x122.png',173,25,-200);
+
+$pdf->Image('../assets/images/img-1583-122x122.png',190,25,-200);
 $pdf->Rect(10, 10, 135, 190, 'D');
 $pdf->Rect(153, 10, 135, 190, 'D');
 //coordinate A(x,y) B(x,y) C(x,y) D(x,y) (&pdfnameobject), in senso orario partendo dall'alto a sinistra
-/*cuadrado(10,10,140,10,140,200,10,200,$pdf); 
+/*cuadrado(10,10,140,10,140,200,10,200,$pdf);
 cuadrado(150,10,290,10,290,200,150,200,$pdf); */
 
-$pdf->AddPage('L','A4'); 
+$pdf->AddPage('L','A4');
 //$pdf->SetFillColor(255, 255, 255);
 $pdf->Rect(10, 10, 135, 190, 'D');
 $pdf->Rect(153, 10, 135, 190, 'D');
 /* $pdf->Line(150, 20, 180, 20);
  $pdf->Line(180, 20, 180, 55);
  $pdf->Line(180, 55, 150, 55);
- $pdf->Line(150, 55, 150, 20);  */      
+ $pdf->Line(150, 55, 150, 20);  */
       /*
             $pdf->Setfont('Arial','',20);
             $pdf->SetXY(154,35);
@@ -63,6 +68,15 @@ $pdf->Rect(153, 10, 135, 190, 'D');
             $pdf->Line(180, 55, 150, 55);
             $pdf->Line(150, 55, 150, 20);
         }*/
+			/*	$pdf->Setfont('Arial','',20);
+				$pdf->SetXY(154,35);
+				$pdf->Cell(15,6,$list,0,1);
+				*/
+				$pdf->Setfont('Arial','',10);
+				$pdf->SetXY(20, 20);
+
+				$pdf->MultiCell(160,4,$prova,0,'L',false);
+				$pdf->Ln();
 
 //stampa qr code di profilo
 //$n = 152;
@@ -112,7 +126,7 @@ else
 
 $pdf->SetAuthor("ADFirenze",true);
 $pdf->SetTitle("Cronogramma mese" , true);
-$pdf->Output(I,$valore,true); //Salida al navegador
+$pdf->Output(); //Salida al navegador
  /*}
          else
          {

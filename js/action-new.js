@@ -21,9 +21,10 @@
                 for(var i=0;i<indice;i++)
                 {
 
-                  var valori = data.names[i].nome + '  '+ data.names[i].cognome;
+                  var valori = data.names[i].nome + '  '+ data.names[i].cognome+'  '+data.names[i].id;
+                  var testo = data.names[i].nome + '  '+ data.names[i].cognome;
 
-                  $('#'+dataid).append($("<option>").attr('value', valori).text(valori));
+                  $('#'+dataid).append($("<option>").attr('value', valori).text(testo));
                 }
             }
             });
@@ -44,13 +45,53 @@
               var salto = opts[i].value.split("  ");
               $("#"+idinput).val(salto[0]+' '+salto[1]);
               //$("#cognome-figlio-5").val(salto[1]);
-              $(':focus').blur()
+              $(':focus').blur();
+            }
+            else if(idinput=="nome-coniuge")
+            {
+              var salto = opts[i].value.split("  ");
+              $("#"+idinput).val(salto[0]);
+              $("#"+idcognome).val(salto[1]);
+              var ident = salto[2];
+              $(':focus').blur();
+
+              $.ajax({
+              url: 'data/dati.php',
+              type: 'POST',
+              data: {
+                'NOME_FIGLI' : 1,
+                'id': ident,
+              },
+              success: function(response){
+                  var data = JSON.parse(response);
+                  console.log(data);
+                  if(!data.numero=="0")
+                  {
+                    var numero = data.numero;
+                    numero=Number(numero);
+                    document.getElementById("numero").selectedIndex = numero;
+                      myFunction();
+                  }
+
+                  //console.log(data);
+                  /*var indice = data.names.length;
+                  $('#'+dataid+' option').remove();
+                  for(var i=0;i<indice;i++)
+                  {
+
+                    var valori = data.names[i].nome + '  '+ data.names[i].cognome+'  '+data.names[i].id;
+                    var testo = data.names[i].nome + '  '+ data.names[i].cognome;
+
+                    $('#'+dataid).append($("<option>").attr('value', valori).text(testo));*/
+                  }
+
+              });
             }
             else {
               var salto = opts[i].value.split("  ");
               $("#"+idinput).val(salto[0]);
               $("#"+idcognome).val(salto[1]);
-              $(':focus').blur()
+              $(':focus').blur();
             }
 
             break;
@@ -233,7 +274,7 @@
        var e = document.getElementById("numero");
        var numero = e.options[e.selectedIndex].value;
        var number=Number(numero);
-       
+
        for (var j=1;j<number+1;j++)
         {
           $("#nfiglio"+j).show();

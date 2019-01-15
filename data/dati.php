@@ -115,14 +115,56 @@ try{
 	                            $jsondataT["names"][]=$row;
 	                        }
 
+													echo json_encode($jsondataT);
 	                  	}
 	                   else
 	                   {
 	                        echo json_encode("not_found");
 	                   }
-										  echo json_encode($jsondataT);
 
 	          }
+
+						if (isset($_POST['NOME_FIGLI']))
+						{
+
+										$id =$_POST['id'];
+										$jsondataT=array();
+
+										$sqlu =$dbh->prepare("SELECT numero_figli FROM persone  WHERE id=:id");
+										$sqlu->bindValue(":id", $id);
+											 $sqlu->execute();
+											if ($sqlu->rowCount()>0)
+											{
+
+													$row=$sqlu->fetch();
+													$jsondataT["numero"]=$row['numero_figli'];
+
+													$sqlu =$dbh->prepare("SELECT * FROM figli_persone WHERE id_padre=:id OR id_madre=:id");
+													$sqlu->bindValue(":id", $id);
+													$sqlu->execute();
+												 if ($sqlu->rowCount()>0)
+												 {
+													 while($row=$sqlu->fetch())
+													 {
+														 $jsondataT['figli']=$row;
+													 }
+												 }
+												 else {
+													 	$jsondataT['figli']="N";
+												 }
+													echo json_encode($jsondataT);
+											}
+										 else
+										 {
+											 		$jsondataT["numero"]="0";
+													$jsondataT['figli']="N";
+													echo json_encode($jsondataT);
+										 }
+
+						}
+
+
+
          if (isset($_POST['M']))
          {
 
