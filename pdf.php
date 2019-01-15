@@ -6,6 +6,10 @@ try{
        //if(isset($_POST['loginuser'])){
 			 $query="SELECT * FROM persone WHERE ";
 			 //tipo membro
+			 if(isset($_GET['tipo']))
+			 {
+				 if($_GET['tipo']=="M")
+				 {
 			 if(isset($_GET['t_m']))
 			 {
 				 $query .= " tipo_persona='membro'";
@@ -148,16 +152,41 @@ try{
 						$query .= " AND congregazione='Cecina'";
 					 }
 			 }
-       $ssid='26';
-       $imm='16';
+		 }
+		 else if($_GET['tipo']=='S')
+		 {
+			 	if(isset($_GET['id']))
+				{
+					$identi=$_GET['id'];
+			 		$query .= " id=:id";
+				}
+		 }
+		 }
+		 else
+		 {
+			 	header('location: printges?err=1');
+		 }
+       //$ssid='26';
+       //$imm='16';
+			 require('fpdf/fpdf.php');
+			 class PDF extends FPDF
+			 {
+
+			 } // FIN Class PDF
+			 $pdf = new FPDF();
+
        $dbh = new PDO($conn,$user,$pass);
-       $stm=$dbh->prepare("SELECT * FROM persone WHERE id=:ssid;");
-       $stm->bindValue(":ssid",$ssid);
+       $stm=$dbh->prepare($query);
+			 if($_GET['tipo']=="S")
+			 {
+			 $stm->bindValue(":id",$identi);
+		 		}
        $stm->execute();
       if($stm->rowCount()>0)
       {
 
-         $row= $stm->fetch();
+         while($row= $stm->fetch())
+				 {
 
 
 
@@ -226,15 +255,7 @@ $luogo_evangelista='';
 $data_pastore='';
 $luogo_pastore='';
 $osservazioni=$row['osservazioni'];
-require('fpdf/fpdf.php');
-class PDF extends FPDF
-{
 
-} // FIN Class PDF
-
-
-
-$pdf = new FPDF();
 
 $pdf->AddPage();
 
@@ -295,11 +316,11 @@ $qrcode->displayFPDF($pdf, 160, 110, 20);
 //$pdf->Output();
 //se agrega el logo
 //$pdf->Image('assets/images/img-1583-122x122.png',20,25,-200);
-$pdf->Setfont('Arial','',5);
+/*$pdf->Setfont('Arial','',5);
 $pdf->SetXY(10,10);
 $pdf->MultiCell(160,5,$query,0,'L');
 $pdf->Ln(3);
-
+*/
 $pdf->Setfont('Arial','',24);
 $pdf->SetXY(38,30);
 $pdf->Cell(15,6,'ADM Firenze',0,1);
@@ -765,11 +786,13 @@ $pdf->SetDrawColor(0,0,0);
 /*
 $pdf->AddPage();
 */
+
+}//chiusura while
 $pdf->Output(); //Salida al navegador
- }
+}//chiusura if
          else
          {
-           header('location: index.php?err=1');
+           header('location: printges?err=1');
          }
       //}
   }
