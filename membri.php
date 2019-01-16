@@ -32,67 +32,15 @@ header('location: index.php');
   <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script type="text/javascript">
-      /*      $(document).ready(function(){
+          $(document).ready(function(){
           var Div, contenuto,data;
-          <?php
-        //   if (!isset($_GET['ca']) || !isset($_GET['cn'])) { ?>
-          $.ajax({
-          url: 'data/dati.php',
-          type: 'POST',
-          data: {
-            'M' : 1,
-          },
-          success: function(response){
-            data = JSON.parse(response);
-           var attivi = data.contatore.attivi;
-           var non_attivi = data.contatore.non_attivi;
-          window.location="membri?ma="+attivi+"&mn="+non_attivi;
-          }
-          });
-          <?php //}
-        //   else { ?>
-             $.ajax({
-             url: 'data/dati.php',
-             type: 'POST',
-             data: {
-               'M' : 1,
-             },
-             success: function(response){
-               data = JSON.parse(response);
-              var attivi = data.contatore.attivi;
-              var non_attivi = data.contatore.non_attivi;
-               var controlloA = <?php// echo $_GET['ma']; ?> ;
-               var controlloN = <?php //echo $_GET['mn']; ?> ;
-               if(controlloA!=attivi||controlloN!=non_attivi)
-               {
-                 window.location="membri?ma="+attivi+"&mn="+non_attivi;
-               }
-             }
-             });
-             <?php // } ?>
-          <?php/* $res = @$_GET['success'];
-          if($res==1)
-          {
-          */  ?>
-            Div = document.getElementById("messaggio");
-            contenuto = document.createTextNode("MEMBRO AGGIUNTO CON SUCCESSO");
-            Div.append(contenuto);
-            $('#messaggio').delay(5000).fadeOut();
-          <?php //}
-        //  else if($res==9) { ?>
-          /*  Div = document.getElementById("messaggio");
-            contenuto = document.createTextNode("ERRORE DURANTE INSERIMENTO");
-            document.getElementById('messaggio').style.color = 'red';
-            Div.append(contenuto);
-            $('#messaggio').delay(5000).fadeOut();*/
-          <?php //} ?>
-      /*  });
+        });
 
         function visualizza(id)
         {
           window.location="visualizza?id="+id;
         }
-*/
+
 </script>
 
 </head>
@@ -277,7 +225,7 @@ header('location: index.php');
             <tbody>
               <?php
                 $dbh = new PDO($conn,$user,$pass);
-                $sqld =$dbh->prepare("SELECT p.*, md5(id) AS ssid, DATE_FORMAT(p.data_nascita,  '%d/%m/%Y' ) AS data_di_nascita,DATE_FORMAT(p.data_matrimonio,  '%d/%m/%Y' ) AS data_di_matrimonio, DATE_FORMAT(p.data_arrivo_in_chiesa, '%d/%m/%Y' ) AS data_arrivo  FROM persone p WHERE tipo_persona='congregato' ORDER BY p.cognome ASC;");
+                $sqld =$dbh->prepare("SELECT p.*, md5(id) AS ssid, DATE_FORMAT(p.data_nascita,  '%d/%m/%Y' ) AS data_di_nascita,DATE_FORMAT(p.data_matrimonio,  '%d/%m/%Y' ) AS data_di_matrimonio, DATE_FORMAT(p.data_arrivo_in_chiesa, '%d/%m/%Y' ) AS data_arrivo  FROM persone p WHERE tipo_persona='membro' ORDER BY p.cognome ASC;");
                 $sqld->execute();
                 while ($row=$sqld->fetch()) {
                   $eta = calcola($row['data_di_nascita']);

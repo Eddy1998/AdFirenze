@@ -154,25 +154,23 @@ if(!isset($_GET['id']))
     <div class="container-fluid">
         <div class="row tabcont">
             <ul class="nav nav-tabs pt-3 mt-5" role="tablist">
-                <li class="nav-item mbr-fonts-style">
-                  <a class="nav-link active show display-7" role="tab" data-toggle="tab" href="#tabs3-1n_tab0" aria-selected="true">
-                        Modifica Dati
-                  </a>
+
+                <li class="nav-item mbr-fonts-style" id="disattiva">
+                <form action="attivita" method="POST">
+                    <input type="hidden"  name="ssid" value="<?php echo $_GET['id']; ?>"></input>
+                   <span class="input-group-btn"><button href="" type="submit" name="disattivautente" class="btn btn-form btn-danger display-4">DISATTIVA</button></span></form>
                 </li>
-                <li class="nav-item mbr-fonts-style">
-                  <a class="nav-link  active show display-7" role="tab" data-toggle="tab" href="#tabs3-1n_tab1" aria-selected="true">
-                        Disattiva
-                  </a>
+
+                <li class="nav-item mbr-fonts-style" id="attiva">
+                  <form action="attivita" method="POST">
+                    <input type="hidden"  name="ssid" value="<?php echo $_GET['id']; ?>"></input>
+                <span class="input-group-btn"><button href="" type="submit" name="attivautente" class="btn btn-form btn-black display-4">ATTIVA</button></span></form>
                 </li>
-                <li class="nav-item mbr-fonts-style">
-                  <a class="nav-link  active show display-7" role="tab" data-toggle="tab" href="#tabs3-1n_tab1" aria-selected="true">
-                          Annulla
-                  </a>
-                </li>
-                <li class="nav-item mbr-fonts-style">
-                  <a class="nav-link  active show display-7" role="tab" data-toggle="tab" href="#tabs3-1n_tab1" aria-selected="true">
-                          Stampa
-                  </a>
+                <li class="nav-item mbr-fonts-style" >
+                  <form action="pdf" method="POST">
+                    <input type="hidden"  name="ssid" value="<?php echo $_GET['id']; ?>"></input>
+
+                <span class="input-group-btn"><button href="" type="submit" name="stampautente" class="btn btn-form btn-black display-4">STAMPA</button></span></form>
                 </li>
             </ul>
         </div>
@@ -189,7 +187,7 @@ if(!isset($_GET['id']))
         <div class="row justify-content-center">
             <div class="title col-12 col-lg-8">
                 <h2 class="mbr-section-title align-center pb-3 mbr-fonts-style display-2">MODULO</h2>
-
+                <h5 class="align-center" style="color:red" id="mexatt"></h5>
             </div>
         </div>
     </div>

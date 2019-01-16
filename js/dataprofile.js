@@ -1,4 +1,5 @@
 $(document).ready(function(){
+  $("#disattiva, #attiva").hide();
    if(($('#id').length))
     {
       var id=$('#id').val();
@@ -17,6 +18,14 @@ document.body.appendChild(image);*/
     /*   $("#attivo2 ,#attivo ").append();
        $("#tipo2 ,#tipo ").append();*/
    $("#attivo2").val(json.profilo[0].attivo);
+   if(json.profilo[0].attivo=="S")
+   {
+     $("#disattiva").show();
+   }
+   else {
+     $("#attiva").show();
+     $("#mexatt").append("NON ATTIVO");
+   }
     $("#id2").val(json.profilo[0].id);
    $("#tipo").append(json.profilo[0].tipo_persona);
    $("#tipo2").val(json.profilo[0].tipo_persona);

@@ -162,6 +162,12 @@ try{
 				}
 		 }
 		 }
+		 else if(isset($_POST['stampautente']))
+		 {
+			 $identi=$_POST['ssid'];
+			 $query .= " md5(id)=:id";
+
+		 }
 		 else
 		 {
 			 	header('location: printges?err=1');
@@ -177,10 +183,17 @@ try{
 
        $dbh = new PDO($conn,$user,$pass);
        $stm=$dbh->prepare($query);
+			 if(isset($_GET['tipo']))
+			 {
 			 if($_GET['tipo']=="S")
 			 {
 			 $stm->bindValue(":id",$identi);
 		 		}
+			}
+				if(isset($_POST['stampautente']))
+				{
+					$stm->bindValue(":id",$identi);
+				}
        $stm->execute();
       if($stm->rowCount()>0)
       {
