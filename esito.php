@@ -119,11 +119,11 @@ session_start();
           $nascita = date('Y-m-d', strtotime($rawdate));
         }
 
-        if (empty($_REQUEST["stato-civile"])){
+        if (empty($_REQUEST["statocivile"])){
           $stato_civile=NULL;
         }
         else {
-          $stato_civile=$_REQUEST["stato-civile"];
+          $stato_civile=$_REQUEST["statocivile"];
         }
 
         if (empty($_REQUEST["matrimonio"])){
