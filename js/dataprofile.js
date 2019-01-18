@@ -186,41 +186,129 @@ document.body.appendChild(image);*/
 
        if(json.mex=="trovato")
        {
+      	  if(json.figli[0].nome_figlio_1==null)
+          {
+           $("#nome-figlio-1").append("--non indicato--");
 
-      	       var k,conta;
-             for(var i=0;i<json.figli.length;i++)
-             {
-                k = i+1;
-      	  conta++;
-      	  $("#nfiglio"+k).show();
-                $("#cfiglio"+k).show();
+          }
+          else
+          {
+            $("#nfiglio1").show();
+            $("#cfiglio1").show();
+	       $("#nome-figlio-1").append(json.figli[0].nome_figlio_1);
+	       $("#nome-figlio-12").val(json.figli[0].nome_figlio_1);
+           }
 
-      	  if(json.figli[i].nome_figlio==null)
-                {
-                 $("#nome-figlio-"+k).append("--non indicato--");
+	    if(json.figli[0].cognome_figlio_1==null)
+          {
+           $("#cognome-figlio-1").append("--non indicato--");
 
-                }
-                else
-                {
-      	       $("#nome-figlio-"+k).append(json.figli[i].nome_figlio);
-      	       $("#nome-figlio-"+k+"2").val(json.figli[i].nome_figlio);
-                 }
+          }
+          else
+          {
+	       $("#cognome-figlio-1").append(json.figli[0].cognome_figlio_1);
+	       $("#cognome-figlio-12").val(json.figli[0].cognome_figlio_1);
+           }
 
-      	    if(json.figli[i].cognome_figlio==null)
-                {
-                 $("#cognome-figlio-"+k).append("--non indicato--");
-
-                }
-                else
-                {
-      	       $("#cognome-figlio-"+k).append(json.figli[i].cognome_figlio);
-      	       $("#cognome-figlio-"+k+"2").val(json.figli[i].cognome_figlio);
-                 }
-             }
-      	//uscita da for, si controlla quanti sono stati valorizzati
-
+           if(json.figli[0].nome_figlio_2==null)
+           {
+            $("#nome-figlio-2").append("--non indicato--");
 
            }
+           else
+           {
+             $("#nfiglio2").show();
+             $("#cfiglio2").show();
+ 	       $("#nome-figlio-2").append(json.figli[0].nome_figlio_2);
+ 	       $("#nome-figlio-22").val(json.figli[0].nome_figlio_2);
+            }
+
+ 	    if(json.figli[0].cognome_figlio_2==null)
+           {
+            $("#cognome-figlio-2").append("--non indicato--");
+
+           }
+           else
+           {
+ 	       $("#cognome-figlio-2").append(json.figli[0].cognome_figlio_2);
+ 	       $("#cognome-figlio-22").val(json.figli[0].cognome_figlio_2);
+            }
+
+            if(json.figli[0].nome_figlio_3==null)
+            {
+             $("#nome-figlio-3").append("--non indicato--");
+
+            }
+            else
+            {
+              $("#nfiglio3").show();
+              $("#cfiglio3").show();
+  	       $("#nome-figlio-3").append(json.figli[0].nome_figlio_3);
+  	       $("#nome-figlio-32").val(json.figli[0].nome_figlio_3);
+             }
+
+  	    if(json.figli[0].cognome_figlio_3==null)
+            {
+             $("#cognome-figlio-3").append("--non indicato--");
+
+            }
+            else
+            {
+  	       $("#cognome-figlio-3").append(json.figli[0].cognome_figlio_3);
+  	       $("#cognome-figlio-32").val(json.figli[0].cognome_figlio_3);
+             }
+
+             if(json.figli[0].nome_figlio_4==null)
+             {
+              $("#nome-figlio-4").append("--non indicato--");
+
+             }
+             else
+             {
+               $("#nfiglio4").show();
+               $("#cfiglio4").show();
+   	       $("#nome-figlio-4").append(json.figli[0].nome_figlio_4);
+   	       $("#nome-figlio-42").val(json.figli[0].nome_figlio_4);
+              }
+
+   	    if(json.figli[0].cognome_figlio_4==null)
+             {
+              $("#cognome-figlio-4").append("--non indicato--");
+
+             }
+             else
+             {
+   	       $("#cognome-figlio-4").append(json.figli[0].cognome_figlio_4);
+   	       $("#cognome-figlio-42").val(json.figli[0].cognome_figlio_4);
+              }
+
+              if(json.figli[0].nome_figlio_5==null)
+              {
+               $("#nome-figlio-5").append("--non indicato--");
+
+              }
+              else
+              {
+                $("#nfiglio5").show();
+                $("#cfiglio5").show();
+    	       $("#nome-figlio-5").append(json.figli[0].nome_figlio_5);
+    	       $("#nome-figlio-52").val(json.figli[0].nome_figlio_5);
+               }
+
+    	    if(json.figli[0].cognome_figlio_5==null)
+              {
+               $("#cognome-figlio-5").append("--non indicato--");
+
+              }
+              else
+              {
+    	       $("#cognome-figlio-5").append(json.figli[0].cognome_figlio_5);
+    	       $("#cognome-figlio-52").val(json.figli[0].cognome_figlio_5);
+               }
+
+
+
+   }
 
 
 	if(json.profilo[0].nome_padre==null)

@@ -280,7 +280,7 @@ header('location: index.php');
                             <div class="col-md-4 multi-horizontal" data-for="nascita">
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" for="nascita"><b>Data di nascita</b></label>
-                                    <input type="date" class="form-control" name="nascita"  id="nascita" maxlength="10">
+                                    <input type="date" class="form-control" name="nascita"  id="nascita" maxlength="10" required>
                                 </div>
                             </div>
                             <div class="col-md-4 multi-horizontal" data-for="sesso">

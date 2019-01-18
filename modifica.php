@@ -5,6 +5,8 @@ include 'conn.inc.php';
 {
 header('location: index.php');
 }*/
+$dbh = new PDO($conn, $user, $pass);
+$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $ssid=$_POST['ssid'];
 $id=$_POST['id'];
 $tipo=$_POST["tipo"];
@@ -53,7 +55,7 @@ $indirizzo=$_POST["indirizzo"];
   $stato_civile=$_POST["statocivile"];
 
 
-  
+
 
 
   $nome_coniuge=$_POST["nome-coniuge"];
@@ -205,6 +207,8 @@ $indirizzo=$_POST["indirizzo"];
   </style>
   <script type="text/javascript">
   $(document).ready(function(){
+    nascondi_figli();
+    var identi = "<?php echo  $id; ?>";
      var statocivile = "<?php echo  $stato_civile; ?>";
      var tipo = "<?php echo  $tipo; ?>";
      var sesso ="<?php echo $sesso; ?>";
@@ -219,6 +223,7 @@ $indirizzo=$_POST["indirizzo"];
     seleziona("statocivile",statocivile );
     seleziona("nazionalita", nazionalita);
     seleziona("numero", numero_figli);
+    myFunction();
     seleziona("battezzato-spirito", battezzato_spirito);
     seleziona("settore",congregazione );
     seleziona("carico",carico );
@@ -239,6 +244,23 @@ $indirizzo=$_POST["indirizzo"];
     $('#carico').on('change', function () {
        consacrazione();
    });
+   $('#eliminadb').on('click', function () {
+     var r = confirm("Vuoi eliminare l'immagine dal registro?");
+      if (r == true) {
+
+        $.post("data/dati.php",{'eliminaimmagine': 1, 'id' : identi }, function(response) {
+          var json = JSON.parse(response);
+          console.log(json);
+          if(json.return=="OK")
+          {
+              $('#img-ad').show();
+              $('#list').children().remove();
+              $("#eliminadb").remove();
+          }
+
+        });
+        }
+  });
     $('#button-elimina').on('click', function () {
          $('#list').children().remove();
          hidebutton();
@@ -253,6 +275,10 @@ $indirizzo=$_POST["indirizzo"];
           $(this).attr("selected","selected");
            }
       });
+    }
+
+    function goBack() {
+      window.history.back();
     }
  </script>
 
@@ -382,7 +408,39 @@ $indirizzo=$_POST["indirizzo"];
                               </div>
                               </div>
                               <div>
-                                <output id="list"></output>
+                                <output id="list">
+                                <?php
+                                $sqlu=$dbh->prepare("SELECT *  FROM immagini WHERE md5(id_persona)=:id");
+                                $sqlu->bindValue(":id",$ssid);
+                                $sqlu->execute();
+                                  if ($sqlu->rowCount()>0)
+                                    {
+
+                                        while($row=$sqlu->fetch())
+                                        {
+
+                                            ?>
+                                            <label id="eliminadb">
+                                            <a class="nav-link link text-black display-4" ><span class="mobi-mbri mobi-mbri-trash mbr-iconfont mbr-iconfont-btn"></span></a>
+                                           </label>
+
+                                            <img class="thumb" src="data:image/png;base64,<?php echo base64_encode($row['img']); ?>" style=" margin-left: 50px; margin-bottom: 20px;" alt="titulo foto" />
+                                            <script type="text/javascript">
+                                                  $('#img-ad').hide();
+                                                  hidebutton();
+                                            </script>
+                                            <?php
+                                        }
+                                     }
+                                     else { ?>
+                                       <script type="text/javascript">
+
+                                             hidebutton();
+                                       </script>
+                                       <?php
+                                     }
+                                     ?>
+                                </output>
                               </div>
 
 
@@ -735,7 +793,7 @@ $indirizzo=$_POST["indirizzo"];
                           </div>
                           <div class="col-md-4 multi-horizontal" >
                             <!-- da rivedere se non funziona, cambiato a type "button"-->
-                            <span class="input-group-btn"><button  type="button" onClick="window.location.href='visualizza'" class="btn  btn-form display-4"  style="background-color: #232323;color:white">ANNULLA</button></span>
+                            <span class="input-group-btn"><button  type="button" onClick="window.history.back()" class="btn  btn-form display-4"  style="background-color: #232323;color:white">ANNULLA</button></span>
 
                           </div>
                           <div class="col-md-4 multi-horizontal" >
@@ -794,7 +852,7 @@ $indirizzo=$_POST["indirizzo"];
            document.getElementById('files').addEventListener('change', archivo, false);
    </script>
 
-  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&language=it&libraries=places&key=AIzaSyDgPsOOliTK-_UaRltboADtrAhvTEMlDGc"></script>
+
   <script src="assets/web/assets/jquery/jquery.min.js"></script>
   <script src="assets/tether/tether.min.js"></script>
   <script src="assets/popper/popper.min.js"></script>

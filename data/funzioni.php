@@ -39,13 +39,15 @@ function visualizza($field)
 
 function calcola($field)
 {
+  if($field!=null)
+  {
   $birthDate = explode("/", $field);
   $data= $birthDate[2]."-".$birthDate[1]."-".$birthDate[0];
   $from = new DateTime($data);
   $to   = new DateTime('today');
   $anno= $from->diff($to)->y;
   return $anno;
-
+}
 }
 
 /*function controllautente($id)

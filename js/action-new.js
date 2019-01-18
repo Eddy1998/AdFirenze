@@ -71,18 +71,55 @@
                     numero=Number(numero);
                     document.getElementById("numero").selectedIndex = numero;
                       myFunction();
+                      //console.log(data.figli[0].nome_figlio_1);
+                      if(data.figli!="N")
+                      {
+                          //console.log("entra");
+                          if(data.figli[0].cognome_figlio_1!=null)
+                            {
+                      	      $('#nome-figlio-1').val(data.figli[0].nome_figlio_1);
+                            }
+                            if(data.figli[0].cognome_figlio_1!=null)
+                              {
+                                $("#cognome-figlio-1").val(data.figli[0].cognome_figlio_1);
+                              }
+                              if(data.figli[0].nome_figlio_2!=null)
+                                {
+                          	      $('#nome-figlio-2').val(data.figli[0].nome_figlio_2);
+                                }
+                                if(data.figli[0].cognome_figlio_2!=null)
+                                  {
+                                    $("#cognome-figlio-2").val(data.figli[0].cognome_figlio_2);
+                                  }
+                                  if(data.figli[0].nome_figlio_3!=null)
+                                    {
+                              	      $('#nome-figlio-3').val(data.figli[0].nome_figlio_3);
+                                    }
+                                    if(data.figli[0].cognome_figlio_3!=null)
+                                      {
+                                        $("#cognome-figlio-3").val(data.figli[0].cognome_figlio_3);
+                                      }
+                                      if(data.figli[0].nome_figlio_4!=null)
+                                        {
+                                  	      $('#nome-figlio-4').val(data.figli[0].nome_figlio_4);
+                                        }
+                                        if(data.figli[0].cognome_figlio_4!=null)
+                                          {
+                                            $("#cognome-figlio-4").val(data.figli[0].cognome_figlio_4);
+                                          }
+                                          if(data.figli[0].nome_figlio_5!=null)
+                                            {
+                                      	      $('#nome-figlio-5').val(data.figli[0].nome_figlio_5);
+                                            }
+                                            if(data.figli[0].cognome_figlio_5!=null)
+                                              {
+                                                $("#cognome-figlio-5").val(data.figli[0].cognome_figlio_5);
+                                              }
+
+                      }
                   }
 
-                  //console.log(data);
-                  /*var indice = data.names.length;
-                  $('#'+dataid+' option').remove();
-                  for(var i=0;i<indice;i++)
-                  {
 
-                    var valori = data.names[i].nome + '  '+ data.names[i].cognome+'  '+data.names[i].id;
-                    var testo = data.names[i].nome + '  '+ data.names[i].cognome;
-
-                    $('#'+dataid).append($("<option>").attr('value', valori).text(testo));*/
                   }
 
               });

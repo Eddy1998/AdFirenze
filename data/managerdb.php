@@ -6,7 +6,7 @@ session_start();
       $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try
   {
-    
+
     function stampaok($ssid)
     {
       header("Location: ../visualizza?id=$ssid&success=1");
@@ -23,59 +23,87 @@ session_start();
       require('conn.inc.php');
       $dbh = new PDO($conn,$user,$pass);
       $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      $sql=$dbh->prepare("SELECT * FROM figli_persone WHERE LOWER(nome_figlio)=LOWER(:nome) AND LOWER(cognome_figlio)=LOWER(:cognome);");
+      $sql=$dbh->prepare("SELECT * FROM figli_persone WHERE LOWER(nome_figlio_1)=LOWER(:nome) AND LOWER(cognome_figlio_1)=LOWER(:cognome)||LOWER(nome_figlio_2)=LOWER(:nome) AND LOWER(cognome_figlio_2)=LOWER(:cognome)||LOWER(nome_figlio_3)=LOWER(:nome) AND LOWER(cognome_figlio_3)=LOWER(:cognome)||LOWER(nome_figlio_4)=LOWER(:nome) AND LOWER(cognome_figlio_4)=LOWER(:cognome)||LOWER(nome_figlio_5)=LOWER(:nome) AND LOWER(cognome_figlio_5)=LOWER(:cognome) LIMIT 1;");
       $sql->bindValue(":nome",$nome);
       $sql->bindValue(":cognome",$cognome);
       $sql->execute();
-        if ($sql->rowCount()>0) {
-          return "si";
+      if ($sql->rowCount()>0) {
+          $row = $sql->fetch();
+          return $row['id'];
         }
-        else {return "no";}
-    }
+        else return "no";
 
-    function aggiorna($ssid,$nomefiglio,$cognomefiglio,$sesso)
+    }
+    function aggiorna($id,$n1,$c1,$n2,$c2,$n3,$c3,$n4,$c4,$n5,$c5,$sesso,$idriga)
     {
+        require('conn.inc.php');
         if($sesso=="Maschile")
         {
-           $riga ="UPDATE figli_persone SET nome_figlio=:nome,cognome_figlio=:cognome WHERE md5(id_padre)=:id;";
-           //$riga ="UPDATE figli_persone SET id_padre=:id WHERE LOWER(nome_figlio)=LOWER(:nome) AND LOWER(cognome_figlio)=LOWER(:cognome);";
+          $prima="id_padre";
+          // $riga ="UPDATE figli_persone SET id_padre=:id WHERE LOWER(nome_figlio)=LOWER(:nome) AND LOWER(cognome_figlio)=LOWER(:cognome);";
         }
        else
        {
-         $riga ="UPDATE figli_persone SET nome_figlio=:nome,cognome_figlio=:cognome WHERE md5(id_madre)=:id;";
-         //$riga ="UPDATE figli_persone SET id_madre=:id WHERE LOWER(nome_figlio)=LOWER(:nome) AND LOWER(cognome_figlio)=LOWER(:cognome);";
+         $prima="id_madre";
        }
-       require('conn.inc.php');
-       $dbh = new PDO($conn,$user,$pass);
-       $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-       $sql1=$dbh->prepare($riga);
-       $sql1->bindValue(":id",$ssid);
-       $sql1->bindValue(":nome",$nomefiglio);
-       $sql1->bindValue(":cognome",$cognomefiglio);
-       if($sql1->execute())
-       {
-         return "OK";
-       }
-       else {return "KO";}
-    }
+       $riga ="UPDATE figli_persone SET ".$prima."=:id, nome_figlio_1=:n1, cognome_figlio_1=:c1, nome_figlio_2=:n2,cognome_figlio_2=:c2, nome_figlio_3=:n3,cognome_figlio_3=:c3, nome_figlio_4=:n4,cognome_figlio_4=:c4, nome_figlio_5=:n5,cognome_figlio_5=:c5  WHERE id=:idriga;";
 
-    function inserisci($id,$nomefiglio,$cognomefiglio,$sesso)
-    {
-        if($sesso=="Maschile")
-        {
-           $riga = "INSERT INTO figli_persone(id_padre,nome_figlio,cognome_figlio) VALUES (:id,:nome,:cognome);";
-        }
-       else
-       {
-          $riga = "INSERT INTO figli_persone(id_madre,nome_figlio,cognome_figlio) VALUES (:id,:nome,:cognome);";
-       }
-       require('conn.inc.php');
+
        $dbh = new PDO($conn,$user,$pass);
        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
        $sql1=$dbh->prepare($riga);
        $sql1->bindValue(":id",$id);
-       $sql1->bindValue(":nome",$nomefiglio);
-       $sql1->bindValue(":cognome",$cognomefiglio);
+       $sql1->bindValue(":idriga",$idriga);
+       $sql1->bindValue(":n1",$n1);
+       $sql1->bindValue(":c1",$c1);
+       $sql1->bindValue(":n2",$n2);
+       $sql1->bindValue(":c2",$c2);
+       $sql1->bindValue(":n3",$n3);
+       $sql1->bindValue(":c3",$c3);
+       $sql1->bindValue(":n4",$n4);
+       $sql1->bindValue(":c4",$c4);
+       $sql1->bindValue(":n5",$n5);
+       $sql1->bindValue(":c5",$c5);
+       if($sql1->execute())
+       {
+         return "OK";
+       }
+       else return "KO";
+    }
+
+    function inserisci($id,$n1,$c1,$n2,$c2,$n3,$c3,$n4,$c4,$n5,$c5,$sesso)
+    {
+        if($sesso=="Maschile")
+        {
+          $in = "INSERT INTO figli_persone(id_padre,nome_figlio_1,cognome_figlio_1,nome_figlio_2,cognome_figlio_2,nome_figlio_3,cognome_figlio_3,nome_figlio_4,cognome_figlio_4,nome_figlio_5,cognome_figlio_5)";
+          // $riga = "INSERT INTO figli_persone(id_padre,nome_figlio,cognome_figlio) VALUES (:id,:nome,:cognome);";
+        }
+       else
+       {
+         $in = "INSERT INTO figli_persone(id_madre,nome_figlio_1,cognome_figlio_1,nome_figlio_2,cognome_figlio_2,nome_figlio_3,cognome_figlio_3,nome_figlio_4,cognome_figlio_4,nome_figlio_5,cognome_figlio_5)";
+
+         //$in = "id_padre";
+
+       }
+       $prein=$in." VALUES (:id,:n1,:c1,:n2,:c2,:n3,:c3,:n4,:c4,:n5,:c5)";
+       //$postin=",nome_figlio_1,cognome_figlio_1,nome_figlio_2,cognome_figlio_2,nome_figlio_3,cognome_figlio_3,nome_figlio_4,cognome_figlio_4,nome_figlio_5,cognome_figlio_5) VALUES (:id,:n1,:c1,:n2,:c2,:n3,:c3,:n4,:c4,:n5,:c5);"
+       //$riga = "INSERT INTO figli_persone(".$in.",nome_figlio_1,cognome_figlio_1,nome_figlio_2,cognome_figlio_2,nome_figlio_3,cognome_figlio_3,nome_figlio_4,cognome_figlio_4,nome_figlio_5,cognome_figlio_5) VALUES (:id,:n1,:c1,:n2,:c2,:n3,:c3,:n4,:c4,:n5,:c5);";
+      // $riga=$prein.$in.$postin;
+       require('conn.inc.php');
+       $dbh = new PDO($conn,$user,$pass);
+       $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+       $sql1=$dbh->prepare($prein);
+       $sql1->bindValue(":id",$id);
+       $sql1->bindValue(":n1",$n1);
+       $sql1->bindValue(":c1",$c1);
+       $sql1->bindValue(":n2",$n2);
+       $sql1->bindValue(":c2",$c2);
+       $sql1->bindValue(":n3",$n3);
+       $sql1->bindValue(":c3",$c3);
+       $sql1->bindValue(":n4",$n4);
+       $sql1->bindValue(":c4",$c4);
+       $sql1->bindValue(":n5",$n5);
+       $sql1->bindValue(":c5",$c5);
        if($sql1->execute())
        {
          return "OK";
@@ -326,6 +354,7 @@ session_start();
             unset( $_FILES, $handle, $immagine );
         }
         else {
+
         }
           //controllo carico in chiesa
         if($carico === 'Pastore' || $carico === 'Evangelista' || $carico==='Presbitero' || $carico ==='Diacono' || $carico==='Diaconessa')
@@ -469,144 +498,71 @@ session_start();
             $cognome_figlio_5=$_POST["cognome-figlio-5"];
           }
 
-
-
+          $e1=0;
+          $e2=0;
+          $e3=0;
+          $e4=0;
+          $e5=0;
           if(!$nome_figlio_1==NULL){
 //se esiste uupdate altrimenti insert into
-            if(esiste($nome_figlio_1,$cognome_figlio_1)=="si")
-            {
-              aggiorna($ssid,$nome_figlio_1,$cognome_figlio_1,$sesso);
-               /*if(aggiorna($ssid,$nome_figlio_1,$cognome_figlio_1,$sesso)=="OK")
-               {
-                  stampaok($ssid);
-               }
-               else
-               {
-                 stampako($ssid);
-               }*/
-            }
-            else
-            {
-              inserisci($id,$nome_figlio_1,$cognome_figlio_1,$sesso);
-                /*if(inserisci($id,$nome_figlio_1,$cognome_figlio_1,$sesso)=="OK")
-                {
-                    stampaok($ssid);
-                }
-                else
-                {
-                  stampako($ssid);
-                }*/
-            }
+
+              $ritorno=esiste($nome_figlio_1,$cognome_figlio_1);
+              if($ritorno!="no")
+              {
+                $e1=$ritorno;
+              }
           }
+
             if(!$nome_figlio_2==NULL){
   //se esiste uupdate altrimenti insert into
-              if(esiste($nome_figlio_2,$cognome_figlio_2)=="si")
-              {
-                aggiorna($ssid,$nome_figlio_2,$cognome_figlio_2,$sesso);
-                /* if(aggiorna($ssid,$nome_figlio_2,$cognome_figlio_2,$sesso)=="OK")
-                 {
-                    stampaok($ssid);
-                 }
-                 else
-                 {
-                   stampako($ssid);
-                 }*/
-              }
-              else
-              {
-                inserisci($id,$nome_figlio_2,$cognome_figlio_2,$sesso);
-                  /*if(inserisci($id,$nome_figlio_2,$cognome_figlio_2,$sesso)=="OK")
+                  $ritorno=esiste($nome_figlio_2,$cognome_figlio_2);
+                  if($ritorno!="no")
                   {
-                      stampaok($ssid);
+                    $e2=$ritorno;
                   }
-                  else
-                  {
-                    stampako($ssid);
-                  }*/
-              }
             }
               if(!$nome_figlio_3==NULL){
     //se esiste uupdate altrimenti insert into
-                if(esiste($nome_figlio_3,$cognome_figlio_3)=="si")
-                {
-                  aggiorna($ssid,$nome_figlio_3,$cognome_figlio_3,$sesso);
-                   /*if(aggiorna($ssid,$nome_figlio_3,$cognome_figlio_3,$sesso)=="OK")
-                   {
-                      stampaok($ssid);
-                   }
-                   else
-                   {
-                     stampako($ssid);
-                   }*/
-                }
-                else
-                {
-                  inserisci($id,$nome_figlio_3,$cognome_figlio_3,$sesso);
-                  /*  if(inserisci($id,$nome_figlio_3,$cognome_figlio_3,$sesso)=="OK")
-                    {
-                        stampaok($ssid);
-                    }
-                    else
-                    {
-                      stampako($ssid);
-                    }*/
-                }
+                  $ritorno=esiste($nome_figlio_3,$cognome_figlio_3);
+                  if($ritorno!="no")
+                  {
+                    $e3=$ritorno;
+                  }
               }
                 if(!$nome_figlio_4==NULL){
       //se esiste uupdate altrimenti insert into
-                  if(esiste($nome_figlio_4,$cognome_figlio_4)=="si")
-                  {
-                    aggiorna($ssid,$nome_figlio_4,$cognome_figlio_4,$sesso);
-                    /* if(aggiorna($ssid,$nome_figlio_4,$cognome_figlio_4,$sesso)=="OK")
-                     {
-                        stampaok($ssid);
-                     }
-                     else
-                     {
-                       stampako($ssid);
-                     }*/
-                  }
-                  else
-                  {
-                    inserisci($id,$nome_figlio_4,$cognome_figlio_4,$sesso);
-                      /*if(inserisci($id,$nome_figlio_4,$cognome_figlio_4,$sesso)=="OK")
+                      $ritorno=esiste($nome_figlio_4,$cognome_figlio_4);
+                      if($ritorno!="no")
                       {
-                          stampaok($ssid);
+                        $e4=$ritorno;
                       }
-                      else
-                      {
-                        stampako($ssid);
-                      }*/
-                  }
                 }
                   if(!$nome_figlio_5==NULL){
         //se esiste uupdate altrimenti insert into
-                    if(esiste($nome_figlio_5,$cognome_figlio_5)=="si")
-                    {
-                      aggiorna($ssid,$nome_figlio_5,$cognome_figlio_5,$sesso);
-                       /*if(aggiorna($ssid,$nome_figlio_5,$cognome_figlio_5,$sesso)=="OK")
-                       {
-                          stampaok($ssid);
-                       }
-                       else
-                       {
-                         stampako($ssid);
-                       }*/
-                    }
-                    else
-                    {
-                      inserisci($id,$nome_figlio_5,$cognome_figlio_5,$sesso);
-                      /*  if(inserisci($id,$nome_figlio_5,$cognome_figlio_5,$sesso)=="OK")
-                        {
-                            stampaok($ssid);
-                        }
-                        else
-                        {
-                          stampako($ssid);
-                        }*/
-                    }
+                      $ritorno=esiste($nome_figlio_5,$cognome_figlio_5);
+                      if($ritorno!="no")
+                      {
+                        $e5=$ritorno;
+                      }
                   }
-                  stampaok($ssid);
+
+                  if($e1!=0||$e2!=0||$e3!=0||$e4!=0||$e5!=0)
+                  {
+                    $risultato=aggiorna($id_genitore,$nome_figlio_1,$cognome_figlio_1,$nome_figlio_2,$cognome_figlio_2,$nome_figlio_3,$cognome_figlio_3,$nome_figlio_4,$cognome_figlio_4,$nome_figlio_5,$cognome_figlio_5,$sesso,$e1);
+                  }
+                  else {
+                    $risultato=inserisci($id_genitore,$nome_figlio_1,$cognome_figlio_1,$nome_figlio_2,$cognome_figlio_2,$nome_figlio_3,$cognome_figlio_3,$nome_figlio_4,$cognome_figlio_4,$nome_figlio_5,$cognome_figlio_5,$sesso);
+                  }
+                  if($risultato=="OK")
+                  {
+                    stampaok($ssid);
+                  }
+                  else {
+                    stampako($ssid);
+                  }
+
+
+
             }
             else
               {

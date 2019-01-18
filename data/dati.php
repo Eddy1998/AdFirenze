@@ -63,6 +63,26 @@ try{
 
 				 }
 
+				 if (isset($_POST['eliminaimmagine']))
+			 {
+							 $id = $_POST['id'];
+
+								$jsondataT=array();
+								 $sqlu =$dbh->prepare("DELETE FROM immagini WHERE id_persona=:id");
+								 $sqlu->bindValue(":id", $id);
+									 if($sqlu->execute())
+									 {
+										 $jsondataT["return"]="OK";
+
+									 }
+									 else {
+										 $jsondataT["return"]="KO";
+									 }
+								 echo json_encode($jsondataT);
+
+					}
+
+
 
           if (isset($_POST['ALL']))
          {
@@ -146,7 +166,7 @@ try{
 												 {
 													 while($row=$sqlu->fetch())
 													 {
-														 $jsondataT['figli']=$row;
+														 $jsondataT['figli'][]=$row;
 													 }
 												 }
 												 else {
