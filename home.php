@@ -1,9 +1,9 @@
 <?php
 session_start();
 include 'conn.inc.php';
-if(isset($_SESSION['username']))
+if(!isset($_SESSION['username']))
 {
-   //header('location: index.php');
+   header('location: index.php');
 }
 ?>
 <!DOCTYPE html>
@@ -60,17 +60,22 @@ if(isset($_SESSION['username']))
             </div>
         </div>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true"><li class="nav-item">
-                    <a class="nav-link link text-white display-4" href="home.php">
+            <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true">
+              <li class="nav-item">
+                    <a class="nav-link link text-white display-4" href="home">
                       <span class="mobi-mbri mobi-mbri-home mbr-iconfont mbr-iconfont-btn">
                       </span>home</a>
                 </li>
+                <li class="nav-item">
+                      <a class="nav-link link text-white display-4" href="utenti">
+                      Gest. utenti</a>
+                  </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link link text-white dropdown-toggle display-4" href="" data-toggle="dropdown-submenu" aria-expanded="false">
                     <span class="mobi-mbri  mbr-iconfont mbr-iconfont-btn">
                     </span>Sezione</a>
                     <div class="dropdown-menu">
-                      <a class="text-white dropdown-item display-4" id="g-t-secretaria">Secretaria</a>
+                      <a class="text-white dropdown-item display-4" href="secretaria">Secretaria</a>
                       <a class="text-white dropdown-item display-4" href="" aria-expanded="false">Tesoreria</a>
                       <a class="text-white dropdown-item display-4" href="" aria-expanded="false">Compleanni<br>
                         <a class="text-white dropdown-item display-4" href="" aria-expanded="false">Visitanti del giorno<br>
@@ -130,7 +135,7 @@ if(isset($_SESSION['username']))
                   <h2 class="mbr-fonts-style display-1">SECRETARIA</h2>
                   <p class="lead mbr-text mbr-fonts-style display-5">Gestisci i dati anagrafici dei membri e congregati</p>
                   <div class="mbr-section-btn" buttons="0">
-                    <a class="btn  btn-white-outline display-4" id="go-to-secretaria">Vai</a>
+                    <a class="btn  btn-white-outline display-4" href="secretaria" >Vai</a>
                   </div>
                 </div>
               </div>

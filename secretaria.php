@@ -1,3 +1,13 @@
+<?php
+session_start();
+include 'data/funzioni.php';
+include 'conn.inc.php';
+
+/*if(!isset($_SESSION['user']))
+{
+header('location: index.php');
+}*/?>
+
 <!DOCTYPE html>
 <html >
 <head>
@@ -22,23 +32,7 @@
     <script type="text/javascript" src="js/managerSections.js"> </script>
     <script type="text/javascript">
           $(document).ready(function(){
-            <?php
-               if (!isset($_GET['m'])|| !isset($_GET['c'])|| !isset($_GET['b'])) { ?>
-            $.ajax({
-            url: 'data/dati.php',
-            type: 'POST',
-            data: {
-              'CONTA' : 1,
-            },
-            success: function(response){
-              var data = JSON.parse(response);
-              var membro = data.attivo_m;
-              var congregato = data.attivo_c;
-              var bambino = data.bambino;
-              window.location="secretaria?m="+membro+"&c="+congregato+"&b="+bambino;
-            }
-            });
-            <?php } ?>
+
         });
 
 
@@ -67,7 +61,7 @@
                          <img src="assets/images/img-1583-122x122.png" alt="logo" title="" style="height: 3.8rem;">
 
                 </span>
-                <span class="navbar-caption-wrap"><a class="navbar-caption text-white display-4" href="home.php">
+                <span class="navbar-caption-wrap"><a class="navbar-caption text-white display-4" href="home">
                       AD Firenze
                     </a></span>
             </div>
@@ -133,7 +127,7 @@
 
                         <div class="card-text" >
                             <h3 class="count pt-3 pb-3 mbr-fonts-style display-2" id="c-membri">
-                              <?php echo  $_GET['m']; ?>
+                              <?php echo visualizza("MA"); ?>
                             </h3>
                             <h4 class="mbr-content-title mbr-bold mbr-fonts-style display-7">Membri</h4>
                             <p class="mbr-content-text mbr-fonts-style display-7">I membri che vengono contati sono quelli attivi</p>
@@ -149,7 +143,7 @@
                         </div>
                         <div class="card-text">
                             <h3 class="count pt-3 pb-3 mbr-fonts-style display-2" id="c-congregati">
-                                  <?php echo  $_GET['c']; ?>
+                                   <?php echo visualizza("CA"); ?>
                             </h3>
                             <h4 class="mbr-content-title mbr-bold mbr-fonts-style display-7">Congregati</h4>
                             <p class="mbr-content-text mbr-fonts-style display-7">Chi frequenta e non è membro, viene considerato congregato</p>
@@ -164,7 +158,7 @@
                         </div>
                         <div class="card-text">
                             <h3 class="count pt-3 pb-3 mbr-fonts-style display-2" id="c-bambini">
-                              <?php echo  $_GET['b']; ?>
+                               <?php echo visualizza("BB"); ?>
                             </h3>
                             <h4 class="mbr-content-title mbr-bold mbr-fonts-style display-7">
                                 Bambini</h4>
@@ -194,7 +188,7 @@
 </div></div></div><div class="carousel-item slider-fullscreen-image active" data-bg-video-slide="false" style="background-image: url(assets/images/mbr-1-1920x1920.jpg);"><div class="container container-slide"><div class="image_wrapper"><div class="mbr-overlay"></div><img src="assets/images/mbr-1-1920x1920.jpg"><div class="carousel-caption justify-content-center"><div class="col-10 align-center"><h2 class="mbr-fonts-style display-1"><strong>CONGREGATI</strong></h2><p class="lead mbr-text mbr-fonts-style display-5">Gestisci i dati anagrafici delle persone che congregano.
 <br>Possono diventare membri</p>
 <div class="mbr-section-btn" buttons="0">
-  <a class="btn btn-primary display-4" id="gocon">Vai a congregati<br>
+  <a class="btn btn-primary display-4" href="congregati">Vai a congregati<br>
   </a>
 </div>
 </div>
@@ -215,7 +209,7 @@
           </h2>
           <p class="lead mbr-text mbr-fonts-style display-5">Gestisci i dati anagrafici dei più piccoli</p>
           <div class="mbr-section-btn" buttons="0">
-            <a class="btn  btn-white-outline display-4" id="gobam">Vai a Bambini</a>
+            <a class="btn  btn-white-outline display-4" href="bambini">Vai a Bambini</a>
           </div>
         </div>
       </div>

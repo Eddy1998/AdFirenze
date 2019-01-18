@@ -1,3 +1,12 @@
+<?php
+session_start();
+include 'conn.inc.php';
+if(isset($_SESSION['id']))
+{
+header('location: home');
+}
+?>
+
 <!DOCTYPE html>
 <html >
 <head>

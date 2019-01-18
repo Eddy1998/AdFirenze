@@ -548,10 +548,10 @@ session_start();
 
                   if($e1!=0||$e2!=0||$e3!=0||$e4!=0||$e5!=0)
                   {
-                    $risultato=aggiorna($id_genitore,$nome_figlio_1,$cognome_figlio_1,$nome_figlio_2,$cognome_figlio_2,$nome_figlio_3,$cognome_figlio_3,$nome_figlio_4,$cognome_figlio_4,$nome_figlio_5,$cognome_figlio_5,$sesso,$e1);
+                    $risultato=aggiorna($id,$nome_figlio_1,$cognome_figlio_1,$nome_figlio_2,$cognome_figlio_2,$nome_figlio_3,$cognome_figlio_3,$nome_figlio_4,$cognome_figlio_4,$nome_figlio_5,$cognome_figlio_5,$sesso,$e1);
                   }
                   else {
-                    $risultato=inserisci($id_genitore,$nome_figlio_1,$cognome_figlio_1,$nome_figlio_2,$cognome_figlio_2,$nome_figlio_3,$cognome_figlio_3,$nome_figlio_4,$cognome_figlio_4,$nome_figlio_5,$cognome_figlio_5,$sesso);
+                    $risultato=inserisci($id,$nome_figlio_1,$cognome_figlio_1,$nome_figlio_2,$cognome_figlio_2,$nome_figlio_3,$cognome_figlio_3,$nome_figlio_4,$cognome_figlio_4,$nome_figlio_5,$cognome_figlio_5,$sesso);
                   }
                   if($risultato=="OK")
                   {

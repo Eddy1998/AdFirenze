@@ -15,6 +15,9 @@
             },
             success: function(response){
                 var data = JSON.parse(response);
+              if(data.names!="N")
+              {
+
                 //console.log(data);
                 var indice = data.names.length;
                 $('#'+dataid+' option').remove();
@@ -26,6 +29,8 @@
 
                   $('#'+dataid).append($("<option>").attr('value', valori).text(testo));
                 }
+              }
+
             }
             });
           }

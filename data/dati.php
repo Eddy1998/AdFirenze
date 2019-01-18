@@ -139,7 +139,8 @@ try{
 	                  	}
 	                   else
 	                   {
-	                        echo json_encode("not_found");
+											 		$jsondataT["names"]="N";
+	                        echo json_encode($jsondataT);
 	                   }
 
 	          }

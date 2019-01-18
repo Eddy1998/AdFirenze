@@ -3,10 +3,10 @@ session_start();
 include 'conn.inc.php';
 include 'data/funzioni.php';
 $dbh = new PDO($conn, $user, $pass);
-/*if(!isset($_SESSION['id']))
+if(!isset($_SESSION['id']))
 {
 header('location: index.php');
-}*/
+}
 
 ?>
 <!DOCTYPE html>
@@ -68,7 +68,7 @@ header('location: index.php');
             $("#mex").remove();
               $("#messaggio").append('  <div id="mex" class="alert alert-dark" role="alert">Utente Rimosso correttamente </div>');
               var idprova = <?php echo $_SESSION['id']; ?> ;
-              
+
               if(idprova==id)
               {
                 window.location="logout";

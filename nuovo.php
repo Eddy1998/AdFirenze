@@ -1,10 +1,10 @@
 <?php
 session_start();
 include 'conn.inc.php';
-/*if(!isset($_SESSION['user']))
+if(!isset($_SESSION['id']))
 {
-header('location: index.php');
-}*/
+header('location: index');
+}
 ?>
 <!DOCTYPE html>
 <html >
