@@ -227,6 +227,7 @@ $indirizzo=$_POST["indirizzo"];
     seleziona("battezzato-spirito", battezzato_spirito);
     seleziona("settore",congregazione );
     seleziona("carico",carico );
+    consacrazione();
     // we define and invoke a function
   //  nascondere();
   //  nascondecons();
