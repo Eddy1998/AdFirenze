@@ -174,11 +174,11 @@ session_start();
           $rawdate = htmlentities($_POST["nascita"]);
           $nascita = date('Y-m-d', strtotime($rawdate));
         }
-        if (empty($_POST["stato-civile"])){
+        if (empty($_POST["statocivile"])){
           $stato_civile=NULL;
         }
         else {
-          $stato_civile=$_POST["stato-civile"];
+          $stato_civile=$_POST["statocivile"];
         }
         if (empty($_POST["matrimonio"])){
           $data_matrimonio=NULL;
@@ -341,21 +341,39 @@ session_start();
               throw new RuntimeException( "Formato immagine non valido.\nO il file non è un'immagine." );
             }
               $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-              $sql=$dbh->prepare("UPDATE immagini SET img=:img,type=:type WHERE md5(id_persona)=:ssid;");
-              $immagine = file_get_contents( $_FILES['files']['tmp_name'] );
-              $type= $_FILES['files']['type'] ;
+              $sql=$dbh->prepare("SELECT id FROM immagini WHERE md5(id_persona)=:ssid;");
               $sql->bindValue(":ssid",$ssid);
-              $sql->bindValue(":img",$immagine);
-              $sql->bindValue(":type",$type);
-            if(!$sql->execute())
-            {
-                echo 'ERROR';
-            }
+              $sql->execute();
+              if ($sql->rowCount()>0) {
+                  
+                   $sql=$dbh->prepare("UPDATE immagini SET img=:img,type=:type WHERE md5(id_persona)=:ssid;");
+                      $immagine = file_get_contents( $_FILES['files']['tmp_name'] );
+                      $type= $_FILES['files']['type'] ;
+                      $sql->bindValue(":ssid",$ssid);
+                      $sql->bindValue(":img",$immagine);
+                      $sql->bindValue(":type",$type);
+                    if(!$sql->execute())
+                    {
+                        echo 'ERROR agigoramento immagine';
+                    }
+                }
+                else 
+                {
+                    $sql=$dbh->prepare("INSERT INTO immagini (id_persona,img,type) VALUES (:id,:img,:type)");
+                    $immagine = file_get_contents( $_FILES['files']['tmp_name'] );
+                    $type= $_FILES['files']['type'] ;
+                    $sql->bindValue(":id",$id);
+                    $sql->bindValue(":img",$immagine);
+                    $sql->bindValue(":type",$type);
+                      if(!$sql->execute())
+                      {
+                        echo 'ERROR inserimento immagine';
+                      }
+                }
+             
             unset( $_FILES, $handle, $immagine );
         }
-        else {
-
-        }
+     
           //controllo carico in chiesa
         if($carico === 'Pastore' || $carico === 'Evangelista' || $carico==='Presbitero' || $carico ==='Diacono' || $carico==='Diaconessa')
         {
