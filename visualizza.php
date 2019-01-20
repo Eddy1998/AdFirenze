@@ -1,4 +1,4 @@
-  <?php
+<?php
 session_start();
 include 'conn.inc.php';
 $dbh = new PDO($conn, $user, $pass);
@@ -38,12 +38,40 @@ if(!isset($_GET['id']))
   <script type="text/javascript" src="js/dataprofile.js"></script>
   <script type="text/javascript">
   $(document).ready(function(){
-      $("#nascita3").append("2012-01-10");
-
+        //$('#mymodal').modal(focus);
     });
        function goBack()
     {
       window.history.back()
+    }
+
+    function elimina()
+    {
+        $('#mymodal').modal('show');
+        $('#conferma').on('click', function () {
+        var tipo = $("#tipo2").val();
+          var valore= $("#utentedaeliminare").val();
+          $.post("data/dati.php",{'eliminaregistrato': 1, 'id' : valore }, function(response) {
+            var json = JSON.parse(response);
+
+            if(json=="OK")
+            {
+                  if(tipo=="membro")
+                  {
+                      window.location="membri?deleted=1";
+                  }
+                  else if(tipo=="congregato")
+                  {
+                    window.location="congregati?deleted=1";
+                  }
+                  else {
+                    window.location="bambini?deleted=1";
+                  }
+            }
+          });
+      });
+
+
     }
   //<button type="button" class="btn btn-danger" onclick="goBack()">Correggi</button>
   </script>
@@ -90,18 +118,18 @@ if(!isset($_GET['id']))
                 </li>
                 <li class="nav-item dropdown open">
                   <a class="nav-link link text-white dropdown-toggle display-4" href="" data-toggle="dropdown-submenu" aria-expanded="true">
-                    <span class="mobi-mbri mobi-mbri-plus mbr-iconfont mbr-iconfont-btn">
-                    </span>Nuovo</a>
+                    <span class="mobi-mbri mbr-iconfont-btn">
+                    </span>Vai a</a>
                     <div class="dropdown-menu">
-                      <a class="text-white dropdown-item display-4" href="nuovo.php?new=M">
+                      <a class="text-white dropdown-item display-4" href="membri">
                         <span class="mobi-mbri mobi-mbri-user-2 mbr-iconfont mbr-iconfont-btn">
-                      </span>&nbsp; &nbsp; &nbsp; &nbsp;Membro</a>
-                      <a class="text-white dropdown-item display-4" href="nuovo.php?new=C" aria-expanded="false">
+                      </span>&nbsp; &nbsp; &nbsp; &nbsp;Membri</a>
+                      <a class="text-white dropdown-item display-4" href="congregati" aria-expanded="false">
                         <span class="mobi-mbri mobi-mbri-user mbr-iconfont mbr-iconfont-btn">
-                        </span>Congregato</a>
-                      <a class="text-white dropdown-item display-4" href="nuovo.php?new=B" aria-expanded="false">
+                        </span>Congregati</a>
+                      <a class="text-white dropdown-item display-4" href="bambini" aria-expanded="false">
                         <span class="mobi-mbri mobi-mbri-rocket mbr-iconfont mbr-iconfont-btn">
-                        </span>&nbsp; &nbsp; &nbsp; Bambino</a>
+                        </span>&nbsp; &nbsp; &nbsp; Bambini</a>
                     </div>
                         </li>
                         <li class="nav-item">
@@ -158,13 +186,13 @@ if(!isset($_GET['id']))
                 <li class="nav-item mbr-fonts-style" id="disattiva">
                 <form action="attivita" method="POST">
                     <input type="hidden"  name="ssid" value="<?php echo $_GET['id']; ?>"></input>
-                   <span class="input-group-btn"><button href="" type="submit" name="disattivautente" class="btn btn-form btn-danger display-4">DISATTIVA</button></span></form>
+                   <span class="input-group-btn"><button href="" type="submit" name="disattivautente" class="btn btn-form display-4" style="background-color:#dc3545; color:white">DISATTIVA</button></span></form>
                 </li>
 
                 <li class="nav-item mbr-fonts-style" id="attiva">
                   <form action="attivita" method="POST">
                     <input type="hidden"  name="ssid" value="<?php echo $_GET['id']; ?>"></input>
-                <span class="input-group-btn"><button href="" type="submit" name="attivautente" class="btn btn-form btn-black display-4">ATTIVA</button></span></form>
+                <span class="input-group-btn"><button href="" type="submit" name="attivautente"  class="btn btn-form display-4" style="background-color:#28a745; color:white">ATTIVA</button></span></form>
                 </li>
                 <li class="nav-item mbr-fonts-style" >
                   <form action="pdf" method="POST">
@@ -621,9 +649,68 @@ https://stackoverflow.com/questions/5763096/i-want-to-display-a-waiting-animatio
 
                         <span class="input-group-btn"><button href="" type="submit" class="btn btn-form btn-black display-4">MODIFICA</button></span>
                     </form>
+                    <br>
+                    <br>
+                      <div class="row">
+                      <div class="col-md-2">
+                      </div>
+                      <div class="col-md-8">
+                        <div class="alert alert-danger" role="alert" style="background-color:#f8d7da; color:#491217; margin-top:20px">
+                      <h4 class="alert-heading"><b>Danger zone</b></h4>
+                      <p id="eliminazione">Elimina </p>
+                      <p class="mb-0">Dopo questa operazione, i dati non potranno essere recuperati</p>
+                      <hr>
+                      <input type="hidden" id="utentedaeliminare">
+                      <span class="input-group-btn" ><button href="" type="submit" class="btn btn-form display-4" style="background-color:#dc3545; color:white" onclick="elimina();">ELIMINA</button></span>
+                    </div>
+                      </div>
+                    <div class="col-md-2">
+                    </div>
+                  </div>
+
             </div>
         </div>
     </div>
+
+
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg" id="notifica" style="display:none">
+    </button>
+
+    <div id="mymodal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog ">
+       <div class="modal-content">
+          <div class="modal-content">
+          <div class="modal-header">
+
+    		<div class="input-group">
+    		  <div class="input-group-prepend">
+    			<h4  >Conferma Eliminazione</h4>
+    		  </div>
+    		</div>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body "><div class="input-group">
+        	  <div class="table-responsive-xl">
+
+                <h5>Confermi l'eliminazione?<br>I dati non potranno essere recuperati.</h5>
+        	</div>
+        	</div>
+          </div>
+          <div class="modal-footer">
+
+            <button id="conferma" type="button" class="btn btn-secondary" data-dismiss="modal">Conferma</button>
+            <button  id="chiudi" type="button" class="btn btn-primary" data-dismiss="modal" >Annulla</button>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
 </section>
 
 

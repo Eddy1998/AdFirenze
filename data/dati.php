@@ -63,6 +63,46 @@ try{
 
 				 }
 
+				 if (isset($_POST['eliminaregistrato']))
+				{
+								$id = $_POST['id'];
+
+								 $jsondataT=array();
+									$sqlu =$dbh->prepare("DELETE FROM persone WHERE id=:id");
+									$sqlu->bindValue(":id", $id);
+									$sqlu->execute();
+
+									$sqlu =$dbh->prepare("DELETE FROM immagini WHERE id_persona=:id");
+									$sqlu->bindValue(":id", $id);
+									$sqlu->execute();
+
+									$sqlu =$dbh->prepare("DELETE FROM consacrato WHERE id_persona=:id");
+									$sqlu->bindValue(":id", $id);
+									$sqlu->execute();
+
+									$sqlu =$dbh->prepare("DELETE FROM figli_persone WHERE id_padre=:id or id_madre=:id");
+									$sqlu->bindValue(":id", $id);
+									$sqlu->execute();
+
+									echo json_encode("OK");
+
+					 }
+
+					 if (isset($_POST['registrato_check'])) {
+					 $nome = $_POST['nome'];
+					 $cognome = $_POST['cognome'];
+					 $sql =$dbh->prepare("SELECT id FROM persone WHERE LOWER(nome)=LOWER(:nome) AND LOWER(cognome)=LOWER(:cognome)");
+					 $sql->bindValue(":nome", $nome);
+					 $sql->bindValue(":cognome", $cognome);
+				 	$sql->execute();
+					 if ($sql->rowCount()>0) {
+						 echo "ESISTE";
+					 }else{
+						 echo "NON";
+					 }
+					 exit();
+					}
+
 				 if (isset($_POST['eliminaimmagine']))
 			 {
 							 $id = $_POST['id'];

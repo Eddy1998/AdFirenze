@@ -49,7 +49,26 @@ function calcola($field)
   return $anno;
 }
 }
+//converte  una stringa in qualunque tipo di lettera (UPPER and LOWER) in soltanto prima lettera di ogni parola in maiuscolo
+function converte($field)
+{
+  if($field!=null)
+  {
+    $field =trim($field);
+    $data = explode(" ", $field);
 
+    $indice = count($data);
+    for($i=0;$i<$indice;$i++)
+    {
+      $basso=strtolower($data[$i]);
+      $composto=ucfirst($basso);
+      $nuovo.=$composto;
+      $nuovo.=' ';
+    }
+    $nuovo=trim($nuovo);
+    return $nuovo;
+  }
+}
 /*function controllautente($id)
 {
   include ('conn.inc.php');

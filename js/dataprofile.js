@@ -26,8 +26,10 @@ document.body.appendChild(image);*/
      $("#attiva").show();
      $("#mexatt").append("NON ATTIVO");
    }
+
+   $("#utentedaeliminare").val(json.profilo[0].id);
     $("#id2").val(json.profilo[0].id);
-   $("#tipo").append(json.profilo[0].tipo_persona);
+   $("#tipo, #eliminazione").append(json.profilo[0].tipo_persona);
    $("#tipo2").val(json.profilo[0].tipo_persona);
 	if(json.profilo[0].tipo=="bambino")
 	{

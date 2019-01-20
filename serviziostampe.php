@@ -1,13 +1,30 @@
+<?php
+session_start();
+include 'conn.inc.php';
+include 'data/funzioni.php';
+$dbh = new PDO($conn, $user, $pass);
+?>
 <!DOCTYPE html>
 <html >
 <head>
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="generator" content="Mobirise v4.8.7, mobirise.com">
-  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+
+  <link rel="shortcut icon" href="assets/images/img-1583-122x122.png" type="image/x-icon">
   <meta name="description" content="Site Generator Description">
-  <title>Gestione utenti</title>
+  <title>Servizio Stampe Varie</title>
+  <link rel="stylesheet" href="assets/web/assets/mobirise-icons2/mobirise2.css">
+  <link rel="stylesheet" href="assets/web/assets/mobirise-icons/mobirise-icons.css">
+  <link rel="stylesheet" href="assets/tether/tether.min.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-reboot.min.css">
+  <link rel="stylesheet" href="assets/dropdown/css/style.css">
+  <link rel="stylesheet" href="assets/animatecss/animate.min.css">
+  <link rel="stylesheet" href="assets/theme/css/style.css">
+  <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
+
  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -50,11 +67,30 @@ var final="pdf";
     {
       var ss = coda(linkfinale);
         window.final=ss;
+
         window.open('pdf'+window.final);
     }
 
 
      });
+
+     $('#printsingola').on('click', function () {
+       var linkfinale="";
+
+
+          if($("#ssid").val()!="")
+          {
+              var identi= $("#ssid").val();
+              linkfinale+="?tipo=S&id="+identi;
+              window.open('pdf'+linkfinale);
+            }
+            else {
+              alert("ERROR");
+            }
+
+
+         });
+
 
 
  });
@@ -72,7 +108,7 @@ function coda(riga)
 
   });
 
-  alert(riga);
+
   return riga;
 }
  function controllomultiplo()
@@ -94,7 +130,7 @@ function coda(riga)
    {
      att=false;
    }
-    if($("#cpastore").prop("checked")||$("#cprebitero").prop("checked")||$("#cevangelista").prop("checked")||$("#cdiacono").prop("checked")||$("#cmembro").prop("checked"))
+    if($("#cpastore").prop("checked")||$("#cpresbitero").prop("checked")||$("#cevangelista").prop("checked")||$("#cdiacono").prop("checked")||$("#cmembro").prop("checked"))
     {
      car=true;
     }
@@ -110,6 +146,9 @@ function coda(riga)
    {
    lu=false;
    }
+
+   if($("bmembri").prop("checked"))
+   {
    if(tipo==true&&att==true&&car==true&&lu==true)
      {
        return true;
@@ -120,49 +159,27 @@ function coda(riga)
      return false;
 
      }
+   }
+   else {
+     if(tipo==true&&att==true&&lu==true)
+       {
+         return true;
+
+       }
+       else
+       {
+       return false;
+
+       }
+   }
 
  }
-	function mostra(){
 
-		var op = document.getElementById("opzione");
-        var valore = op.options[op.selectedIndex].value;
-        if(valore==="S")
-			{
-				$("#parametri").hide();
-				$("#selpersona").show();
-				TIPO="S";
-			}
-		else{
-				$("#selpersona").hide();
-				$("#parametri").show();
-				TIPO="M";
-		}
-	}
 
-	function nuovariga()
-	{
-		var riga='<tr><td><input type="text" class="form-control"></td><td><input class="form-control" type="text"></td><td><input class="form-control" type="text"></td><td><input  class="form-control" type="email"></td><td><input class="form-control" type="password"></td><td><input  type="button" class="btn btn-success" id="add" onclick="aggiungi(this)" value="+">  </td><td><input type="button" class="btn btn-danger" id="add" value="X" onclick="elimina(this)"></td></tr>';
-		$("#riga").append(riga);
-	}
-
-	function elimina(value)
-	{
-		var r = confirm("Confermi di eliminare utente?");
-		  if (r == true) {
-			//richiesta delete con dati (id)
-			//se eliminato return code == ok, si rimuove
-			$(value).parent().parent().remove();
-		  } else {
-			txt = "You pressed Cancel!";
-		  }
-
-	}
 	function aggiungi(value)
 	{
 
-		/*$(this).closest('tr').find("input").each(function() {
-        alert(this.value)
-    });*/
+
 		var valore= $(value).closest('tr');
 		var col1 = valore.find('td:eq(0)').find("input").val();
 		var col2 = valore.find('td:eq(1)').find("input").val();
@@ -175,11 +192,7 @@ function coda(riga)
 		var riga='<tr><td>'+col1+'</td><td>'+col2+'</td><td>'+col3+'</td><td>'+col4+'</td><td></td><td><input  type="button" class="btn btn-success" id="add" onclick="aggiungi(this)" value="+">  </td><td><input type="button" class="btn btn-danger" id="add" value="X" onclick="elimina(this)"></td></tr>';
 		$("#riga").append(riga);
 
-		//alert(res);
-		/*$(value).parent().parent().$("td").each(function()
-			{
-			  alert($(this).html());
-			});*/
+
 	}
 	 function controlladefault(){
 		$('#parametri input:checked').each(function() {
@@ -191,38 +204,17 @@ function coda(riga)
 	function setta(value)
 	{
 
-		/*$(this).closest('tr').find("input").each(function() {
-        alert(this.value)
-    });*/
+
 		var valore= $(value).closest('tr');
 		var col1 = valore.find('td:eq(0)').text();
 		var col2 = valore.find('td:eq(1)').text();
-		var col3 = valore.find('td:eq(5)').find("input").val();
+		var col3 = valore.find('td:eq(4)').find("input").val();
 		$("#nome").val(col1);
 		$("#cognome").val(col2);
 		$("#ssid").val(col3);
 		$("#chiudi").click();
-		//var col4 = valore.find('td:eq(3)').find("input").val();
-		//var col5 = valore.find('td:eq(4)').find("input").val();
-		//var res= col1+' '+col2+' '+col3+' '+col4+' '+col5;
-		//invia request post con dati e se retunr ok si posizionano come fissi
-		//$(value).parent().parent().remove();
-		/*var riga='<tr><td>'+col1+'</td><td>'+col2+'</td><td>'+col3+'</td><td>'+col4+'</td><td></td><td><input  type="button" class="btn btn-success" id="add" onclick="aggiungi(this)" value="+">  </td><td><input type="button" class="btn btn-danger" id="add" value="X" onclick="elimina(this)"></td></tr>';
-		$("#riga").append(riga);
-		*/
-		//alert(res);
-		/*$(value).parent().parent().$("td").each(function()
-			{
-			  alert($(this).html());
-			});*/
+
 	}
-
-	function citta(field){
-
-		luogo=field;
-	}
-
-
 
 	function attivaopzione(field)
 	{
@@ -248,6 +240,26 @@ function coda(riga)
 		else
 		{
 			$("#carico2").hide();
+      if($("#cpastore").prop("checked"))
+      {
+        $("#cpastore").parent().click();
+      }
+      if($("#cpresbitero").prop("checked"))
+      {
+        $("#cpresbitero").parent().click();
+      }
+      if($("#cevangelista").prop("checked"))
+      {
+        $("#cevangelista").parent().click();
+      }
+      if($("#cdiacono").prop("checked"))
+      {
+        $("#cdiacono").parent().click();
+      }
+      if($("#cmembro").prop("checked"))
+      {
+        $("#cmembro").parent().click();
+      }
 		}
 	}
 
@@ -256,12 +268,39 @@ function coda(riga)
 
 </head>
 <body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">
+        <img src="assets/images/img-1583-122x122.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        AD Firenze
+      </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="secretaria">secretaria</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">tesoreria</a>
+      </li>
+
+    </ul>
+  </div>
+  </nav>
+
+
+  <section class="counters1 counters cid-ra81Nt6vpJ" id="counters1-n" >
 <div class="container">
  <div class="row">
 	<div class="col-md-4">
 	</div>
 	<div class="col-md-4">
-		<h4>Gest. stampe varie</h4>
+      <h2 ><b>Servizio Stampe varie</b></h2>
+
 	</div>
 	<div class="col-md-4">
 	</div>
@@ -354,7 +393,7 @@ function coda(riga)
 						<input type="checkbox" name="options" id="cevangelista" autocomplete="off" value="c_e"> Evangelista
 					</label>
 					<label class="btn btn-outline-primary">
-						<input type="checkbox" name="options" id="cprebitero" autocomplete="off" value="c_pre"> Presbitero
+						<input type="checkbox" name="options" id="cpresbitero" autocomplete="off" value="c_pre"> Presbitero
 					</label>
 					<label class="btn btn-outline-primary">
 						<input type="checkbox" name="options" id="cdiacono" autocomplete="off" value="c_di"> Diacono
@@ -430,59 +469,37 @@ function coda(riga)
 		  <div class="table-responsive-xl">
 
 			<table id="risultati" class="table table-striped  table-bordered table-hover" width="100%"  >
-		<caption>List of users</caption>
+		<caption>Elenco persone registrate</caption>
 		<thead class="thead-dark">
 			<th scope="col" >Nome</th>
 			<th scope="col" >Cognome</th>
-			<th scope="col" >Età</th>
-			<th scope="col" >tipo</th>
-			<th scope="col" >congr</th>
+			<th scope="col" >Congregazione</th>
+			<th scope="col" >Sezione</th>
 			<th scope="col" >Operazioni</th>
 		</thead>
 		<tbody id="riga" >
-			<tr scope="row">
-				<td>prima riga prima colona</td>
-				<td>seconda riga 1 col</td>
-				<td>terza riga 1 col</td>
-				<td>nasafw</td>
+      <?php
 
-				<td></td>
-				<td> <input type="hidden" value="11"><input type="button" class="btn btn-dark" id="add" value="seleziona" onclick="setta(this)"></td>
-			</tr>
-			<tr scope="row">
-				<td>prima riga 2colona</td>
-				<td>seconda riga 2 col</td>
-				<td>t12l</td>
-				<td>nasafw</td>
-				<td></td>
-				<td> <input type="hidden" value="22">  <input type="button" class="btn btn-dark" id="add" value="seleziona" onclick="setta(this)"></td>
-			</tr>
-			<tr scope="row">
-				<td>prima riga terxa colona</td>
-				<td>seconda riga 3 col</td>
-				<td>terza riga3 col</td>
-				<td>nasafw</td>
+      $sqlu =$dbh->prepare("SELECT id,nome,cognome,tipo_persona,congregazione FROM persone ");
+      $sqlu->execute();
+      if ($sqlu->rowCount()>0)
+      {
+          while($row=$sqlu->fetch())
+          {
 
-				<td></td>
-				<td><input type="hidden" value="33"><input type="button" class="btn btn-dark" id="add" value="seleziona" onclick="setta(this)"></td>
-			</tr>
-			<tr scope="row">
-				<td>prima riga quarta colona</td>
-				<td>seconda riga 4 col</td>
-				<td>terza riga 4 col</td>
-				<td>nasafw</td>
+            echo '<tr><td>'.$row['nome'].'</td><td>'.$row['cognome'].'</td><td>'.$row['congregazione'].'</td><td>'.$row['tipo_persona'].'</td><td><input type="hidden" value="'.$row['id'].'">  <button type="submit" class="btn btn-form display-4" name="" style="background-color: #e61e1e;color:white" onclick="setta(this)">Scegli</button></td></tr>';
+          }
 
-				<td></td>
-				<td><input type="hidden" value="44"><input type="button" class="btn btn-dark" id="add" value="seleziona" onclick="setta(this)"></td>
-			</tr>
+      }
+      ?>
 		</tbody>
 		</table>
 		</div>
 		</div>
 		  </div>
 		  <div class="modal-footer">
-			<button id="chiudi" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			<button type="button" class="btn btn-primary">Save changes</button>
+			<button id="chiudi" type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+
 		  </div>
 		</div>
 		</div>
@@ -490,7 +507,7 @@ function coda(riga)
 	</div>
 	</div>
 </div>
-
+</section>
 
 </body>
 </html>

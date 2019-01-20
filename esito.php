@@ -5,6 +5,7 @@ session_start();
    header('location: ../index.php');
  }*/
   include ('conn.inc.php');
+  include ('data/funzioni.php');
 
 
 
@@ -61,8 +62,10 @@ session_start();
         else {
         $tessera=$_REQUEST["tessera"];
         }
-        $nome=$_REQUEST["nome"];
-        $cognome=$_REQUEST["cognome"];
+        $nome=converte($_REQUEST["nome"]);
+
+        $cognome=converte($_REQUEST["cognome"]);
+
         if (empty($_REQUEST["carico"])){
           $carico =NULL;
         }
@@ -137,14 +140,15 @@ session_start();
           $nome_coniuge=NULL;
         }
         else {
-          $nome_coniuge=$_REQUEST["nome-coniuge"];
+          $nome_coniuge=converte($_REQUEST["nome-coniuge"]);
+
         }
 
         if (empty($_REQUEST["cognome-coniuge"])){
           $cognome_coniuge=NULL;
         }
         else {
-          $cognome_coniuge=$_REQUEST["cognome-coniuge"];
+          $cognome_coniuge=converte($_REQUEST["cognome-coniuge"]);
         }
 
         if (empty($_REQUEST["numero-figli"])){
@@ -158,14 +162,15 @@ session_start();
           $nome_padre=NULL;
         }
         else {
-          $nome_padre=$_REQUEST["nome-padre"];
+          $nome_padre=converte($_REQUEST["nome-padre"]);
+
         }
 
         if (empty($_REQUEST["nome-madre"])){
           $nome_madre=NULL;
         }
         else {
-          $nome_madre=$_REQUEST["nome-madre"];
+          $nome_madre=converte($_REQUEST["nome-madre"]);
         }
 
         if (empty($_REQUEST["data-battesimo"])){
@@ -180,7 +185,7 @@ session_start();
           $luogo_battesimo=NULL;
         }
         else {
-          $luogo_battesimo=$_REQUEST["luogo-battesimo"];
+          $luogo_battesimo=converte($_REQUEST["luogo-battesimo"]);
         }
 
         if (empty($_REQUEST["data-arrivo"])){
@@ -349,28 +354,28 @@ session_start();
                 $luogo_diacono=NULL;
               }
               else {
-                $luogo_diacono=$_REQUEST["luogo-diacono"];
+                $luogo_diacono=converte($_REQUEST["luogo-diacono"]);
               }
 
               if (empty($_REQUEST["luogo-presbitero"])){
                 $luogo_presbitero=NULL;
               }
               else {
-                $luogo_presbitero=$_REQUEST["luogo-presbitero"];
+                $luogo_presbitero=converte($_REQUEST["luogo-presbitero"]);
               }
 
               if (empty($_REQUEST["luogo-evangelista"])){
                 $luogo_evangelista=NULL;
               }
               else {
-                $luogo_evangelista=$_REQUEST["luogo-evangelista"];
+                $luogo_evangelista=converte($_REQUEST["luogo-evangelista"]);
               }
 
               if (empty($_REQUEST["luogo-pastore"])){
                 $luogo_pastore=NULL;
               }
               else {
-                $luogo_pastore=$_REQUEST["luogo-pastore"];
+                $luogo_pastore=converte($_REQUEST["luogo-pastore"]);
               }
 
               $query=$dbh->prepare("INSERT INTO consacrato (id_persona,consacrato_diacono,luogo_diacono,consacrato_presbitero,luogo_presbitero,consacrato_evangelista,luogo_evangelista,consacrato_pastore,luogo_pastore)
@@ -400,69 +405,69 @@ session_start();
             $nome_figlio_1=NULL;
           }
           else {
-            $nome_figlio_1=$_REQUEST["nome-figlio-1"];
+            $nome_figlio_1=converte($_REQUEST["nome-figlio-1"]);
           }
 
           if (empty($_REQUEST["cognome-figlio-1"])){
            $cognome_figlio_1=NULL;
           }
           else {
-            $cognome_figlio_1=$_POST["cognome-figlio-1"];
+            $cognome_figlio_1=converte($_POST["cognome-figlio-1"]);
           }
           if (empty($_REQUEST["nome-figlio-2"])){
             $nome_figlio_2=NULL;
           }
           else {
-            $nome_figlio_2=$_REQUEST["nome-figlio-2"];
+            $nome_figlio_2=converte($_REQUEST["nome-figlio-2"]);
           }
 
           if (empty($_REQUEST["cognome-figlio-2"])){
             $cognome_figlio_2=NULL;
           }
           else {
-            $cognome_figlio_2=$_REQUEST["cognome-figlio-2"];
+            $cognome_figlio_2=converte($_REQUEST["cognome-figlio-2"]);
           }
 
           if (empty($_REQUEST["nome-figlio-3"])){
             $nome_figlio_3=NULL;
           }
           else {
-            $nome_figlio_3=$_REQUEST["nome-figlio-3"];
+            $nome_figlio_3=converte($_REQUEST["nome-figlio-3"]);
           }
 
           if (empty($_REQUEST["cognome-figlio-3"])){
             $cognome_figlio_3=NULL;
           }
           else {
-            $cognome_figlio_3=$_REQUEST["cognome-figlio-3"];
+            $cognome_figlio_3=converte($_REQUEST["cognome-figlio-3"]);
           }
 
           if (empty($_REQUEST["nome-figlio-4"])){
             $nome_figlio_4=NULL;
           }
           else {
-            $nome_figlio_4=$_REQUEST["nome-figlio-4"];
+            $nome_figlio_4=converte($_REQUEST["nome-figlio-4"]);
           }
 
           if (empty($_REQUEST["cognome-figlio-4"])){
             $cognome_figlio_4=NULL;
           }
           else {
-            $cognome_figlio_4=$_REQUEST["cognome-figlio-4"];
+            $cognome_figlio_4=converte($_REQUEST["cognome-figlio-4"]);
           }
 
           if (empty($_REQUEST["nome-figlio-5"])){
             $nome_figlio_5=NULL;
           }
           else {
-            $nome_figlio_5=$_REQUEST["nome-figlio-5"];
+            $nome_figlio_5=converte($_REQUEST["nome-figlio-5"]);
           }
 
           if (empty($_REQUEST["cognome-figlio-5"])){
             $cognome_figlio_5=NULL;
           }
           else {
-            $cognome_figlio_5=$_REQUEST["cognome-figlio-5"];
+            $cognome_figlio_5=converte($_REQUEST["cognome-figlio-5"]);
           }
 
           function esiste($nome,$cognome)

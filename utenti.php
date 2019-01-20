@@ -137,38 +137,32 @@ header('location: index.php');
 
 </head>
 <body>
-<section class="menu cid-ra8sZROvHU" once="menu" id="menu1-1f">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">
+        <img src="assets/images/img-1583-122x122.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        AD Firenze
+      </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="secretaria">secretaria</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">tesoreria</a>
+      </li>
+
+    </ul>
+  </div>
+</nav>
 
 
-
-  <nav class="navbar navbar-expand beta-menu navbar-dropdown align-items-center navbar-fixed-top navbar-toggleable-sm bg-color ">
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <div class="hamburger">
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-          </div>
-      </button>
-      <div class="menu-logo">
-          <div class="navbar-brand">
-              <span class="navbar-logo">
-
-                       <img src="assets/images/img-1583-122x122.png" alt="logo" title="" style="height: 3.8rem;">
-
-              </span>
-              <span class="navbar-caption-wrap"><a class="navbar-caption text-white" href="home">AD Firenze</a></span>
-          </div>
-      </div>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-
-      </div>
-  </nav>
-</section>
-
-
-<section class="tabs3 cid-ra8uzLCEiU" id="tabs3-1n" style="margin-top: 85px;">
+<section class="counters1 counters cid-ra81Nt6vpJ" id="counters1-n" >
 
 
   <div class="container-fluid">

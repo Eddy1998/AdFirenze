@@ -143,17 +143,23 @@ header('location: index.php');
                       </span>Home</a>
                 </li>
                 <li class="nav-item dropdown">
-                  <a class="nav-link link text-white dropdown-toggle display-4" href="" data-toggle="dropdown-submenu" aria-expanded="false">
-                    <span class="mobi-mbri mobi-mbri-plus mbr-iconfont mbr-iconfont-btn">
-                    </span>Nuovo</a>
+                  <a class="nav-link link text-white dropdown-toggle display-4"  data-toggle="dropdown-submenu" aria-expanded="false">
+                    <span class="mobi-mbri  mbr-iconfont mbr-iconfont-btn">
+                    </span>Vai a</a>
                     <div class="dropdown-menu">
-                      <a class="text-white dropdown-item display-4" href="nuovo.php?new=M">Membro</a>
-                      <a class="text-white dropdown-item display-4" href="nuovo.php?new=C" aria-expanded="false">Congregato</a>
-                      <a class="text-white dropdown-item display-4" href="nuovo.php?new=B" aria-expanded="false">Bambino<br>
-                      </a>
-                    </div></li>
+                      <a class="text-white dropdown-item display-4" href="membri">
+                        <span class="mobi-mbri mobi-mbri-user-2 mbr-iconfont mbr-iconfont-btn">
+                      </span>&nbsp; &nbsp; &nbsp; &nbsp;Membri</a>
+                      <a class="text-white dropdown-item display-4" href="congregati" aria-expanded="false">
+                        <span class="mobi-mbri mobi-mbri-user mbr-iconfont mbr-iconfont-btn">
+                        </span>Congregati</a>
+                      <a class="text-white dropdown-item display-4" href="bambini" aria-expanded="false">
+                        <span class="mobi-mbri mobi-mbri-rocket mbr-iconfont mbr-iconfont-btn">
+                        </span>&nbsp; &nbsp; &nbsp; Bambini</a>
+                    </div>
+                  </li>
                     <li class="nav-item">
-                      <a class="nav-link link text-white display-4" href="ricerca.php" aria-expanded="false">
+                      <a class="nav-link link text-white display-4" href="ricerca" aria-expanded="false">
                         <span class="mobi-mbri mobi-mbri-search mbr-iconfont mbr-iconfont-btn">
                         </span>Ricerca</a>
                       </li>
@@ -168,7 +174,15 @@ header('location: index.php');
     </nav>
 </section>
 
-<section class="engine"><a href=""></a></section><section class="mbr-section info2 cid-ra862p31vh" id="info2-s">
+<section class="engine"><a href=""></a></section><section class="mbr-section info2 cid-ra862p31vh" id="info2-s" style="background-color: rgba(0, 0, 0, 0);
+background-position-x: 0%;
+background-position-y: 0%;
+background-repeat: repeat;
+background-attachment: scroll;
+background-image: linear-gradient(45deg, rgb(8, 8, 8), rgb(187, 212, 221));
+background-size: auto auto;
+background-origin: padding-box;
+background-clip: border-box;">
 
 
 

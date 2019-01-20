@@ -76,9 +76,14 @@ header('location: index.php');
                   <div class="dropdown-menu"><a class="text-white dropdown-item display-4" href="nuovo.php?new=M">Membro</a>
                     <a class="text-white dropdown-item display-4" href="nuovo.php?new=C" aria-expanded="false">Congregato</a>
                     <a class="text-white dropdown-item display-4" href="nuovo.php?new=B" aria-expanded="false">Bambino<br></a>
-                  </div></li><li class="nav-item">
+                  </div></li>
+                  <li class="nav-item">
                     <a class="nav-link link text-white display-4" href="ricerca" aria-expanded="false">Ricerca</a>
                   </li>
+                  <li class="nav-item">
+                        <a class="nav-link link text-white display-4" href="serviziostampe">
+                          <span class="mobi-mbri mbr-iconfont mbr-iconfont-btn"></span>Stampe</a>
+                    </li>
                 </ul>
             <div class="navbar-buttons mbr-section-btn">
 

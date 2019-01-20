@@ -77,16 +77,33 @@ $dbh = new PDO($conn,$user,$pass);
             <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true"><li class="nav-item">
                     <a class="nav-link link text-white display-4" href="home">
                       <span class="mobi-mbri mobi-mbri-home mbr-iconfont mbr-iconfont-btn"></span>Home</a>
-                </li><li class="nav-item dropdown open">
-                  <a class="nav-link link text-white dropdown-toggle display-4" href="" data-toggle="dropdown-submenu" aria-expanded="true">
-                    <span class="mobi-mbri mobi-mbri-plus mbr-iconfont mbr-iconfont-btn">
-                    </span>Nuovo</a>
-                    <div class="dropdown-menu"><a class="text-white dropdown-item display-4" href="nuovo?new=M">Membro</a>
-                      <a class="text-white dropdown-item display-4" href="nuovo?new=C" aria-expanded="false">Congregato</a>
-                      <a class="text-white dropdown-item display-4" href="nuovo?new=B" aria-expanded="false">Bambino<br>
-                      </a>
+                </li><li class="nav-item dropdown">
+                  <a class="nav-link link text-white dropdown-toggle display-4"  data-toggle="dropdown-submenu" aria-expanded="false">
+                    <span class="mobi-mbri  mbr-iconfont mbr-iconfont-btn">
+                    </span>Vai a</a>
+                    <div class="dropdown-menu">
+                      <a class="text-white dropdown-item display-4" href="membri">
+                        <span class="mobi-mbri mobi-mbri-user-2 mbr-iconfont mbr-iconfont-btn">
+                      </span>&nbsp; &nbsp; &nbsp; &nbsp;Membri</a>
+                      <a class="text-white dropdown-item display-4" href="congregati" aria-expanded="false">
+                        <span class="mobi-mbri mobi-mbri-user mbr-iconfont mbr-iconfont-btn">
+                        </span>Congregati</a>
+                      <a class="text-white dropdown-item display-4" href="bambini" aria-expanded="false">
+                        <span class="mobi-mbri mobi-mbri-rocket mbr-iconfont mbr-iconfont-btn">
+                        </span>&nbsp; &nbsp; &nbsp; Bambini</a>
                     </div>
                   </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link link text-white dropdown-toggle display-4" href="" data-toggle="dropdown-submenu" aria-expanded="false">
+                      <span class="mobi-mbri  mbr-iconfont mbr-iconfont-btn">
+                      </span>Sezione</a>
+                      <div class="dropdown-menu">
+                        <a class="text-white dropdown-item display-4" href="secretaria">Secretaria</a>
+                        <a class="text-white dropdown-item display-4" href="" aria-expanded="false">Tesoreria</a>
+                        <a class="text-white dropdown-item display-4" href="" aria-expanded="false">Compleanni<br>
+                          <a class="text-white dropdown-item display-4" href="" aria-expanded="false">Visitanti del giorno<br>
+                        </a>
+                      </div></li>
 
             </ul>
             <div class="navbar-buttons mbr-section-btn">
@@ -113,7 +130,7 @@ $dbh = new PDO($conn,$user,$pass);
                 <h2 class="align-right mbr-bold mbr-white pb-3 mbr-fonts-style display-2">
                     Ricerca generale</h2>
                 <h3 class="mbr-section-subtitle align-right mbr-light mbr-white mbr-fonts-style display-5">
-                    Ricerca in tutte le sezioni di secretaria</h3>
+                    Ricerca in tutte le sezioni della secretaria</h3>
             </div>
         </div>
     </div>

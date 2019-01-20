@@ -2,6 +2,7 @@
 session_start();
 
   include ('conn.inc.php');
+  include ('funzioni.php');
     $dbh = new PDO($conn,$user,$pass);
       $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try
@@ -123,8 +124,8 @@ session_start();
         else {
         $tessera=$_POST["tessera"];
         }
-        $nome=$_POST["nome"];
-        $cognome=$_POST["cognome"];
+        $nome=converte($_POST["nome"]);
+        $cognome=converte($_POST["cognome"]);
         if (empty($_POST["carico"])){
           $carico =NULL;
         }
@@ -190,13 +191,13 @@ session_start();
           $nome_coniuge=NULL;
         }
         else {
-          $nome_coniuge=$_POST["nome-coniuge"];
+          $nome_coniuge=converte($_POST["nome-coniuge"]);
         }
         if (empty($_POST["cognome-coniuge"])){
           $cognome_coniuge=NULL;
         }
         else {
-          $cognome_coniuge=$_POST["cognome-coniuge"];
+          $cognome_coniuge=converte($_POST["cognome-coniuge"]);
         }
         if (empty($_POST["numero-figli"])){
           $numero_figli='0';
@@ -208,13 +209,13 @@ session_start();
           $nome_padre=NULL;
         }
         else {
-          $nome_padre=$_POST["nome-padre"];
+          $nome_padre=converte($_POST["nome-padre"]);
         }
         if (empty($_POST["nome-madre"])){
           $nome_madre=NULL;
         }
         else {
-          $nome_madre=$_POST["nome-madre"];
+          $nome_madre=converte($_POST["nome-madre"]);
         }
         if (empty($_POST["data-battesimo"])){
           $data_battesimo=NULL;
@@ -227,7 +228,7 @@ session_start();
           $luogo_battesimo=NULL;
         }
         else {
-          $luogo_battesimo=$_POST["luogo-battesimo"];
+          $luogo_battesimo=converte($_POST["luogo-battesimo"]);
         }
         if (empty($_POST["data-arrivo"])){
           $data_arrivo=NULL;
@@ -268,9 +269,7 @@ session_start();
                   data_arrivo_in_chiesa=:data_arrivo_in_chiesa,
                    battezzato_con_spirito_santo=:battezzato_con_spirito_santo,
                     osservazioni=:osservazioni WHERE md5(id)=:id");
-    /*  $query=$dbh->prepare("INSERT INTO persone(tipo_persona, attivo, numero_tessera,congregazione, nome, cognome, carico_in_chiesa, indirizzo, citta, cap, telefono, nazionalita, sesso, data_nascita, stato_civile, data_matrimonio, nome_coniuge, cognome_coniuge, numero_figli, nome_padre,  nome_madre,  data_battesimo, luogo_battesimo, data_arrivo_in_chiesa, battezzato_con_spirito_santo, osservazioni)
-      VALUES(:tipo_persona,:attivo,:numero_tessera,:congregazione, :nome, :cognome, :carico, :indirizzo, :citta, :cap, :telefono, :nazionalita, :sesso, :data_nascita, :stato_civile, :data_matrimonio, :nome_coniuge, :cognome_coniuge, :numero_figli, :nome_padre, :nome_madre,:data_battesimo,:luogo_battesimo,:data_arrivo_in_chiesa,:battezzato_con_spirito_santo,:osservazioni);");
-      */
+
       $query->bindValue(":id",$ssid);
       $query->bindValue(":tipo_persona",$tipo);
       $query->bindValue(":attivo",$attivo);
@@ -303,14 +302,7 @@ session_start();
         stampako($ssid);
       }
       else {
-        /*$query=$dbh->prepare("SELECT id FROM persone WHERE nome=:nome AND cognome=:cognome AND carico_in_chiesa=:carico LIMIT 1;");
-        $query->bindValue(":nome",$nome);
-        $query->bindValue(":cognome",$cognome);
-        $query->bindValue(":carico",$carico);
-        $query->execute();
-        $idrisultante=$query->fetch();
-        $id_genitore = $idrisultante['id'];*/
-        //si inserisce i dati di consacrazione e l'immagine di profilo, nel caso esistano
+
         if ($_FILES['files']['size'] > 0 )
         {
             // cover_image is empty (and not an error)
@@ -345,7 +337,7 @@ session_start();
               $sql->bindValue(":ssid",$ssid);
               $sql->execute();
               if ($sql->rowCount()>0) {
-                  
+
                    $sql=$dbh->prepare("UPDATE immagini SET img=:img,type=:type WHERE md5(id_persona)=:ssid;");
                       $immagine = file_get_contents( $_FILES['files']['tmp_name'] );
                       $type= $_FILES['files']['type'] ;
@@ -357,7 +349,7 @@ session_start();
                         echo 'ERROR agigoramento immagine';
                     }
                 }
-                else 
+                else
                 {
                     $sql=$dbh->prepare("INSERT INTO immagini (id_persona,img,type) VALUES (:id,:img,:type)");
                     $immagine = file_get_contents( $_FILES['files']['tmp_name'] );
@@ -370,12 +362,12 @@ session_start();
                         echo 'ERROR inserimento immagine';
                       }
                 }
-             
+
             unset( $_FILES, $handle, $immagine );
         }
-     
+
           //controllo carico in chiesa
-        if($carico === 'Pastore' || $carico === 'Evangelista' || $carico==='Presbitero' || $carico ==='Diacono' || $carico==='Diaconessa')
+        if($carico == 'Pastore' || $carico == 'Evangelista' || $carico=='Presbitero' || $carico =='Diacono' || $carico=='Diaconessa')
         {
             if(!empty($_POST['data-diacono']) || !empty($_POST['luogo-diacono']) || !empty($_POST['data-presbitero']) || !empty($_POST['luogo-presbitero']) || !empty($_POST['data-evangelista']) || !empty($_POST['luogo-evangelista']) || !empty($_POST['data-pastore']) || !empty($_POST['luogo-pastore']) )
             {
@@ -411,45 +403,73 @@ session_start();
                 $luogo_diacono=NULL;
               }
               else {
-                $luogo_diacono=$_POST["luogo-diacono"];
+                $luogo_diacono=converte($_POST["luogo-diacono"]);
               }
               if (empty($_POST["luogo-presbitero"])){
                 $luogo_presbitero=NULL;
               }
               else {
-                $luogo_presbitero=$_POST["luogo-presbitero"];
+                $luogo_presbitero=converte($_POST["luogo-presbitero"]);
               }
               if (empty($_POST["luogo-evangelista"])){
                 $luogo_evangelista=NULL;
               }
               else {
-                $luogo_evangelista=$_POST["luogo-evangelista"];
+                $luogo_evangelista=converte($_POST["luogo-evangelista"]);
               }
               if (empty($_POST["luogo-pastore"])){
                 $luogo_pastore=NULL;
               }
               else {
-                $luogo_pastore=$_POST["luogo-pastore"];
+                $luogo_pastore=converte($_POST["luogo-pastore"]);
               }
-              $query=$dbh->prepare("UPDATE consacrato SET consacrato_diacono=:consacrato_diacono,
-                luogo_diacono=:luogo_diacono, consacrato_presbitero=:consacrato_presbitero,
-                 luogo_presbitero=:luogo_presbitero, consacrato_evangelista=:consacrato_evangelista,
-                  luogo_evangelista=:luogo_evangelista, consacrato_pastore=:consacrato_pastore,
-                  luogo_pastore=:luogo_pastore WHERE md5(id_persona)=:id;");
 
-              $query->bindValue(":id",$ssid);
-              $query->bindValue(":consacrato_diacono",$data_diacono);
-              $query->bindValue(":luogo_diacono",$luogo_diacono);
-              $query->bindValue(":consacrato_presbitero",$data_presbitero);
-              $query->bindValue(":luogo_presbitero",$luogo_presbitero);
-              $query->bindValue(":consacrato_evangelista",$data_evangelista);
-              $query->bindValue(":luogo_evangelista",$luogo_evangelista);
-              $query->bindValue(":consacrato_pastore",$data_pastore);
-              $query->bindValue(":luogo_pastore",$luogo_pastore);
-              if(!$query->execute())
-              {
-                  stampako($ssid);
-              }
+                $query=$dbh->prepare("SELECT id_persona FROM consacrato WHERE md5(id_persona)=:id");
+                $query->bindValue(":id",$ssid);
+                $query->execute();
+                if ($query->rowCount()>0) {
+
+                  $query=$dbh->prepare("UPDATE consacrato SET consacrato_diacono=:consacrato_diacono,
+                    luogo_diacono=:luogo_diacono, consacrato_presbitero=:consacrato_presbitero,
+                     luogo_presbitero=:luogo_presbitero, consacrato_evangelista=:consacrato_evangelista,
+                      luogo_evangelista=:luogo_evangelista, consacrato_pastore=:consacrato_pastore,
+                      luogo_pastore=:luogo_pastore WHERE md5(id_persona)=:id;");
+
+                      $query->bindValue(":id",$ssid);
+                      $query->bindValue(":consacrato_diacono",$data_diacono);
+                      $query->bindValue(":luogo_diacono",$luogo_diacono);
+                      $query->bindValue(":consacrato_presbitero",$data_presbitero);
+                      $query->bindValue(":luogo_presbitero",$luogo_presbitero);
+                      $query->bindValue(":consacrato_evangelista",$data_evangelista);
+                      $query->bindValue(":luogo_evangelista",$luogo_evangelista);
+                      $query->bindValue(":consacrato_pastore",$data_pastore);
+                      $query->bindValue(":luogo_pastore",$luogo_pastore);
+                      if(!$query->execute())
+                      {
+                          stampako($ssid);
+                      }
+                  }
+                  else
+                  {
+                      $query=$dbh->prepare("INSERT INTO consacrato (id_persona,consacrato_diacono,luogo_diacono,consacrato_presbitero,luogo_presbitero,consacrato_evangelista,luogo_evangelista,consacrato_pastore,luogo_pastore)
+                      VALUES (:id_persona,:consacrato_diacono,:luogo_diacono,:consacrato_presbitero,:luogo_presbitero,:consacrato_evangelista,:luogo_evangelista,:consacrato_pastore,:luogo_pastore)");
+
+                      $query->bindValue(":id_persona",$id);
+                      $query->bindValue(":consacrato_diacono",$data_diacono);
+                      $query->bindValue(":luogo_diacono",$luogo_diacono);
+                      $query->bindValue(":consacrato_presbitero",$data_presbitero);
+                      $query->bindValue(":luogo_presbitero",$luogo_presbitero);
+                      $query->bindValue(":consacrato_evangelista",$data_evangelista);
+                      $query->bindValue(":luogo_evangelista",$luogo_evangelista);
+                      $query->bindValue(":consacrato_pastore",$data_pastore);
+                      $query->bindValue(":luogo_pastore",$luogo_pastore);
+                      if(!$query->execute())
+                      {
+                            stampako($ssid);
+                      }
+                  }
+
+
           }
       }
       //fine controllo carico in chiesa
@@ -459,61 +479,61 @@ session_start();
             $nome_figlio_1=NULL;
           }
           else {
-            $nome_figlio_1=$_POST["nome-figlio-1"];
+            $nome_figlio_1=converte($_POST["nome-figlio-1"]);
           }
           if (empty($_POST["cognome-figlio-1"])){
            $cognome_figlio_1=NULL;
           }
           else {
-            $cognome_figlio_1=$_POST["cognome-figlio-1"];
+            $cognome_figlio_1=converte($_POST["cognome-figlio-1"]);
           }
           if (empty($_POST["nome-figlio-2"])){
             $nome_figlio_2=NULL;
           }
           else {
-            $nome_figlio_2=$_POST["nome-figlio-2"];
+            $nome_figlio_2=converte($_POST["nome-figlio-2"]);
           }
           if (empty($_POST["cognome-figlio-2"])){
             $cognome_figlio_2=NULL;
           }
           else {
-            $cognome_figlio_2=$_POST["cognome-figlio-2"];
+            $cognome_figlio_2=converte($_POST["cognome-figlio-2"]);
           }
           if (empty($_POST["nome-figlio-3"])){
             $nome_figlio_3=NULL;
           }
           else {
-            $nome_figlio_3=$_POST["nome-figlio-3"];
+            $nome_figlio_3=converte($_POST["nome-figlio-3"]);
           }
           if (empty($_POST["cognome-figlio-3"])){
             $cognome_figlio_3=NULL;
           }
           else {
-            $cognome_figlio_3=$_POST["cognome-figlio-3"];
+            $cognome_figlio_3=converte($_POST["cognome-figlio-3"]);
           }
           if (empty($_POST["nome-figlio-4"])){
             $nome_figlio_4=NULL;
           }
           else {
-            $nome_figlio_4=$_POST["nome-figlio-4"];
+            $nome_figlio_4=converte($_POST["nome-figlio-4"]);
           }
           if (empty($_POST["cognome-figlio-4"])){
             $cognome_figlio_4=NULL;
           }
           else {
-            $cognome_figlio_4=$_POST["cognome-figlio-4"];
+            $cognome_figlio_4=converte($_POST["cognome-figlio-4"]);
           }
           if (empty($_POST["nome-figlio-5"])){
             $nome_figlio_5=NULL;
           }
           else {
-            $nome_figlio_5=$_POST["nome-figlio-5"];
+            $nome_figlio_5=converte($_POST["nome-figlio-5"]);
           }
           if (empty($_POST["cognome-figlio-5"])){
             $cognome_figlio_5=NULL;
           }
           else {
-            $cognome_figlio_5=$_POST["cognome-figlio-5"];
+            $cognome_figlio_5=converte($_POST["cognome-figlio-5"]);
           }
 
           $e1=0;

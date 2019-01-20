@@ -33,42 +33,7 @@ header('location: index.php');
   <script type="text/javascript">
          $(document).ready(function(){
           var Div, contenuto,data;
-          <?php
-          // if (!isset($_GET['ba'])) { ?>
-        /*  $.ajax({
-          url: 'data/dati.php',
-          type: 'POST',
-          data: {
-            'B' : 1,
-          },
-          success: function(response){
-            data = JSON.parse(response);
-           var totale = data.contatore.totale;
-           //var non_attivi = data.contatore.non_attivi;
-          window.location="bambini?ba="+totale;
-          }
-          });
-          */<?php //}
-          // else { ?>
-            /* $.ajax({
-             url: 'data/dati.php',
-             type: 'POST',
-             data: {
-               'B' : 1,
-             },
-             success: function(response){
-               data = JSON.parse(response);
-              var totale = data.contatore.totale;
-              //var non_attivi = data.contatore.non_attivi;
-               var controlloT = */ <?php //echo $_GET['ba']; ?> //;
-               //var controlloN = <?php //echo $_GET['mn']; ?> ;
-              /* if(controlloT!=totale)
-               {
-                 window.location="bambini?ba="+totale;
-               }
-             }
-           });*/
-             <?php //} ?>
+
           <?php $res = @$_GET['success'];
           if($res==1)
           {
@@ -126,17 +91,23 @@ header('location: index.php');
                       </span>Home</a>
                 </li>
                 <li class="nav-item dropdown">
-                  <a class="nav-link link text-white dropdown-toggle display-4" href="" data-toggle="dropdown-submenu" aria-expanded="false">
-                    <span class="mobi-mbri mobi-mbri-plus mbr-iconfont mbr-iconfont-btn">
-                    </span>Nuovo</a>
+                  <a class="nav-link link text-white dropdown-toggle display-4"  data-toggle="dropdown-submenu" aria-expanded="false">
+                    <span class="mobi-mbri  mbr-iconfont mbr-iconfont-btn">
+                    </span>Vai a</a>
                     <div class="dropdown-menu">
-                      <a class="text-white dropdown-item display-4" href="nuovo.php?new=M">Membro</a>
-                      <a class="text-white dropdown-item display-4" href="nuovo.php?new=C" aria-expanded="false">Congregato</a>
-                      <a class="text-white dropdown-item display-4" href="nuovo.php?new=B" aria-expanded="false">Bambino<br>
-                      </a>
-                    </div></li>
+                      <a class="text-white dropdown-item display-4" href="membri">
+                        <span class="mobi-mbri mobi-mbri-user-2 mbr-iconfont mbr-iconfont-btn">
+                      </span>&nbsp; &nbsp; &nbsp; &nbsp;Membri</a>
+                      <a class="text-white dropdown-item display-4" href="congregati" aria-expanded="false">
+                        <span class="mobi-mbri mobi-mbri-user mbr-iconfont mbr-iconfont-btn">
+                        </span>Congregati</a>
+                      <a class="text-white dropdown-item display-4" href="bambini" aria-expanded="false">
+                        <span class="mobi-mbri mobi-mbri-rocket mbr-iconfont mbr-iconfont-btn">
+                        </span>&nbsp; &nbsp; &nbsp; Bambini</a>
+                    </div>
+                  </li>
                     <li class="nav-item">
-                      <a class="nav-link link text-white display-4" href="ricerca.php" aria-expanded="false">
+                      <a class="nav-link link text-white display-4" href="ricerca" aria-expanded="false">
                         <span class="mobi-mbri mobi-mbri-search mbr-iconfont mbr-iconfont-btn">
                         </span>Ricerca</a>
                       </li>
@@ -261,7 +232,7 @@ header('location: index.php');
 
 
                    $eta = calcola($row['data_di_nascita']);
-                  
+
 
                     echo '<tr onclick="visualizza(\'' . $row['ssid'] .'\');">';
                     echo "<td class='body-item mbr-fonts-style display-7'>" . $row['nome'] .    "</td>";

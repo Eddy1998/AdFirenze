@@ -32,14 +32,11 @@ header('location: index');
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
   <script type="text/javascript" src="js/action-new.js"></script>
   <style>
-
   input[type="file"] {
                       display: none;
                     }
-
   .thumb {
             height: 170px;
-
             margin: 10px 5px 0 0;
           }
   </style>
@@ -64,12 +61,35 @@ header('location: index');
     $('#carico').on('change', function () {
        consacrazione();
    });
+
     $('#button-elimina').on('click', function () {
          $('#list').children().remove();
          hidebutton();
            $('#img-ad').show();
              $('#erroredimensione').text('');
      });
+
+     $('#cognome').focusout( function(){
+		  var nome  = $('#nome').val();
+		  var cognome = $('#cognome').val();
+
+		  $.ajax({
+			url: 'data/dati.php',
+			type: 'post',
+			data: {
+				'registrato_check' : 1,
+				'nome' : nome,
+        'cognome' : cognome,
+			},
+			success: function(response){
+			  if (response == 'ESISTE' ) {
+          //$('#persona-esistente').text('');
+              $('#persona-esistente').text(nome+' '+cognome);
+                $('#mymodal').modal('show');
+			  }
+			}
+		  });
+		 });
 
     <?php $res = @$_GET['new'];
     if($res=='M')
@@ -210,7 +230,7 @@ header('location: index');
 
                             <div class="col-md-3 multi-horizontal" data-for="">
                               <div class="form-group">
-                                <label class="form-control-label mbr-fonts-style display-7" for="files"><b>Foto</b> (Max 60KB)</label><br>
+                                <label class="form-control-label mbr-fonts-style display-7" for="files"><b>Foto</b> (Max 1MB)</label><br>
 
                                   <label id="button-elimina">
                                   <a class="nav-link link text-black display-4" ><span class="mobi-mbri mobi-mbri-trash mbr-iconfont mbr-iconfont-btn"></span></a>
@@ -588,6 +608,34 @@ header('location: index');
             </div>
         </div>
     </div>
+
+    <div id="mymodal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog ">
+       <div class="modal-content">
+          <div class="modal-content">
+          <div class="modal-header">
+
+        <div class="input-group">
+          <div class="input-group-prepend">
+          <h4  >Attenzione!</h4>
+          </div>
+        </div>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body "><div class="input-group">
+                <h5>Sembra che <b id="persona-esistente"></b> è già presente nel registro, ti consigliamo di verificare prima di continuare con la registrazione per evitare duplicazioni.</h5>
+          </div>
+          </div>
+          <div class="modal-footer">
+            <button  id="chiudi" type="button" class="btn btn-primary" data-dismiss="modal" >OK</button>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+
 </section>
 
 <script>

@@ -283,37 +283,7 @@ var luogo="";
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg" id="notifica" style="display:none">
   </button>
 
-  <!--<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog ">
-     <div class="modal-content">
-        <div class="modal-content">
-        <div class="modal-header">
 
-  		<div class="input-group">
-  		  <div class="input-group-prepend">
-  			<h4  >Conferma Eliminazione</h4>
-  		  </div>
-  		</div>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body "><div class="input-group">
-      	  <div class="table-responsive-xl">
-
-              <h5>Confermi di eliminale l'utente selezionato?<br>L'utente non potrà essere recuperato.</h5>
-      	</div>
-      	</div>
-        </div>
-        <div class="modal-footer">
-
-          <button id="conferma" type="button" class="btn btn-primary" data-dismiss="modal">Conferma</button>
-          <button  id="chiudi" type="button" class="btn btn-secondary" data-dismiss="modal" >Annulla</button>
-        </div>
-      </div>
-      </div>
-    </div>
-  </div>-->
 
 
   <div class="row">

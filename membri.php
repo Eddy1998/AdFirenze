@@ -76,22 +76,22 @@ header('location: index.php');
                 </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link link text-white dropdown-toggle display-4"  data-toggle="dropdown-submenu" aria-expanded="false">
-                    <span class="mobi-mbri mobi-mbri-plus mbr-iconfont mbr-iconfont-btn">
-                    </span>Nuovo</a>
+                    <span class="mobi-mbri  mbr-iconfont mbr-iconfont-btn">
+                    </span>Vai a</a>
                     <div class="dropdown-menu">
-                      <a class="text-white dropdown-item display-4" href="nuovo.php?new=M">
+                      <a class="text-white dropdown-item display-4" href="membri">
                         <span class="mobi-mbri mobi-mbri-user-2 mbr-iconfont mbr-iconfont-btn">
-                      </span>&nbsp; &nbsp; &nbsp; &nbsp;Membro</a>
-                      <a class="text-white dropdown-item display-4" href="nuovo.php?new=C" aria-expanded="false">
+                      </span>&nbsp; &nbsp; &nbsp; &nbsp;Membri</a>
+                      <a class="text-white dropdown-item display-4" href="congregati" aria-expanded="false">
                         <span class="mobi-mbri mobi-mbri-user mbr-iconfont mbr-iconfont-btn">
-                        </span>Congregato</a>
-                      <a class="text-white dropdown-item display-4" href="nuovo.php?new=B" aria-expanded="false">
+                        </span>Congregati</a>
+                      <a class="text-white dropdown-item display-4" href="bambini" aria-expanded="false">
                         <span class="mobi-mbri mobi-mbri-rocket mbr-iconfont mbr-iconfont-btn">
-                        </span>&nbsp; &nbsp; &nbsp; Bambino</a>
+                        </span>&nbsp; &nbsp; &nbsp; Bambini</a>
                     </div>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link link text-white display-4" href="ricerca.php" aria-expanded="false">
+                    <a class="nav-link link text-white display-4" href="ricerca" aria-expanded="false">
                       <span class="mobi-mbri mobi-mbri-search mbr-iconfont mbr-iconfont-btn">
                       </span>Ricerca</a>
                     </li>
@@ -212,7 +212,7 @@ header('location: index.php');
                 <th class="head-item mbr-fonts-style display-7">
                       Cognome</th>
                 <th class="head-item mbr-fonts-style display-7">
-                      età</th>
+                      Data di nascita</th>
                 <th class="head-item mbr-fonts-style display-7">
                       Carico</th>
                  <th class="head-item mbr-fonts-style display-7">
@@ -232,7 +232,7 @@ header('location: index.php');
                     echo '<tr onclick="visualizza(\'' . $row['ssid'] .'\');">';
                     echo "<td class='body-item mbr-fonts-style display-7'>" . $row['nome'] . "</td>";
                     echo "<td class='body-item mbr-fonts-style display-7'>" . $row['cognome'] . "</td>";
-                    echo "<td class='body-item mbr-fonts-style display-7'>" . $eta . "</td>";
+                    echo "<td class='body-item mbr-fonts-style display-7'>" . $row['data_di_nascita'] . "</td>";
                     echo "<td class='body-item mbr-fonts-style display-7'>" . $row['carico_in_chiesa'] . "</td>";
                     echo "<td class='body-item mbr-fonts-style display-7'>" . $row['attivo']  . "</td>";
                     echo "<td class='body-item mbr-fonts-style display-7'>" . $row['congregazione'] . "</td>";
