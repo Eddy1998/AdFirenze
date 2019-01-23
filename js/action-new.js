@@ -35,7 +35,16 @@
             });
           }
       }
-
+    
+    
+    function seleziona(id,value)
+    {
+      $("#"+id+" option").each(function(){
+        if($(this).val()==value){
+          $(this).attr("selected","selected");
+           }
+      });
+    }    
 
       function rellena(idinput,idcognome,idlist)
       {
@@ -48,8 +57,33 @@
             if(idinput=="nome-padre"||idinput=="nome-madre")
             {
               var salto = opts[i].value.split("  ");
+              var ident = salto[2];
               $("#"+idinput).val(salto[0]+' '+salto[1]);
-              //$("#cognome-figlio-5").val(salto[1]);
+             
+              if($("#tipo").val()=="bambino")
+              {
+               $.ajax({
+                  url: 'data/dati.php',
+                  type: 'POST',
+                  data: {
+                    'ONE' : 1,
+                    'ssid': ident,
+                  },
+                  success: function(response){
+                      var data = JSON.parse(response);
+                      console.log(data);
+                     $("#indirizzo").val(data.profilo[0].indirizzo);
+                        $("#citta").val(data.profilo[0].citta);
+                        $("#cap").val(data.profilo[0].cap);
+                    $("#telefono").val(data.profilo[0].telefono);
+                    var nazio = data.profilo[0].nazionalita;
+                    var congrega = data.profilo[0].congregazione;
+                    seleziona("nazionalita",nazio);
+                    seleziona("settore",congrega);
+                    $("#genitore-mex").modal('show');
+                  }
+              });
+              }
               $(':focus').blur();
             }
             else if(idinput=="nome-coniuge")
@@ -80,46 +114,46 @@
                       if(data.figli!="N")
                       {
                           //console.log("entra");
-                          if(data.figli[0].cognome_figlio_1!=null)
+                      if(data.figli[0].cognome_figlio_1!=null)
+                        {
+                  	      $('#nome-figlio-1').val(data.figli[0].nome_figlio_1);
+                        }
+                        if(data.figli[0].cognome_figlio_1!=null)
+                          {
+                            $("#cognome-figlio-1").val(data.figli[0].cognome_figlio_1);
+                          }
+                      if(data.figli[0].nome_figlio_2!=null)
+                        {
+                  	      $('#nome-figlio-2').val(data.figli[0].nome_figlio_2);
+                        }
+                        if(data.figli[0].cognome_figlio_2!=null)
+                          {
+                            $("#cognome-figlio-2").val(data.figli[0].cognome_figlio_2);
+                          }
+                          if(data.figli[0].nome_figlio_3!=null)
                             {
-                      	      $('#nome-figlio-1').val(data.figli[0].nome_figlio_1);
+                      	      $('#nome-figlio-3').val(data.figli[0].nome_figlio_3);
                             }
-                            if(data.figli[0].cognome_figlio_1!=null)
-                              {
-                                $("#cognome-figlio-1").val(data.figli[0].cognome_figlio_1);
-                              }
-                              if(data.figli[0].nome_figlio_2!=null)
-                                {
-                          	      $('#nome-figlio-2').val(data.figli[0].nome_figlio_2);
-                                }
-                                if(data.figli[0].cognome_figlio_2!=null)
-                                  {
-                                    $("#cognome-figlio-2").val(data.figli[0].cognome_figlio_2);
-                                  }
-                                  if(data.figli[0].nome_figlio_3!=null)
-                                    {
-                              	      $('#nome-figlio-3').val(data.figli[0].nome_figlio_3);
-                                    }
-                                    if(data.figli[0].cognome_figlio_3!=null)
-                                      {
-                                        $("#cognome-figlio-3").val(data.figli[0].cognome_figlio_3);
-                                      }
-                                      if(data.figli[0].nome_figlio_4!=null)
-                                        {
-                                  	      $('#nome-figlio-4').val(data.figli[0].nome_figlio_4);
-                                        }
-                                        if(data.figli[0].cognome_figlio_4!=null)
-                                          {
-                                            $("#cognome-figlio-4").val(data.figli[0].cognome_figlio_4);
-                                          }
-                                          if(data.figli[0].nome_figlio_5!=null)
-                                            {
-                                      	      $('#nome-figlio-5').val(data.figli[0].nome_figlio_5);
-                                            }
-                                            if(data.figli[0].cognome_figlio_5!=null)
-                                              {
-                                                $("#cognome-figlio-5").val(data.figli[0].cognome_figlio_5);
-                                              }
+                        if(data.figli[0].cognome_figlio_3!=null)
+                          {
+                            $("#cognome-figlio-3").val(data.figli[0].cognome_figlio_3);
+                          }
+                          if(data.figli[0].nome_figlio_4!=null)
+                            {
+                      	      $('#nome-figlio-4').val(data.figli[0].nome_figlio_4);
+                            }
+                        if(data.figli[0].cognome_figlio_4!=null)
+                          {
+                            $("#cognome-figlio-4").val(data.figli[0].cognome_figlio_4);
+                          }
+                          if(data.figli[0].nome_figlio_5!=null)
+                            {
+                      	      $('#nome-figlio-5').val(data.figli[0].nome_figlio_5);
+                            }
+                        if(data.figli[0].cognome_figlio_5!=null)
+                          {
+                            $("#cognome-figlio-5").val(data.figli[0].cognome_figlio_5);
+                          }
 
                       }
                   }
@@ -231,7 +265,7 @@
         //$('#settore').parent().hide();
         $("#numero-tessera").parent().hide();
         $("#carico").parent().hide();
-        $("#osservazioni").parent().hide();
+        //$("#osservazioni").parent().hide();
       }
       function prepara_nuovo_membro()
       {
