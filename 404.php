@@ -44,7 +44,7 @@
                          <img src="assets/images/img-1583-122x122.png" alt="logo" title="" style="height: 3.8rem;">
                     </a>
                 </span>
-                <span class="navbar-caption-wrap"><a class="navbar-caption text-white display-4" href="home">AD Firenze</a></span>
+                <span class="navbar-caption-wrap"><a class="navbar-caption text-white display-4" href="home">ADM Firenze</a></span>
             </div>
         </div>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">

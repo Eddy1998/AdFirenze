@@ -54,7 +54,7 @@ if(!isset($_SESSION['username']))
                 </span>
                 <span class="navbar-caption-wrap">
                     <a class="navbar-caption text-white display-4" href="home.php">
-                        AD Firenze
+                        ADM Firenze
                     </a>
                 </span>
             </div>

@@ -32,7 +32,7 @@ header('location: index.php');
   <script type="text/javascript">
         $(document).ready(function(){
           var Div, contenuto,data;
-        
+
 
           <?php $res = @$_GET['success'];
           if($res==1)
@@ -95,7 +95,7 @@ header('location: index.php');
                          <img src="assets/images/img-1583-122x122.png" alt="Logo" title="" style="height: 3.8rem;">
 
                 </span>
-                <span class="navbar-caption-wrap"><a class="navbar-caption text-white display-4" href="home.php">AD Firenze</a></span>
+                <span class="navbar-caption-wrap"><a class="navbar-caption text-white display-4" href="home.php">ADM Firenze</a></span>
             </div>
         </div>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">

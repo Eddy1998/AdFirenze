@@ -271,7 +271,7 @@ function coda(riga)
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">
         <img src="assets/images/img-1583-122x122.png" width="30" height="30" class="d-inline-block align-top" alt="">
-        AD Firenze
+        ADM Firenze
       </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>

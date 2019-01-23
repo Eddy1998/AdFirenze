@@ -54,7 +54,7 @@ header('location: home');
                          <img src="assets/images/img-1583-122x122.png" alt="Mobirise" title="" style="height: 3.8rem;">
                     </a>
                 </span>
-                <span class="navbar-caption-wrap"><a class="navbar-caption text-white display-4" href="#">AD Firenze</a></span>
+                <span class="navbar-caption-wrap"><a class="navbar-caption text-white display-4" href="">ADM Firenze</a></span>
             </div>
         </div>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -74,7 +74,7 @@ header('location: home');
 
 
         <h1 class="mbr-section-title align-center pb-3 mbr-white mbr-bold mbr-fonts-style display-1"><p>
-        </p><br><br><p style="text-shadow: -1px 0 black, 0 2px black, 2px 0 black, 0 -1px black;">AD Firenze</p></h1>
+        </p><br><br><p style="text-shadow: -1px 0 black, 0 2px black, 2px 0 black, 0 -1px black;">ADM Firenze</p></h1>
 
         <h3 class="mbr-section-subtitle mbr-fonts-style display-5">
             Amministrazione</h3>

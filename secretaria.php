@@ -62,7 +62,7 @@ header('location: index.php');
 
                 </span>
                 <span class="navbar-caption-wrap"><a class="navbar-caption text-white display-4" href="home">
-                      AD Firenze
+                      ADM Firenze
                     </a></span>
             </div>
         </div>
