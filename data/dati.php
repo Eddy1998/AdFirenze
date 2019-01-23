@@ -315,6 +315,10 @@ try{
     if(isset($_POST['ONE'])) {
 
            $id = $_POST['ssid'];
+           if(strlen($id) < 32 )
+           {
+               $id = md5($id);
+           }
 					//		$id="17e62166fc8586dfa4d1bc0e1742c08b";
 
 					   $jsondata=array();
