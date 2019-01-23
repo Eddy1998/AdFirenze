@@ -128,7 +128,7 @@ try{
          {
 
                   $jsondataT=array();
-                  $sqlu =$dbh->prepare("SELECT *, md5(id) AS ssid, DATE_FORMAT(p.data_nascita, '%d/%m/%Y' ) AS data_di_nascita,DATE_FORMAT(p.data_matrimonio,  '%d/%m/%Y' ) AS data_di_matrimonio, DATE_FORMAT(p.data_battesimo,  '%d/%m/%Y' ) AS data_di_battesimo, DATE_FORMAT(p.data_arrivo_in_chiesa,  '%d/%m/%Y' ) AS data_arrivo  FROM persone p ORDER BY p.cognome ASC;");
+                  $sqlu =$dbh->prepare("SELECT *, md5(id) AS ssid, DATE_FORMAT(p.data_nascita, '%d-%m-%Y' ) AS data_di_nascita,DATE_FORMAT(p.data_matrimonio,  '%d-%m-%Y' ) AS data_di_matrimonio, DATE_FORMAT(p.data_battesimo,  '%d-%m-%Y' ) AS data_di_battesimo, DATE_FORMAT(p.data_arrivo_in_chiesa,  '%d-%m-%Y' ) AS data_arrivo  FROM persone p ORDER BY p.cognome ASC;");
 
                      $sqlu->execute();
                     if ($sqlu->rowCount()>0)
@@ -230,7 +230,7 @@ try{
          {
 
                   $jsondataT=array();
-                  $sqlu =$dbh->prepare("SELECT p.*, md5(id) AS ssid, DATE_FORMAT(p.data_nascita,  '%d/%m/%Y' ) AS data_di_nascita,DATE_FORMAT(p.data_matrimonio,  '%d/%m/%Y' ) AS data_di_matrimonio, DATE_FORMAT(p.data_battesimo,  '%d/%m/%Y' ) AS data_di_battesimo, DATE_FORMAT(p.data_arrivo_in_chiesa,  '%d/%m/%Y' ) AS data_arrivo  FROM persone p WHERE tipo_persona='membro' ORDER BY p.cognome ASC;");
+                  $sqlu =$dbh->prepare("SELECT p.*, md5(id) AS ssid, DATE_FORMAT(p.data_nascita,  '%d-%m-%Y' ) AS data_di_nascita,DATE_FORMAT(p.data_matrimonio,  '%d-%m-%Y' ) AS data_di_matrimonio, DATE_FORMAT(p.data_battesimo,  '%d-%m-%Y' ) AS data_di_battesimo, DATE_FORMAT(p.data_arrivo_in_chiesa,  '%d-%m-%Y' ) AS data_arrivo  FROM persone p WHERE tipo_persona='membro' ORDER BY p.cognome ASC;");
 
                      $sqlu->execute();
                     if ($sqlu->rowCount()>0)
@@ -258,7 +258,7 @@ try{
       {
 
               $jsondata=array();
-              $sqld =$dbh->prepare("SELECT p.*, md5(id) AS ssid, DATE_FORMAT(p.data_nascita,  '%d/%m/%Y' ) AS data_di_nascita,DATE_FORMAT(p.data_matrimonio,  '%d/%m/%Y' ) AS data_di_matrimonio, DATE_FORMAT(p.data_arrivo_in_chiesa, '%d/%m/%Y' ) AS data_arrivo  FROM persone p WHERE tipo_persona='congregato' ORDER BY p.cognome ASC;");
+              $sqld =$dbh->prepare("SELECT p.*, md5(id) AS ssid, DATE_FORMAT(p.data_nascita,  '%d-%m-%Y' ) AS data_di_nascita,DATE_FORMAT(p.data_matrimonio,  '%d-%m-%Y' ) AS data_di_matrimonio, DATE_FORMAT(p.data_arrivo_in_chiesa, '%d-%m-%Y' ) AS data_arrivo  FROM persone p WHERE tipo_persona='congregato' ORDER BY p.cognome ASC;");
                  $sqld->execute();
                 if ($sqld->rowCount()>0)
                 {
@@ -287,7 +287,7 @@ try{
 
 
                   $jsondata=array();
-                  $sql =$dbh->prepare("SELECT *, md5(id) AS ssid, DATE_FORMAT(p.data_nascita,  '%d/%m/%Y' ) AS data_di_nascita FROM persone p WHERE p.tipo_persona='bambino' ORDER BY p.cognome ASC;");
+                  $sql =$dbh->prepare("SELECT *, md5(id) AS ssid, DATE_FORMAT(p.data_nascita,  '%d-%m-%Y' ) AS data_di_nascita FROM persone p WHERE p.tipo_persona='bambino' ORDER BY p.cognome ASC;");
                   $sql->execute();
 
                     if ($sql->rowCount()>0)
@@ -315,10 +315,14 @@ try{
     if(isset($_POST['ONE'])) {
 
            $id = $_POST['ssid'];
+           if(strlen($id) < 32 )
+           {
+               $id = md5($id);
+           }
 					//		$id="17e62166fc8586dfa4d1bc0e1742c08b";
 
 					   $jsondata=array();
-             $sql =$dbh->prepare("SELECT p.*,DATE_FORMAT(p.data_nascita,  '%d/%m/%Y' ) AS data_di_nascita,DATE_FORMAT(p.data_matrimonio,  '%d/%m/%Y' ) AS data_di_matrimonio, DATE_FORMAT(p.data_battesimo,  '%d/%m/%Y' ) AS data_di_battesimo, DATE_FORMAT(p.data_arrivo_in_chiesa,  '%d/%m/%Y' ) AS data_arrivo  FROM persone p WHERE md5(p.id)=:id;");
+             $sql =$dbh->prepare("SELECT p.*,DATE_FORMAT(p.data_nascita,  '%d-%m-%Y' ) AS data_di_nascita,DATE_FORMAT(p.data_matrimonio,  '%d-%m-%Y' ) AS data_di_matrimonio, DATE_FORMAT(p.data_battesimo,  '%d-%m-%Y' ) AS data_di_battesimo, DATE_FORMAT(p.data_arrivo_in_chiesa,  '%d-%m-%Y' ) AS data_arrivo  FROM persone p WHERE md5(p.id)=:id;");
               $sql->bindValue(":id", $id);
              $sql->execute();
 
@@ -368,7 +372,7 @@ try{
 
 
 									 	// se esiste si cerca nella tabella di consacrato
-									 	$sql2 =$dbh->prepare("SELECT *,DATE_FORMAT(consacrato_diacono, '%d/%m/%Y' ) AS data_diacono,DATE_FORMAT(consacrato_presbitero, '%d/%m/%Y' ) AS data_presbitero, DATE_FORMAT(consacrato_evangelista, '%d/%m/%Y' ) AS data_evangelista,DATE_FORMAT(consacrato_pastore, '%d/%m/%Y' ) AS data_pastore FROM consacrato WHERE md5(id_persona)=:id");
+									 	$sql2 =$dbh->prepare("SELECT *,DATE_FORMAT(consacrato_diacono, '%d-%m-%Y' ) AS data_diacono,DATE_FORMAT(consacrato_presbitero, '%d-%m-%Y' ) AS data_presbitero, DATE_FORMAT(consacrato_evangelista, '%d-%m-%Y' ) AS data_evangelista,DATE_FORMAT(consacrato_pastore, '%d-%m-%Y' ) AS data_pastore FROM consacrato WHERE md5(id_persona)=:id");
 										$sql2->bindValue(":id", $id);
 										$sql2->execute();
 

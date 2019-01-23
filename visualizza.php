@@ -186,19 +186,22 @@ if(!isset($_GET['id']))
                 <li class="nav-item mbr-fonts-style" id="disattiva">
                 <form action="attivita" method="POST">
                     <input type="hidden"  name="ssid" value="<?php echo $_GET['id']; ?>"></input>
-                   <span class="input-group-btn"><button href="" type="submit" name="disattivautente" class="btn btn-form display-4" style="background-color:#dc3545; color:white">DISATTIVA</button></span></form>
+                   <span class="input-group-btn"><button href="" type="submit" name="disattivautente" class="btn btn-form display-4" style="background-color:#dc3545; color:white">DISATTIVA</button></span>
+                 </form>
                 </li>
 
                 <li class="nav-item mbr-fonts-style" id="attiva">
                   <form action="attivita" method="POST">
                     <input type="hidden"  name="ssid" value="<?php echo $_GET['id']; ?>"></input>
-                <span class="input-group-btn"><button href="" type="submit" name="attivautente"  class="btn btn-form display-4" style="background-color:#28a745; color:white">ATTIVA</button></span></form>
+                <span class="input-group-btn"><button href="" type="submit" name="attivautente"  class="btn btn-form display-4" style="background-color:#28a745; color:white">ATTIVA</button></span>
+              </form>
                 </li>
                 <li class="nav-item mbr-fonts-style" >
                   <form action="pdf" method="POST">
                     <input type="hidden"  name="ssid" value="<?php echo $_GET['id']; ?>"></input>
 
-                <span class="input-group-btn"><button href="" type="submit" name="stampautente" class="btn btn-form btn-black display-4">STAMPA</button></span></form>
+                <span class="input-group-btn"><button href="" type="submit" name="stampautente" class="btn btn-form btn-black display-4">STAMPA</button></span>
+              </form>
                 </li>
             </ul>
         </div>

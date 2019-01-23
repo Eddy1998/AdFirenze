@@ -40,6 +40,7 @@ $indirizzo=$_POST["indirizzo"];
     $nascita=NULL;
   }
   else {
+
     $rawdate = htmlentities($_POST["nascita"]);
     $nascita = date('Y-m-d', strtotime($rawdate));
   }

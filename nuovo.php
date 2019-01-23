@@ -97,17 +97,20 @@ header('location: index');
       //preparo membro
       document.getElementById("opzione").selectedIndex = 1;
       cambia();
+      $("#titolo-tipo, #titolo-opzione").hide();
     <?php }
     else if($res=='C') { ?>
       //preparo congregato
       document.getElementById("opzione").selectedIndex = 2;
       cambia();
+      $("#titolo-tipo, #titolo-opzione").hide();
     <?php }
     else if($res=='B')
     { ?>
       //prepato bambino/a
       document.getElementById("opzione").selectedIndex = 3;
       cambia();
+      $("#titolo-tipo, #titolo-opzione").hide();
     <?php
     } ?>
 
@@ -177,7 +180,7 @@ header('location: index');
 
 
     <div class="container">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" id="titolo-tipo">
             <div class="title col-12 col-lg-8">
                 <h2 class="align-center pb-2 mbr-fonts-style display-2">TIPO</h2>
                 <h3 class="mbr-section-subtitle align-center pb-5 mbr-light mbr-fonts-style display-5">
@@ -185,7 +188,7 @@ header('location: index');
             </div>
         </div>
 
-        <div class="row py-2 justify-content-center">
+        <div class="row py-2 justify-content-center" id="titolo-opzione">
             <div class="col-12 col-lg-8  col-md-8 " data-form-type="formoid">
                 <div class="row row-sm-offset">
                   <div class="col-md-3 multi-horizontal"></div>
@@ -626,6 +629,42 @@ header('location: index');
           </div>
           <div class="modal-body "><div class="input-group">
                 <h5>Sembra che <b id="persona-esistente"></b> è già presente nel registro, ti consigliamo di verificare prima di continuare con la registrazione per evitare duplicazioni.</h5>
+          </div>
+          </div>
+          <div class="modal-footer">
+            <button  id="chiudi" type="button" class="btn btn-primary" data-dismiss="modal" >OK</button>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+     <div id="genitore-mex" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog ">
+       <div class="modal-content">
+          <div class="modal-content">
+          <div class="modal-header">
+
+        <div class="input-group">
+          <div class="input-group-prepend">
+          <h4  ><b>Messaggio:</b></h4>
+          </div>
+        </div>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body "><div class="input-group">
+                <h5>I seguenti campi sono stati autocompilati con i dati del genitore(padre) scelto:</h5><br>
+                <h5><ul>
+                    <li>Indirizzo</li>
+                    <li>Città</li>
+                    <li>CAP</li>
+                    <li>Indirizzo</li>
+                    <li>Numero di telefono</li>
+                    <li>Nazionalità</li>
+                    <li>Congregazione</li>
+                </ul></h5><br>
+                <h5>Prima di registrare il bambino/a, controlla che i dati coincidano con quelli desiderati per evitare futuri errori.</h5>
           </div>
           </div>
           <div class="modal-footer">
