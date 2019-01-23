@@ -35,8 +35,8 @@
             });
           }
       }
-    
-    
+
+
     function seleziona(id,value)
     {
       $("#"+id+" option").each(function(){
@@ -44,7 +44,7 @@
           $(this).attr("selected","selected");
            }
       });
-    }    
+    }
 
       function rellena(idinput,idcognome,idlist)
       {
@@ -59,7 +59,7 @@
               var salto = opts[i].value.split("  ");
               var ident = salto[2];
               $("#"+idinput).val(salto[0]+' '+salto[1]);
-             
+
               if($("#tipo").val()=="bambino")
               {
                $.ajax({
@@ -76,6 +76,16 @@
                         $("#citta").val(data.profilo[0].citta);
                         $("#cap").val(data.profilo[0].cap);
                     $("#telefono").val(data.profilo[0].telefono);
+                    var nome =data.profilo[0].nome_coniuge;
+                    var cognome = data.profilo[0].cognome_coniuge;
+                    if(nome!= null && cognome != null)
+                    {
+                      $("#nome-madre").val(nome+' '+cognome);
+                    }
+                    else if(nome!= null && cognome === null)
+                    {
+                      $("#nome-madre").val(nome);
+                    }
                     var nazio = data.profilo[0].nazionalita;
                     var congrega = data.profilo[0].congregazione;
                     seleziona("nazionalita",nazio);
@@ -374,6 +384,22 @@
              $("#luogoevangelista").show();
              $("#datapastore").show();
              $("#luogopastore").show();
+             $("#datamissionario").show();
+             $("#luogomissionario").show();
+             $("#datacooperatore").show();
+               $("#luogocooperatore").show();
+        break;
+        case 'Missionario/a':
+            $("#datadiacono").show();
+             $("#luogodiacono").show();
+             $("#datapresbitero").show();
+             $("#luogopresbitero").show();
+             $("#dataevangelista").show();
+             $("#luogoevangelista").show();
+             $("#datamissionario").show();
+             $("#luogomissionario").show();
+             $("#datacooperatore").show();
+               $("#luogocooperatore").show();
         break;
         case 'Evangelista':
             $("#datadiacono").show();
@@ -382,21 +408,27 @@
              $("#luogopresbitero").show();
              $("#dataevangelista").show();
              $("#luogoevangelista").show();
+             $("#datacooperatore").show();
+               $("#luogocooperatore").show();
         break;
         case 'Presbitero':
             $("#datadiacono").show();
              $("#luogodiacono").show();
              $("#datapresbitero").show();
              $("#luogopresbitero").show();
+             $("#datacooperatore").show();
+               $("#luogocooperatore").show();
         break;
-        case 'Diacono':
+        case 'Diacono/Diaconessa':
            $("#datadiacono").show();
              $("#luogodiacono").show();
+             $("#datacooperatore").show();
+               $("#luogocooperatore").show();
         break;
 
-        case  'Diaconessa':
-           $("#datadiacono").show();
-             $("#luogodiacono").show();
+        case  'Cooperatore/Cooperatrice':
+           $("#datacooperatore").show();
+             $("#luogocooperatore").show();
         break;
 
       }
@@ -413,6 +445,10 @@
            $("#luogoevangelista").hide();
            $("#datapastore").hide();
            $("#luogopastore").hide();
+           $("#datamissionario").hide();
+           $("#luogomissionario").hide();
+           $("#datacooperatore").hide();
+           $("#luogocooperatore").hide();
       }
 
 

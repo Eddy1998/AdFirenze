@@ -369,7 +369,7 @@ session_start();
           //controllo carico in chiesa
         if($carico == 'Pastore' || $carico == 'Evangelista' || $carico=='Presbitero' || $carico =='Diacono' || $carico=='Diaconessa')
         {
-            if(!empty($_POST['data-diacono']) || !empty($_POST['luogo-diacono']) || !empty($_POST['data-presbitero']) || !empty($_POST['luogo-presbitero']) || !empty($_POST['data-evangelista']) || !empty($_POST['luogo-evangelista']) || !empty($_POST['data-pastore']) || !empty($_POST['luogo-pastore']) )
+            if(!empty($_POST['data-diacono']) || !empty($_POST['luogo-diacono']) || !empty($_POST['data-presbitero']) || !empty($_POST['luogo-presbitero']) || !empty($_POST['data-evangelista']) || !empty($_POST['luogo-evangelista']) || !empty($_POST['data-pastore']) || !empty($_POST['luogo-pastore']) || !empty($_POST['data-missionario']) || !empty($_POST['luogo-missionario']) || !empty($_POST['data-cooperatore'])|| !empty($_POST['luogo-cooperatore']))
             {
               if (empty($_POST["data-diacono"])){
                 $data_diacono=NULL;
@@ -399,6 +399,23 @@ session_start();
                 $rawdate6 = htmlentities($_POST["data-pastore"]);
                 $data_pastore = date('Y-m-d', strtotime($rawdate6));
               }
+
+              if (empty($_POST["data-missionario"])){
+                $data_missionario=NULL;
+              }
+              else {
+                $rawdate7 = htmlentities($_POST["data-missionario"]);
+                $data_missionario = date('Y-m-d', strtotime($rawdate7));
+              }
+
+              if (empty($_POST["data-cooperatore"])){
+                $data_cooperatore=NULL;
+              }
+              else {
+                $rawdate8 = htmlentities($_POST["data-cooperatore"]);
+                $data_cooperatore = date('Y-m-d', strtotime($rawdate8));
+              }
+
               if (empty($_POST["luogo-diacono"])){
                 $luogo_diacono=NULL;
               }
@@ -424,6 +441,22 @@ session_start();
                 $luogo_pastore=converte($_POST["luogo-pastore"]);
               }
 
+              if (empty($_POST["luogo-missionario"])){
+                $luogo_missionario=NULL;
+              }
+              else {
+                $luogo_missionario=converte($_POST["luogo-missionario"]);
+              }
+
+              if (empty($_POST["luogo-cooperatore"])){
+                $luogo_cooperatore=NULL;
+              }
+              else {
+                $luogo_cooperatore=converte($_POST["luogo-cooperatore"]);
+              }
+
+
+
                 $query=$dbh->prepare("SELECT id_persona FROM consacrato WHERE md5(id_persona)=:id");
                 $query->bindValue(":id",$ssid);
                 $query->execute();
@@ -433,7 +466,8 @@ session_start();
                     luogo_diacono=:luogo_diacono, consacrato_presbitero=:consacrato_presbitero,
                      luogo_presbitero=:luogo_presbitero, consacrato_evangelista=:consacrato_evangelista,
                       luogo_evangelista=:luogo_evangelista, consacrato_pastore=:consacrato_pastore,
-                      luogo_pastore=:luogo_pastore WHERE md5(id_persona)=:id;");
+                      luogo_pastore=:luogo_pastore, consacrato_missionario=:consacrato_missionario, luogo_missionario=:luogo_missionario,
+                      consacrato_cooperatore=:consacrato_cooperatore, luogo_cooperatore=:luogo_cooperatore WHERE md5(id_persona)=:id;");
 
                       $query->bindValue(":id",$ssid);
                       $query->bindValue(":consacrato_diacono",$data_diacono);
@@ -444,6 +478,10 @@ session_start();
                       $query->bindValue(":luogo_evangelista",$luogo_evangelista);
                       $query->bindValue(":consacrato_pastore",$data_pastore);
                       $query->bindValue(":luogo_pastore",$luogo_pastore);
+                      $query->bindValue(":consacrato_missionario",$data_missionario);
+                      $query->bindValue(":luogo_missionario",$luogo_missionario);
+                      $query->bindValue(":consacrato_cooperatore",$data_cooperatore);
+                      $query->bindValue(":luogo_cooperatore",$luogo_cooperatore);
                       if(!$query->execute())
                       {
                           stampako($ssid);
@@ -451,8 +489,8 @@ session_start();
                   }
                   else
                   {
-                      $query=$dbh->prepare("INSERT INTO consacrato (id_persona,consacrato_diacono,luogo_diacono,consacrato_presbitero,luogo_presbitero,consacrato_evangelista,luogo_evangelista,consacrato_pastore,luogo_pastore)
-                      VALUES (:id_persona,:consacrato_diacono,:luogo_diacono,:consacrato_presbitero,:luogo_presbitero,:consacrato_evangelista,:luogo_evangelista,:consacrato_pastore,:luogo_pastore)");
+                      $query=$dbh->prepare("INSERT INTO consacrato (id_persona,consacrato_diacono,luogo_diacono,consacrato_presbitero,luogo_presbitero,consacrato_evangelista,luogo_evangelista,consacrato_pastore,luogo_pastore,consacrato_missionario,luogo_missionario,consacrato_cooperatore,luogo_cooperatore)
+                      VALUES (:id_persona,:consacrato_diacono,:luogo_diacono,:consacrato_presbitero,:luogo_presbitero,:consacrato_evangelista,:luogo_evangelista,:consacrato_pastore,:luogo_pastore,:consacrato_missionario,:luogo_missionario,consacrato_cooperatore,luogo_cooperatore)");
 
                       $query->bindValue(":id_persona",$id);
                       $query->bindValue(":consacrato_diacono",$data_diacono);
@@ -463,6 +501,10 @@ session_start();
                       $query->bindValue(":luogo_evangelista",$luogo_evangelista);
                       $query->bindValue(":consacrato_pastore",$data_pastore);
                       $query->bindValue(":luogo_pastore",$luogo_pastore);
+                      $query->bindValue(":consacrato_missionario",$data_missionario);
+                      $query->bindValue(":luogo_missionario",$luogo_missionario);
+                      $query->bindValue(":consacrato_cooperatore",$data_cooperatore);
+                      $query->bindValue(":luogo_cooperatore",$luogo_cooperatore);
                       if(!$query->execute())
                       {
                             stampako($ssid);

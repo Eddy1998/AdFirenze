@@ -530,50 +530,6 @@ if(!isset($_GET['id']))
 
                                 </div>
                             </div>
-
-                            <div id="datadiacono" class="col-md-6 multi-horizontal" >
-                                <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7" style="color:gray"><b>Data consacrazione a Diacono</b></label><br>
-                                    <label class="form-control-label mbr-fonts-style display-7"  ><b id="data-diacono"> </b></label>
-
-                                </div>
-                            </div>
-                            <div id="luogodiacono" class="col-md-6 multi-horizontal" >
-                                <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7" style="color:gray" ><b>Luogo di consacrazione - Diacono</b></label><br>
-                                    <label class="form-control-label mbr-fonts-style display-7"  ><b id="luogo-diacono"> </b></label>
-
-                                </div>
-                            </div>
-
-                            <div id="datapresbitero" class="col-md-6 multi-horizontal" >
-                                <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7" style="color:gray" ><b>Data consacrazione a Presbitero</b></label><br>
-                                    <label class="form-control-label mbr-fonts-style display-7"  ><b id="data-presbitero"> </b></label>
-
-                                </div>
-                            </div>
-                            <div id="luogopresbitero" class="col-md-6 multi-horizontal" >
-                                <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7" style="color:gray" ><b>Luogo di consacrazione - Presbitero</b></label><br>
-                                    <label class="form-control-label mbr-fonts-style display-7"  ><b id="luogo-presbitero"> </b></label>
-
-                                </div>
-                            </div>
-                            <div id="dataevangelista" class="col-md-6 multi-horizontal">
-                                <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7" style="color:gray"><b>Data consacrazione a Evangelista</b></label><br>
-                                    <label class="form-control-label mbr-fonts-style display-7"  ><b id="data-evangelista"> </b></label>
-
-                                </div>
-                            </div>
-                            <div  id="luogoevangelista" class="col-md-6 multi-horizontal" >
-                                <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7" style="color:gray"><b>Luogo di consacrazione - Evangelista</b></label><br>
-                                    <label class="form-control-label mbr-fonts-style display-7"  ><b id="luogo-evangelista"> </b></label>
-
-                                </div>
-                            </div>
                             <div id="datapastore" class="col-md-6 multi-horizontal" >
                                 <div class="form-group">
                                     <label class="form-control-label mbr-fonts-style display-7" style="color:gray"><b>Data consacrazione a Pastore</b></label><br>
@@ -588,6 +544,77 @@ if(!isset($_GET['id']))
 
                                 </div>
                               </div>
+                              <div id="datamissionario" class="col-md-6 multi-horizontal" >
+                                  <div class="form-group">
+                                      <label class="form-control-label mbr-fonts-style display-7" style="color:gray"><b>Data consacrazione a Missionario</b></label><br>
+                                      <label class="form-control-label mbr-fonts-style display-7"  ><b id="data-missionario"> </b></label>
+
+                                  </div>
+                              </div>
+                              <div id="luogomissionario" class="col-md-6 multi-horizontal">
+                                  <div class="form-group">
+                                      <label class="form-control-label mbr-fonts-style display-7" style="color:gray"><b>Luogo di consacrazione - Missionario</b></label><br>
+                                      <label class="form-control-label mbr-fonts-style display-7"  ><b id="luogo-missionario"> </b></label>
+
+                                  </div>
+                                </div>
+                              <div id="dataevangelista" class="col-md-6 multi-horizontal">
+                                  <div class="form-group">
+                                      <label class="form-control-label mbr-fonts-style display-7" style="color:gray"><b>Data consacrazione a Evangelista</b></label><br>
+                                      <label class="form-control-label mbr-fonts-style display-7"  ><b id="data-evangelista"> </b></label>
+
+                                  </div>
+                              </div>
+                              <div  id="luogoevangelista" class="col-md-6 multi-horizontal" >
+                                  <div class="form-group">
+                                      <label class="form-control-label mbr-fonts-style display-7" style="color:gray"><b>Luogo di consacrazione - Evangelista</b></label><br>
+                                      <label class="form-control-label mbr-fonts-style display-7"  ><b id="luogo-evangelista"> </b></label>
+
+                                  </div>
+                              </div>
+                              <div id="datapresbitero" class="col-md-6 multi-horizontal" >
+                                  <div class="form-group">
+                                      <label class="form-control-label mbr-fonts-style display-7" style="color:gray" ><b>Data consacrazione a Presbitero</b></label><br>
+                                      <label class="form-control-label mbr-fonts-style display-7"  ><b id="data-presbitero"> </b></label>
+
+                                  </div>
+                              </div>
+                              <div id="luogopresbitero" class="col-md-6 multi-horizontal" >
+                                  <div class="form-group">
+                                      <label class="form-control-label mbr-fonts-style display-7" style="color:gray" ><b>Luogo di consacrazione - Presbitero</b></label><br>
+                                      <label class="form-control-label mbr-fonts-style display-7"  ><b id="luogo-presbitero"> </b></label>
+
+                                  </div>
+                              </div>
+                            <div id="datadiacono" class="col-md-6 multi-horizontal" >
+                                <div class="form-group">
+                                    <label class="form-control-label mbr-fonts-style display-7" style="color:gray"><b>Data consacrazione a Diacono</b></label><br>
+                                    <label class="form-control-label mbr-fonts-style display-7"  ><b id="data-diacono"> </b></label>
+
+                                </div>
+                            </div>
+                            <div id="luogodiacono" class="col-md-6 multi-horizontal" >
+                                <div class="form-group">
+                                    <label class="form-control-label mbr-fonts-style display-7" style="color:gray" ><b>Luogo di consacrazione - Diacono</b></label><br>
+                                    <label class="form-control-label mbr-fonts-style display-7"  ><b id="luogo-diacono"> </b></label>
+
+                                </div>
+                            </div>
+                            <div id="datacooperatore" class="col-md-6 multi-horizontal" >
+                                <div class="form-group">
+                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Data consacrazione a Cooperatore</b></label><br>
+                                  <label class="form-control-label mbr-fonts-style display-7"  ><b id="data-cooperatore"> </b></label>
+                                </div>
+                            </div>
+                            <div id="luogocooperatore" class="col-md-6 multi-horizontal" >
+                                <div class="form-group">
+                                    <label class="form-control-label mbr-fonts-style display-7"  style="color:gray"><b>Luogo di consacrazione - Cooperatore</b></label><br>
+                                    <label class="form-control-label mbr-fonts-style display-7"  ><b id="luogo-cooperatore"> </b></label>
+                                </div>
+                            </div>
+
+
+
 
 
                         </div>
@@ -634,20 +661,19 @@ if(!isset($_GET['id']))
                        <input type="hidden" class="form-control" name="battezzato-spirito" id="battezzato-spirito2" >
                       <input type="hidden" class="form-control" name="tessera" id="numero-tessera2">
                        <input type="hidden" class="form-control" name="carico" id="carico2">
+                       <input type="hidden" class="form-control" name="data-cooperatore" id="data-cooperatore2">
+                       <input type="hidden" class="form-control" name="luogo-cooperatore" id="luogo-cooperatore2">
                       <input type="hidden" class="form-control" name="data-diacono" id="data-diacono2">
                       <input type="hidden" class="form-control" name="luogo-diacono" id="luogo-diacono2">
                       <input type="hidden" class="form-control" name="data-presbitero"  id="data-presbitero2">
                       <input type="hidden" class="form-control" name="luogo-presbitero"  id="luogo-presbitero2">
                       <input type="hidden" class="form-control" name="data-evangelista" id="data-evangelista2">
                       <input type="hidden" class="form-control" name="luogo-evangelista"  id="luogo-evangelista2">
+                      <input type="hidden" class="form-control" name="data-missionario" id="data-missionario2">
+                      <input type="hidden" class="form-control" name="luogo-missionario"  id="luogo-missionario2">
                       <input type="hidden" class="form-control" name="data-pastore"  id="data-pastore2">
                       <input type="hidden" class="form-control" name="luogo-pastore"  id="luogo-pastore2">
                       <textarea type="text" class="form-control" name="osservazioni"  id="osservazioni2" style="display:none;"></textarea>
-                        <!--/////INSERT INTO user_date VALUES ('', '$name', STR_TO_DATE('$date', '%m/%d/%Y'))
-
-                        link per caricamento
-https://stackoverflow.com/questions/5763096/i-want-to-display-a-waiting-animation-while-my-php-page-is-fetching-data-from-th
-                        -->
 
 
                         <span class="input-group-btn"><button href="" type="submit" class="btn btn-form btn-black display-4">MODIFICA</button></span>

@@ -537,52 +537,13 @@ header('location: index');
                                     <select  class="form-control" name="carico"  required="" id="carico">
                                     <option value="" disabled selected>Scegli un'opzione..</option>
                                     <option value="Pastore">Pastore</option>
+                                    <option value="Missionario/a">Missionario/a</option>
                                    <option value="Evangelista">Evangelista</option>
                                    <option value="Presbitero">Presbitero</option>
-                                   <option value="Diacono">Diacono</option>
-                                   <option value="Diaconessa">Diaconessa</option>
-                                   <option value="Cooperatore">Cooperatore</option>
-                                   <option value="Cooperatrice">Cooperatrice</option>
+                                   <option value="Diacono/Diaconessa">Diacono/Diaconessa</option>
+                                   <option value="Cooperatore/Cooperatrice">Cooperatore/Cooperatrice</option>
                                    <option value="Membro">Membro</option>
                                     </select>
-                                </div>
-                            </div>
-
-                            <div id="datadiacono" class="col-md-6 multi-horizontal" data-for="data-diacono">
-                                <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7" for="data-diacono"><b>Data consacrazione a Diacono</b></label>
-                                    <input type="date" class="form-control" name="data-diacono" id="data-diacono">
-                                </div>
-                            </div>
-                            <div id="luogodiacono" class="col-md-6 multi-horizontal" data-for="luogo-diacono">
-                                <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7" for="luogo-diacono"><b>Luogo di consacrazione - Diacono</b></label>
-                                    <input type="text" class="form-control" name="luogo-diacono" id="luogo-diacono">
-                                </div>
-                            </div>
-
-                            <div id="datapresbitero" class="col-md-6 multi-horizontal" data-for="data-presbitero">
-                                <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7" for="data-presbitero"><b>Data consacrazione a Presbitero</b></label>
-                                    <input type="date" class="form-control" name="data-presbitero"  id="data-presbitero">
-                                </div>
-                            </div>
-                            <div id="luogopresbitero" class="col-md-6 multi-horizontal" data-for="luogo-presbitero">
-                                <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7" for="luogo-presbitero"><b>Luogo di consacrazione - Presbitero</b></label>
-                                    <input type="text" class="form-control" name="luogo-presbitero"  id="luogo-presbitero">
-                                </div>
-                            </div>
-                            <div id="dataevangelista" class="col-md-6 multi-horizontal" data-for="data-evangelista">
-                                <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7" for="data-evangelista"><b>Data consacrazione a Evangelista</b></label>
-                                    <input type="date" class="form-control" name="data-evangelista" id="data-evangelista">
-                                </div>
-                            </div>
-                            <div  id="luogoevangelista" class="col-md-6 multi-horizontal" data-for="luogo-evangelista">
-                                <div class="form-group">
-                                    <label class="form-control-label mbr-fonts-style display-7" for="luogo-evangelista"><b>Luogo di consacrazione - Evangelista</b></label>
-                                    <input type="text" class="form-control" name="luogo-evangelista"  id="luogo-evangelista">
                                 </div>
                             </div>
                             <div id="datapastore" class="col-md-6 multi-horizontal" data-for="data-pastore">
@@ -597,6 +558,70 @@ header('location: index');
                                     <input type="text" class="form-control" name="luogo-pastore"  id="luogo-pastore">
                                 </div>
                             </div>
+                            <div id="datamissionario" class="col-md-6 multi-horizontal" data-for="data-missionario">
+                                <div class="form-group">
+                                    <label class="form-control-label mbr-fonts-style display-7" for="data-missionario"><b>Data consacrazione a Missionario</b></label>
+                                    <input type="date" class="form-control" name="data-missionario"  id="data-missionario">
+                                </div>
+                            </div>
+                            <div id="luogomissionario" class="col-md-6 multi-horizontal" data-for="luogo-missionario">
+                                <div class="form-group">
+                                    <label class="form-control-label mbr-fonts-style display-7" for="luogo-Missionario"><b>Luogo di consacrazione - Missionario</b></label>
+                                    <input type="text" class="form-control" name="luogo-missionario"  id="luogo-missionario">
+                                </div>
+                            </div>
+
+                            <div id="dataevangelista" class="col-md-6 multi-horizontal" data-for="data-evangelista">
+                                <div class="form-group">
+                                    <label class="form-control-label mbr-fonts-style display-7" for="data-evangelista"><b>Data consacrazione a Evangelista</b></label>
+                                    <input type="date" class="form-control" name="data-evangelista" id="data-evangelista">
+                                </div>
+                            </div>
+                            <div  id="luogoevangelista" class="col-md-6 multi-horizontal" data-for="luogo-evangelista">
+                                <div class="form-group">
+                                    <label class="form-control-label mbr-fonts-style display-7" for="luogo-evangelista"><b>Luogo di consacrazione - Evangelista</b></label>
+                                    <input type="text" class="form-control" name="luogo-evangelista"  id="luogo-evangelista">
+                                </div>
+                            </div>
+                            <div id="datapresbitero" class="col-md-6 multi-horizontal" data-for="data-presbitero">
+                                <div class="form-group">
+                                    <label class="form-control-label mbr-fonts-style display-7" for="data-presbitero"><b>Data consacrazione a Presbitero</b></label>
+                                    <input type="date" class="form-control" name="data-presbitero"  id="data-presbitero">
+                                </div>
+                            </div>
+                            <div id="luogopresbitero" class="col-md-6 multi-horizontal" data-for="luogo-presbitero">
+                                <div class="form-group">
+                                    <label class="form-control-label mbr-fonts-style display-7" for="luogo-presbitero"><b>Luogo di consacrazione - Presbitero</b></label>
+                                    <input type="text" class="form-control" name="luogo-presbitero"  id="luogo-presbitero">
+                                </div>
+                            </div>
+                            <div id="datadiacono" class="col-md-6 multi-horizontal" data-for="data-diacono">
+                                <div class="form-group">
+                                    <label class="form-control-label mbr-fonts-style display-7" for="data-diacono"><b>Data consacrazione a Diacono</b></label>
+                                    <input type="date" class="form-control" name="data-diacono" id="data-diacono">
+                                </div>
+                            </div>
+                            <div id="luogodiacono" class="col-md-6 multi-horizontal" data-for="luogo-diacono">
+                                <div class="form-group">
+                                    <label class="form-control-label mbr-fonts-style display-7" for="luogo-diacono"><b>Luogo di consacrazione - Diacono</b></label>
+                                    <input type="text" class="form-control" name="luogo-diacono" id="luogo-diacono">
+                                </div>
+                            </div>
+                            <div id="datacooperatore" class="col-md-6 multi-horizontal" data-for="data-cooperatore">
+                                <div class="form-group">
+                                    <label class="form-control-label mbr-fonts-style display-7" for="data-cooperatore"><b>Data consacrazione a Cooperatore</b></label>
+                                    <input type="date" class="form-control" name="data-cooperatore" id="data-cooperatore">
+                                </div>
+                            </div>
+                            <div id="luogocooperatore" class="col-md-6 multi-horizontal" data-for="luogo-cooperatore">
+                                <div class="form-group">
+                                    <label class="form-control-label mbr-fonts-style display-7" for="luogo-cooperatore"><b>Luogo di consacrazione - Cooperatore</b></label>
+                                    <input type="text" class="form-control" name="luogo-cooperatore" id="luogo-cooperatore">
+                                </div>
+                            </div>
+
+
+
 
 
                         </div>
@@ -656,6 +681,7 @@ header('location: index');
           <div class="modal-body "><div class="input-group">
                 <h5>I seguenti campi sono stati autocompilati con i dati del genitore(padre) scelto:</h5><br>
                 <h5><ul>
+                   <li>nome genitore (madre)</li>
                     <li>Indirizzo</li>
                     <li>Città</li>
                     <li>CAP</li>

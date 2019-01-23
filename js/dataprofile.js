@@ -4,19 +4,12 @@ $(document).ready(function(){
     {
       var id=$('#id').val();
 	    //se non funziona, il link è senza i due punti
-        console.log(id);
+
 
       $.post("data/dati.php",{'ONE': 1, 'ssid' : id }, function(response) {
         var json = JSON.parse(response);
           nascondi_figli()
-          console.log(json);
-         /*
-	 var image = new Image();
-image.src = 'data:image/png;base64,iVBORw0K...';
-document.body.appendChild(image);*/
-	      //vengono valorizzati id dati e controlli per mostrare quta di form ( n figli, consacrato nome figli)
-    /*   $("#attivo2 ,#attivo ").append();
-       $("#tipo2 ,#tipo ").append();*/
+
    $("#attivo2").val(json.profilo[0].attivo);
    if(json.profilo[0].attivo=="S")
    {
@@ -556,6 +549,73 @@ document.body.appendChild(image);*/
 			$("#luogo-pastore2 ").val(json.consacrato[0].luogo_pastore);
 		}
 	}
+
+  if(json.consacrato[0].data_missionario==null && json.consacrato[0].luogo_missionario==null)
+	{
+ 	  $("#datamissionario , #luogomissionario").hide();
+
+	}
+	else
+	{
+		if(json.consacrato[0].data_missionario==null)
+		{
+			$("#data-missionario").append("--non indicato--");
+
+		}
+		else
+		{
+			//da gestire le date, nella parte hidden e visualizzata
+			$("#data-missionario").append(json.consacrato[0].data_missionario);
+			$("#data-missionario2 ").val(json.consacrato[0].data_missionario);
+		}
+		if(json.consacrato[0].luogo_missionario==null)
+		{
+			$("#luogo-missionario").append("--non indicato--");
+
+		}
+		else
+		{
+			//da gestire le date, nella parte hidden e visualizzata
+			$("#luogo-missionario").append(json.consacrato[0].luogo_missionario);
+			$("#luogo-missionario2 ").val(json.consacrato[0].luogo_missionario);
+		}
+	}
+
+
+  if(json.consacrato[0].data_cooperatore==null && json.consacrato[0].luogo_cooperatore==null)
+	{
+ 	  $("#datacooperatore , #luogocooperatore").hide();
+
+	}
+	else
+	{
+		if(json.consacrato[0].data_cooperatore==null)
+		{
+			$("#data-cooperatore").append("--non indicato--");
+
+		}
+		else
+		{
+			//da gestire le date, nella parte hidden e visualizzata
+			$("#data-cooperatore").append(json.consacrato[0].data_cooperatore);
+			$("#data-cooperatore2 ").val(json.consacrato[0].data_cooperatore);
+		}
+		if(json.consacrato[0].luogo_cooperatore==null)
+		{
+			$("#luogo-cooperatore").append("--non indicato--");
+
+		}
+		else
+		{
+			//da gestire le date, nella parte hidden e visualizzata
+			$("#luogo-cooperatore").append(json.consacrato[0].luogo_cooperatore);
+			$("#luogo-cooperatore2 ").val(json.consacrato[0].luogo_cooperatore);
+		}
+	}
+
+
+
+
       });
     }
     else

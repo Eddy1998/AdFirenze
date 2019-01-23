@@ -124,39 +124,6 @@ try{
 
 
 
-          if (isset($_POST['ALL']))
-         {
-
-                  $jsondataT=array();
-                  $sqlu =$dbh->prepare("SELECT *, md5(id) AS ssid, DATE_FORMAT(p.data_nascita, '%d-%m-%Y' ) AS data_di_nascita,DATE_FORMAT(p.data_matrimonio,  '%d-%m-%Y' ) AS data_di_matrimonio, DATE_FORMAT(p.data_battesimo,  '%d-%m-%Y' ) AS data_di_battesimo, DATE_FORMAT(p.data_arrivo_in_chiesa,  '%d-%m-%Y' ) AS data_arrivo  FROM persone p ORDER BY p.cognome ASC;");
-
-                     $sqlu->execute();
-                    if ($sqlu->rowCount()>0)
-                    {
-
-                        while($row=$sqlu->fetch())
-                        {
-                            $jsondataT["dati"][]=$row;
-                        }
-
-
-												$sqlu =$dbh->prepare("SELECT count(*) as totale, (select count(*)  from persone p WHERE attivo='S') as attivi, (select count(*)  from persone p WHERE attivo='N') as non_attivi   FROM persone");
-
-									      $sqlu->execute();
-								        $row=$sqlu->fetch();
-
-  											$jsondataT["contatore"]=$row;
-
-
-
-                  	}
-                   else
-                   {
-                        echo json_encode("not_found");
-                   }
-									 echo json_encode($jsondataT);
-                    exit();
-            }
 
 						if (isset($_POST['NAMES']))
 	        	{
@@ -319,7 +286,7 @@ try{
            {
                $id = md5($id);
            }
-					//		$id="17e62166fc8586dfa4d1bc0e1742c08b";
+
 
 					   $jsondata=array();
              $sql =$dbh->prepare("SELECT p.*,DATE_FORMAT(p.data_nascita,  '%d-%m-%Y' ) AS data_di_nascita,DATE_FORMAT(p.data_matrimonio,  '%d-%m-%Y' ) AS data_di_matrimonio, DATE_FORMAT(p.data_battesimo,  '%d-%m-%Y' ) AS data_di_battesimo, DATE_FORMAT(p.data_arrivo_in_chiesa,  '%d-%m-%Y' ) AS data_arrivo  FROM persone p WHERE md5(p.id)=:id;");
@@ -372,7 +339,7 @@ try{
 
 
 									 	// se esiste si cerca nella tabella di consacrato
-									 	$sql2 =$dbh->prepare("SELECT *,DATE_FORMAT(consacrato_diacono, '%d-%m-%Y' ) AS data_diacono,DATE_FORMAT(consacrato_presbitero, '%d-%m-%Y' ) AS data_presbitero, DATE_FORMAT(consacrato_evangelista, '%d-%m-%Y' ) AS data_evangelista,DATE_FORMAT(consacrato_pastore, '%d-%m-%Y' ) AS data_pastore FROM consacrato WHERE md5(id_persona)=:id");
+									 	$sql2 =$dbh->prepare("SELECT *,DATE_FORMAT(consacrato_diacono, '%d-%m-%Y' ) AS data_diacono,DATE_FORMAT(consacrato_presbitero, '%d-%m-%Y' ) AS data_presbitero, DATE_FORMAT(consacrato_evangelista, '%d-%m-%Y' ) AS data_evangelista, DATE_FORMAT(consacrato_pastore, '%d-%m-%Y' ) AS data_pastore, DATE_FORMAT(consacrato_missionario, '%d-%m-%Y' ) AS data_missionario, DATE_FORMAT(consacrato_cooperatore, '%d-%m-%Y' ) AS data_cooperatore FROM consacrato WHERE md5(id_persona)=:id");
 										$sql2->bindValue(":id", $id);
 										$sql2->execute();
 

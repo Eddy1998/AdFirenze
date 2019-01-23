@@ -350,6 +350,23 @@ session_start();
                 $data_pastore = date('Y-m-d', strtotime($rawdate6));
               }
 
+              if (empty($_REQUEST["data-missionario"])){
+                $data_missionario=NULL;
+              }
+              else {
+                $rawdate7 = htmlentities($_REQUEST["data-missionario"]);
+                $data_missionario = date('Y-m-d', strtotime($rawdate7));
+              }
+
+              if (empty($_REQUEST["data-cooperatore"])){
+                $data_cooperatore=NULL;
+              }
+              else {
+                $rawdate8 = htmlentities($_REQUEST["data-cooperatore"]);
+                $data_cooperatore = date('Y-m-d', strtotime($rawdate8));
+              }
+
+
               if (empty($_REQUEST["luogo-diacono"])){
                 $luogo_diacono=NULL;
               }
@@ -378,8 +395,22 @@ session_start();
                 $luogo_pastore=converte($_REQUEST["luogo-pastore"]);
               }
 
-              $query=$dbh->prepare("INSERT INTO consacrato (id_persona,consacrato_diacono,luogo_diacono,consacrato_presbitero,luogo_presbitero,consacrato_evangelista,luogo_evangelista,consacrato_pastore,luogo_pastore)
-              VALUES (:id_persona,:consacrato_diacono,:luogo_diacono,:consacrato_presbitero,:luogo_presbitero,:consacrato_evangelista,:luogo_evangelista,:consacrato_pastore,:luogo_pastore)");
+              if (empty($_REQUEST["luogo-missionario"])){
+                $luogo_missionario=NULL;
+              }
+              else {
+                $luogo_missionario=converte($_REQUEST["luogo-missionario"]);
+              }
+
+              if (empty($_REQUEST["luogo-cooperatore"])){
+                $luogo_cooperatore=NULL;
+              }
+              else {
+                $luogo_cooperatore=converte($_REQUEST["luogo-cooperatore"]);
+              }
+
+              $query=$dbh->prepare("INSERT INTO consacrato (id_persona,consacrato_diacono,luogo_diacono,consacrato_presbitero,luogo_presbitero,consacrato_evangelista,luogo_evangelista,consacrato_pastore,luogo_pastore,consacrato_missionario,luogo_missionario,consacrato_cooperatore,luogo_cooperatore)
+              VALUES (:id_persona,:consacrato_diacono,:luogo_diacono,:consacrato_presbitero,:luogo_presbitero,:consacrato_evangelista,:luogo_evangelista,:consacrato_pastore,:luogo_pastore,:consacrato_missionario,:luogo_missionario,consacrato_cooperatore,luogo_cooperatore)");
 
               $query->bindValue(":id_persona",$id_genitore);
               $query->bindValue(":consacrato_diacono",$data_diacono);
@@ -390,6 +421,10 @@ session_start();
               $query->bindValue(":luogo_evangelista",$luogo_evangelista);
               $query->bindValue(":consacrato_pastore",$data_pastore);
               $query->bindValue(":luogo_pastore",$luogo_pastore);
+              $query->bindValue(":consacrato_missionario",$data_missionario);
+              $query->bindValue(":luogo_missionario",$luogo_missionario);
+              $query->bindValue(":consacrato_cooperatore",$data_cooperatore);
+              $query->bindValue(":luogo_cooperatore",$luogo_cooperatore);
               if(!$query->execute())
               {
                   echo 'ERROR - Inserimento dati di consacrazione';
