@@ -34,76 +34,187 @@ if(!isset($_SESSION['username']))
 <body>
   <section class="menu cid-qTkzRZLJNu" once="menu" id="menu1-4">
 
-
-
     <nav class="navbar navbar-expand beta-menu navbar-dropdown align-items-center navbar-fixed-top navbar-toggleable-sm">
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </button>
-        <div class="menu-logo">
-            <div class="navbar-brand">
-                <span class="navbar-logo">
-                    <a href="home.php">
-                         <img src="assets/images/img-1583-122x122.png" alt="Logo" title="" style="height: 3.8rem;">
-                    </a>
-                </span>
-                <span class="navbar-caption-wrap">
-                    <a class="navbar-caption text-white display-4" href="home.php">
-                        ADM Firenze
-                    </a>
-                </span>
-            </div>
-        </div>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true">
-              <li class="nav-item">
-                    <a class="nav-link link text-white display-4" href="home">
-                      <span class="mobi-mbri mobi-mbri-home mbr-iconfont mbr-iconfont-btn">
-                      </span>home</a>
-                </li>
-                <li class="nav-item">
-                      <a class="nav-link link text-white display-4" href="utenti">
-                      Gest. utenti</a>
-                  </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link link text-white dropdown-toggle display-4" href="" data-toggle="dropdown-submenu" aria-expanded="false">
-                    <span class="mobi-mbri  mbr-iconfont mbr-iconfont-btn">
-                    </span>Sezione</a>
-                    <div class="dropdown-menu">
-                      <a class="text-white dropdown-item display-4" href="secretaria">Secretaria</a>
-                      <a class="text-white dropdown-item display-4" href="" aria-expanded="false">Tesoreria</a>
-                      <a class="text-white dropdown-item display-4" href="" aria-expanded="false">Compleanni<br>
-                        <a class="text-white dropdown-item display-4" href="" aria-expanded="false">Visitanti del giorno<br>
-                      </a>
-                    </div></li>
-                  </ul>
-            <div class="navbar-buttons mbr-section-btn">
-
-                 <a class="btn btn-sm btn-white display-4" href="logout.php"><span class="mbri-logout mbr-iconfont mbr-iconfont-btn">
-                 </span>Esci</a></div>
-        </div>
-    </nav>
+       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+           <div class="hamburger">
+               <span></span>
+               <span></span>
+               <span></span>
+               <span></span>
+           </div>
+       </button>
+       <div class="menu-logo">
+           <div class="navbar-brand">
+               <span class="navbar-logo">
+                   <a href="home">
+                        <img src="assets/images/img-1583-122x122.png" alt="ADM" style="height: 3.8rem;">
+                   </a>
+               </span>
+               <span class="navbar-caption-wrap">
+                   <a class="navbar-caption text-white display-4" href="home">
+                       ADM Firenze
+                   </a>
+               </span>
+           </div>
+       </div>
+       <div class="collapse navbar-collapse" id="navbarSupportedContent">
+           <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true">
+             <li class="nav-item dropdown">
+                   <a class="nav-link link text-white dropdown-toggle display-4" href="secretaria" data-toggle="dropdown-submenu" aria-expanded="false">
+                     <span class="mbri-pages mbr-iconfont mbr-iconfont-btn">
+                     </span>
+                       Secretaria</a>
+                       <div class="dropdown-menu">
+                         <div class="dropdown">
+                           <a class="text-white dropdown-item dropdown-toggle display-4" href=" " data-toggle="dropdown-submenu" aria-expanded="false">
+                             Registro</a>
+                           <div class="dropdown-menu dropdown-submenu">
+                             <a class="text-white dropdown-item display-4" href="ricerca">Visualizza Tutti</a>
+                             <div class="dropdown">
+                               <a class="text-white dropdown-item dropdown-toggle display-4" href="membri" data-toggle="dropdown-submenu" aria-expanded="false">
+                                 Membri</a>
+                                 <div class="dropdown-menu dropdown-submenu">
+                                   <a class="text-white dropdown-item display-4" href="membri">Tutti</a>
+                                   <a class="text-white dropdown-item display-4" href="nuovo?new=M">Nuovo</a>
+                                 </div>
+                               </div>
+                               <div class="dropdown">
+                                 <a class="text-white dropdown-item dropdown-toggle display-4" href="congregati" data-toggle="dropdown-submenu" aria-expanded="false">
+                                   Congregati</a>
+                                   <div class="dropdown-menu dropdown-submenu">
+                                     <a class="text-white dropdown-item display-4" href="congregati">
+                                       Tutti</a>
+                                       <a class="text-white dropdown-item display-4" href="nuovo?new=C">
+                                         Nuovo</a>
+                                       </div>
+                                     </div>
+                                     <div class="dropdown">
+                                       <a class="text-white dropdown-item dropdown-toggle display-4" href="bambini" data-toggle="dropdown-submenu">
+                                         Bambini</a>
+                                         <div class="dropdown-menu dropdown-submenu">
+                                           <a class="text-white dropdown-item display-4" href="bambini">
+                                             Tutti</a>
+                                             <a class="text-white dropdown-item display-4" href="nuovo?new=B">
+                                               Nuovo</a>
+                                             </div>
+                                           </div>
+                                           <a class="text-white dropdown-item display-4" href="nuovo">
+                                             Aggiungi Nuovo</a>
+                                           </div>
+                                         </div>
+                                         <div class="dropdown">
+                                           <a class="text-white dropdown-item dropdown-toggle display-4" href="" data-toggle="dropdown-submenu" aria-expanded="false">
+                                             Stampe</a>
+                                             <div class="dropdown-menu dropdown-submenu">
+                                               <a class="text-white dropdown-item display-4" href="serviziostampe">
+                                                 Scheda dati</a>
+                                                 <a class="text-white dropdown-item display-4" href=" ">
+                                                   Certificati</a>
+                                                   <a class="text-white dropdown-item display-4" href=" ">
+                                                     Carte</a>
+                                                     <a class="text-white dropdown-item display-4" href="compleanni">
+                                                       Compleanni</a>
+                                                     </div>
+                                                   </div>
+                                                   <div class="dropdown">
+                                                     <a class="text-white dropdown-item dropdown-toggle display-4" href=" " data-toggle="dropdown-submenu" aria-expanded="false">
+                                                       Altro</a>
+                                                       <div class="dropdown-menu dropdown-submenu">
+                                                         <a class="text-white dropdown-item display-4" href=" ">
+                                                           ...</a>
+                                                         </div>
+                                                       </div>
+                                                     </div>
+               </li>
+               <li class="nav-item dropdown">
+                 <a class="nav-link link text-white dropdown-toggle display-4" href=" " data-toggle="dropdown-submenu" aria-expanded="false">
+                   <span class="mbri-credit-card mbr-iconfont mbr-iconfont-btn"></span>
+                       Tesoreria</a>
+                       <div class="dropdown-menu">
+                         <div class="dropdown">
+                           <a class="text-white dropdown-item dropdown-toggle display-4" href=" " data-toggle="dropdown-submenu" aria-expanded="false">
+                             Entrate</a>
+                             <div class="dropdown-menu dropdown-submenu">
+                               <a class="text-white dropdown-item display-4" href=" ">
+                                 Visualizza tutte</a>
+                               </div>
+                             </div>
+                             <div class="dropdown">
+                               <a class="text-white dropdown-item dropdown-toggle display-4" href=" " data-toggle="dropdown-submenu" aria-expanded="false">
+                                 Uscite</a>
+                                 <div class="dropdown-menu dropdown-submenu">
+                                   <a class="text-white dropdown-item display-4" href=" ">
+                                     Visualizza utte</a>
+                                   </div>
+                                 </div>
+                               </div>
+                             </li>
+               <li class="nav-item dropdown">
+                   <a class="nav-link link text-white dropdown-toggle display-4" href=" " data-toggle="dropdown-submenu" aria-expanded="false">
+                     <span class="mbri-setting mbr-iconfont mbr-iconfont-btn"></span>
+                       Altro</a>
+                       <div class="dropdown-menu">
+                         <div class="dropdown">
+                           <a class="text-white dropdown-item dropdown-toggle display-4" href=" " data-toggle="dropdown-submenu" aria-expanded="false">
+                             Utenti</a>
+                             <div class="dropdown-menu dropdown-submenu">
+                               <a class="text-white dropdown-item display-4" href="utenti">Gestione Utenti</a>
+                             </div>
+                           </div>
+                         </div>
+               </li>
+             </ul>
+           <div class="navbar-buttons mbr-section-btn">
+             <a class="btn btn-sm btn-warning display-4" href="logout">
+               <span class="mbri-logout mbr-iconfont mbr-iconfont-btn"></span>
+               Esci</a>
+             </div>
+       </div>
+   </nav>
 </section>
-
-<section class="engine"><a href="#"></a></section><section class="header11 cid-ra7S5vK1WU mbr-fullscreen" id="header11-b">
-
-    <!-- Block parameters controls (Blue "Gear" panel) -->
-
-    <!-- End block parameters -->
+<section class="engine"><a href=""></a></section>
+<section class="header12 cid-rghP81a8vY mbr-fullscreen mbr-parallax-background" id="header12-8" style="padding-top:8em">
 
 
-    <div class="container align-left">
-        <div class="media-container-column mbr-white col-md-12">
-            <h3 class="mbr-section-subtitle py-3 mbr-fonts-style display-5">Benvenuto/a <?php echo $_SESSION['username']; ?></h3>
 
-            <p class="mbr-text py-3 mbr-fonts-style display-5">Gestisci tutti i dati della secretaria e tesoreria, in seguito, scegli una sezione</p>
+    <div class="mbr-overlay" style="opacity: 0.8; background: linear-gradient(45deg, #ccccb3, #0f7699);;">
+    </div>
 
-        </div>
+    <div class="container  ">
+            <div class="media-container">
+                <div class="col-md-12 align-center">
+                    <h1 class="mbr-section-title pb-3 mbr-white  mbr-fonts-style display-1">
+                        Benvenuto/a<br>
+                        <?php echo $_SESSION['username']; ?></h1>
+                    <p class="mbr-text pb-3 mbr-white mbr-fonts-style display-5">
+                      <b>  Gestisci tutti i dati della secretaria e tesoreria, in seguito, scegli una sezione
+                    </b></p>
+
+
+                    <div class="icons-media-container mbr-white">
+                        <div class="card col-12 col-md-6">
+                            <div class="icon-block">
+                            <a href="secretaria">
+                                <span class="mbr-iconfont mbri-pages"></span>
+                            </a>
+                            </div>
+                            <h5 class="mbr-fonts-style display-5">
+                                Secretaria</h5>
+                        </div>
+
+                        <div class="card col-12 col-md-6">
+                            <div class="icon-block">
+                                <a href="">
+                                    <span class="mbr-iconfont mbri-credit-card"></span>
+                                </a>
+                            </div>
+                            <h5 class="mbr-fonts-style display-5">
+                                Tesoreria</h5>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
     </div>
 
     <div class="mbr-arrow hidden-sm-down" aria-hidden="true">
@@ -112,6 +223,7 @@ if(!isset($_SESSION['username']))
         </a>
     </div>
 </section>
+
 
 <section class="carousel slide cid-ra7Tb8v6jc" data-interval="false" id="slider1-c">
 
@@ -125,14 +237,16 @@ if(!isset($_SESSION['username']))
 
      </ol>
       <div class="carousel-inner" role="listbox">
-        <div class="carousel-item slider-fullscreen-image" data-bg-video-slide="false" style="background-image: url(assets/images/mbr-1920x1278.jpg);">
+
+        <div class="carousel-item slider-fullscreen-image active" data-bg-video-slide="false" style="background-image: url(assets/images/mbr-1920x1278.jpg);">
+
           <div class="container container-slide">
             <div class="image_wrapper">
               <div class="mbr-overlay"></div>
               <img src="assets/images/mbr-1920x1278.jpg">
               <div class="carousel-caption justify-content-center">
                 <div class="col-10 align-center">
-                  <h2 class="mbr-fonts-style display-1">SECRETARIA</h2>
+                  <h2 class="mbr-fonts-style display-1">Secretaria</h2>
                   <p class="lead mbr-text mbr-fonts-style display-5">Gestisci i dati anagrafici dei membri e congregati</p>
                   <div class="mbr-section-btn" buttons="0">
                     <a class="btn  btn-white-outline display-4" href="secretaria" >Vai</a>
@@ -142,14 +256,14 @@ if(!isset($_SESSION['username']))
             </div>
           </div>
         </div>
-        <div class="carousel-item slider-fullscreen-image active" data-bg-video-slide="false" style="background-image: url(assets/images/mbr-1-1920x1280.jpg);">
+        <div class="carousel-item slider-fullscreen-image" data-bg-video-slide="false" style="background-image: url(assets/images/mbr-1-1920x1280.jpg);">
           <div class="container container-slide">
             <div class="image_wrapper">
               <div class="mbr-overlay"></div>
               <img src="assets/images/mbr-1-1920x1280.jpg">
               <div class="carousel-caption justify-content-center">
                 <div class="col-10 align-center">
-                  <h2 class="mbr-fonts-style display-1">TESORERIA</h2>
+                  <h2 class="mbr-fonts-style display-1">Tesoreria</h2>
                   <p class="lead mbr-text mbr-fonts-style display-5">Gestisci gli ingressi, uscite, ecc</p>
                   <div class="mbr-section-btn" buttons="0">
                     <a class="btn btn-success display-4" href="">non acora disponibile...</a>

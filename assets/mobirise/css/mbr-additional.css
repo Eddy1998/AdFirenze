@@ -1388,6 +1388,33 @@ body {
   transition: none;
   min-height: 77px;
 }
+.cid-rghP81a8vY {
+  background-image: url("../../../assets/images/sfondo.jpg");
+}
+.cid-rghP81a8vY .icons-media-container {
+  display: -webkit-flex;
+  justify-content: center;
+  -webkit-justify-content: center;
+  flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  padding-top: 4rem;
+}
+.cid-rghP81a8vY .icons-media-container .mbr-iconfont {
+  font-size: 96px;
+  color: #ffffff;
+}
+.cid-rghP81a8vY .icons-media-container .icon-block {
+  padding-bottom: 1rem;
+}
+.cid-rghP81a8vY .mbr-text {
+  color: #ffffff;
+}
+.cid-rghP81a8vY .card {
+  padding-bottom: 1.5rem;
+}
+
 .cid-qTkzRZLJNu .navbar-dropdown.bg-color.transparent.opened {
   background: #232323;
 }

@@ -1,11 +1,11 @@
 <?php
 session_start();
-include 'data/funzioni.php';
 include 'conn.inc.php';
-/*if(!isset($_SESSION['user']))
+if(!isset($_SESSION['username']))
 {
-header('location: index.php');
-}*/
+   header('location: index.php');
+}
+$currentMonth = date('n');
 ?>
 <!DOCTYPE html>
 <html >
@@ -15,8 +15,8 @@ header('location: index.php');
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
   <link rel="shortcut icon" href="assets/images/img-1583-122x122.png" type="image/x-icon">
-  <meta name="description" content="Site Generator Description">
-  <title>Congregati</title>
+  <meta name="description">
+  <title>Compleanni</title>
   <link rel="stylesheet" href="assets/web/assets/mobirise-icons2/mobirise2.css">
   <link rel="stylesheet" href="assets/web/assets/mobirise-icons/mobirise-icons.css">
   <link rel="stylesheet" href="assets/tether/tether.min.css">
@@ -24,60 +24,22 @@ header('location: index.php');
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-grid.min.css">
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-reboot.min.css">
   <link rel="stylesheet" href="assets/dropdown/css/style.css">
-  <link rel="stylesheet" href="assets/datatables/data-tables.bootstrap4.min.css">
   <link rel="stylesheet" href="assets/animatecss/animate.min.css">
   <link rel="stylesheet" href="assets/theme/css/style.css">
   <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script type="text/javascript">
-        $(document).ready(function(){
-          var Div, contenuto,data;
+  <script>
+    $(document).ready(function(){
 
 
-          <?php $res = @$_GET['success'];
-          if($res==1)
-          {
-            ?>
-            Div = document.getElementById("messaggio");
-            contenuto = document.createTextNode("CONGREGATO AGGIUNTO CON SUCCESSO");
-            Div.append(contenuto);
-            $('#messaggio').delay(5000).fadeOut();
-          <?php }
-          else if($res==9) { ?>
+    });
 
-            Div = document.getElementById("messaggio");
-            contenuto = document.createTextNode("ERRORE");
-            document.getElementById('messaggio').style.color = 'red';
-            Div.append(contenuto);
-            $('#messaggio').delay(5000).fadeOut();
-          <?php } ?>
-        });
-        function appendere()
-        {
-          $.ajax({
-          url: 'data/dati.php',
-          type: 'POST',
-          data: {
-            'C' : 1,
-          },
-          success: function(response){
-
-          }
-          });
-
-        }
-        function visualizza(id)
-        {
-          window.location="visualizza?id="+id;
-        }
-</script>
+  </script>
 
 
 </head>
 <body>
-  <section class="menu cid-ra862qYpx4" once="menu" id="menu1-u">
-
-
+  <section class="menu cid-qTkzRZLJNu" once="menu" id="menu1-4">
 
     <nav class="navbar navbar-expand beta-menu navbar-dropdown align-items-center navbar-fixed-top navbar-toggleable-sm">
        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -218,15 +180,7 @@ header('location: index.php');
    </nav>
 </section>
 
-<section class="engine"><a href=""></a></section><section class="mbr-section info2 cid-ra862p31vh" id="info2-s" style="background-color: rgba(0, 0, 0, 0);
-background-position-x: 0%;
-background-position-y: 0%;
-background-repeat: repeat;
-background-attachment: scroll;
-background-image: linear-gradient(45deg, rgb(8, 8, 8), rgb(187, 212, 221));
-background-size: auto auto;
-background-origin: padding-box;
-background-clip: border-box;">
+<section class="engine"><a href="#"></a></section><section class="mbr-section info2 cid-ra8qrR3M2J" id="info2-14">
 
 
 
@@ -235,167 +189,99 @@ background-clip: border-box;">
     <div class="container">
         <div class="row main justify-content-center">
             <div class="media-container-column col-12 col-lg-3 col-md-4">
-                <div class="mbr-section-btn align-left py-4"><a class="btn btn-primary display-4" href="nuovo.php?new=C"><span class="mobi-mbri mobi-mbri-plus mbr-iconfont mbr-iconfont-btn"></span>Nuovo<br>Congregato<br>
-                    </a></div>
+
             </div>
             <div class="media-container-column title col-12 col-lg-7 col-md-6">
-                <h2 class="align-right mbr-bold mbr-white pb-3 mbr-fonts-style display-2">
-                    Sezione Congregati</h2>
-                <h3 class="mbr-section-subtitle align-right mbr-light mbr-white mbr-fonts-style display-5">
-                    Gestisci i dati anagrafici dei congregati</h3>
-                <h3 class="mbr-section-subtitle align-right mbr-light mbr-white mbr-fonts-style display-5" >
-                      <b id="messaggio"></b></h3>
+                <h2 class="align-right mbr-bold mbr-white mbr-fonts-style display-2">Compleanni del mese</h2>
+
             </div>
         </div>
     </div>
 </section>
 
-<section class="counters1 counters cid-ra862pQ5vy" id="counters1-t">
+<section class="engine"><a href=""></a></section>
+<section class="mbr-section form1 cid-ra8qCZsALE" id="membro" >
+
+    <div class="container" style="padding-top:5em">
+        <div class="row justify-content-center">
+            <div class="media-container-column col-lg-8" data-form-type="formoid">
+                    <form name="modulo" class="mbr-form" action="menu/auguri" method="post" target="_blank">
+
+                        <div class="row row-sm-offset">
+
+
+
+                            <div class="col-md-4 multi-horizontal" data-for="numero-figli">
+                                <div class="form-group">
+                                    <label class="form-control-label mbr-fonts-style display-7" for="numero"><b>Mese</b></label>
+                                    <select  id="mese" class="form-control" name="mese"  >
+                                      <option value="1" <?php if ($currentMonth == 1) echo 'selected'; ?>  >Gennaio</option>
+                                      <option value="2"  <?php if ($currentMonth == 2) echo 'selected'; ?> >Febbraio</option>
+                                      <option value="3" <?php if ($currentMonth == 3) echo 'selected'; ?> >Marzo</option>
+                                      <option value="4" <?php if ($currentMonth == 4) echo 'selected'; ?> >Aprile</option>
+                                      <option value="5" <?php if ($currentMonth == 5) echo 'selected'; ?> >Maggio</option>
+                                      <option value="6" <?php if ($currentMonth == 6) echo 'selected'; ?> >Giugno</option>
+                                      <option value="7" <?php if ($currentMonth == 7) echo 'selected'; ?> >Luglio</option>
+                                      <option value="8" <?php if ($currentMonth == 8) echo 'selected'; ?> >Agosto</option>
+                                      <option value="9" <?php if ($currentMonth == 9) echo 'selected'; ?> >Settembre</option>
+                                      <option value="10" <?php if ($currentMonth == 10) echo 'selected'; ?> >Ottobre</option>
+                                      <option value="11" <?php if ($currentMonth == 11) echo 'selected'; ?> >Novembre</option>
+                                      <option value="12" <?php if ($currentMonth == 12) echo 'selected'; ?> >Dicembre</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 multi-horizontal" data-for="settore">
+                                <div class="form-group">
+                                    <label class="form-control-label mbr-fonts-style display-7" for="settore"><b>Congregazione</b></label>
+                                    <select  class="form-control" name="settore"  required>
+
+                                    <option value="Firenze" selected>Firenze</option>
+                                    <option value="Pisa">Pisa</option>
+                                    <option value="Prato">Prato</option>
+                                    <option value="Cecina">Cecina</option>
+                                    </select>
+                                </div>
+                            </div>
 
 
 
 
 
-    <div class="container">
-        <h2 class="mbr-section-title pb-3 align-center mbr-fonts-style display-2">
-            In questo momento ci sono</h2>
 
 
-        <div class="container pt-4 mt-2">
-            <div class="media-container-row">
-                <div class="card p-3 align-center col-12 col-md-6">
-                    <div class="panel-item p-3">
-                        <div class="card-img pb-3">
-                            <span class="mbr-iconfont mobi-mbri-users mobi-mbri"></span>
+
                         </div>
 
-                        <div class="card-text">
-                            <h3 class="count pt-3 pb-3 mbr-fonts-style display-2">
-                                <?php echo visualizza("CA"); ?>
-                            </h3>
-                            <h4 class="mbr-content-title mbr-bold mbr-fonts-style display-7">Congregati attivi</h4>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card p-3 align-center col-12 col-md-6">
-                    <div class="panel-item p-3">
-                        <div class="card-img pb-3">
-                            <span class="mbr-iconfont mobi-mbri-error mobi-mbri"></span>
-                        </div>
-                        <div class="card-text">
-                            <h3 class="count pt-3 pb-3 mbr-fonts-style display-2">
-                                  <?php echo visualizza("CN"); ?>
-                            </h3>
-                            <h4 class="mbr-content-title mbr-bold mbr-fonts-style display-7">Congregati non attivi</h4>
-
-                        </div>
-                    </div>
-                </div>
 
 
-
-
-
-
-
-
+                        <span class="input-group-btn"><button  type="submit" class="btn btn-primary btn-form display-4" name="newmembro">Crea Documento</button></span>
+                    </form>
             </div>
         </div>
-   </div>
-</section>
-
-<section class="section-table cid-ra862rE415" id="table1-v">
-
-
-
-  <div class="container container-table">
-      <h2 class="mbr-section-title mbr-fonts-style align-center pb-3 display-2">Elenco dei congregati</h2>
-
-      <div class="table-wrapper">
-        <div class="container">
-          <div class="row search">
-            <div class="col-md-6"></div>
-            <div class="col-md-6">
-                <div class="dataTables_filter">
-                  <label class="searchInfo mbr-fonts-style display-7">Cerca:</label>
-                  <input class="form-control input-sm" disabled="">
-                </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="container scroll">
-          <table class="table isSearch" cellspacing="0">
-            <thead>
-              <tr class="table-heads ">
-              <th class="head-item mbr-fonts-style display-7">Nome</th>
-              <th class="head-item mbr-fonts-style display-7">Cognome</th>
-              <th class="head-item mbr-fonts-style display-7">Età</th>
-              <th class="head-item mbr-fonts-style display-7">Data di Nascita</th>
-              <th class="head-item mbr-fonts-style display-7">Attivo</th>
-              <th class="head-item mbr-fonts-style display-7">Congregazione</th></tr>
-            </thead>
-            <tbody id="body">
-              <?php
-                $dbh = new PDO($conn,$user,$pass);
-                $sqld =$dbh->prepare("SELECT p.*, md5(id) AS ssid, DATE_FORMAT(p.data_nascita,  '%d-%m-%Y' ) AS data_di_nascita,DATE_FORMAT(p.data_matrimonio,  '%d-%m-%Y' ) AS data_di_matrimonio, DATE_FORMAT(p.data_arrivo_in_chiesa, '%d-%m-%Y' ) AS data_arrivo  FROM persone p WHERE tipo_persona='congregato' ORDER BY p.cognome ASC;");
-                $sqld->execute();
-                while ($row=$sqld->fetch()) {
-                  $eta = calcola($row['data_di_nascita']);
-                  //explode the date to get month, day and year
-
-
-                  //get age from date or birthdate
-
-
-                    echo '<tr onclick="visualizza(\'' . $row['ssid'] .'\');">';
-                    echo "<td class='body-item mbr-fonts-style display-7'>" . $row['nome'] . "</td>";
-                    echo "<td class='body-item mbr-fonts-style display-7'>" . $row['cognome'] . "</td>";
-                    echo "<td class='body-item mbr-fonts-style display-7'>" . $eta . "</td>";
-                    echo "<td class='body-item mbr-fonts-style display-7'>" . $row['data_di_nascita'] . "</td>";
-                    echo "<td class='body-item mbr-fonts-style display-7'>" . $row['attivo']  . "</td>";
-                    echo "<td class='body-item mbr-fonts-style display-7'>" . $row['congregazione'] . "</td>";
-                    echo "</tr>";
-                }
-
-              ?>
-
-          </tbody>
-          </table>
-        </div>
-       <div class="container table-info-container">
-          <div class="row info">
-            <div class="col-md-6">
-              <div class="dataTables_info mbr-fonts-style display-7">
-                <span class="infoBefore">Totale:</span>
-                <span class="inactive infoRows"></span>
-                <span class="infoAfter">congregati</span>
-                <span class="infoFilteredBefore"></span>
-                <span class="inactive infoRows"></span>
-                <span class="infoFilteredAfter"></span>
-              </div>
-            </div>
-            <div class="col-md-6"></div>
-          </div>
-        </div>
-      </div>
     </div>
+
+
+
 </section>
+
+
+
 
 
   <script src="assets/web/assets/jquery/jquery.min.js"></script>
   <script src="assets/tether/tether.min.js"></script>
   <script src="assets/popper/popper.min.js"></script>
   <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-  <script src="assets/smoothscroll/smooth-scroll.js"></script>
-  <script src="assets/viewportchecker/jquery.viewportchecker.js"></script>
   <script src="assets/dropdown/js/script.min.js"></script>
   <script src="assets/touchswipe/jquery.touch-swipe.min.js"></script>
-  <script src="assets/datatables/jquery.data-tables.min.js"></script>
-  <script src="assets/datatables/data-tables.bootstrap4.min.js"></script>
+  <script src="assets/smoothscroll/smooth-scroll.js"></script>
+  <script src="assets/ytplayer/jquery.mb.ytplayer.min.js"></script>
+  <script src="assets/vimeoplayer/jquery.mb.vimeo_player.js"></script>
+  <script src="assets/bootstrapcarouselswipe/bootstrap-carousel-swipe.js"></script>
+  <script src="assets/viewportchecker/jquery.viewportchecker.js"></script>
   <script src="assets/theme/js/script.js"></script>
+  <script src="assets/slidervideo/script.js"></script>
 
 
  <div id="scrollToTop" class="scrollToTop mbr-arrow-up"><a style="text-align: center;"><i></i></a></div>

@@ -64,17 +64,19 @@ header('location: home');
     </nav>
 </section>
 
-<section class="engine"><a href="#"></a></section><section class="header13 cid-ra7JYQ8nAY mbr-fullscreen mbr-parallax-background" id="header13-3">
+<section class="engine"><a href="#"></a></section>
+<section class="header13 cid-ra7JYQ8nAY mbr-fullscreen mbr-parallax-background" id="header13-3">
 
 
-
+  <div class="mbr-overlay" style="opacity: 0.7; background: linear-gradient(45deg, #ffffb3, #0f7699);;">
+  </div>
 
 
     <div class="container">
 
 
-        <h1 class="mbr-section-title align-center pb-3 mbr-white mbr-bold mbr-fonts-style display-1"><p>
-        </p><br><br><p style="text-shadow: -1px 0 black, 0 2px black, 2px 0 black, 0 -1px black;">ADM Firenze</p></h1>
+        <h1 class="mbr-section-title align-center pb-3 mbr-white mbr-bold mbr-fonts-style display-1">
+        <br><br>ADM Firenze</h1>
 
         <h3 class="mbr-section-subtitle mbr-fonts-style display-5">
             Amministrazione</h3>
