@@ -3,10 +3,10 @@ session_start();
 include 'data/funzioni.php';
 include 'conn.inc.php';
 
-/*if(!isset($_SESSION['user']))
+if(!isset($_SESSION['user']))
 {
 header('location: index.php');
-}*/?>
+}?>
 
 <!DOCTYPE html>
 <html >
@@ -101,16 +101,16 @@ header('location: index.php');
 
  <!--INIZIO PROVA-->
  <section class="engine"><a ></a></section>
-  <section class="tabs3 cid-rgbf8XZiJ2" id="tabs3-2" style="margin-top:5em">      
-    
+  <section class="tabs3 cid-rgbf8XZiJ2" id="tabs3-2" style="margin-top:5em">
 
-    
+
+
 
     <div class="container">
         <h2 class="mbr-section-title align-center pb-3 mbr-fonts-style display-2">
            Menu principale
         </h2>
-       
+
     </div>
     <div class="container-fluid">
         <div class="row tabcont">
@@ -124,9 +124,9 @@ header('location: index.php');
                 <li class="nav-item mbr-fonts-style"><a class="nav-link active show display-7" role="tab" data-toggle="tab" href="#tabs3-2_tab2" aria-selected="true">
                         Altro
                     </a></li>
-                
-                
-                
+
+
+
             </ul>
         </div>
     </div>
@@ -143,20 +143,20 @@ header('location: index.php');
                             <hr>
                             <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
                                 <a href="ricerca">Visualizza tutti</a>
-                            </h4>                       
+                            </h4>
                              <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
                               <a href="membri"> Membri</a>
-                            </h4> 
+                            </h4>
                            <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
                                <a href="congregati">Congregati</a>
-                            </h4> 
+                            </h4>
                              <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
-                             <a href="bambini">  Bambini</a> 
+                             <a href="bambini">  Bambini</a>
                             </h4>
                             <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
-                               <a href="nuovo"> Aggiungi Nuovo</a> 
+                               <a href="nuovo"> Aggiungi Nuovo</a>
                             </h4>
-                             
+
                         </div>
 
                         <div class="col-xs-12 col-md-6 col-lg-4">
@@ -165,18 +165,18 @@ header('location: index.php');
                             </h3>
                             <hr>
                              <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
-                               <a href="serviziostampe">Scheda di dati</a> 
-                            </h4>                       
+                               <a href="serviziostampe">Scheda di dati</a>
+                            </h4>
                             <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
-                               <a href=""> Certificati</a> 
+                               <a href=""> Certificati</a>
                             </h4>
                           <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
-                                <a href="">Carte</a> 
+                                <a href="">Carte</a>
                             </h4>
                              <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
                               <a href=""> Compleanni</a>
-                            </h4> 
-                              
+                            </h4>
+
                         </div>
 
                         <div class="col-xs-12 col-md-6 col-lg-4">
@@ -184,13 +184,13 @@ header('location: index.php');
                                 Altro
                             </h3>
                             <hr>
-                            
+
                             <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
                               <a href=""></a>
-                            </h4> 
+                            </h4>
                         </div>
 
-                        
+
                     </div>
                 </div>
 
@@ -203,20 +203,20 @@ header('location: index.php');
                             <hr>
                             <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
                                 <a href="">Visualizza Entrate</a>
-                            </h4>                       
+                            </h4>
                              <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
                               <a href=""></a>
-                            </h4> 
+                            </h4>
                            <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
                                <a href=""></a>
-                            </h4> 
+                            </h4>
                              <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
-                             <a href="">  </a> 
+                             <a href="">  </a>
                             </h4>
                             <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
-                               <a href=""></a> 
+                               <a href=""></a>
                             </h4>
-                             
+
                         </div>
 
                         <div class="col-xs-12 col-md-6 col-lg-4">
@@ -225,18 +225,18 @@ header('location: index.php');
                             </h3>
                             <hr>
                              <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
-                               <a href="serviziostampe">Visualizza Uscite</a> 
-                            </h4>                       
+                               <a href="serviziostampe">Visualizza Uscite</a>
+                            </h4>
                             <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
-                               <a href=""> </a> 
+                               <a href=""> </a>
                             </h4>
                           <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
-                                <a href=""></a> 
+                                <a href=""></a>
                             </h4>
                              <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
                               <a href=""></a>
-                            </h4> 
-                              
+                            </h4>
+
                         </div>
 
                         <div class="col-xs-12 col-md-6 col-lg-4">
@@ -244,13 +244,13 @@ header('location: index.php');
                                 Dichiarazioni
                             </h3>
                             <hr>
-                            
+
                             <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
                               <a href=""></a>
-                            </h4> 
+                            </h4>
                         </div>
 
-                        
+
                     </div>
                 </div>
 
@@ -263,20 +263,20 @@ header('location: index.php');
                             <hr>
                             <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
                                 <a href="utenti">Gestione Utenti</a>
-                            </h4>                       
+                            </h4>
                              <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
                               <a href=""> </a>
-                            </h4> 
+                            </h4>
                            <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
                                <a href=""></a>
-                            </h4> 
+                            </h4>
                              <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
-                             <a href=""></a> 
+                             <a href=""></a>
                             </h4>
                             <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
-                               <a href=""> </a> 
+                               <a href=""> </a>
                             </h4>
-                             
+
                         </div>
 
                         <div class="col-xs-12 col-md-6 col-lg-4">
@@ -285,18 +285,18 @@ header('location: index.php');
                             </h3>
                             <hr>
                              <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
-                               <a href=""></a> 
-                            </h4>                       
+                               <a href=""></a>
+                            </h4>
                             <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
-                               <a href=""></a> 
+                               <a href=""></a>
                             </h4>
                           <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
-                                <a href=""></a> 
+                                <a href=""></a>
                             </h4>
                              <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
                               <a href=""></a>
-                            </h4> 
-                              
+                            </h4>
+
                         </div>
 
                         <div class="col-xs-12 col-md-6 col-lg-4">
@@ -304,12 +304,12 @@ header('location: index.php');
                                ...
                             </h3>
                             <hr>
-                            
+
                             <h4 class="mbr-element-title  align-center mbr-fonts-style pb-2 display-5">
                               <a href=""></a>
-                            </h4> 
+                            </h4>
                         </div>
-                        
+
                     </div>
                 </div>
 
@@ -351,7 +351,7 @@ header('location: index.php');
                             </p>
                         </div>
 
-                        
+
                     </div>
                 </div>
 
@@ -393,7 +393,7 @@ header('location: index.php');
                             </p>
                         </div>
 
-                        
+
                     </div>
                 </div>
 
@@ -435,7 +435,7 @@ header('location: index.php');
                             </p>
                         </div>
 
-                        
+
                     </div>
                 </div>
             </div>
