@@ -851,11 +851,11 @@ $indirizzo=$_POST["indirizzo"];
                                     <select  class="form-control" name="carico"  required="" id="carico">
                                     <option value="" disabled selected>Scegli un'opzione..</option>
                                     <option value="Pastore">Pastore</option>
-                                    <option value="Diaconessa">Missionario/a</option>
+                                    <option value="Missionario/a">Missionario/a</option>
                                    <option value="Evangelista">Evangelista</option>
                                    <option value="Presbitero">Presbitero</option>
-                                   <option value="Diacono">Diacono/Diaconessa</option>
-                                   <option value="Cooperatore">Cooperatore/Cooperatrice</option>
+                                   <option value="Diacono/Diaconessa">Diacono/Diaconessa</option>
+                                   <option value="Cooperatore/Cooperatrice">Cooperatore/Cooperatrice</option>
                                    <option value="Membro">Membro</option>
                                     </select>
                                 </div>

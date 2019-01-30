@@ -1,24 +1,22 @@
 <?php
 session_start();
-include 'data/funzioni.php';
 include 'conn.inc.php';
-
-/*if(!isset($_SESSION['user']))
+if(!isset($_SESSION['username']))
 {
-header('location: index.php');
-}*/?>
-
+   header('location: index.php');
+}
+$currentMonth = date('n');
+?>
 <!DOCTYPE html>
 <html >
 <head>
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
   <link rel="shortcut icon" href="assets/images/img-1583-122x122.png" type="image/x-icon">
-  <meta name="description" content="Site Generator Description">
-  <title>Membri</title>
+  <meta name="description">
+  <title>Certificati</title>
   <link rel="stylesheet" href="assets/web/assets/mobirise-icons2/mobirise2.css">
   <link rel="stylesheet" href="assets/web/assets/mobirise-icons/mobirise-icons.css">
   <link rel="stylesheet" href="assets/tether/tether.min.css">
@@ -26,28 +24,22 @@ header('location: index.php');
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-grid.min.css">
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-reboot.min.css">
   <link rel="stylesheet" href="assets/dropdown/css/style.css">
-  <link rel="stylesheet" href="assets/datatables/data-tables.bootstrap4.min.css">
   <link rel="stylesheet" href="assets/animatecss/animate.min.css">
   <link rel="stylesheet" href="assets/theme/css/style.css">
   <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script type="text/javascript">
-          $(document).ready(function(){
-          var Div, contenuto,data;
-        });
+  <script>
+    $(document).ready(function(){
 
-        function visualizza(id)
-        {
-          window.location="visualizza?id="+id;
-        }
 
-</script>
+    });
+
+  </script>
+
 
 </head>
 <body>
-  <section class="menu cid-ra81NrMM5L" once="menu" id="menu1-l">
-
-
+  <section class="menu cid-qTkzRZLJNu" once="menu" id="menu1-4">
 
     <nav class="navbar navbar-expand beta-menu navbar-dropdown align-items-center navbar-fixed-top navbar-toggleable-sm">
        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -188,7 +180,8 @@ header('location: index.php');
    </nav>
 </section>
 
-<section class="engine"><a href=""></a></section><section class="mbr-section info2 cid-ra84WTzLfa" id="info2-r">
+<section class="engine"><a href="#"></a></section><section class="mbr-section info2 cid-ra8qrR3M2J" id="info2-14">
+
 
 
 
@@ -196,168 +189,127 @@ header('location: index.php');
     <div class="container">
         <div class="row main justify-content-center">
             <div class="media-container-column col-12 col-lg-3 col-md-4">
-                <div class="mbr-section-btn align-left py-4"><a class="btn btn-primary display-4" href="nuovo.php?new=M"><span class="mobi-mbri mobi-mbri-plus mbr-iconfont mbr-iconfont-btn"></span>Nuovo<br>Membro<br>
-                    </a></div>
+
             </div>
             <div class="media-container-column title col-12 col-lg-7 col-md-6">
-                <h2 class="align-right mbr-bold mbr-white pb-3 mbr-fonts-style display-2">
-                    Sezione membri</h2>
-                <h3 class="mbr-section-subtitle align-right mbr-light mbr-white mbr-fonts-style display-5">
-                    Gestisci i dati anagrafici dei membri</h3>
-                <h3 class="mbr-section-subtitle align-right mbr-light mbr-white mbr-fonts-style display-5" >
-                  <b id="messaggio"></b></h3>
+                <h2 class="align-right mbr-bold mbr-white mbr-fonts-style display-2">Certificati</h2>
+
             </div>
         </div>
     </div>
 </section>
 
-<section class="counters1 counters cid-ra81Nt6vpJ" id="counters1-n">
+<section class="engine"><a href=""></a></section>
+<section class="mbr-section form1 cid-ra8qCZsALE" id="membro" >
 
+    <div class="container" style="padding-top:5em">
+        <div class="row justify-content-center">
+            <div class="media-container-column col-lg-8" data-form-type="formoid">
+                    <form name="modulo" class="mbr-form" action="menu/auguri" method="post" target="_blank">
 
+                        <div class="row row-sm-offset">
 
-
-
-    <div class="container">
-
-
-
-        <div class="container pt-4 mt-2">
-            <div class="media-container-row">
-                <div class="card p-3 align-center col-12 col-md-6">
-                    <div class="panel-item p-3">
-                        <div class="card-img pb-3">
-                            <span class="mbr-iconfont mobi-mbri-users mobi-mbri"></span>
+                            <div class="col-md-12 multi-horizontal" >
+                                <div class="form-group">
+                                    <label class="form-control-label mbr-fonts-style display-7" ><b>Nome</b></label>
+                                    <input type="text" class="form-control" name="nome"  >
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 multi-horizontal" >
+                                <div class="form-group">
+                                    <label class="form-control-label mbr-fonts-style display-7" ><b>Nome P</b></label>
+                                    <input type="text" class="form-control" name="nome-padre"  >
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 multi-horizontal" >
+                                <div class="form-group">
+                                    <label class="form-control-label mbr-fonts-style display-7" ><b>Nome M</b></label>
+                                    <input type="text" class="form-control" name="nome-madre"  >
+                                </div>
+                            </div>
+                             <div class="col-md-6 multi-horizontal" id="battesimo">
+                                <div class="form-group">
+                                    <label class="form-control-label mbr-fonts-style display-7" ><b>Data di Batt</b></label>
+                                    <input type="date" class="form-control" name="nascita"  >
+                                </div>
+                            </div>
+                            <div class="col-md-6 multi-horizontal" id="datanascita">
+                                <div class="form-group">
+                                    <label class="form-control-label mbr-fonts-style display-7" ><b>Data di Nascita</b></label>
+                                    <input type="date" class="form-control" name="nascita"  >
+                                </div>
+                            </div>
+                            <div class="col-md-6 multi-horizontal" id="dichiarazione" >
+                                    <label class="form-control-label mbr-fonts-style display-7" ><b>Data Dichiarazione</b></label>
+                                <div class="input-group mb-3">
+                                  <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <label class="form-control-label mbr-fonts-style display-7" ><b>Oggi</b>&nbsp;&nbsp;</label>
+                                        <input type="checkbox">
+                                    </div>
+                                  </div>
+                                  <input type="date" class="form-control" >
+                                </div>
+                            </div>
+                           
+                            <div class="col-md-12 multi-horizontal" id="firmas" >
+                                     <label class="form-control-label mbr-fonts-style display-7" ><b>Opzioni</b></label>
+                                <div class="input-group mb-3">
+                                  <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        
+                                        <input type="checkbox">
+                                    </div>
+                                  </div>
+                                  <label class="form-control mbr-fonts-style display-7" ><b>Includi firma Secretaria</b></label>
+                                </div>
+                                <div class="input-group mb-3">
+                                  <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        
+                                        <input type="checkbox">
+                                    </div>
+                                  </div>
+                                  <label class="form-control mbr-fonts-style display-7" ><b>Includi firma Pr</b></label>
+                                </div>
+                            </div>
+                            
+                          
+                            
+                             
                         </div>
 
-                        <div class="card-text">
-                            <h3 class="count pt-3 pb-3 mbr-fonts-style display-2">
-                                   <?php echo visualizza("MA"); ?>
-                            </h3>
-                            <h4 class="mbr-content-title mbr-bold mbr-fonts-style display-7">&nbsp;Membri attivi</h4>
-
-                        </div>
-                    </div>
-                </div>
 
 
-                <div class="card p-3 align-center col-12 col-md-6">
-                    <div class="panel-item p-3">
-                        <div class="card-img pb-3">
-                            <span class="mbr-iconfont mobi-mbri-error mobi-mbri"></span>
-                        </div>
-                        <div class="card-text">
-                            <h3 class="count pt-3 pb-3 mbr-fonts-style display-2">
-                                   <?php echo visualizza("MN"); ?>
-                            </h3>
-                            <h4 class="mbr-content-title mbr-bold mbr-fonts-style display-7">Membri non attivi</h4>
-
-                        </div>
-                    </div>
-                </div>
-
-
-
-
-
+                        <span class="input-group-btn"><button  type="submit" class="btn btn-primary btn-form display-4" name="newmembro">Crea Documento</button></span>
+                    </form>
             </div>
         </div>
-   </div>
-</section>
-
-<section class="section-table cid-ra83F73ZSR" id="table1-q">
-
-
-
-  <div class="container container-table">
-      <h2 class="mbr-section-title mbr-fonts-style align-center pb-3 display-2">Elenco dei membri</h2>
-
-      <div class="table-wrapper">
-        <div class="container">
-          <div class="row search">
-            <div class="col-md-6"></div>
-            <div class="col-md-6">
-                <div class="dataTables_filter">
-                  <label class="searchInfo mbr-fonts-style display-7">Cerca:</label>
-                  <input class="form-control input-sm" disabled="">
-                </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="container scroll">
-          <table class="table isSearch" cellspacing="0">
-            <thead>
-              <tr class="table-heads ">
-
-              <th class="head-item mbr-fonts-style display-7">
-                      Nome</th>
-                <th class="head-item mbr-fonts-style display-7">
-                      Cognome</th>
-                <th class="head-item mbr-fonts-style display-7">
-                      Data di nascita</th>
-                <th class="head-item mbr-fonts-style display-7">
-                      Carico</th>
-                 <th class="head-item mbr-fonts-style display-7">
-                      Attivo</th>
-                <th class="head-item mbr-fonts-style display-7">
-                      Congregazione</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <?php
-                $dbh = new PDO($conn,$user,$pass);
-                $sqld =$dbh->prepare("SELECT p.*, md5(id) AS ssid, DATE_FORMAT(p.data_nascita,  '%d-%m-%Y' ) AS data_di_nascita,DATE_FORMAT(p.data_matrimonio,  '%d-%m-%Y' ) AS data_di_matrimonio, DATE_FORMAT(p.data_arrivo_in_chiesa, '%d-%m-%Y' ) AS data_arrivo  FROM persone p WHERE tipo_persona='membro' ORDER BY p.nome ASC;");
-                $sqld->execute();
-                while ($row=$sqld->fetch()) {
-                  $eta = calcola($row['data_di_nascita']);
-                    echo '<tr onclick="visualizza(\'' . $row['ssid'] .'\');">';
-                    echo "<td class='body-item mbr-fonts-style display-7'>" . $row['nome'] . "</td>";
-                    echo "<td class='body-item mbr-fonts-style display-7'>" . $row['cognome'] . "</td>";
-                    echo "<td class='body-item mbr-fonts-style display-7'>" . $row['data_di_nascita'] . "</td>";
-                    echo "<td class='body-item mbr-fonts-style display-7'>" . $row['carico_in_chiesa'] . "</td>";
-                    echo "<td class='body-item mbr-fonts-style display-7'>" . $row['attivo']  . "</td>";
-                    echo "<td class='body-item mbr-fonts-style display-7'>" . $row['congregazione'] . "</td>";
-                    echo "</tr>";
-                }
-              ?>
-
-
-
-</tbody>
-          </table>
-        </div>
-        <div class="container table-info-container">
-          <div class="row info">
-            <div class="col-md-6">
-              <div class="dataTables_info mbr-fonts-style display-7">
-                <span class="infoBefore">Totale:</span>
-                <span class="inactive infoRows"></span>
-                <span class="infoAfter">congregati</span>
-                <span class="infoFilteredBefore"></span>
-                <span class="inactive infoRows"></span>
-                <span class="infoFilteredAfter"> </span>
-              </div>
-            </div>
-            <div class="col-md-6"></div>
-          </div>
-        </div>
-      </div>
     </div>
+
+
+
 </section>
+
+
+
 
 
   <script src="assets/web/assets/jquery/jquery.min.js"></script>
   <script src="assets/tether/tether.min.js"></script>
   <script src="assets/popper/popper.min.js"></script>
   <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-  <script src="assets/smoothscroll/smooth-scroll.js"></script>
-  <script src="assets/viewportchecker/jquery.viewportchecker.js"></script>
   <script src="assets/dropdown/js/script.min.js"></script>
   <script src="assets/touchswipe/jquery.touch-swipe.min.js"></script>
-  <script src="assets/datatables/jquery.data-tables.min.js"></script>
-  <script src="assets/datatables/data-tables.bootstrap4.min.js"></script>
+  <script src="assets/smoothscroll/smooth-scroll.js"></script>
+  <script src="assets/ytplayer/jquery.mb.ytplayer.min.js"></script>
+  <script src="assets/vimeoplayer/jquery.mb.vimeo_player.js"></script>
+  <script src="assets/bootstrapcarouselswipe/bootstrap-carousel-swipe.js"></script>
+  <script src="assets/viewportchecker/jquery.viewportchecker.js"></script>
   <script src="assets/theme/js/script.js"></script>
+  <script src="assets/slidervideo/script.js"></script>
 
 
  <div id="scrollToTop" class="scrollToTop mbr-arrow-up"><a style="text-align: center;"><i></i></a></div>

@@ -307,7 +307,7 @@ header('location: index.php');
             <tbody>
               <?php
                 $dbh = new PDO($conn,$user,$pass);
-                $sqld =$dbh->prepare("SELECT *, md5(id) AS ssid, DATE_FORMAT(p.data_nascita,  '%d-%m-%Y' ) AS data_di_nascita FROM persone p WHERE p.tipo_persona='bambino' ORDER BY p.cognome ASC;");
+                $sqld =$dbh->prepare("SELECT *, md5(id) AS ssid, DATE_FORMAT(p.data_nascita,  '%d-%m-%Y' ) AS data_di_nascita FROM persone p WHERE p.tipo_persona='bambino' ORDER BY p.nome ASC;");
                 $sqld->execute();
                 while ($row=$sqld->fetch()) {
 
