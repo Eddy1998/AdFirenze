@@ -34,8 +34,9 @@ $pdf = new FPDF();
 $linee="";
 $dbh = new PDO($conn,$user,$pass);
 //$pdf->Addpage();
-$pdf->AddFont('auguri','','Qarmic sans Abridged.php');
-$pdf->SetFont('auguri','',13);
+//$pdf->AddFont('auguri','','Qarmic sans Abridged.php');
+//$pdf->SetFont('auguri','',13);
+$pdf->SetFont('Arial','',13);
 $pdf->SetXY(10,10);
 //$pdf->Cell(15,6,'Certificato',0,1);*/
 $pdf->AddPage();
@@ -73,9 +74,11 @@ $stm->execute();
  if($stm->rowCount()>0)
   {
       $pdf->SetXY(30,$n);
-	$pdf->SetFont('auguri','',23);
+      $pdf->SetFont('Arial','',23);
+	//$pdf->SetFont('auguri','',23);
     $pdf->Cell(15,6,'Bambini :',0,1);
-	$pdf->SetFont('auguri','',13);
+	$pdf->SetFont('Arial','',13);
+	//$pdf->SetFont('auguri','',13);
     $n+=12;
      while($row= $stm->fetch())
      {
@@ -95,7 +98,7 @@ $stm->execute();
  $jsondataT=array();
     $dati=array();
 
-/*  $stm=$dbh->prepare("SELECT nome,cognome,nome_coniuge,cognome_coniuge,sesso, DATE_FORMAT(data_matrimonio, '%d/%m' ) AS data_di_matrimonio, nome_coniuge, cognome_coniuge FROM persone WHERE MONTH(data_matrimonio)=:numero AND congregazione=:congre AND tipo_persona<>'bambino'");
+  $stm=$dbh->prepare("SELECT nome,cognome,nome_coniuge,cognome_coniuge,sesso, DATE_FORMAT(data_matrimonio, '%d/%m' ) AS data_di_matrimonio, nome_coniuge, cognome_coniuge FROM persone WHERE MONTH(data_matrimonio)=:numero AND congregazione=:congre AND tipo_persona<>'bambino'");
     $stm->bindValue(":numero",$mese);
     $stm->bindValue(":congre",$luogo);
     $stm->execute();
@@ -105,9 +108,11 @@ $stm->execute();
      if($stm->rowCount()>0)
           {
              $pdf->SetXY(30,$n);
-  $pdf->SetFont('auguri','',23);
+             $pdf->SetFont('Arial','',23);
+  //$pdf->SetFont('auguri','',23);
     $pdf->Cell(15,6,'Anniversari di matrimonio : ',0,1);
-	$pdf->SetFont('auguri','',13);
+	$pdf->SetFont('Arial','',13);
+	//$pdf->SetFont('auguri','',13);
     $n+=12;
              while($row= $stm->fetch())
              {
@@ -139,6 +144,11 @@ $stm->execute();
             }
       }
 
+  //si ordinano le date degli Anniversari di matrimonio
+
+ 		asort($dati);
+
+
     foreach($dati as $key => $value)
     {
 
@@ -155,7 +165,7 @@ $stm->execute();
     }
 
 
-*/
+
 
 
 
